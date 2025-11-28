@@ -4,3 +4,6 @@ theme: minima
 
 # 글 링크 형태 (선택)
 permalink: /:year/:month/:day/:title/
+
+header_pages:
+  - about.md
