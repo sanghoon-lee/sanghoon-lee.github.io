@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 준민아빠 소개
+title: about
 permalink: /about/
 ---
 
