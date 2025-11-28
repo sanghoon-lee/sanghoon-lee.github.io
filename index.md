@@ -74,10 +74,3 @@ title: 🏠 Home
     <li class="hero-tag">🤝 Culture Crafting</li>
   </ul>
 </section>
-
-<section>
-  <h2 class="home-posts-header">최근 포스트</h2>
-  <p class="home-posts-intro">
-    준민아빠가 일하면서 경험하고, 배운것들을 기록한 것입니다.
-  </p>
-</section>
