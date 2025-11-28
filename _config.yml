@@ -6,5 +6,6 @@ theme: minima
 permalink: /:year/:month/:day/:title/
 
 header_pages:
+  - index.md
   - posts.md
   - about.md
