@@ -78,6 +78,6 @@ title: 🏠 Home
 <section>
   <h2 class="home-posts-header">최근 포스트</h2>
   <p class="home-posts-intro">
-    기술부채 청산, 서비스 안정화, 개발문화 개선과 관련된 기록들을 모아두었습니다.
+    준민아빠가 일하면서 경험하고, 배운것들을 기록한 것입니다.
   </p>
 </section>
