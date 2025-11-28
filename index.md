@@ -4,26 +4,25 @@ title: 🏠 Home
 ---
 
 <style>
+/* Hero 영역 */
 .hero {
-  margin: 1.5rem 0 2rem;
-  padding: 1.5rem 1.25rem;
-  border-radius: 10px;
-  background: #f9f9f9;
+  margin: 2rem 0 1.5rem;
 }
 
 .hero-title {
-  margin: 0 0 0.5rem;
-  font-size: 1.8rem;
+  margin: 0 0 0.75rem;
+  font-size: 1.9rem;
   font-weight: 700;
 }
 
 .hero-subtitle {
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
   color: #555;
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   line-height: 1.6;
 }
 
+/* 태그 라인 */
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
@@ -41,12 +40,23 @@ title: 🏠 Home
   color: #666;
 }
 
+/* 포스트 리스트 섹션 안내 문구 */
+.home-posts-header {
+  margin: 2.5rem 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.home-posts-intro {
+  margin: 0 0 1.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* 반응형 */
 @media (max-width: 768px) {
-  .hero {
-    padding: 1.25rem 1rem;
-  }
   .hero-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 }
 </style>
@@ -63,4 +73,11 @@ title: 🏠 Home
     <li class="hero-tag">📊 Data-based Quality</li>
     <li class="hero-tag">🧑‍💼 Engineering Leadership</li>
   </ul>
+</section>
+
+<section>
+  <h2 class="home-posts-header">최근 포스트</h2>
+  <p class="home-posts-intro">
+    기술부채 청산, 서비스 안정화, 개발문화 개선과 관련된 기록들을 모아두었습니다.
+  </p>
 </section>
