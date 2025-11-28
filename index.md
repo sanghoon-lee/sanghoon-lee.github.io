@@ -4,74 +4,76 @@ title: 🏠 Home
 ---
 
 <style>
-/* Hero 영역 */
+/* Hero 영역 스타일 개선 */
 .hero {
-  margin: 2rem 0 1.5rem;
+  margin: 2.8rem 0 2rem;
+  padding: 2rem 2rem;
+  border-radius: 14px;
+  background: #fafafa;
+  border: 1px solid #eee;
 }
 
+/* 제목 */
 .hero-title {
-  margin: 0 0 0.75rem;
-  font-size: 1.9rem;
-  font-weight: 700;
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.45;
+  color: #111;
 }
 
+/* 부제 */
 .hero-subtitle {
-  margin: 0 0 1.25rem;
-  color: #555;
-  font-size: 0.96rem;
-  line-height: 1.6;
+  margin: 0 0 1.6rem;
+  color: #4e4e4e;
+  font-size: 0.95rem;
+  line-height: 1.7;
 }
 
-/* 태그 라인 */
+/* 태그 라벨 */
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .hero-tag {
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  background: #fff;
   border: 1px solid #ddd;
-  font-size: 0.8rem;
-  color: #666;
+  font-size: 0.82rem;
+  color: #555;
 }
 
-/* 포스트 리스트 섹션 안내 문구 */
-.home-posts-header {
-  margin: 2.5rem 0 0.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.home-posts-intro {
-  margin: 0 0 1.5rem;
-  color: #666;
-  font-size: 0.9rem;
-}
-
-/* 반응형 */
+/* 반응형 개선 */
 @media (max-width: 768px) {
+  .hero {
+    padding: 1.5rem 1.25rem;
+  }
   .hero-title {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
   }
 }
 </style>
 
 <section class="hero">
-  <h1 class="hero-title">기술부채는 청산하고, 좋은 개발문화는 남기는 개발팀장</h1>
+  <h1 class="hero-title">
+    팀의 행복을 버그 없이 배포합니다.<br>
+    단, 일정은 예외입니다.
+  </h1>
   <p class="hero-subtitle">
-    눈앞의 문제 해결하는 팀이 아니라, <br>
-    지속 가능한 성장을 이끄는 팀을 지향합니다.
+    기술부채는 줄이고, 개발자가 일하기 좋은 문화를 만들고 싶습니다.<br>
+    일정을 버그처럼 고치고 있습니다.
   </p>
   <ul class="hero-tags">
-    <li class="hero-tag">🔨 Tech Debt Reduction</li>
-    <li class="hero-tag">🤝 Development Culture</li>
-    <li class="hero-tag">📊 Data-based Quality</li>
     <li class="hero-tag">🧑‍💼 Engineering Leadership</li>
+    <li class="hero-tag">🔧 Tech Debt Recovery</li>
+    <li class="hero-tag">🤝 Culture Crafting</li>
+    <li class="hero-tag">📊 Data-driven Quality</li>
   </ul>
 </section>
 
