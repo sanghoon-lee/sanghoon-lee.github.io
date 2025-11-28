@@ -1,0 +1,33 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  <!-- 제목 숨김: page.title 출력 제거 -->
+  {% if page.excerpt %}
+    <p class="page-excerpt">{{ page.excerpt }}</p>
+  {% endif %}
+
+  {{ content }}
+
+  <!-- 아래는 포스트 목록 -->
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: date_format }}</span>
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h3>
+        {% if site.show_excerpts %}
+          {{ post.excerpt }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">
+    <a href="{{ "/feed.xml" | relative_url }}">subscribe via RSS</a>
+  </p>
+
+</div>
