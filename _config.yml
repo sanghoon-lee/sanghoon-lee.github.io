@@ -1,0 +1,6 @@
+title: "준민아빠의 블로그"    # 블로그 제목
+description: "개발자로 오래 살아가고 싶은 준민아빠의 기록"  # 간단 소개
+theme: jekyll-theme-minimal
+
+# 글 링크 형태 (선택)
+permalink: /:year/:month/:day/:title/
