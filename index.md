@@ -52,10 +52,10 @@ title: 🏠 Home
 </style>
 
 <section class="hero">
-  <h1 class="hero-title">기술부채를 해결하고, 좋은 개발문화를 구축하기 위해 고민하는 개발팀장</h1>
+  <h1 class="hero-title">기술부채는 청산하고, 좋은 개발문화는 남기는 개발팀장</h1>
   <p class="hero-subtitle">
-    눈앞의 문제 해결하는 팀이 아니라, 지속 가능한 성장을 이끄는 팀을 지향합니다.<br>
-    코드 품질과 개발 생산성을 높이고, 더 잘할 수 있는 문화를 설계하고 싶습니다.
+    눈앞의 문제 해결하는 팀이 아니라, <br>
+    지속 가능한 성장을 이끄는 팀을 지향합니다.
   </p>
   <ul class="hero-tags">
     <li class="hero-tag">🔨 Tech Debt Reduction</li>
