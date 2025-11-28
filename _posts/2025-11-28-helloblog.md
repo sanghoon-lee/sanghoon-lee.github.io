@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Github에 개발 블로그 개설!"
+title: "Github에 블로그 개설!"
 date: 2025-11-28
 categories: blog
 ---
