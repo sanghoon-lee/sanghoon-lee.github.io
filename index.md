@@ -49,6 +49,16 @@ title: 🏠 Home
   color: #555;
 }
 
+/* Hero 이미지 */
+.hero-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  display: block;
+  border-radius: 12px;
+}
+
 /* 반응형 개선 */
 @media (max-width: 768px) {
   .hero {
@@ -61,6 +71,7 @@ title: 🏠 Home
 </style>
 
 <section class="hero">
+  <img class="hero-image" src="/assets/hero.png" alt="Hero image: 팀의 행복을 버그 없이 배포합니다">
   <h1 class="hero-title">
     팀의 행복을 버그 없이 배포합니다.
   </h1>
