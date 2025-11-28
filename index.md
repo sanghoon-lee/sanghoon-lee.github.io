@@ -62,18 +62,16 @@ title: 🏠 Home
 
 <section class="hero">
   <h1 class="hero-title">
-    팀의 행복을 버그 없이 배포합니다.<br>
-    단, 일정은 예외입니다.
+    팀의 행복을 버그 없이 배포합니다.
   </h1>
   <p class="hero-subtitle">
     기술부채는 줄이고, 개발자가 일하기 좋은 문화를 만들고 싶습니다.<br>
-    일정을 버그처럼 고치고 있습니다.
+    하지만, 일정을 버그처럼 고치고 있네요.
   </p>
   <ul class="hero-tags">
     <li class="hero-tag">🧑‍💼 Engineering Leadership</li>
     <li class="hero-tag">🔧 Tech Debt Recovery</li>
     <li class="hero-tag">🤝 Culture Crafting</li>
-    <li class="hero-tag">📊 Data-driven Quality</li>
   </ul>
 </section>
 
