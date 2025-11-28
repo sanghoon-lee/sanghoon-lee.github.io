@@ -4,30 +4,29 @@ layout: default
 
 <div class="home">
 
-  <!-- 제목 숨김: page.title 출력 제거 -->
-  {% if page.excerpt %}
-    <p class="page-excerpt">{{ page.excerpt }}</p>
-  {% endif %}
-
+  <!-- Hero + 소개 영역: index.md 의 내용 -->
   {{ content }}
 
-  <!-- 아래는 포스트 목록 -->
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        </h3>
-        {% if site.show_excerpts %}
-          {{ post.excerpt }}
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+  <!-- 최신 글 5개 섹션 -->
+  <section class="home-posts">
+    <h2>Latest Posts</h2>
+    <ul class="post-list">
+      {% for post in site.posts limit:5 %}
+        <li>
+          <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
+          <h3>
+            <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h3>
+          {% if site.show_excerpts %}
+            {{ post.excerpt }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
 
-  <p class="rss-subscribe">
-    <a href="{{ "/feed.xml" | relative_url }}">subscribe via RSS</a>
-  </p>
+    <p class="home-posts-more">
+      <a href="{{ "/posts/" | relative_url }}">→ 모든 글 보기</a>
+    </p>
+  </section>
 
 </div>
