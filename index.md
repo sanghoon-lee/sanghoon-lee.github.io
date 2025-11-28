@@ -51,15 +51,6 @@ title: 🏠 Home
   margin-top: 0.8rem;
 }
 
-.hero-tag {
-  padding: 0.3rem 0.75rem;
-  border-radius: 20px;
-  background: #fafafa;
-  border: 1px solid #ddd;
-  font-size: 0.78rem;
-  color: #555;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .hero-image {
@@ -80,9 +71,4 @@ title: 🏠 Home
     기술부채는 줄이고, 개발자가 일하기 좋은 문화를 만들고 싶습니다.<br>
     하지만, 일정을 버그처럼 고치고 있네요.
   </p>
-  <ul class="hero-tags">
-    <li class="hero-tag">🧑‍💼 Engineering Leadership</li>
-    <li class="hero-tag">🔧 Tech Debt Recovery</li>
-    <li class="hero-tag">🤝 Culture Crafting</li>
-  </ul>
 </section>
