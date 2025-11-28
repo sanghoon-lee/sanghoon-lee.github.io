@@ -4,68 +4,69 @@ title: 🏠 Home
 ---
 
 <style>
-/* Hero 영역 스타일 개선 */
+/* Hero wrapper */
 .hero {
-  margin: 2.8rem 0 2rem;
-  padding: 2rem 2rem;
-  border-radius: 14px;
-  background: #fafafa;
-  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0 2.5rem;
+  padding: 1.5rem 1rem;
 }
 
-/* 제목 */
+/* Hero image: 자연스러운 크기 */
+.hero-image {
+  width: 80%;
+  max-width: 380px;
+  height: auto;
+  margin-bottom: 1.4rem;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Title (텍스트 중심 강조) */
 .hero-title {
-  margin: 0 0 1rem;
-  font-size: 2rem;
+  margin: 0 0 0.6rem;
+  font-size: 1.65rem;
   font-weight: 800;
   line-height: 1.45;
-  color: #111;
+  text-align: center;
 }
 
-/* 부제 */
+/* Subtitle alignment balancing */
 .hero-subtitle {
-  margin: 0 0 1.6rem;
+  margin: 0 0 1.2rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  text-align: center;
   color: #4e4e4e;
-  font-size: 0.95rem;
-  line-height: 1.7;
+  max-width: 600px;
 }
 
-/* 태그 라벨 */
+/* Tags: 중앙 정렬 */
 .hero-tags {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  gap: 0.45rem;
+  margin-top: 0.8rem;
 }
 
 .hero-tag {
-  padding: 0.35rem 0.85rem;
+  padding: 0.3rem 0.75rem;
   border-radius: 20px;
-  background: #fff;
+  background: #fafafa;
   border: 1px solid #ddd;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: #555;
 }
 
-/* Hero 이미지 */
-.hero-image {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
-  margin: 0 auto 1.5rem;
-  display: block;
-  border-radius: 12px;
-}
-
-/* 반응형 개선 */
+/* Responsive */
 @media (max-width: 768px) {
-  .hero {
-    padding: 1.5rem 1.25rem;
+  .hero-image {
+    max-width: 280px;
   }
   .hero-title {
-    font-size: 1.55rem;
+    font-size: 1.4rem;
   }
 }
 </style>
