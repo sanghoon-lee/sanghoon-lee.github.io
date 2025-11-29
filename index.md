@@ -51,24 +51,13 @@ title: 🏠 Home
   margin-top: 0.8rem;
 }
 
-.role-card {
-  max-width: 720px;
-  margin: 1rem auto 2rem;
-  padding: 1.8rem 1.4rem;
-  background: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-  text-align: left;
-}
-
-.role-card ul {
+.hero ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.role-card li {
+.hero li {
   font-size: 0.9rem;
   margin: 0.25rem 0;
   color: #444;
@@ -111,12 +100,10 @@ p, li {
   <p class="hero-subtitle">
     기술부채를 줄이고, 팀의 행복과 서비스 품질을 함께 배포합니다.
   </p>
-</section>
-
-<section class="role-card">
   <ul>
     <li>🔹 닉네임 : 준민아빠 </li>
     <li>🔹 한줄소개 : 이제는 개발자가 아닌 개발팀장이 직업이 되어버린 것 같습니다. </li>
     <li>🔹 관심분야 : 기술부채 청산, 조직관리</li>
   </ul>
 </section>
+
