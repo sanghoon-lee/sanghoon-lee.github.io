@@ -53,7 +53,7 @@ title: 🏠 Home
 
 .role-card {
   max-width: 720px;
-  margin: 2.5rem auto 2rem;
+  margin: 1rem auto 2rem;
   padding: 1.8rem 1.4rem;
   background: #fff;
   border: 1px solid #e5e5e5;
