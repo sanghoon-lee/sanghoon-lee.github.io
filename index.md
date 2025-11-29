@@ -65,11 +65,10 @@ title: 🏠 Home
 <section class="hero">
   <img class="hero-image" src="/assets/hero.png" alt="Hero image: 팀의 행복을 버그 없이 배포합니다">
   <p class="hero-subtitle">
-    팀원들이 웃으면 서비스도 잘 돌아갑니다.<br>
-    팀의 행복은 계속 누적되어야 합니다.
+    기술부채를 줄이고, 팀의 행복과 서비스 품질을 함께 배포합니다.
   </p>
-  <p>
-    기술부채 청산와 긍정적인 개발문화 확산 사이에서<br>
-    부딪히고 고민하는 개발팀장의 기록을 담고 있습니다.
-  </p>
+  <ul>
+    <li>🔹 한줄소개 : 직업이 개발팀장입니다. </li>
+    <li>🔹 관심분야 : 기술부채 청산, 성과관리, 데이터 분석, 바이브 코딩</li>
+  </ul>
 </section>
