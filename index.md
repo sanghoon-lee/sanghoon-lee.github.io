@@ -37,7 +37,7 @@ title: 🏠 Home
   margin: 0 0 1.2rem;
   font-size: 0.92rem;
   line-height: 1.6;
-  text-align: center;
+  text-align: left;
   color: #4e4e4e;
   max-width: 600px;
 }
@@ -64,11 +64,12 @@ title: 🏠 Home
 
 <section class="hero">
   <img class="hero-image" src="/assets/hero.png" alt="Hero image: 팀의 행복을 버그 없이 배포합니다">
-  <h1 class="hero-title">
-    팀의 행복을 버그 없이 배포합니다.
-  </h1>
   <p class="hero-subtitle">
-    기술부채는 줄이고, 개발자가 일하기 좋은 문화를 만들고 싶습니다.<br>
-    하지만, 일정을 버그처럼 고치고 있네요.
+    팀원들이 웃으면 서비스도 잘 돌아갑니다.<br>
+    팀의 행복은 계속 누적되어야 합니다.
+  </p>
+  <p>
+    기술부채 청산와 긍정적인 개발문화 확산 사이에서<br>
+    부딪히고 고민하는 개발팀장의 기록을 담고 있습니다.
   </p>
 </section>
