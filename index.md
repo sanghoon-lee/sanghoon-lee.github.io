@@ -83,6 +83,42 @@ title: 🏠 Home
     font-size: 1.4rem;
   }
 }
+
+/* ---- Global Font Style ---- */
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  color: #222;
+  letter-spacing: -0.015em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* 본문 가독성 개선 */
+p, li {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* 헤더 메뉴 개선 */
+.site-nav .page-link {
+  font-weight: 500;
+}
+
+/* 코드 스타일 */
+code, pre code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  background: #f8f8fa;
+  padding: 0.1rem 0.25rem;
+  border-radius: 4px;
+  color: #c7254e;
+}
+
 </style>
 
 <section class="hero">
