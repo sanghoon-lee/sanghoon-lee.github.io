@@ -95,6 +95,6 @@ title: 🏠 Home
 <section class="role-card">
   <ul>
     <li>🔹 한줄소개 : 직업이 개발팀장입니다. </li>
-    <li>🔹 관심분야 : 기술부채 청산, 성과관리, 데이터 분석, 바이브 코딩</li>
+    <li>🔹 관심분야 : 기술부채 청산, 조직관리</li>
   </ul>
 </section>
