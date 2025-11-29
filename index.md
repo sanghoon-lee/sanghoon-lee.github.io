@@ -65,7 +65,7 @@ title: 🏠 Home
 <section class="hero">
   <img class="hero-image" src="/assets/hero.png" alt="Hero image: 팀의 행복을 버그 없이 배포합니다">
   <p class="hero-subtitle">
-    기술부채를 줄이고, 팀의 행복과 서비스 품질을 함께 배포합니다.
+    기술부채를 줄이고, 팀의 행복과 서비스 품질향상을 함께 고민하는 평범한 개발팀장입니다.
   </p>
   <ul>
     <li>🔹 닉네임 : 준민아빠 </li>

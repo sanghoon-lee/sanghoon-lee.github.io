@@ -1,12 +1,24 @@
 ---
 layout: post
-title: "GitHub에 블로그 개설!"
+title: "GitHub에 블로그 개설 with ChatGPT"
 date: 2025-11-28
 categories: blog
 ---
 
-ChatGPT의 도움을 받아서 GitHub Pages + Minima 테마로 
-심플한 블로그를 만들었습니다! 😄
+<style>
+.main-image {
+  width: 50%;
+  max-width: 380px;
+  height: auto;
+  margin-bottom: 1.4rem;
+  border-radius: 12px;
+  display: block;
+}
+</style>
+
+ChatGPT의 도움을 받아서 GitHub Pages + Minima 테마로 심플한 블로그를 만들었습니다! 😄
+
+<img class="main-image" src="/assets/20251128/githubpages.jpg" alt="GitHub Pages">
 
 2-3년 전쯤, 이전에 근무하던 회사의 기술블로그를 GitHub에 만들면서 Jekyll 설정부터 Gem 설치까지 
 이슈 해결을 구글링에 의존하면서 고생했던 기억이 아직도 생생합니다. 그런데 ChatGPT의 도움을
@@ -19,8 +31,7 @@ ChatGPT의 도움을 받아서 GitHub Pages + Minima 테마로
 * 가볍고 심플한 디자인
 * 포스팅 기능에 충실
 
-여기에 딱 맞는 것이 GitHub Pages의 공식 추천 테마 중 하나인 Minima였습니다. 복잡하게 꾸미지 말고, 글 쓰기에 충실한
-블로그를 만들고 싶었어요.
+너무 단순하죠? 복잡하게 꾸미지 말고, 글 쓰기에 충실한 블로그를 만들고 싶었어요. 이러한 조건에 딱 맞는 것이 GitHub Pages의 공식 추천 테마 중 하나인 Minima였습니다.
 
 ## 블로그 생성
 
