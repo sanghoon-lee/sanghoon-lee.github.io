@@ -94,7 +94,8 @@ title: 🏠 Home
 
 <section class="role-card">
   <ul>
-    <li>🔹 한줄소개 : 직업이 개발팀장입니다. </li>
+    <li>🔹 닉네임 : 준민아빠 </li>
+    <li>🔹 한줄소개 : 이제는 개발자가 아닌 개발팀장이 직업이 되어버린 것 같습니다. </li>
     <li>🔹 관심분야 : 기술부채 청산, 조직관리</li>
   </ul>
 </section>
