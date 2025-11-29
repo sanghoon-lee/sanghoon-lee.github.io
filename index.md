@@ -9,7 +9,7 @@ title: 🏠 Home
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem 0 2.5rem;
+  margin: 2rem 0 1.5rem;
   padding: 1.5rem 1rem;
 }
 
