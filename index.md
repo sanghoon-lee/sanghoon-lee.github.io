@@ -84,39 +84,24 @@ title: 🏠 Home
   }
 }
 
-/* ---- Global Font Style ---- */
+/* 기본 본문 폰트 */
 body {
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: 400;
-  color: #222;
-  letter-spacing: -0.015em;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Pretendard', sans-serif;
-  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
-/* 본문 가독성 개선 */
+/* 포스트 제목 & 헤딩 */
+h1, h2, h3, h4, h5 {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+}
+
+/* 포스트 내용 가독성 */
 p, li {
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-/* 헤더 메뉴 개선 */
-.site-nav .page-link {
-  font-weight: 500;
-}
-
-/* 코드 스타일 */
-code, pre code {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.9rem;
-  background: #f8f8fa;
-  padding: 0.1rem 0.25rem;
-  border-radius: 4px;
-  color: #c7254e;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #333;
 }
 
 </style>
