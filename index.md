@@ -51,18 +51,6 @@ title: 🏠 Home
   margin-top: 0.8rem;
 }
 
-.hero ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.hero li {
-  font-size: 0.9rem;
-  margin: 0.25rem 0;
-  color: #444;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .hero-image {
@@ -72,27 +60,6 @@ title: 🏠 Home
     font-size: 1.4rem;
   }
 }
-
-/* 기본 본문 폰트 */
-body {
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
-
-/* 포스트 제목 & 헤딩 */
-h1, h2, h3, h4, h5 {
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 700;
-}
-
-/* 포스트 내용 가독성 */
-p, li {
-  font-size: 0.98rem;
-  line-height: 1.65;
-  color: #333;
-}
-
 </style>
 
 <section class="hero">
