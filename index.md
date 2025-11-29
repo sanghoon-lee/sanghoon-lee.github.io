@@ -59,7 +59,7 @@ title: 🏠 Home
   border: 1px solid #e5e5e5;
   border-radius: 14px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-  text-align: center;
+  text-align: left;
 }
 
 .role-card ul {
