@@ -9,6 +9,3 @@ header_pages:
   - index.md
   - posts.md
   #- about.md
-
-plugins:
-  - jekyll-sitemap
