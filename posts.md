@@ -81,7 +81,7 @@ permalink: /posts/
 
         if (totalPages <= 1) {
         // 페이지가 1개뿐이면 굳이 페이지네이션 안 보이게
-        return;
+            return;
         }
 
         function renderPage(page) {
