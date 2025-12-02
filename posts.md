@@ -55,7 +55,7 @@ permalink: /posts/
 
 <section class="posts-archive">
   <h1 class="posts-archive-title">포스트 목록</h1>
-  
+  <br><br>
   <ul class="post-list">
     {% for post in site.posts %}
       <li>
