@@ -52,7 +52,7 @@ public abstract class BaseEntity {
 
 DB에 테이블 생성없이 공통적으로 사용할 수 있는 속성들만 정의하려던 원래 목적과는 다르게 불필요한 테이블이 생성됩니다.
 
-4️⃣ 설계 혼란 유도
+2️⃣ 설계 혼란 유발
 
 ```java
 public interface BaseEntityRepository
@@ -60,5 +60,20 @@ public interface BaseEntityRepository
 }
 ```
 
+BaseEntity와 매핑되는 테이블이 생성되면, Repository 생성의 대상이 되기 때문에 설계 의도가 흐려지게 됩니다. 기술적으로는 가능하지만,
+* “이 Repository를 실제로 어디서 써야 하지?”
+* “이 엔티티는 무슨 책임을 가지는 거지?”
 
+와 같은 설계 혼란을 유발할 수 있습니다.
 
+3️⃣ 상속 전략(@Inheritance)의 고민 요구
+
+대부분의 경우, 공통 속성의 상속에는 상속 전략 자체가 필요하지 않습니다. 속성만 재사용하고 싶은데, 테이블 구조의 설계까지 함께 고민해야 하는 상황이 됩니다
+
+4️⃣ 의도하지 않은 다형성 조회 가능성
+
+```sql
+select b from BaseEntity b
+```
+
+부모 클래스가 @Entity로 선언되면, 위와 같은 JPQL 조회가 가능해집니다. 하지만, BaseEntity는 직접 조회할 의도가 없는 클래스인 경우가 대부분입니다. 조회할 필요가 없는 대상이 조회가 가능한 엔티티가 되어 버립니다.
