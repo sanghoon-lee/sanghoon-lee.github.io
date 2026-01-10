@@ -2,68 +2,8 @@
 layout: default
 ---
 
-<!doctype html>
-<html lang="{{ site.lang | default: 'ko' }}">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>
-      {% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}
-    </title>
-
-    {%- assign meta_description = page.description | default: page.excerpt | default: site.description -%}
-    {% if meta_description %}
-      <meta name="description" content="{{ meta_description | strip_html | strip_newlines | truncate: 160 }}" />
-    {% endif %}
-
-    <!-- Canonical -->
-    <link rel="canonical" href="{{ page.url | absolute_url }}" />
-
-    <!-- Open Graph -->
-    <meta property="og:site_name" content="{{ site.title }}" />
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
-    {% if meta_description %}
-      <meta property="og:description" content="{{ meta_description | strip_html | strip_newlines | truncate: 200 }}" />
-    {% endif %}
-    <meta property="og:url" content="{{ page.url | absolute_url }}" />
-    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}" />
-
-    <!-- RSS -->
-    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}" />
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
-
-    <!-- Syntax highlight (Rouge) fallback styling tweak is in CSS -->
-  </head>
-
-  <body>
-    <a class="skip-link" href="#content">본문으로 바로가기</a>
-
-    <header class="site-header">
-      <div class="container">
-        <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-        <nav class="nav" aria-label="primary">
-          <a href="{{ '/' | relative_url }}">Home</a>
-          <a href="{{ '/about/' | relative_url }}">About</a>
-          <a href="{{ '/tags/' | relative_url }}">Tags</a>
-        </nav>
-      </div>
-    </header>
-
-    <main id="content" class="site-main">
-      <div class="container">
-        {{ content }}
-      </div>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p class="muted">
-          © {{ site.time | date: '%Y' }} {{ site.title }} · Powered by Jekyll / GitHub Pages
-        </p>
-      </div>
-    </footer>
-  </body>
-</html>
+<article class="page">
+  <div class="page-content">
+    {{ content }}
+  </div>
+</article>

@@ -2,34 +2,91 @@
 layout: default
 ---
 
-<article class="post">
-
+<article class="post h-entry">
   <header class="post-header">
-    <h1 class="post-title">{{ page.title | escape }}</h1>
-  </header>
-  
-  <br>
+    <h1 class="post-title p-name">{{ page.title | escape }}</h1>
 
-  <div class="post-content">
+    <div class="post-meta">
+      {% if page.date %}
+        <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}">
+          {{ page.date | date: "%Y-%m-%d" }}
+        </time>
+      {% endif %}
+
+      {% if page.updated %}
+        <span class="dot">·</span>
+        <time class="dt-updated" datetime="{{ page.updated | date_to_xmlschema }}">
+          updated {{ page.updated | date: "%Y-%m-%d" }}
+        </time>
+      {% endif %}
+
+      {% if page.tags and page.tags.size > 0 %}
+        <span class="dot">·</span>
+        <span class="tags" aria-label="tags">
+          {% for tag in page.tags %}
+            <a class="tag" href="{{ '/tags/#' | append: tag | slugify | relative_url }}">#{{ tag }}</a>
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    {% if page.description %}
+      <p class="post-desc">{{ page.description }}</p>
+    {% endif %}
+  </header>
+
+  <!-- 본문 -->
+  <div class="post-content prose e-content">
     {{ content }}
   </div>
 
-  
-  <script src="https://giscus.app/client.js"
-          data-repo="sanghoon-lee/sanghoon-lee.github.io"
-          data-repo-id="R_kgDOQerB-w"
-          data-category="General"
-          data-category-id="DIC_kwDOQerB-84CzS7M"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="bottom"
-          data-theme="light"
-          data-lang="ko"
-          crossorigin="anonymous"
-          async>
-  </script>
+  <!-- 댓글 -->
+  <section class="post-comments" aria-label="comments">
+    <h2 class="sr-only">댓글</h2>
 
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="sanghoon-lee/sanghoon-lee.github.io"
+      data-repo-id="R_kgDOQerB-w"
+      data-category="General"
+      data-category-id="DIC_kwDOQerB-84CzS7M"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="ko"
+      crossorigin="anonymous"
+      async>
+    </script>
+
+    <!-- 다크/라이트 변경 시 giscus 테마 동기화 -->
+    <script>
+      (function () {
+        const sendThemeToGiscus = (theme) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            'https://giscus.app'
+          );
+        };
+
+        const getPreferredTheme = () =>
+          window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+
+        // 최초 로드 후 한 번 맞춤
+        window.addEventListener('load', () => sendThemeToGiscus(getPreferredTheme()));
+
+        // OS 테마 바뀌면 반영
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        if (mq && mq.addEventListener) {
+          mq.addEventListener('change', () => sendThemeToGiscus(getPreferredTheme()));
+        }
+      })();
+    </script>
+  </section>
 </article>
-
