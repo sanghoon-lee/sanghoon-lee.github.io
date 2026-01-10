@@ -20,9 +20,7 @@ categories: java
 
 <img class="main-image" src="/assets/images/springboot.png" alt="스프링부트">
 
-@MappedSuperclass도 그 중 하나였습니다. 종종 사용하면서도 머릿속에 개념을 명확하게 정리하지 못해서 타인에게 명확하게 설명하기는 어려웠습니다.
-
-다행히 최근에 혼자 토이 프로젝트를 진행하면서 우연히 @MappedSuperClass에 대해서 공부하면서 부족한 지식을 채울 수 있었습니다. 
+@MappedSuperclass도 그 중 하나였습니다. 종종 사용하면서도 머릿속에 개념을 명확하게 정리하지 못해서 타인에게 명확하게 설명하기는 어려웠습니다. 다행히 최근 혼자 토이 프로젝트를 진행하면서 @MappedSuperClass에 대해서 공부하면서 부족했던 지식을 조금은 채울 수 있었습니다. 
 
 ---
 
