@@ -24,6 +24,8 @@ categories: java
 
 다행히 최근에 혼자 토이 프로젝트를 진행하면서 우연히 @MappedSuperClass에 대해서 공부하면서 부족한 지식을 채울 수 있었습니다. 
 
+---
+
 ### 엔티티와 속성
 
 우선 가장 기본적인 ```엔티티(Entity)```와 ```속성(Attribute)```에 대한 개념부터 명확히 정리했습니다.
@@ -33,6 +35,8 @@ categories: java
 
 **속성** 
 > 엔티티의 최소 단위로 물리 모델에서는 컬럼으로 표현(예 : 사번, 이름, 나이 등)
+
+---
 
 ### 다형성 조회
 
@@ -44,6 +48,8 @@ JPA에서의 디형성 조회(Polymorphic Query)는 부모 엔티티를 기준�
 * 결제수단(구현체) : 자식 엔티티(카드, 포인트, 현금 등)
 
 다형성 조회 기능을 활용하면 결제 전체 내역을 한 번에 보고 싶을 때, 구현체가 무엇이든 '결제'라는 개념으로 묶어서 조회가 가능합니다.
+
+---
 
 ### 공통 속성의 재사용
 
@@ -64,11 +70,13 @@ JPA에서의 디형성 조회(Polymorphic Query)는 부모 엔티티를 기준�
 * 유지보수 비용 증가 
 * 컬럼 정책 변경 시 누락 위험
 
+---
+
 ### @Entity와 @MappedSuperclass 
 
 JPA에서는 @Entity로 선언하면 엔티티로 인식해서 연결된 테이블을 DB에 생성하게 됩니다. 하지만, @MappedSuperClass로 선언하면 엔티티로 인식되지 않기 때문에, 테이블은 생성하지 않고 속성들만 담을 수 있습니다.
 
-@Entity와 @MappedSuperClass 비교
+**@Entity와 @MappedSuperClass 비교**
 
 | 구분	| @Entity |	@MappedSuperclass|
 | ---- | --- | --- |
@@ -80,6 +88,8 @@ JPA에서는 @Entity로 선언하면 엔티티로 인식해서 연결된 테이�
 @MappedSuperClass를 사용하면 부모 엔티티가 DB에서 조회의 대상이 아닌 공통 속성만 정의하고 있는 순수한 기본 엔티티임을 명확하게 표현할 수 있습니다.
 
 단순히 공통 속성의 재사용이 목적이고, 다형성 조회가 필요하지 않다면 @Entity 대신 @MappedSuperclass를 사용하는 것이 적합합니다.
+
+---
 
 ### 부모 엔티티를 @Entity로 선언하는 경우에 발생할 수 있는 문제
 
@@ -116,13 +126,11 @@ BaseEntity와 연결된 테이블이 생성되면 Repository 생성의 대상이
 
 3️⃣ 의도하지 않은 다형성 조회 가능성
 
-
-
 ```sql
 select b from BaseEntity b
 ```
 
 BaseEntity를 상속받은 자식 엔티티 ChildEntityA와 ChildEntityB가 있다고 가정하면 위의 SQL문으로 BaseEntity, ChildEntityA, ChildEntityB가 한번에 조회됩니다.
 
-
+---
 
