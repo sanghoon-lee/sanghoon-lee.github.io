@@ -62,7 +62,7 @@ DB 관점에서는 테이블의 컬럼(Column)에 해당합니다.
 * 유지보수 비용 증가 
 * 컬럼 정책 변경 시 누락 위험
 
-이러한 문제를 회피하기 위해서 아래 예제 코드처럼 @MappedSuperclass로 클래스를 선언합니다. 이렇게 선언된 BaseEntity는 여러 엔티티에서 공통으로 사용할 수 있는 속성들만 묶인 기본 객체가 됩니다. 실제 엔티티들은 BaseEntity를 상속받아서 사용하도록 하면 됩니다.  
+이러한 문제를 회피하기 위해서 아래 예제 코드처럼 @MappedSuperclass로 클래스를 선언합니다. 이렇게 선언된 BaseEntity는 여러 엔티티에서 공통으로 사용할 수 있는 속성들만 묶인 기본 객체가 됩니다. ChildEntity는 BaseEntity로부터 createAt과 updateAt 속성을 상속받아 사용하게 됩니다.  
 
 ```java
 @MappedSuperclass
@@ -70,6 +70,13 @@ public abstract class BaseEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
+
+@Entity
+public class ChildEntity extends BaseEntity{
+    private String userName;
+    private Integer age;
+}
+
 ```
 
 ### 3. @Entity와 @MappedSuperClass의 차이점
@@ -91,7 +98,7 @@ public abstract class BaseEntity {
 
 ```java
 /**
- * 결제(개념) : 부모 엔티티(클래스명 : Payment)
+ * 결제(개념) : 부모 엔티티(Payment)
  * 결제수단(구현체) : 자식 엔티티(카드, 포인트, 현금 등)
  */
 
@@ -123,7 +130,8 @@ BaseEntity와 연결된 테이블이 생성되면, Repository 생성의 대상�
 와 같은 혼란을 유발할 수 있습니다.
 
 ```java
-public interface BaseEntityRepository extends JpaRepository<BaseEntity, Long> {
+public interface BaseEntityRepository 
+                    extends JpaRepository<BaseEntity, Long> {
 }
 ```
 
