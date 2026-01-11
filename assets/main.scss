@@ -29,142 +29,6 @@ body{
   word-break: keep-all;
 }
 
-/* 헤더 */
-.site-header {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-}
-
-.site-header .site-title a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 2rem;
-}
-
-
-/* 본문 폭/여백 */
-.page-content, .post-content, main {
-  max-width: var(--content-max);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-/* 제목 스타일 개선 */
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.25;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-top: 1.5rem;
-}
-
-h2 {
-  font-size: 2rem;
-}
-
-h3 {
-  font-size: 1.75rem;
-}
-
-h4 {
-  font-size: 1.5rem;
-}
-
-/* 단락 및 텍스트 */
-p {
-  margin-bottom: 1.25rem;
-}
-
-ul, ol {
-  margin-bottom: 1.25rem;
-  padding-left: 1.5rem;
-}
-
-li {
-  margin-bottom: 0.75rem;
-}
-
-/* 인용문 */
-blockquote {
-  background: #f9f9f9;
-  border-left: 5px solid #3490dc;
-  padding: 1rem;
-  margin: 2rem 0;
-  font-style: italic;
-  color: #444;
-}
-
-/* 리스트 */
-li {
-  margin-bottom: 0.75rem;
-}
-
-/* 링크 스타일 */
-a {
-  color: #3490dc;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* =========================
-   Code blocks – Step 1
-   (예제 코드 세련되게 스타일링)
-   ========================= */
-
-/* 코드 블록 스타일링 */
-pre {
-  background: #1e1e1e;
-  color: #f8f8f2;
-  padding: 1rem;
-  border-radius: 8px;
-  overflow-x: auto;
-  line-height: 1.6;
-  font-size: 0.95rem;
-  margin: 1.5rem 0;
-}
-
-/* 코드 내부의 스타일 */
-code {
-  background: transparent;
-  color: #f8f8f2;
-  font-family: 'Courier New', monospace;
-  padding: 0.2rem 0.4rem;
-  border-radius: 6px;
-}
-
-/* 코드 블록에 "언어" 정보 추가 */
-pre[class*="language-"] {
-  background: #2d2d2d;
-}
-
-/* 복사 버튼 추가 시 스타일 */
-button.copy-btn {
-  background-color: #3490dc;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 0.5rem;
-  transition: background-color 0.3s;
-}
-
-button.copy-btn:hover {
-  background-color: #2779bd;
-}
-
-
 /* ================================
    헤더 및 네비게이션 영역 설정
    ================================ */
@@ -228,4 +92,51 @@ button.copy-btn:hover {
   margin: 1.5rem 0;
   color: #fff; /* 포스트 제목 색상 */
   text-align: left; /* 왼쪽 정렬 */
+}
+
+/* =========================
+   Code blocks – Step 1
+   (예제 코드 세련되게 스타일링)
+   ========================= */
+
+/* 코드 블록 스타일링 */
+pre {
+  background: #1e1e1e;
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 1.5rem 0;
+}
+
+/* 코드 내부의 스타일 */
+code {
+  background: transparent;
+  color: #f8f8f2;
+  font-family: 'Courier New', monospace;
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+}
+
+/* 코드 블록에 "언어" 정보 추가 */
+pre[class*="language-"] {
+  background: #2d2d2d;
+}
+
+/* 복사 버튼 추가 시 스타일 */
+button.copy-btn {
+  background-color: #3490dc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+button.copy-btn:hover {
+  background-color: #2779bd;
 }
