@@ -1,26 +1,88 @@
 ---
 ---
 
-/* =========================
-   Custom – Step 1 (Readability)
-   ========================= */
-
-:root{
-  --content-max: 860px;
+/* 기본 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.page-content, .post-content, main {
-  max-width: var(--content-max);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
+/* 전체 배경 및 텍스트 색상 */
 body {
+  background-color: #f4f4f9;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+}
+
+/* 헤더 */
+.site-header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+.site-header .site-title a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.site-nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 1rem;
+}
+
+.site-nav a:hover {
+  color: #ddd;
+}
+
+/* 본문 컨텐츠 */
+.site-main {
+  padding: 2rem 0;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* 본문 */
+.post-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-content {
+  font-size: 1.125rem;
   line-height: 1.75;
-  letter-spacing: -0.01em;
-  word-break: keep-all;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo",
-               "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+}
+
+/* 인용문 */
+blockquote {
+  background: #f9f9f9;
+  border-left: 5px solid #333;
+  padding: 1rem;
+  margin: 2rem 0;
+}
+
+/* 리스트 */
+ul, ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* 푸터 */
+.site-footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
 }

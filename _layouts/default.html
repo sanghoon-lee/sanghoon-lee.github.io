@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1 class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+        <nav class="site-nav">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/posts/' | relative_url }}">Posts</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <div class="container">
+        {{ content }}
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; {{ site.title }} - {{ site.time | date: '%Y' }}</p>
+      </div>
+    </footer>
+  </body>
+</html>
