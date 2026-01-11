@@ -41,15 +41,18 @@ body {
   width: 100%; /* 화면 가로 폭에 맞추기 */
   padding: 1.5rem 0; /* 상하 여백 */
   margin: 0;
-  position: relative;
+  text-align: center; /* 중앙 정렬 */
 }
 
 .site-title {
   font-size: 2.5rem;
   font-weight: bold;
-  text-align: left; /* 왼쪽 정렬 */
   margin: 0;
   padding-left: 1rem; /* 왼쪽 여백 추가 */
+  padding-right: 1rem; /* 오른쪽 여백 추가 */
+  max-width: var(--content-max); /* 본문 폭에 맞추기 */
+  margin-left: auto;
+  margin-right: auto; /* 중앙 정렬 */
 }
 
 .site-title a {
