@@ -160,42 +160,42 @@ pre {
 /* 다크 모드일 때 코드 블록 스타일 */
 @media (prefers-color-scheme: dark) {
   pre {
-    background-color: #282c34;  /* 어두운 회색 배경 */
-    color: #f8f8f2;             /* 밝은 글씨 색상 */
+    background-color: #282c34 !important;  /* 어두운 회색 배경 */
+    color: #f8f8f2 !important;             /* 밝은 글씨 색상 */
   }
 
   /* 코드 하이라이팅 영역 */
   pre code {
-    background-color: transparent;
-    color: inherit;
-    padding: 0;
-    border-radius: 0;
+    background-color: transparent !important;
+    color: inherit !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
   }
 
   pre .language-javascript {
-    background-color: transparent;
-    color: #f8f8f2;
+    background-color: transparent !important;
+    color: #f8f8f2 !important;
   }
 }
 
 /* 화이트 모드일 때 코드 블록 스타일 */
 @media (prefers-color-scheme: light) {
   pre {
-    background-color: #f4f4f4;  /* 밝은 배경 (화이트 모드) */
-    color: #333;                 /* 어두운 글씨 색상 */
+    background-color: #f4f4f4 !important;  /* 밝은 배경 (화이트 모드) */
+    color: #333 !important;                 /* 어두운 글씨 색상 */
   }
 
   /* 코드 하이라이팅 영역 */
   pre code {
-    background-color: transparent;
-    color: inherit;
-    padding: 0;
-    border-radius: 0;
+    background-color: transparent !important;
+    color: inherit !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
   }
 
   pre .language-javascript {
-    background-color: #e3f2fd;  /* 연한 파란색 배경 */
-    color: #00796b;              /* 어두운 색상 글씨 */
+    background-color: #e3f2fd !important;  /* 연한 파란색 배경 */
+    color: #00796b !important;              /* 어두운 색상 글씨 */
   }
 }
 
