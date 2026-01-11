@@ -7,7 +7,7 @@
    ========================= */
 
 :root{
-  --content-max: 860px;
+  --content-max: 860px;  /* 본문 최대 폭 */
   --text: #111827;
   --muted: #6b7280;
   --bg: #ffffff;
@@ -38,9 +38,10 @@ body{
   background-color: #333; /* 전체 배경을 검정색으로 */
   color: #fff;
   width: 100%;
-  max-width: var(--content-max); /* 본문과 동일한 폭 */
+  padding: 1.5rem 0; /* 여백 추가 */
+  text-align: left;
   margin: 0 auto;
-  padding: 1rem 0; /* 여백 추가 */
+  max-width: var(--content-max); /* 본문과 동일한 폭 */
 }
 
 .site-title {
@@ -58,8 +59,9 @@ body{
 /* 네비게이션 메뉴 */
 .site-nav {
   display: flex;
-  justify-content: center; /* 메뉴 중앙 정렬 */
+  justify-content: center; /* 메뉴 항목을 중앙으로 배치 */
   padding: 0;
+  width: 100%; /* 메뉴가 전체 폭을 차지 */
 }
 
 .site-nav a {
@@ -92,6 +94,29 @@ body{
   margin: 1.5rem 0;
   color: #fff; /* 포스트 제목 색상 */
   text-align: left; /* 왼쪽 정렬 */
+}
+
+/* =========================
+   글 본문 및 포스팅 목록 정리
+   ========================= */
+
+/* 본문 및 포스트 글 정렬 */
+.page-content, .post-content, main {
+  max-width: var(--content-max); /* 본문 폭 */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* 포스팅 목록 */
+ul, ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.75rem;
 }
 
 /* =========================
