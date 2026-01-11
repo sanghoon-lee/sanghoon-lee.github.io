@@ -3,11 +3,10 @@
 
 /* ================================
    Base styles (Step 0)
-   - theme 없이도 '안 깨져 보이게' 만드는 최소 세트
    ================================ */
 
-:root{
-  --content-max: 860px;  /* 본문 최대 폭 */
+:root {
+  --content-max: 860px; /* 본문 최대 폭 */
   --text: #111827;
   --muted: #6b7280;
   --bg: #ffffff;
@@ -15,11 +14,13 @@
   --link: #2563eb;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body { height: 100%; }
-
-body{
+html,
+body {
+  height: 100%;
   margin: 0;
   color: var(--text);
   background: var(--bg);
@@ -33,22 +34,22 @@ body{
    헤더 및 네비게이션 영역 설정
    ================================ */
 
-/* 상단 블로그 제목 영역: 화면 가로 폭에 맞춰 검정색 배경 */
+/* 블로그 제목 영역: 화면 가로 폭에 맞춰 검정색 배경 */
 .site-header {
   background-color: #333; /* 검정색 배경 */
   color: #fff;
-  width: 100%;  /* 화면 가로 폭에 맞추기 */
+  width: 100%; /* 화면 가로 폭에 맞추기 */
   padding: 1.5rem 0; /* 상하 여백 */
   text-align: left; /* 왼쪽 정렬 */
-  margin: 0 auto;
+  margin: 0;
 }
 
 .site-title {
   font-size: 2.5rem;
   font-weight: bold;
-  text-align: left;
+  text-align: left; /* 왼쪽 정렬 */
   margin: 0;
-  padding-left: 1rem; /* 왼쪽에 간격을 주어 본문과 맞추기 */
+  padding-left: 1rem; /* 왼쪽 여백 추가 */
 }
 
 .site-title a {
@@ -56,14 +57,16 @@ body{
   text-decoration: none;
 }
 
-/* 네비게이션 메뉴: 본문 폭에 맞추고 중앙 정렬 */
+/* 네비게이션 메뉴: 본문 폭에 맞추고 블로그 제목과 동일하게 정렬 */
 .site-nav {
   display: flex;
-  justify-content: flex-start; /* 메뉴 항목을 블로그 제목과 맞춰 왼쪽 정렬 */
+  justify-content: flex-start; /* 메뉴 항목을 왼쪽 정렬 */
   padding: 0;
+  width: 100%; /* 화면 가로 폭에 맞추기 */
   max-width: var(--content-max); /* 본문과 동일한 폭 */
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 
 .site-nav a {
@@ -103,7 +106,9 @@ body{
    ========================= */
 
 /* 본문 및 포스트 글 정렬 */
-.page-content, .post-content, main {
+.page-content,
+.post-content,
+main {
   max-width: var(--content-max); /* 본문 폭 */
   margin-left: auto;
   margin-right: auto;
@@ -112,7 +117,8 @@ body{
 }
 
 /* 포스팅 목록 */
-ul, ol {
+ul,
+ol {
   margin-bottom: 1.25rem;
   padding-left: 1.5rem;
 }

@@ -51,7 +51,6 @@ DB 관점에서는 테이블의 컬럼(Column)에 해당합니다.
 
 다음은 공통적으로 사용할 수 있는 대표적인 속성입니다.
 ```
-
 - 생성일(createdAt)
 - 변경일(updatedAt)
 - 생성자(createdBy)
@@ -69,7 +68,6 @@ DB 관점에서는 테이블의 컬럼(Column)에 해당합니다.
 아래는 @MappedSuperClass를 사용해서 생성일과 변경일을 공통 속성으로 가진 BaseEntity라는 이름의 객체를 선언하는 방법을 보여주는 예제 코드입니다.
 ```java
 @MappedSuperclass
-
 public abstract class BaseEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
