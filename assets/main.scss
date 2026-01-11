@@ -158,7 +158,7 @@ pre {
   margin: 1.5rem 0;
   overflow-x: auto;  /* 수평 스크롤 추가 */
   font-size: 1rem;
-  white-space: pre;   /* 줄바꿈 허용 */
+  white-space: nowrap;  /* 수평 스크롤을 위해 줄바꿈을 막고, 한 줄로 유지 */
   word-wrap: normal;  /* 긴 단어가 줄을 넘지 않게 */
   max-width: 100%;    /* 최대 폭을 100%로 설정 */
 }
