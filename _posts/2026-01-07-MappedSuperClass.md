@@ -124,8 +124,7 @@ BaseEntity와 연결된 테이블이 생성되면, Repository 생성의 대상�
 와 같은 혼란을 유발할 수 있습니다.
 
 ```java
-public interface BaseEntityRepository
-        extends JpaRepository<BaseEntity, Long> {
+public interface BaseEntityRepository extends JpaRepository<BaseEntity, Long> {
 }
 ```
 
