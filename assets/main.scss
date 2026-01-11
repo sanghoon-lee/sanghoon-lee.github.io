@@ -42,15 +42,6 @@ body{
   font-size: 2rem;
 }
 
-.site-nav a {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 1rem;
-}
-
-.site-nav a:hover {
-  color: #ddd;
-}
 
 /* 본문 폭/여백 */
 .page-content, .post-content, main {
@@ -171,4 +162,27 @@ button.copy-btn {
 
 button.copy-btn:hover {
   background-color: #2779bd;
+}
+
+
+/* 네비게이션 메뉴를 본문과 같은 폭에 맞추기 */
+.site-nav {
+  display: flex;
+  justify-content: center;  /* 메뉴 항목을 수평 중앙으로 배치 */
+  padding: 0;
+  width: 100%;  /* 네비게이션 메뉴가 100% 넓이를 차지 */
+  max-width: 860px;  /* 본문 폭에 맞추기 (여기서 max-width는 컨텐츠의 최대 너비) */
+  margin-left: auto; /* 중앙 정렬 */
+  margin-right: auto;
+}
+
+.site-nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 1rem; /* 메뉴 항목 간 간격 */
+  font-size: 1.125rem;
+}
+
+.site-nav a:hover {
+  color: #ddd;
 }
