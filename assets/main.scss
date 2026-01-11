@@ -158,14 +158,14 @@ pre {
   margin: 1.5rem 0;
   overflow-x: auto;  /* 수평 스크롤 추가 */
   font-size: 1rem;
-  white-space: nowrap; /* 자동 줄바꿈 허용 X */
-  word-wrap: break-word; /* 긴 단어가 줄을 넘기지 않게 설정 */
+  white-space: pre;   /* 줄바꿈 허용 */
+  word-wrap: normal;  /* 긴 단어가 줄을 넘지 않게 */
+  max-width: 100%;    /* 최대 폭을 100%로 설정 */
 }
 
 /* 작은 화면에서 코드 블록이 스크롤 가능하게끔 설정 */
 @media (max-width: 768px) {
   pre {
-    max-width: 100%;  /* 모바일 화면에 맞게 최대 폭 설정 */
     margin: 1rem 0;  /* 모바일에서 여백 조정 */
   }
 }
