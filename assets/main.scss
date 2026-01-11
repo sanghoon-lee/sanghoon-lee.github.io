@@ -151,8 +151,8 @@ code {
 
 /* 코드 블록 스타일링 */
 pre {
-  background-color: #2d2d2d; /* 어두운 배경 */
-  color: #f8f8f2;        /* 밝은 글씨 색상 */
+  background-color: #282c34; /* 어두운 회색 배경 - 가독성 높임 */
+  color: #f8f8f2;            /* 밝은 글씨 색상 */
   padding: 1.5rem;
   border-radius: 8px;
   margin: 1.5rem 0;
@@ -162,7 +162,9 @@ pre {
   word-wrap: normal;  /* 긴 단어가 줄을 넘지 않게 */
   max-width: 100%;    /* 최대 폭을 100%로 설정 */
   box-sizing: border-box; /* 패딩 포함 크기 설정 */
+  font-family: 'Fira Code', 'Courier New', monospace; /* Fira Code 폰트 적용 */
 }
+
 
 /* 작은 화면에서 코드 블록이 스크롤 가능하게끔 설정 */
 @media (max-width: 768px) {
