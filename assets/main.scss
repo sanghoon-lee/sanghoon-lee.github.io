@@ -135,19 +135,25 @@ li {
    (예제 코드 세련되게 스타일링)
    ========================= */
 
+/* ================================
+   코드 강조문구 및 코드 블록 처리
+   ================================ */
+
 /* 인라인 코드 (code) 강조 */
-code, kbd, pre, samp, tt {
+code {
   background-color: #2d2d2d; /* 어두운 배경 */
   color: #f8f8f2; /* 밝은 글씨 색상 */
   font-family: 'Courier New', monospace;
   padding: 0.2rem 0.4rem;
   border-radius: 6px;
+  display: inline-block; /* 인라인 요소로 처리 */
+  white-space: nowrap; /* 텍스트가 줄바꿈 되지 않도록 */
 }
 
-/* 코드 블록 스타일링 */
+/* 코드 블록 (pre) */
 pre {
-  background: #1e1e1e;
-  color: #f8f8f2;
+  background-color: #2d2d2d; /* 어두운 배경 */
+  color: #f8f8f2; /* 밝은 글씨 색상 */
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
@@ -158,20 +164,10 @@ pre {
   word-wrap: break-word; /* 긴 단어가 줄을 넘기지 않게 설정 */
 }
 
-/* 코드 내부 스타일 */
-code {
-  background: transparent;
-  color: #f8f8f2;
-  font-family: 'Courier New', monospace;
-  padding: 0.2rem 0.4rem;
-  border-radius: 6px;
-  display: inline-block;
-  white-space: pre-wrap; /* 자동 줄바꿈 허용 */
-}
-
 /* 코드 블록에 "언어" 정보 추가 */
 pre[class*="language-"] {
-  background: #2d2d2d;
+  background-color: #2d2d2d; /* 어두운 배경 */
+  color: #f8f8f2; /* 밝은 글씨 색상 */
 }
 
 /* 복사 버튼 추가 시 스타일 */
