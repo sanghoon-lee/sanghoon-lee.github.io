@@ -1,4 +1,88 @@
 ---
 ---
 
-body { outline: 6px solid hotpink !important; }
+/* =========================
+   Base styles (Step 0)
+   - theme 없이도 '안 깨져 보이게' 만드는 최소 세트
+   ========================= */
+
+:root{
+  --content-max: 860px;
+  --text: #111827;
+  --muted: #6b7280;
+  --bg: #ffffff;
+  --border: #e5e7eb;
+  --link: #2563eb;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body{
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo",
+               "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+}
+
+/* 링크 */
+a{
+  color: var(--link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover{ text-decoration-thickness: 2px; }
+
+/* 본문 폭/여백: “너무 넓어서 읽기 힘든 문제” 해결 */
+main, article{
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* 제목 가독성 */
+h1, h2, h3, h4{
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin: 2rem 0 0.75rem;
+}
+h1{
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  margin-top: 1.5rem;
+}
+h2{ font-size: 1.45rem; }
+h3{ font-size: 1.2rem; }
+h4{ font-size: 1.05rem; }
+
+/* 문단/리스트 기본 간격 */
+p{ margin: 0 0 1.05rem; }
+ul, ol{ margin: 0 0 1.05rem; padding-left: 1.25rem; }
+li{ margin: 0.25rem 0; }
+
+/* 인용문 */
+blockquote{
+  margin: 1.25rem 0;
+  padding: 0.85rem 1rem;
+  border-left: 4px solid var(--border);
+  background: #f9fafb;
+  border-radius: 12px;
+  color: #374151;
+}
+
+/* 구분선 */
+hr{
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+/* 이미지 */
+img{
+  max-width: 100%;
+  height: auto;
+}
