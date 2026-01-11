@@ -135,6 +135,15 @@ li {
    (예제 코드 세련되게 스타일링)
    ========================= */
 
+/* 인라인 코드 (code) 강조 */
+code, kbd, pre, samp, tt {
+  background-color: #2d2d2d; /* 어두운 배경 */
+  color: #f8f8f2; /* 밝은 글씨 색상 */
+  font-family: 'Courier New', monospace;
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+}
+
 /* 코드 블록 스타일링 */
 pre {
   background: #1e1e1e;
