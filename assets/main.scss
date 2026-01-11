@@ -5,5 +5,47 @@
   margin-top: 2.5rem;
 }
 
-/* CODESTYLE_MARK_20260111 */
-pre { background: #111 !important; }
+/* ==== Code blocks (Step 1) ==== */
+
+/* 인라인 코드 */
+main :not(pre) > code,
+article :not(pre) > code {
+  padding: 0.15em 0.35em;
+  border-radius: 8px;
+  border: 1px solid rgba(127, 127, 127, 0.18);
+  background: rgba(127, 127, 127, 0.08);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92em;
+}
+
+/* 코드 블록 (Rouge 포함) */
+main pre,
+main .highlight pre,
+article pre,
+article .highlight pre {
+  margin: 1.2rem 0;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(127, 127, 127, 0.22);
+  overflow-x: auto;
+
+  background: #0b1220;
+  color: #e5e7eb;
+
+  line-height: 1.65;
+  font-size: 0.95rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* pre 내부 code 중복 제거 */
+main pre code,
+main .highlight pre code,
+article pre code,
+article .highlight pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
