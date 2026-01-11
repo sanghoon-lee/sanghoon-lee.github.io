@@ -63,9 +63,8 @@ DB 관점에서는 테이블의 컬럼(Column)에 해당합니다.
 * 유지보수 비용 증가 
 * 컬럼 정책 변경 시 누락 위험
 
-@MappedSuperclass를 사용하면 여러 엔티티에서 공통으로 사용할 수 있는 속성들을 묶어서 쉡게 기본 객체로 선언할 수 있습니다.  
+아래 예제 코드처럼 @MappedSuperclass로 클래스를 선언하면 여러 엔티티에서 공통으로 사용할 수 있는 속성들만 묶어서 쉽게 기본 객체로 선언할 수 있습니다.  
 
-아래는 @MappedSuperClass를 사용해서 생성일과 변경일을 공통 속성으로 가진 BaseEntity라는 이름의 객체를 선언하는 방법을 보여주는 예제 코드입니다.
 ```java
 @MappedSuperclass
 public abstract class BaseEntity {
