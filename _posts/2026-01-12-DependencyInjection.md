@@ -18,6 +18,8 @@ categories: 학습기록
 
 스프링에서는 의존성 주입(Dependency Injection, DI)을 통해 객체 간의 결합도를 낮추고, 코드의 재사용성을 높이며, 테스트 용이성을 증가시킬 수 있습니다. 이 글에서는 **생성자 주입(Constructor Injection)**과 **필드 초기화(Field Initialization)** 방식의 차이점과, 올바른 의존성 주입 방식을 사용하는 이유에 대해 살펴보겠습니다.
 
+<img class="main-image" src="/assets/images/springboot.png" alt="스프링부트">
+
 ### 1. 필드 초기화 방식 (문제 코드)
 
 먼저 필드 초기화 방식을 살펴보겠습니다.
