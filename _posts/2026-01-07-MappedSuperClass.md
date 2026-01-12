@@ -2,7 +2,7 @@
 layout: post
 title: "[학습기록] 스프링부트 @MappedSuperClass 사용법"
 date: 2026-01-07
-categories: java
+categories: 학습기록
 ---
 
 <style>
