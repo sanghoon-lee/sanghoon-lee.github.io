@@ -16,7 +16,7 @@ categories: 학습기록
 }
 </style>
 
-스프링에서 의존관계를 자동으로 설정해주는 **의존성 주입(Dependency Injection, DI)**은 매우 중요한 기능으로 객체의 생성 책임과 사용 책임을 분리하는 설계 원칙이기도 합니다.
+스프링에서 의존관계를 자동으로 설정해주는 **의존성 주입(Dependency Injection, DI)**은 매우 중요한 기능으로 객체의 생성과 사용 책임을 분리하는 설계 원칙이기도 합니다.
 하지만, 이에 대해서 제대로 공부하기보다는 그냥 "@Autowired를 붙이는 기술” 정도로만 알고 사용하는 개발자들도 의외로 많이 있는 것 같습니다. 
 
 <img class="main-image" src="/assets/images/springboot.png" alt="스프링부트">
