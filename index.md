@@ -4,69 +4,93 @@ title: 🏠 Home
 ---
 
 <style>
-/* Hero wrapper */
-.hero {
-  display: flex;
-  flex-direction: column;
+/* Home intro wrapper */
+.home-intro {
+  max-width: 860px;
+  margin: 2rem auto 1.5rem;
+  padding: 1.25rem 1rem;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.25rem;
   align-items: center;
-  margin: 2rem 0 1.5rem;
-  padding: 1.5rem 1rem;
 }
 
-/* Hero image: 자연스러운 크기 */
-.hero-image {
-  width: 80%;
-  max-width: 380px;
-  height: auto;
-  margin-bottom: 1.4rem;
-  border-radius: 12px;
-  display: block;
-}
-
-/* Title (텍스트 중심 강조) */
-.hero-title {
-  margin: 0 0 0.6rem;
-  font-size: 1.65rem;
-  font-weight: 800;
-  line-height: 1.45;
-  text-align: center;
-}
-
-/* Subtitle alignment balancing */
-.hero-subtitle {
-  margin: 0 0 1.2rem;
-  font-size: 0.92rem;
-  line-height: 1.6;
-  text-align: left;
-  color: #4e4e4e;
-  max-width: 600px;
-}
-
-/* Tags: 중앙 정렬 */
-.hero-tags {
+/* Profile image (circle) */
+.profile-wrap {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 999px; /* 완전 원형 */
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Text area */
+.profile-text h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.profile-text p {
+  margin: 0.4rem 0;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.profile-meta {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  color: #4b5563;
+}
+
+.profile-meta li {
+  margin: 0.25rem 0;
+}
+
+/* Small badges */
+.badges {
+  margin-top: 0.8rem;
+  display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
-  margin-top: 0.8rem;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.03);
+  color: #111827;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-image {
-    max-width: 280px;
+  .home-intro {
+    grid-template-columns: 1fr;
+    text-align: left;
   }
-  .hero-title {
-    font-size: 1.4rem;
+  .profile-wrap {
+    justify-content: flex-start;
   }
 }
 </style>
 
-<section class="hero">
-  <img class="hero-image" src="/assets/hero.png" alt="Hero image: 팀의 행복을 버그 없이 배포합니다">
-  <p class="hero-subtitle">
-    기술부채를 줄이고, 팀의 행복과 서비스 품질향상을 함께 고민하고 있는 평범한 개발팀장입니다.
-  </p>
+<section class="home-intro">
+  <div class="profile-wrap">
+    <!-- 프로필 이미지 파일을 /assets/profile.jpg 로 두는 걸 추천 -->
+    <img class="profile-img" src="/assets/profile.jpg" alt="준민아빠">
+  </div>
+
   <ul class="hero-subtitle">
     <li>닉네임 : 준민아빠 </li>
     <li>한줄소개 : 어느덧 개발실무보다는 조직 관리가 더 익숙해진 것 같습니다. 슬프지만 이제는 개발자가 아닌 개발팀장이 직업이 되어버린 것 같아요. </li>
