@@ -4,18 +4,24 @@ title: 🏠 Home
 ---
 
 <style>
-/* Home intro wrapper */
+/* =========================
+   Home Intro Layout
+   ========================= */
+
 .home-intro {
   max-width: 860px;
-  margin: 2rem auto 1.5rem;
-  padding: 1.25rem 1rem;
+  margin: 2.5rem auto 2rem;
+  padding: 1.5rem 1rem;
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 1.25rem;
+  grid-template-columns: 180px 1fr;
+  gap: 1.75rem;
   align-items: center;
 }
 
-/* Profile image (circle) */
+/* =========================
+   Profile Image
+   ========================= */
+
 .profile-wrap {
   display: flex;
   justify-content: center;
@@ -23,64 +29,80 @@ title: 🏠 Home
 }
 
 .profile-img {
-  width: 240px;
-  height: 240px;
-  border-radius: 999px; /* 완전 원형 */
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;          /* 완전 원형 */
   object-fit: cover;
   display: block;
   border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12); /* 은은한 그림자 */
 }
 
-/* Text area */
+/* =========================
+   Text Area
+   ========================= */
+
 .profile-text h1 {
-  margin: 0 0 0.35rem;
-  font-size: 1.55rem;
+  margin: 0 0 0.4rem;
+  font-size: 1.6rem;
   font-weight: 800;
   line-height: 1.35;
 }
 
 .profile-text p {
-  margin: 0.4rem 0;
+  margin: 0.45rem 0;
   line-height: 1.7;
   color: #374151;
 }
 
 .profile-meta {
-  margin: 0.75rem 0 0;
+  margin: 0.9rem 0 0;
   padding-left: 1.1rem;
   color: #4b5563;
 }
 
 .profile-meta li {
-  margin: 0.25rem 0;
+  margin: 0.3rem 0;
 }
 
-/* Small badges */
+/* =========================
+   Badges
+   ========================= */
+
 .badges {
-  margin-top: 0.8rem;
+  margin-top: 0.9rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
 
 .badge {
   display: inline-block;
   font-size: 0.85rem;
-  padding: 0.25rem 0.55rem;
+  padding: 0.3rem 0.6rem;
   border-radius: 999px;
   border: 1px solid rgba(0,0,0,0.12);
   background: rgba(0,0,0,0.03);
   color: #111827;
 }
 
-/* Responsive */
+/* =========================
+   Responsive
+   ========================= */
+
 @media (max-width: 768px) {
   .home-intro {
     grid-template-columns: 1fr;
-    text-align: left;
+    gap: 1.25rem;
   }
+
   .profile-wrap {
     justify-content: flex-start;
+  }
+
+  .profile-img {
+    width: 140px;
+    height: 140px;
   }
 }
 </style>
