@@ -1,144 +1,124 @@
 ---
 layout: page
-title: 📝 Posts
+title: Posts
 permalink: /posts/
 ---
 
 <style>
-.posts-archive-title {
-  margin-bottom: 0.4rem;
-}
+  /* JS 준비 전에는 목록/페이지네이션 숨김 (깜빡임 방지) */
+  .post-list,
+  .pagination {
+    display: none;
+  }
 
-.posts-archive-intro {
-  margin-top: 0;
-  margin-bottom: 1.4rem;
-  color: #666;
-  font-size: 0.95rem;
-}
-
-/* 페이지네이션 스타일 */
-.pagination {
-  margin-top: 1.8rem;
-  text-align: center;
-}
-
-.pagination-inner {
-  display: inline-flex;
-  gap: 0.4rem;
-  align-items: center;
-}
-
-.pagination button {
-  border: 1px solid #ddd;
-  background: #fff;
-  padding: 0.3rem 0.7rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-.pagination button:hover:not(:disabled) {
-  border-color: #bbb;
-}
-
-.pagination button.active {
-  background: #333;
-  color: #fff;
-  border-color: #333;
-}
-
-.pagination button:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
+  /* JS가 준비되면 보여줌 */
+  .js-ready .post-list,
+  .js-ready .pagination {
+    display: block;
+  }
 </style>
 
-<section class="posts-archive">
-  <h2 class="posts-archive-title">포스트 목록</h2>
-  <br>
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li class="post-item">
-        <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        </h3>
-      </li>
-    {% endfor %}
-  </ul>
+<ul id="post-list" class="post-list">
+  {% for post in site.posts %}
+    <li class="post-item">
+      <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
+      <h3>
+        <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h3>
+    </li>
+  {% endfor %}
+</ul>
 
-   <!-- 페이지네이션 UI가 들어갈 영역 -->
-  <div id="pagination" class="pagination"></div>
+<div id="pagination" class="pagination"></div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const postsPerPage = 5;  // ▶ 한 페이지에 보여줄 포스트 수
-        const items = Array.from(document.querySelectorAll('#post-list .post-item'));
-        const totalItems = items.length;
-        const totalPages = Math.ceil(totalItems / postsPerPage);
-        const paginationContainer = document.getElementById('pagination');
-        let currentPage = 1;
+<script>
+  (function () {
+    // 1) 대상 찾기
+    const listEl = document.getElementById('post-list');
+    const paginationEl = document.getElementById('pagination');
+    if (!listEl || !paginationEl) return;
 
-        if (totalPages <= 1) {
-        // 페이지가 1개뿐이면 굳이 페이지네이션 안 보이게
-            return;
-        }
+    const items = Array.from(listEl.querySelectorAll('.post-item'));
+    if (items.length === 0) return;
 
-        function renderPage(page) {
-        currentPage = page;
+    // 2) 페이지 설정
+    const perPage = 5; // 한 페이지에 보여줄 글 수
+    let currentPage = 1;
+    const totalPages = Math.ceil(items.length / perPage);
 
-        // 포스트 show/hide
-        items.forEach((item, index) => {
-            const start = (page - 1) * postsPerPage;
-            const end = start + postsPerPage;
-            if (index >= start && index < end) {
-            item.style.display = '';
-            } else {
-            item.style.display = 'none';
-            }
-        });
+    // 3) 렌더 함수
+    function renderPage(page) {
+      currentPage = Math.min(Math.max(page, 1), totalPages);
 
-        // 페이지네이션 버튼 다시 그리기
-        renderPagination();
-        }
+      const start = (currentPage - 1) * perPage;
+      const end = start + perPage;
 
-        function renderPagination() {
-        paginationContainer.innerHTML = '';
+      items.forEach((item, idx) => {
+        item.style.display = (idx >= start && idx < end) ? '' : 'none';
+      });
 
-        const nav = document.createElement('div');
-        nav.className = 'pagination-inner';
+      renderPagination();
+    }
 
-        // 이전 버튼
-        const prev = document.createElement('button');
-        prev.textContent = '이전';
-        prev.disabled = currentPage === 1;
-        prev.addEventListener('click', () => renderPage(currentPage - 1));
-        nav.appendChild(prev);
+    function renderPagination() {
+      // 버튼 HTML 생성
+      let html = '';
 
-        // 페이지 번호 버튼
-        for (let i = 1; i <= totalPages; i++) {
-            const btn = document.createElement('button');
-            btn.textContent = i;
-            if (i === currentPage) {
-            btn.className = 'active';
-            }
-            btn.addEventListener('click', () => renderPage(i));
-            nav.appendChild(btn);
-        }
+      // Prev
+      html += `<button type="button" class="page-btn prev" ${currentPage === 1 ? 'disabled' : ''}>이전</button>`;
 
-        // 다음 버튼
-        const next = document.createElement('button');
-        next.textContent = '다음';
-        next.disabled = currentPage === totalPages;
-        next.addEventListener('click', () => renderPage(currentPage + 1));
-        nav.appendChild(next);
+      // Pages (간단 버전: 전체 페이지 버튼)
+      for (let p = 1; p <= totalPages; p++) {
+        html += `<button type="button" class="page-btn num ${p === currentPage ? 'active' : ''}" data-page="${p}">${p}</button>`;
+      }
 
-        paginationContainer.appendChild(nav);
-        }
+      // Next
+      html += `<button type="button" class="page-btn next" ${currentPage === totalPages ? 'disabled' : ''}>다음</button>`;
 
-        // 처음 1페이지 렌더링
-        renderPage(1);
-    });
+      paginationEl.innerHTML = html;
+
+      // 이벤트 바인딩
+      const prevBtn = paginationEl.querySelector('.prev');
+      const nextBtn = paginationEl.querySelector('.next');
+
+      prevBtn && prevBtn.addEventListener('click', () => renderPage(currentPage - 1));
+      nextBtn && nextBtn.addEventListener('click', () => renderPage(currentPage + 1));
+
+      paginationEl.querySelectorAll('[data-page]').forEach(btn => {
+        btn.addEventListener('click', () => renderPage(parseInt(btn.dataset.page, 10)));
+      });
+    }
+
+    // 4) JS 준비 완료 표시(숨김 해제) + 첫 페이지 렌더
+    document.documentElement.classList.add('js-ready');
+    renderPage(1);
+  })();
 </script>
 
-</section>
+<style>
+  /* 페이지네이션 기본 스타일(원하면 main.scss로 옮겨도 됨) */
+  .pagination {
+    margin: 1.5rem 0 2rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .page-btn {
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    padding: 0.4rem 0.7rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .page-btn.active {
+    border-color: #111;
+    font-weight: 700;
+  }
+
+  .page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+</style>
