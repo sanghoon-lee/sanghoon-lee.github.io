@@ -16,8 +16,14 @@ permalink: /posts/
   .js-ready .pagination {
     display: block;
   }
+
+  .posts-archive-title {
+    margin-bottom: 0.4rem;
+  }
 </style>
 
+<h2 class="posts-archive-title">포스트 목록</h2>
+<br>
 <ul id="post-list" class="post-list">
   {% for post in site.posts %}
     <li class="post-item">
