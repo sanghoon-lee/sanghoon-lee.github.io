@@ -23,8 +23,8 @@ title: 🏠 Home
 }
 
 .profile-img {
-  width: 120px;
-  height: 120px;
+  width: 240px;
+  height: 240px;
   border-radius: 999px; /* 완전 원형 */
   object-fit: cover;
   display: block;
