@@ -2,7 +2,7 @@
 layout: post
 title: "GitHub에 블로그 개설 with ChatGPT"
 date: 2025-11-28
-categories: blog
+categories: 일반
 ---
 
 <style>
