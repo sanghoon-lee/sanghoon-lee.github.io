@@ -8,7 +8,7 @@ categories: 트러블슈팅
 <style>
 .main-image {
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   height: auto;
   margin-bottom: 1.4rem;
   border-radius: 12px;
@@ -65,16 +65,8 @@ DB에 데이터를 저장하는 테스트도 정상적으로 동작하는 것처
 
 ### 원인
 
-원인은 아주 단순했습니다.
-
-@EnableJpaAuditing 설정이 빠져 있었습니다.
-
-AuditingEntityListener는 이름 그대로 리스너일 뿐이고,
-Spring Data JPA의 Auditing 기능 자체는 명시적으로 활성화해야 동작합니다.
-
-Auditing이 비활성화된 상태에서는
-@CreatedDate, @LastModifiedDate가 붙어 있어도
-아무 값도 자동으로 채워지지 않습니다.
+원인은 아주 단순했습니다. @EnableJpaAuditing 설정이 빠져 있었습니다. AuditingEntityListener는 이름 그대로 리스너일 뿐이고,
+Spring Data JPA의 Auditing 기능 자체는 명시적으로 활성화해야 동작합니다. Auditing이 비활성화된 상태에서는 @CreatedDate, @LastModifiedDate가 붙어 있어도 아무 값도 자동으로 채워지지 않습니다.
 
 ### 해결 방법
 
