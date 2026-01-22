@@ -7,7 +7,7 @@ categories: 트러블슈팅
 
 <style>
 .main-image {
-  width: 50%;
+  width: 100%;
   max-width: 380px;
   height: auto;
   margin-bottom: 1.4rem;
