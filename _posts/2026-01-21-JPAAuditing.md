@@ -15,16 +15,19 @@ categories: 트러블슈팅
   display: block;
 }
 </style>
+개발팀장 역할을 맡으면서 회의와 일정 관리, 의사결정, 보고 등 관리 업무에 대부분의 시간을 사용하고 있습니다. 그러다 보니 자연스럽게 개발 실무와는 거리가 생기게 되었습니다. 비교적 최근에 나온 기술들에 대해서는 팀원들과 이야기를 나누다 보면 경험과 지식의 부족이 금방 드러나기도 합니다. 그래서 틈틈이 혼자 토이 프로젝트를 진행하면서 부족함을 조금이라도 채워보려고 노력하고 있습니다. 다만, 그 노력이 충분하다고 말하기는 어려운 것 같습니다.
 
-개발팀장으로 회의와 일정 관리, 의사결정, 보고 등 관리자 역할에 업무 시간의 대부분을 사용하게 되었습니다. 그러다 보니 자연스럽게 개발 실무와는 거리가 생기게 되었습니다. 그렇다고 해서 개발에 대한 감각을 완전히 놓고 싶은 것은 아닙니다. 그래서 가끔씩은 혼자 토이 프로젝트를 수행하면서 코드를 직접 작성해보기도 합니다. 다만, 함께 일하고 있는 팀원들과 비교하면 여전히 부족함을 많이 느낍니다. 이제 관리자 역할에는 익숙해졌지만, 코드 작성에는 조금 서툰 사람이 되어버린 것 같습니다.
+JPA도 사실 제가 실무에서 깊게 다뤄본 경험이 없는 기술 중 하나입니다. 제대로 공부했다고 말하기에도 아직은 조심스러운 수준입니다. 그럼에도 팀에서는 JPA를 사용하고 있기 때문에, 기초적인 개념만이라도 정리해보고 싶다는 생각으로 간단한 토이 프로젝트를 진행했습니다. JPA Auditing 기능을 활용해 DB 테이블의 생성일과 수정일을 자동으로 관리해보고 싶었습니다. 데이터가 추가되면(Insert) 생성일이 기록되고, 데이터가 갱신되면(Update) 수정일이 기록되는 단순하지만, 실무에서도 자주 쓰이는 기능입니다.
+
+하지만 설정 하나를 놓친 탓에 생각보다 많은 시간을 문제 해결에 쓰게 되었고, 그 과정에서 지금의 제 상태를 다시 한 번 돌아보게 되었습니다.
+사소한 실수였지만, 동일한 실수를 반복하지 않도록 기록으로 남겨놓고 싶어서 이 포스팅을 작성하게 되었습니다.
 
 ### 문제의 시작
 
-사실을 먼저 고백하자면, JPA는 제가 실무에서 깊게 다뤄본 경험이 없는 기술입니다. 제대로 공부했다고 말하기에도 조금은 민망한 수준이죠.
-그럼에도 불구하고 이번 토이 프로젝트에서는 JPA를 사용했습니다. JPA를 팀원들은 실무에서 사용하고 있기 때문에, 토이 프로젝트에서라도 사용해보면서 공부하고 싶었습니다.
-JPA 이해가 충분하지 않은 상태에서 무모한 선택이었습니다. 이왕이면 엔티티의 생성일과 수정일 정도는 자동으로 관리해보고 싶었습니다.
-그래서 부모 엔티티(BaseEntity)를 선언하면서, 생성일과 수정일을 나타내는 속성변수 앞에 @CreatedDate와 @LastModifiedDate를 붙였습니다. 당연히 @EntityListener로 Auditing 설정도 했습니다.
+공통으로 관리하고 싶은 속성들은 부모 엔티티(BaseEntity)에서 선언했습니다. 엔티티마다 생성일과 수정일을 반복해서 정의하는 대신, 공통 부모에서 한 번에 처리하고 싶었습니다.
 
+JPA Auditing 기능을 사용하기 위해 부모 엔티티에는 `@EntityListeners` 어노테이션을 통해 `AuditingEntityListener`를 등록해두었습니다.
+또한 `createdAt`과 `updatedAt` 필드에 각각 `@CreatedDate`, `@LastModifiedDate` 어노테이션을 붙여 생성일과 수정일을 자동으로 관리하도록 설정했습니다. 이렇게만 설정해두면, 엔티티가 저장되거나 수정될 때 생성일과 수정일이 자연스럽게 기록될 것이라고 기대했습니다.
 
 **부모 엔티티**
 ```java
@@ -37,6 +40,8 @@ public abstract class BaseEntity {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    ...
 }
 ```
 
@@ -50,30 +55,24 @@ public class Account extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 저장시 암호화, 조회시 복호화
-    @Convert(converter = StringEncryptConverter.class)
-    private String phoneNumber;
-
     private String userName;
     private int sex;
     private int age;
     ....
 ```
 
-테스트를 해보니 정상적으로 DB에 데이터가 저장되는 것 같았습니다. 하지만 막상 H2 콘솔에 접속해서 저장된 데이터를 조회해보니 기대와 다르게
-생성일과 수정일이 모두 null로 저장되어 있었습니다. 
-“이 정도면 설정 하나쯤 빠졌겠지”라는 생각은 들었지만, 막상 어디가 문제인지 바로 떠오르지는 않았습니다.
+근데 막상 테스트를 해보면 생성일과 수정일이 기대와는 다르게 모두 null로 저장되어 있었습니다. “설정 하나쯤 빠졌겠지”라는 생각은 들었지만, 막상 어디가 문제인지 바로 떠오르지는 않았습니다. 
 
-<img class="main-image" src="/assets/images/h2console.png" alt="H2 콘솔 화면">
+아래는 H2 콘솔에 접속해서 저장된 데이터를 조회했던 화면입니다. 생성일과 수정일에 모두 null이 저장되어 있는 것을 알 수 있습니다.
+<img class="main-image" src="/assets/images/h2console.png" alt="H2 콘솔 화면(생성일과 수정일이 null로 기재)">
 
 ### 원인
 
-원인은 아주 단순했습니다. @EnableJpaAuditing 설정이 빠져 있었습니다. AuditingEntityListener는 이름 그대로 리스너일 뿐이고,
-Spring Data JPA의 Auditing 기능 자체는 명시적으로 활성화해야 동작합니다. Auditing이 비활성화된 상태에서는 @CreatedDate, @LastModifiedDate가 붙어 있어도 아무 값도 자동으로 채워지지 않습니다.
+사실 원인은 아주 단순했습니다. @EnableJpaAuditing 설정이 빠져 있어서 JPA Auditing 기능이 동작하지 않았던 것입니다. AuditingEntityListener는 이름 그대로 리스너일 뿐이고, JPA Auditing 기능은 반드시 명시적으로 활성화해야만 동작합니다. 제가 이걸 놓치고 있었던 것입니다. JPA Auditing이 비활성화된 상태에서는 아무리 @CreatedDate, @LastModifiedDate 어노테이션이 붙어 있어도 자동으로 값이 채워지지 않습니다.
 
 ### 해결 방법
 
-Auditing 설정 클래스를 하나 추가하고 @EnableJpaAuditing을 선언합니다.
+JPA Auditing 설정을 위해서 클래스를 하나 추가하고, @EnableJpaAuditing을 선언해서 문제를 해결했습니다.
 
 ```java
 @Configuration
@@ -82,7 +81,7 @@ public class JpaAuditingConfig {
 }
 ```
 
-또는 메인 클래스에 직접 추가해도 됩니다.
+별도의 클래스를 추가하지 않고, 아래처럼 메인 클래스에서 직접 선언해도 됩니다.
 
 ```java
 @SpringBootApplication
@@ -91,20 +90,15 @@ public class Application {
 }
 ```
 
-설정 후에는 다음과 같이 정상 동작합니다.
+설정 후에는 다음과 같이 정상적으로 동작하는 것을 확인할 수 있었습니다.
 
 * INSERT 시 → @CreatedDate 자동 세팅
 * UPDATE 시 → 변경 감지(dirty checking)가 발생하면 @LastModifiedDate 자동 갱신
 
+아래는 문제를 해결한 다음에 다시 H2 콘솔에 접속해서 저장된 데이터를 조회했던 화면입니다. 이번에는 생성일과 수정일에 모두 정상적인 값이 저장되어 있는 것을 알 수 있습니다.
+<img class="main-image" src="/assets/images/h2console2.png" alt="H2 콘솔 화면(생성일과 수정일이 정상)">
+
 ### 정리하며
 
-Auditing 어노테이션은 리스너 등록이고,
-Auditing을 실제로 동작시키는 스위치는 @EnableJpaAuditing입니다.
+개발팀장이라고 다 개발을 잘하는 것은 아닙니다. 관리자 역할에 익숙해지는 만큼, 코드 작성에는 서툰 사람이 될 수도 있습니다. 정답이 따로 있는 문제는 아닌 것 같습니다. 자신이 속해있는 조직의 상황에 맞춰서 살아야죠. 그래도 최소한의 실무 역량은 유지할 수 있도록 꾸준히 노력해나가는 것은 필요해보입니다. 
 
-그리고 개인적으로는 한 줄을 더 덧붙이고 싶습니다.
-
-팀장을 오래 해도, 기본 설정은 가끔 까먹는다.
-
-이번 이슈는 아주 사소한 설정 하나였지만,
-지금의 제 상태를 돌아보게 만드는 계기가 되었습니다.
-그래서 더더욱 이런 실수일수록 기록으로 남겨두는 것이 중요하다고 느꼈습니다.
