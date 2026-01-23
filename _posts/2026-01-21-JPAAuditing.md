@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[트러블슈팅] 스프링에서 JPA Auditing이 동작하지 않는 문제 - @EnableJpaAuditing 빠진 경우"
-date: 2026-01-12
+date: 2026-01-21
 categories: 트러블슈팅
 ---
 
