@@ -31,6 +31,12 @@ JPA Auditing 기능을 사용하기 위해 부모 엔티티에는 `@EntityListen
 
 **부모 엔티티**
 ```java
+
+/**
+ * 아래 코드는 BaseEntity에 Auditing 설정을 해둔 부분입니다.
+ * JPA가 엔티티를 persist/update 할 때 자동으로 날짜를 채워줄 것으로 기대했습니다.
+**/
+
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
@@ -61,10 +67,10 @@ public class Account extends BaseEntity{
     ....
 ```
 
-근데 막상 테스트를 해보면 생성일과 수정일이 기대와는 다르게 모두 null로 저장되어 있었습니다. “설정 하나쯤 빠졌겠지”라는 생각은 들었지만, 막상 어디가 문제인지 바로 떠오르지는 않았습니다. 
+하지만, 결과는 기대했던 것과 달랐습니다. H2 콘솔로 접속해서 저장된 데이터를 조회하면, 아래 그림처럼 실제로는 **생성일과 수정일이 모두 `null`**로 저장되고 있었습니다. 
+<img class="main-image" src="/assets/images/h2console.png" alt="H2 콘솔 화면(생성일과 수정일이 null로 기록)">
 
-아래는 H2 콘솔에 접속해서 저장된 데이터를 조회했던 화면입니다. 생성일과 수정일에 모두 null이 저장되어 있는 것을 알 수 있습니다.
-<img class="main-image" src="/assets/images/h2console.png" alt="H2 콘솔 화면(생성일과 수정일이 null로 기재)">
+ “설정 하나쯤 빠졌겠지”라는 생각은 들었지만, 막상 어디가 문제인지 바로 떠오르지는 않았습니다. 
 
 ### 원인
 
@@ -95,10 +101,11 @@ public class Application {
 * INSERT 시 → @CreatedDate 자동 세팅
 * UPDATE 시 → 변경 감지(dirty checking)가 발생하면 @LastModifiedDate 자동 갱신
 
-아래는 문제를 해결한 다음에 다시 H2 콘솔에 접속해서 저장된 데이터를 조회했던 화면입니다. 이번에는 생성일과 수정일에 모두 정상적인 값이 저장되어 있는 것을 알 수 있습니다.
-<img class="main-image" src="/assets/images/h2console2.png" alt="H2 콘솔 화면(생성일과 수정일이 정상)">
+문제를 해결한 다음에 다시 H2 콘솔에 접속해서 저장된 데이터를 조회했습니다. 이번에는 아래 그림처럼 생성일과 수정일에 모두 정상적인 값이 저장되어 있는 것을 알 수 있었습니다.
+<img class="main-image" src="/assets/images/h2console2.png" alt="H2 콘솔 화면(생성일과 수정일이 정상적으로 기록)">
 
 ### 정리하며
 
-개발팀장이라고 다 개발을 잘하는 것은 아닙니다. 관리자 역할에 익숙해지는 만큼, 코드 작성에는 서툰 사람이 될 수도 있습니다. 정답이 따로 있는 문제는 아닌 것 같습니다. 자신이 속해있는 조직의 상황에 맞춰서 살아야죠. 그래도 최소한의 실무 역량은 유지할 수 있도록 꾸준히 노력해나가는 것은 필요해보입니다. 
+이번 이슈는 아주 사소한 설정 하나였지만, JPA Auditing의 기대 동작과 실제 동작 사이의 차이를 이해하는 데 도움이 되었습니다.
+이 글이 비슷한 문제로 고민하는 분들에게 작은 참고가 되기를 바랍니다. 그리고 개발팀장이라고 다 개발을 잘하는 것은 아닙니다....^__^
 
