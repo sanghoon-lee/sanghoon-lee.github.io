@@ -68,14 +68,14 @@ public class Account extends BaseEntity{
     ....
 ```
 
-JPA Auditing 기능의 사용을 위해 부모 엔티티에는 `@EntityListeners` 어노테이션을 통해 `AuditingEntityListener`도 등록했습니다. `createdAt`과 `updatedAt` 필드에 각각 `@CreatedDate`, `@LastModifiedDate` 어노테이션을 붙여서 생성일과 수정일로 인식되도록 했습니다. 이렇게만 하면 JPA Auditing 기능이 동작할 것으로 기대했습니다.
+JPA Auditing 기능을 사용하기 위해 부모 엔티티에는 `@EntityListeners` 어노테이션을 통해 `AuditingEntityListener`를 등록했습니다. 또한, `createdAt`과 `updatedAt` 필드에 각각 `@CreatedDate`, `@LastModifiedDate` 어노테이션을 붙여서 생성일과 수정일로 인식되도록 했습니다. 이렇게만 하면 JPA Auditing 기능이 동작할 것으로 기대했습니다.
 
-즉, 기대했던 결과는 다음과 같았습니다.
+기대했던 결과는 다음과 같았습니다.
 
 * 데이터 INSERT → 자동으로 생성일 기록
 * 데이터 UPDATE → 지동으로 수정일 기록
 
-하지만, 기대했던 결과가 나오지는 않았습니다. 데이터를 INSERT하고, H2 콘솔로 접속해서 저장된 데이터를 조회해보면 아래 그림처럼 **생성일과 수정일이 모두 `null`**로 저장되고 있었습니다. 
+하지만, 막상 데이터를 INSERT하고, H2 콘솔로 접속해서 저장된 데이터를 조회해보면 기대와 다르게 아래 그림처럼 **생성일과 수정일이 모두 `null`**로 저장되고 있었습니다. 
 
 <img class="main-image" src="/assets/images/h2console.png" alt="H2 콘솔 화면(생성일과 수정일이 null로 기록)">
 
@@ -83,11 +83,11 @@ JPA Auditing 기능의 사용을 위해 부모 엔티티에는 `@EntityListeners
 
 ### 원인
 
-사실 원인은 아주 단순했습니다. @EnableJpaAuditing 어노테이션을 선언하는 것이 빠져 있었기 때문에, JPA Auditing 기능이 활성화되지 않았던 것입니다. 부모 엔티티에서 @EntityListener 어노테이션을 통해 등록했던 AuditingEntityListener는 이름 그대로 리스너일 뿐입니다. 그것만으로는 JPA Auditing 기능이 활성화되지는 않습니다. 제가 이걸 놓치고 있었던 것입니다. 
+사실 원인은 아주 단순했습니다. @EnableJpaAuditing 어노테이션을 선언하는 것이 빠져 있어서 JPA Auditing 기능이 활성화되지 못했던 것입니다. 부모 엔티티에서 @EntityListener 어노테이션을 통해 등록했던 AuditingEntityListener는 이름 그대로 리스너일 뿐입니다. 그것만으로는 JPA Auditing 기능이 활성화되지는 않습니다. 제가 이걸 놓치고 있었던 것입니다. 
 
 ### 해결 방법
 
-문제를 해결하기 위해서는 JPA Auditing 기능을 명시적으로 활성화해야 합니다. 이를 위해 Config 클래스를 하나 생성하고, @EnableJpaAuditing 어노테이션을 선언하면 됩니다.
+JPA Auditing 기능을 명시적으로 활성화하면 문제는 즉시 해결됩니다. Config 클래스를 하나 생성하고, @EnableJpaAuditing 어노테이션을 선언하면 됩니다.
 
 ```java
 @Configuration
@@ -96,7 +96,7 @@ public class JpaAuditingConfig {
 }
 ```
 
-별도의 Config 클래스를 추가하지 않고, 아래처럼 메인 클래스에서 직접 @EnableJpaAuditing 어노테이션을 선언해도 상관은 없습니다.
+별도의 Config 클래스를 추가하지 않고, 아래 코드처럼 메인 클래스에서 직접 @EnableJpaAuditing 어노테이션을 선언해도 상관은 없습니다.
 
 ```java
 @SpringBootApplication
@@ -105,7 +105,7 @@ public class Application {
 }
 ```
 
-이후, JPA Auditing 기능이 정상적으로 동작했습니다. 데이터를 INSERT하고, H2 콘솔로 접속해서 저장된 데이터를 조회해보면 아래 그림처럼 생성일과 수정일에 모두 정상적인 값이 저장되어 있는 것을 확인할 수 있었습니다.
+이후, JPA Auditing 기능이 정상적으로 동작하는 것을 확인했습니다. 데이터를 INSERT하고, H2 콘솔로 접속해서 저장된 데이터를 조회해보면 아래 그림처럼 생성일과 수정일에 모두 정상적인 값이 저장되어 있었습니다.
 <img class="main-image" src="/assets/images/h2console2.png" alt="H2 콘솔 화면(생성일과 수정일이 정상적으로 기록)">
 
 ### 정리하며...
@@ -119,4 +119,4 @@ public class Application {
 그리고 같은 실수를 반복하지 않기 위해
 이렇게 기록으로 남겨두려고 합니다.
 
-이 글은 팀장으로서 기본을 다시 점검하기 위한 기록이기도 합니다.
+그리고 이 글은 팀장으로서 기본을 다시 점검하기 위한 기록이기도 합니다.
