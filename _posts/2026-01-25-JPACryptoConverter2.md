@@ -60,12 +60,13 @@ JPA의 `AttributeConverter` 인터페이스는 DB에 저장되거나 조회되�
 이번 포스팅에서는 애플리케이션 레벨 암호화를 구현하기 위해
 암·복호화 로직을 어디에 두는 것이 적절한지에 대한 고민부터 시작해서 서비스 계층과 엔티티 내부에 두는 방식의 한계를 차례로 살펴봤습니다. 그리고 최종적으로 JPA의 AttributeConverter를 선택하게 된 이유에 대해서도 설명했습니다.
 
-다음 포스팅에서는, 실제로 애플리케이션 레벨 암호화를 구현했는지 프로젝트 구조를 중심으로 하나씩 살펴보려고 합니다.
+다음 포스팅에서는 프로젝트 구조를 어떻게 구성했는지 살펴보도록 하겠습니다.
+
+## 포스팅 시리즈
+
+* [[토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민](https://sanghoon-lee.github.io/2026/01/24/JPACryptoConverter/)
+* [토이 프로젝트] DB 컬럼 암호화: (2) AttributeConverter를 선택한 이유
+* [[토이 프로젝트] DB 컬럼 암호화: (3) 프로젝트 구조 살펴보기](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
 
 ## 참고 : 소스 코드 
 * [JPA Crypto Conveter](https://github.com/sanghoon-lee/jpa-crypto-converter)
-
-## 관련 포스팅
-
-* [[토이 프로젝트] JPA 컬럼 암호화: (3) 프로젝트 구조 살펴보기](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
-* [[토이 프로젝트] JPA 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민](https://sanghoon-lee.github.io/2026/01/24/JPACryptoConverter/)

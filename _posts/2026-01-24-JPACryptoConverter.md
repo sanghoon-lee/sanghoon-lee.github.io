@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[토이 프로젝트] JPA 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민"
+title: "[토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민"
 date: 2026-01-24
 categories: 토이프로젝트
 ---
@@ -85,10 +85,11 @@ JPA를 사용하는 환경에서 통제 가능한 범위 내에서 안전하고 
 
 이번 포스팅에서는 먼저 애플리케이션 레벨 암호화의 개념과 방향성을 정리했습니다. 다음 포스팅에서는 이를 실제 코드를 보면서 어떻게 구현했는지 자세히 살펴보도록 하겠습니다.
 
+## 포스팅 시리즈
+
+* [토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민
+* [[토이 프로젝트] DB 컬럼 암호화: (2) AttributeConverter를 선택한 이유](https://sanghoon-lee.github.io/2026/01/25/JPACryptoConverter2/)
+* [[토이 프로젝트] DB 컬럼 암호화: (3) 프로젝트 구조 살펴보기](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
+
 ## 참고 : 소스 코드 
 * [JPA Crypto Conveter](https://github.com/sanghoon-lee/jpa-crypto-converter)
-
-## 관련 포스팅
-
-* [[토이 프로젝트] JPA 컬럼 암호화: (2) AttributeConverter를 선택한 이유](https://sanghoon-lee.github.io/2026/01/25/JPACryptoConverter2/)
-* [[토이 프로젝트] JPA 컬럼 암호화: (3) 프로젝트 구조 살펴보기](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
