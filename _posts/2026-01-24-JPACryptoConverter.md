@@ -90,6 +90,8 @@ JPA를 사용하는 환경에서 통제 가능한 범위 내에서 안전하고 
 * [토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민
 * [[토이 프로젝트] DB 컬럼 암호화: (2) AttributeConverter를 선택한 이유](https://sanghoon-lee.github.io/2026/01/25/JPACryptoConverter2/)
 * [[토이 프로젝트] DB 컬럼 암호화: (3) 프로젝트 구조 살펴보기](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
+* [[토이 프로젝트] DB 컬럼 암호화: (4) 코드 살펴보기](https://sanghoon-lee.github.io/2026/01/27/JPACryptoConverter4/)
+
 
 ## 참고 : 소스 코드 
 * [JPA Crypto Conveter](https://github.com/sanghoon-lee/jpa-crypto-converter)
