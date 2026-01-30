@@ -19,7 +19,6 @@ categories: 토이프로젝트
 │  └─ service
 │
 ├─ domain
-│  ├─ entity
 │  └─ repository
 │
 ├─ crypto
