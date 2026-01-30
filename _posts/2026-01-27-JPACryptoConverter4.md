@@ -77,10 +77,9 @@ public abstract class BaseEncryptConverter<T>
 
 **StringEncryptConverter**
 ```java
-@Converter
-public class StringEncryptConverter
-        extends BaseEncryptConverter<String> {
-
+@Converter(autoApply=false) // 명시적으로 @Convert 어노테이션을 붙인 필드만 암호화
+@Component
+public class StringEncryptConverter extends BaseEncryptConverter<String>{
     public StringEncryptConverter(CryptoEngine cryptoEngine) {
         super(cryptoEngine);
     }
@@ -91,7 +90,7 @@ public class StringEncryptConverter
     }
 
     @Override
-    protected String convertToEntityValue(String decrypted) {
+    protected String convertToAttribute(String decrypted) {
         return decrypted;
     }
 }
@@ -99,7 +98,7 @@ public class StringEncryptConverter
 
 문자열(String) 타입만 처리해도 충분하지만, 실무 환경에 적용하려면 다양한 데이터 타입을 처리할 수 있어야 합니다. 이러한 문제는 `StringEncryptConverter`처럼 `BaseEncryptConverter`를 확장해서 특정 데이터 타입에 종속적인 처리를 구현하는 방식으로 쉽게 해결될 수 있습니다.
 
-`BaseEncryptConverter`와 `StringEncryptConverter`이 포함된 crypto 패키지의 구조는 다음과 같습니다.
+지금까지 살펴 본 `BaseEncryptConverter`와 `StringEncryptConverter`이 포함된 crypto 패키지의 구조는 다음과 같습니다.
 ```
 ├─ crypto
 │  ├─ converter
@@ -110,9 +109,28 @@ public class StringEncryptConverter
 │  └─ exception
 ```
 
-## Entity 코드 정의
+## CryptoEngine의 구현 
 
-토이 프로젝트에서 사용할 엔티티는 domain 패키지에 위치한 `Account` 클래스에서 정의했습니다. 
+`CryptoEngine`은 인터페이스로 선언하고, 실제 암·복호화 로직은 이 인터페이스를 상속받은 클래스에서 구현하도록 했습니다.
+
+```java
+public interface CryptoEngine {
+    String encrypt(String plainText);
+    String decrypt(String cipherText);
+}
+```
+이렇게 역할을 인터페이스로 분리한 이유는,
+암·복호화 로직의 변경 가능성을 구조적으로 흡수하기 위함입니다.
+
+* 암호화 알고리즘 교체
+* 테스트용 더미 구현체 추가
+* 환경별(개발/운영) 구현 분리
+
+와 같은 요구사항이 생기더라도 기존 구조를 크게 변경하지 않고 대응할 수 있습니다.
+
+## Entity 정의
+
+애플리케이션 레벨 암호화 테스트를 위한 다음과 같은 구조를 가진 엔티티 `Account`를 정의했습니다.
 
 | 필드명 | 데이터 타입 | 내용 | 암호화 대상 |
 | --- | --- | --- | ---- |
@@ -121,9 +139,6 @@ public class StringEncryptConverter
 | userName | String | 이름(예 : 홍길동) | X |
 | sex | int | 성별 - 1:남성,0:여성 | X |
 | age | int | 나이 | X |
-
-
-최초 엔티티는 다음과 같이 정의했습니다.
 
 ```java
 public class Account extends BaseEntity{
@@ -140,6 +155,8 @@ public class Account extends BaseEntity{
     private int age;
     ...
 ```
+
+암호화 대상 필드인 phoneNumber에 @Convert 어노테이션을 통해 위에서 구현한 `StringEncryptConverter`이 등록되었습니다.
 
 
 
