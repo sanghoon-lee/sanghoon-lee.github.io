@@ -24,7 +24,7 @@ public interface AttributeConverter<X, Y> {
 * X : 엔티티 필드의 데이터 타입
 * Y : DB 컬럼에 저장되는 값의 데이터 타입
 
-이 인터페이스를 상속받아 구현하면, JPA가 데이터를 저장하거나 조회하는 시점에 아래와 같은 흐름으로 데이터 변환 과정이 자동으로 수행됩니다.
+이 인터페이스를 상속받아 구현하면 개발자가 정의한 데이터 변환 과정이 JPA의 데이터 처리 절차에 통합되어 자동으로 수행됩니다.
 
 | 구분 | 데이터 저장 시 | 데이터 조회 시 |
 | --- | --- | --- |
@@ -33,8 +33,8 @@ public interface AttributeConverter<X, Y> {
 | 호출 시점 | DB에 저장하기 직전 | DB에서 읽은 직후 |
 | 결과 | DB에는 암호문 저장 | 엔티티에는 평문 설정 |
 
-이번 토이 프로젝트에서는 `AttributeConverter`를 상속받아
-`BaseEncryptConverter`를 정의했습니다. 나중에 기능이 확장될 가능성에 대비해서 데이터 변환 과정의 확장 포인트와 실제 암·복호화 로직을 분리했습니다.  
+토이 프로젝트에서는 `AttributeConverter`를 상속받은
+`BaseEncryptConverter`를 정의했습니다. 이후 기능 확장 가능성을 고려해, 데이터 변환 과정과 암·복호화 로직을 분리했습니다.  
 
 **BaseEncryptConverter**
 ```java
@@ -69,15 +69,11 @@ public abstract class BaseEncryptConverter<T>
 }
 ```
 
-`BaseEncryptConverter`에서는 암·복호화 로직이 수행되는 시점은 결정하지만, 실제 처리는 뒤에서 살펴볼 `CryptoEngine`에 위임하고 있습니다.
+`BaseEncryptConverter`는 JPA의 데이터 처리 절차의 확장 포인트로서의 역할에만 충실하고, 실제 암·복호화 로직의 실행은 뒤에서 살펴볼 `CryptoEngine`에 위임하고 있습니다. 
 
-이렇게 역할을 분리할 이유는 다음과 같습니다.
+이렇게 역할이 분리되면 암호화 알고리즘이 변경되더라도 `BaseEncryptConverter`의 변경을 최소화할 수 있고, 다른 컨버터에서도 암호화 알고리즘을 재사용하는 것이 용이합니다.
 
-* `BaseEncryptConverter`는 JPA 확장 포인트로서의 역할에만 집중
-* 암호화 알고리즘 변경 시 `BaseEncryptConverter`의 변경 최소화
-* 암·복호화 로직을 여러 컨버터에서 재사용 가능
-
-`BaseEncryptConverter`를 확장해서 문자열 데이터 타입을 처리하는 `StringEncryptConverter`를 별도로 정의했습니다. 이렇게 하면, 공통적인 데이터 변환 흐름은 그대로 유지한 채 다양한 데이터 타입에 대해서 종속적인 처리를 확장해나갈 수 있습니다.
+`BaseEncryptConverter`를 확장해서 문자열 데이터 타입을 처리하는 `StringEncryptConverter`를 별도로 정의했습니다. 
 
 **StringEncryptConverter**
 ```java
@@ -101,7 +97,7 @@ public class StringEncryptConverter
 }
 ```
 
-토이 프로젝트에서는 문자열(String) 타입만 처리해도 충분합니다. 하지만, 실무 환경에서는 다양한 데이터 타입을 처리할 수 있어야 합니다. 
+문자열(String) 타입만 처리해도 충분하지만, 실무 환경에 적용하려면 다양한 데이터 타입을 처리할 수 있어야 합니다. 이러한 문제는 `StringEncryptConverter`처럼 `BaseEncryptConverter`를 확장해서 특정 데이터 타입에 종속적인 처리를 구현하는 방식으로 쉽게 해결될 수 있습니다.
 
 `BaseEncryptConverter`와 `StringEncryptConverter`이 포함된 crypto 패키지의 구조는 다음과 같습니다.
 ```
