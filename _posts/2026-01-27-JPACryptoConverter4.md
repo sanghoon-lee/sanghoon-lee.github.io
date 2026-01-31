@@ -211,32 +211,23 @@ public class PropertyKeyProvider implements KeyProvider{
 │  └─ exception
 ```
 
-## Config의 구현
+참고로 `PropertyKeyProvider`가 키를 읽어올 수 있도록 application.properties 파일에 아래처럼 crypto.base64-key 속성이 추가해야 합니다.
 
 ```java
-@Getter
-@Setter
-@ConfigurationProperties(prefix="crypto")
-public class CryptoProperties {
-    private String base64Key;
-}
+crypto.base64-key=[BASE64로 인코딩된 키 값]
 ```
 
-```java
-@Configuration
-@EnableConfigurationProperties(CryptoProperties.class)
-public class CryptoConfig {
-}
-```
+## 다음 포스팅으로 넘어가며...
 
+이번 포스팅에서는 애플리케이션 레벨 암호화를 어떻게 구현했는지 핵심 코드 중심으로 살펴봤습니다.
 
+| 책임 범위 | 구성요소 |
+| ---- | ----- |
+| 암·복호화의 실행 | AttributeConverter의 구현체 |
+| 암호화 알고리즘 | CryptoEngine의 구현체 |
+| 키 관리 | KeyProvider의 구현체 |
 
-
-
-
-
-
-
+다음 포스팅에서는 실제로 어떻게 동작하는지 이야기를 이어가면서, 실무 환경에 사용하는데 어떤 제약사항이 있으며 해결책은 무엇인지알아보도록 하겠습니다.
 
 ## 포스팅 시리즈
 
