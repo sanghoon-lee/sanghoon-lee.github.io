@@ -46,6 +46,50 @@ public class Account extends BaseEntity {
 }
 ```
 
+## 엔티티 저장 시 암·복호화 흐름
+
+JPA를 사용하면 서비스 계층에서는 엔티티를 DB에 저장하면서 암·복호화를 의식할 필요가 없습니다. 아래 코드처럼 엔티티를 생성해서 값을 설정하고, save() 메서드를 호출하기만 하면 됩니다. 
+
+```java
+Account account = new Account();
+account.setPhoneNumber("010-1234-5678");
+account.setUserName("홍길동");
+account.setSex(1);
+account.setAge(30);
+
+accountRepository.save(account);
+```
+
+하지만 엔티티가 DB에 저장되려는 순간, @Convert 어노테이션이 선언된 필드는 등록된 AttributeConverter가 자동으로 개입하게 됩니다.
+
+이 과정을 정리하면 다음과 같습니다.
+
+| 순서 | 처리 단계              | 설명                             |
+| -- | ------------------ | ------------------------------ |
+| 1  | 서비스 계층             | 엔티티 생성 및 값 설정                  |
+| 2  | 리포지토리              | `save()` 호출                    |
+| 3  | JPA                | 엔티티를 DB 컬럼 값으로 변환              |
+| 4  | AttributeConverter | `convertToDatabaseColumn()` 호출 |
+| 5  | CryptoEngine       | 평문 → 암호문 변환                    |
+| 6  | DB                 | 암호문이 컬럼에 저장                    |
+
+
+이 과정에서 핵심은 4번 단계입니다.
+
+phoneNumber 필드는 @Convert로 선언되어 있기 때문에,
+DB에 저장되기 직전에 StringEncryptConverter의
+convertToDatabaseColumn() 메서드가 호출됩니다.
+
+**StringEncryptConverter의 convertToDatabaseColumn 메서드**
+```java
+@Override
+public String convertToDatabaseColumn(String attribute) {
+    return cryptoEngine.encrypt(attribute);
+}
+```
+
+그 결과로 서비스 계층에서는 평문을 다루지만, DB에는 암호문이 저장될 수 있습니다.
+
 ## 관련 포스팅
 
 * [[트러블슈팅] 스프링에서 JPA Auditing이 동작하지 않는 문제 - @EnableJpaAuditing 빠진 경우](https://sanghoon-lee.github.io/2026/01/21/JPAAuditing/)
