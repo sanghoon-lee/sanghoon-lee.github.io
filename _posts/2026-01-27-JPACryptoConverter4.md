@@ -84,7 +84,10 @@ public abstract class BaseEncryptConverter<T>
 
 **StringEncryptConverter**
 ```java
-@Converter(autoApply=false) // 명시적으로 @Convert 어노테이션을 붙인 필드만 암호화
+/**
+ * autoApply=false를 설정해서 암호화가 필요한 필드에만 명시적으로 적용되도록 했습니다. 필요하지 않은 필드에 자동 적용되는 위험을 방지하기 위한 선택입니다.
+ */
+@Converter(autoApply=false) 
 @Component
 public class StringEncryptConverter extends BaseEncryptConverter<String>{
     public StringEncryptConverter(CryptoEngine cryptoEngine) {
@@ -103,7 +106,7 @@ public class StringEncryptConverter extends BaseEncryptConverter<String>{
 }
 ```
 
-문자열(String) 타입만 처리해도 충분하지만, 실무 환경에 적용하려면 다양한 데이터 타입을 처리할 수 있어야 합니다. 이러한 문제는 `StringEncryptConverter`처럼 `BaseEncryptConverter`를 확장해서 특정 데이터 타입에 종속적인 처리를 구현하는 방식으로 쉽게 해결될 수 있습니다.
+토이 프로젝트에서는 문자열(String) 타입만 처리해도 충분하지만, 실무 환경에 적용하려면 다양한 데이터 타입을 처리할 수 있어야 합니다. 이러한 문제는 `StringEncryptConverter`처럼 `BaseEncryptConverter`를 확장해서 특정 데이터 타입에 종속적인 처리를 구현하는 방식으로 쉽게 해결될 수 있습니다.
 
 `BaseEncryptConverter`와 `StringEncryptConverter`이 포함된 crypto.converter 패키지의 구조는 다음과 같습니다.
 ```
@@ -135,7 +138,7 @@ public interface CryptoEngine {
 
 와 같은 요구사항이 생기더라도 기존 구조를 크게 변경하지 않고 대응할 수 있습니다.
 
-`CryptoEngine`의 구현체로 AES-GCM 암호화 알고리즘을 사용하는 `AesGcmCryptoEngine`를 정의했습니다.
+`CryptoEngine`의 구현체로 AES-GCM 암호화 알고리즘을 사용하는 `AesGcmCryptoEngine`를 정의했습니다. 여기에는 랜덤 IV 생성해서 GCM Parameter Spec으로 초기화하고, 최종 결과를 Base64로 인코딩하는 등의 로직이 구현되어 있습니다. 
 
 ```java
 @Component
@@ -154,7 +157,7 @@ public class AesGcmCryptoEngine implements CryptoEngine{
 * 암호문을 다시 평문으로 복호화
 * 암호화 알고리즘의 세부 구현
 
-구현체 밖에서는 **“어떤 알고리즘을 사용하는지”, “IV를 어떻게 생성하는지”** 등과 같은 구현과 관련된 세부적인 사항을 전혀 알 필요가 없습니다. 이번에는 암호화 알고리즘 자체를 구현하는 것이 목적이 아니었기 때문에, 이미 충분히 검증된 알고리즘을 선택했습니다. 
+**“어떤 알고리즘을 사용하는지”, “IV를 어떻게 생성하는지”** 등과 같은 구현과 관련된 세부적인 사항을 구현체 밖에서는 전혀 알 필요가 없습니다. 이번에는 암호화 알고리즘 자체를 구현하는 것이 목적이 아니었기 때문에, 이미 충분히 검증된 알고리즘을 선택했습니다. 
 
 `CryptoEngine`와 `AesGcmCryptoEngine`이 포함된 crypto.core 패키지의 구조는 다음과 같습니다.
 
@@ -221,13 +224,13 @@ crypto.base64-key=[BASE64로 인코딩된 키 값]
 
 이번 포스팅에서는 애플리케이션 레벨 암호화를 어떻게 구현했는지 핵심 코드 중심으로 살펴봤습니다.
 
-| 책임 범위 | 구성요소 |
+| 책임  | 구현체 |
 | ---- | ----- |
-| 암·복호화의 실행 | AttributeConverter의 구현체 |
-| 암호화 알고리즘 | CryptoEngine의 구현체 |
-| 키 관리 | KeyProvider의 구현체 |
+| 암·복호화의 실행 시점 | AttributeConverter |
+| 암호화 알고리즘 | CryptoEngine |
+| 키 제공 | KeyProvider |
 
-다음 포스팅에서는 실제로 어떻게 동작하는지 이야기를 이어가면서, 실무 환경에 사용하는데 어떤 제약사항이 있으며 해결책은 무엇인지알아보도록 하겠습니다.
+다음 포스팅에서는 실제로 어떻게 동작하는지 이야기를 이어가면서, 실무 환경에 사용하는데 어떤 제약사항이 있으며 해결책은 무엇인지 알아보도록 하겠습니다.
 
 ## 포스팅 시리즈
 
