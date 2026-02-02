@@ -236,6 +236,25 @@ public class Account extends BaseEntity{
 * `WHERE phone_number_hash = ?` 조건으로 정확한 조회 가능
 * 유니크 인덱스를 통한 중복 전화번호 방지 가능
 
+서비스 계층에서도 입력받은 전화번호의 해시값을 계산해서 조회할 수 있도록 아래처럼 코드를 작성했습니다.
+
+```java
+@Transactional(readOnly = true)
+    public AccountResponse findByPhoneNumber(String phoneNumber) {
+        String normalizedPhoneNumber = PhoneNumberNormalizer.normalize(phoneNumber);
+        String hashNormalizedPhoneNumber = phoneNumberHashService.hashNormalizedPhoneNumber(normalizedPhoneNumber);
+
+        Account account = accountRepository.findByPhoneNumberHash(hashNormalizedPhoneNumber)
+                .orElse(null);
+
+        if (account == null) {
+            return null;
+        }
+
+        return AccountResponse.of(account);
+    }
+```
+
 엔티티 저장 시 흐름을 정리하면 다음과 같습니다.
 
 1. 서비스 계층에서 전화번호 평문 입력
