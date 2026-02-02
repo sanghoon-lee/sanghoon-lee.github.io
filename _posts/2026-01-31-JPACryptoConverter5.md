@@ -5,6 +5,17 @@ date: 2026-01-31
 categories: 토이프로젝트
 ---
 
+<style>
+.main-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin-bottom: 1.4rem;
+  border-radius: 12px;
+  display: block;
+}
+</style>
+
 지난 포스팅까지 다룬 내용을 바탕으로,
 이번 포스팅에서는 실제 코드가 어떤 흐름으로 동작하는지를
 차례대로 따라가 보려고 합니다.
@@ -253,6 +264,62 @@ public class Account extends BaseEntity{
 * 해시 컬럼에도 개인정보로 분류될 가능성
 
 실무 적용 시에는 보안 정책과 함께 충분한 검토가 필요합니다.
+
+## 테스트 결과
+
+**API를 통해 설정된 엔티티의 값을 DB에 저장**
+
+```bash
+URL: POST /api/v1/account
+Content-Type: application/json
+
+Request Body:
+{
+    "phoneNumber":"010-1234-5678",
+    "userName":"홍길동",
+    "sex":1,
+    "age":45
+}
+
+Response Body:
+{
+    "code": 200,
+    "status": "OK",
+    "message": "OK",
+    "data": {
+        "id": 1,
+        "phoneNumber": "01012345678",
+        "userName": "홍길동",
+        "sex": 1,
+        "age": 45
+    }
+}
+```
+
+**API를 통해 DB에서 전화번호로 엔티티를 조회**
+
+```bash
+URL: GET http://127.0.0.1:8080/api/v1/account?phoneNumber=01012345678
+Content-Type: application/json
+
+Response Body:
+{
+    "code": 200,
+    "status": "OK",
+    "message": "OK",
+    "data": {
+        "id": 1,
+        "phoneNumber": "01012345678",
+        "userName": "홍길동",
+        "sex": 1,
+        "age": 45
+    }
+}
+```
+
+**H2 콘솔에서 직접 DB에 저장된 값을 조회**
+
+<img class="main-image" src="/assets/images/h2console_log.png" alt="H2 콘솔 화면">
 
 ## 마무리
 
