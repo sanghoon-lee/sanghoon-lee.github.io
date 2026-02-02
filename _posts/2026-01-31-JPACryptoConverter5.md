@@ -169,7 +169,7 @@ JPA의 `AttributeConverter`로는 해결할 수 없는 영역입니다.
 | --- | --- | --- | ---- |
 | id | Long | ID | X |
 | phoneNumber | String | 전화번호(예 : 010-1234-5678) | O |
-|<span style="display:block; background-color:blue;"> phoneNumberHash</span> | String | phoneNumber의 해시값 | X |
+| **phoneNumberHash** | String | phoneNumber의 해시값 | X |
 | userName | String | 이름(예 : 홍길동) | X |
 | sex | int | 성별 - 1:남성,0:여성 | X |
 | age | int | 나이 | X |
