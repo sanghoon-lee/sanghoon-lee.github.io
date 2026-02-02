@@ -238,6 +238,7 @@ crypto.base64-key=[BASE64로 인코딩된 키 값]
 * [[토이 프로젝트] DB 컬럼 암호화: (2) AttributeConverter를 선택한 이유](https://sanghoon-lee.github.io/2026/01/25/JPACryptoConverter2/)
 * [[토이 프로젝트] DB 컬럼 암호화: (3) 프로젝트 구조 살펴보기](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
 * [토이 프로젝트] DB 컬럼 암호화: (4) 코드 살펴보기
+* [[토이 프로젝트] DB 컬럼 암호화:  (5) 동작의 흐름 및 제약사항](https://sanghoon-lee.github.io/2026/01/31/JPACryptoConverter5/)
 
 ## 참고 : 소스 코드 
 * [JPA Crypto Conveter](https://github.com/sanghoon-lee/jpa-crypto-converter)
