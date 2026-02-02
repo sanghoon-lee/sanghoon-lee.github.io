@@ -43,6 +43,8 @@ public class Account extends BaseEntity {
     private String userName;
     private int sex;
     private int age;
+
+    ...
 }
 ```
 
@@ -172,6 +174,51 @@ JPA의 `AttributeConverter`로는 해결할 수 없는 영역입니다.
 | sex | int | 성별 - 1:남성,0:여성 | X |
 | age | int | 나이 | X |
 
+Account 엔티티의 최종 정의는 다음과 같습니다.
+
+```java
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(name="uk_account_phonenumber_hash", columnNames="phoneNumberHash")
+        },
+        indexes = {
+                @Index(name="idx_account_phonenumber_hash", columnList="phoneNumberHash")
+        }
+)
+
+public class Account extends BaseEntity{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // 저장시 암호화, 조회시 복호화
+    @Convert(converter = StringEncryptConverter.class)
+    @Column(nullable = false, length = 512) // 암호문 길이 감안 (여유있게)
+    private String phoneNumber;
+
+    @Column(nullable = false, length = 64)
+    private String phoneNumberHash;
+
+    private String userName;
+    private int sex;
+    private int age;
+
+    @Builder
+    public Account(String phoneNumber,String phoneNumberHash,String userName,int sex,int age){
+        this.phoneNumber = phoneNumber;
+        this.phoneNumberHash = phoneNumberHash;
+        this.userName = userName;
+        this.sex = sex;
+        this.age = age;
+    }
+}
+```
+
+전화번호(`phoneNumber`)의 중복 저장을 방지하도록 해시값(`phoneNumberHash`)을 Unique Key로 설정하고, 인덱스도 구성했습니다. 
+
 이렇게 하면 다음과 같은 장점을 얻을 수 있습니다.
 
 * 개인정보 보호를 유지
@@ -211,8 +258,9 @@ JPA의 `AttributeConverter`로는 해결할 수 없는 영역입니다.
 
 이번 토이 프로젝트를 통해서 애플리케이션 레벨 암호화 방식으로 DB 컬럼 암호화를 자동으로 구현해봤습니다. 처음에 생각했던 것보다 내용이 길어져서 5회 분량으로 나눠서 포스팅을 하게 되었습니다. 
 
-설명이 충분하지 못한 부분도 분명 있을 것입니다. 그래서 아래에 소스코드가 있는 GitHub 저장소의 링크를 게시했으니
-참고하시길 바랍니다.
+구현의 핵심인 `AttributeConverter`는 암호화 로직의 실행 시점과 자동화를 쉽게 해 줄 뿐이지, 높은 수준의 보안성을 보장하는 것은 아닙니다. 즉, 암호화 알고리즘/키 길이/IV 처리/안전한 키 저장 등은 여전히 신경써야 할 별도의 과제입니다.
+
+아래에 GitHub 저장소 링크를 게시했으니, 필요하다면 전체 소스코드를 참고하시길 바랍니다.
 
 ## 포스팅 시리즈
 
