@@ -147,6 +147,24 @@ public class AesGcmCryptoEngine implements CryptoEngine{
     ...
     private final KeyProvider keyProvider;
     ...
+    @Override
+    public String encrypt(String plainText) {
+        if(plainText==null)
+            return null;
+
+        try{
+            byte[] keyBytes = decodeAndValidateKey(keyProvider.getBase64Key());
+
+            byte[] iv = new byte[IV_LENGTH_BYTES];
+            secureRandom.nextBytes(iv);
+
+            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+            SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
+            GCMParameterSpec gcmSpec = new GCMParameterSpec(GCM_TAG_LENGTH_BITS, iv);
+            cipher.init(Cipher.ENCRYPT_MODE, keySpec, gcmSpec);
+
+            byte[] cipherBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+
     ...
 }
 ```
