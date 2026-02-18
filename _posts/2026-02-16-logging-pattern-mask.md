@@ -124,4 +124,4 @@ sanghoon.study.logging.mask
 # 포스팅 시리즈
 
 * [토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (1) 순수 문자열 패턴 기반으로 설계
-* [[토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (2) 구현 상세](https://sanghoon-lee.github.io/2026/02/16/logging-pattern-mask2/)
+* [[토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (2) 구현 상세](https://sanghoon-lee.github.io/2026/02/18/logging-pattern-mask2/)
