@@ -257,17 +257,17 @@ td {
 
 
 blockquote {
-  margin: 0.9rem 0;
-  padding: 0.8rem 1.1rem;
+  margin: 0.8rem 0;
+  padding: 0.75rem 1rem;
+  line-height: 1.65;
   border-left: 4px solid #4a90e2;
   background-color: #f8f9fa;
   font-size: 0.95rem;
-  line-height: 1.7;
   color: #555;
 }
 
 blockquote p {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 
 blockquote p:last-child {
