@@ -37,3 +37,11 @@ Logback에서 로그 출력을 처리하는 과정은 다음과 같습니다.
 super.doLayout(event) 메서드를 호출해서 로그에 출력할 문자열을 생성하고, `SensitiveStringSanitizer` 객체의 **sanitize()** 메서드를 통해서 민감 정보를 마스킹합니다. 이렇게 함으로써 애플리케이션 로직을 수정하지 않고도, 로그 출력 레벨에서 일괄적으로 민감 정보를 통제할 수 있습니다.
 
 개발자의 주의에 의존하지 않고, 구조적으로 문제를 해결하는 방식입니다. 민감 정보의 통제 지점을 애플리케이션 로직이 아닌 로그 출력 계층으로 옮긴 셈입니다.
+
+# 포스팅 시리즈
+
+* [[토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (1) 순수 문자열 패턴 기반으로 설계](https://sanghoon-lee.github.io/2026/02/16/logging-pattern-mask/)
+* [토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (2) 구현 상세
+
+## 참고 : 소스 코드 
+* [logging-pattern-mask](https://github.com/sanghoon-lee/logging-pattern-mask)
