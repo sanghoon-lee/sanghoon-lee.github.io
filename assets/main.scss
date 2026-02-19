@@ -217,6 +217,39 @@ pre {
   }
 }
 
+/* 코드 블록 기본 배경 */
+.highlight {
+  background-color: #f8fafc;
+}
+
+/* 키워드 */
+.highlight .k {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* 문자열 */
+.highlight .s {
+  color: #047857;
+}
+
+/* 주석 */
+.highlight .c {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* 함수명 */
+.highlight .nf {
+  color: #7c3aed;
+}
+
+/* 기본 텍스트 */
+.highlight .n {
+  color: #111827;
+}
+
+
 /* 복사 버튼 추가 시 스타일 */
 button.copy-btn {
   background-color: #3490dc;
