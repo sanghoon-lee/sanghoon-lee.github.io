@@ -255,25 +255,6 @@ td {
   color: #333; /* 글씨 색상 */
 }
 
-/* 인용 구문 스타일 */
-blockquote {
-  background-color: #f4f4f4;   /* 부드러운 회색 배경 */
-  border-left: 4px solid #3490dc; /* 왼쪽에 강조된 파란색 선 */
-  color: #333;                  /* 기본 글씨 색상 */
-  padding: 1rem 1.5rem;         /* 위아래 여백 및 좌우 여백 */
-  margin: 1.5rem 0;             /* 상하 여백 */
-  font-style: italic;           /* 글씨 기울임 (인용구 효과) */
-  font-size: 1.1rem;            /* 약간 큰 폰트 크기 */
-  line-height: 1.6;             /* 줄 간격 */
-  border-radius: 5px;           /* 부드러운 모서리 */
-}
-
-/* 인용 구문에 마우스를 올렸을 때 효과 */
-blockquote:hover {
-  background-color: #e2e8f0;   /* 호버 시 밝은 회색 배경 */
-  border-left: 4px solid #2779bd; /* 강조된 색상 변경 */
-  transition: background-color 0.3s ease, border-left 0.3s ease; /* 부드러운 전환 효과 */
-}
 
 blockquote {
   margin: 0.9rem 0;
