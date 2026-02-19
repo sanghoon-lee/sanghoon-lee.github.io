@@ -143,6 +143,14 @@ li {
    코드 블록 스타일링 (다크 모드 / 화이트 모드 구분)
    ================================ */
 
+code {
+  background-color: #f3f5f7;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #c7254e;
+}
+
 /* 기본 코드 블록 스타일링 */
 pre {
   padding: 1.5rem;
