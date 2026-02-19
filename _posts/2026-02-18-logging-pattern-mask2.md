@@ -16,7 +16,7 @@ Logback에서 로그 출력을 처리하는 과정은 다음과 같습니다.
 
 토이 프로젝트에서 로그 마스킹 기능을 구현하기 위해서 개입한 지점은 3번과 4번 사이입니다. 로그가 출력되기 직전에 민감 정보를 마스킹하는 것이 핵심이기 때문입니다.
 
-## PatternLayout 클래스의 확장
+## MaskingPatternLayout 클래스의 구현: PatternLayout 클래스의 확장
 
 그래서 `PatternLayout`을 상속받은 `MaskingPatternLayout` 클래스에서 이벤트 내용을 문자열로 변환할 때 호출되는 **doLayout()** 메소드를 오버라이드했습니다. 
 
@@ -40,7 +40,7 @@ super.doLayout(event) 메서드를 호출해서 로그에 출력할 문자열을
 
 개발자의 주의에 의존하지 않고, 구조적으로 문제를 해결하는 방식입니다. 민감 정보의 통제 지점을 애플리케이션 로직이 아닌 로그 출력 계층으로 옮긴 셈입니다.
 
-## 주의 : Logback의 초기화
+## 주의: Logback의 초기화
 
 Logback은 애플리케이션이 시작될 때 설정 파일(`logback.xml`)을 읽고 Layout, Appender, MaskingPatternLayout 등 필요한 객체를 생성합니다. 
 
@@ -89,9 +89,9 @@ public void start() {
 
 이 정규식은 비교적 복잡합니다. 그런데 사실 대부분의 로그에는 전화번호가 포함되어 있지 않습니다. 그래서 매번 정규식 검사를 수행할 필요는 없습니다. 대신 로그 문자열에 특정 키워드가 포함되어 있는 경우에는 정규식 검사가 수행되도록 했습니다. 이 키워드는 정확한 검증을 위한 조건이 아니라, 정규식 수행 여부를 빠르게 판단하기 위한 1차 필터입니다.
 
-키워드는 `logback.xml` 파일에 <trigger></trigger> 태그 사이에 나열하면 되고, 콤마(,)로 단어를 구분합니다. 
+키워드는 `logback.xml` 파일에 <triggers> 태그에 정의하면 되고, 콤마(,)로 단어가 구분됩니다. 
 
-**예시) logback.xml에 키워드 정의**
+**logback.xml에 키워드 정의 예시**
 ```xml
 <triggers>010-,@,Bearer </triggers>
 ```
@@ -148,6 +148,89 @@ public String sanitize(String input) {
 > * 정규식 검사 → 정확한 2차 판별
 
 토이 프로젝트에서는 구조를 단순하게 하기 위해서 Trigger 키워드와 하나라도 매칭되면 모든 Rule이 적용되도록 구현했습니다.
+
+## 마스킹 규칙(Rule) 정의
+
+마스킹 규칙은 `logback.xml` 파일의 `<rule>` 태그에 정의하면 됩니다. 
+
+**logback.xml 파일 예시**
+```xml
+<layout class="sanghoon.study.logging.mask.logback.MaskingPatternLayout">
+
+    <enabled>true</enabled>
+
+    <triggers>010-,@</triggers>
+
+    <rule>phone|(\\b01[016789]-?)\\d{3,4}(-?\\d{4}\\b)|$1****$2</rule>
+    <rule>email|([A-Za-z0-9._%+-]{2})[A-Za-z0-9._%+-]*(@[A-Za-z0-9.-]+\\.[A-Za-z]{2,})|$1****$2</rule>
+
+</layout>
+```
+
+각 `<rule>` 태그는 다음의 형식을 따릅니다.
+
+> name | regex | replacement
+
+* name → 규칙 식별자
+* regex → 정규식 패턴
+* replacement → 치환 문자열
+
+## RuleSpecParser 클래스의 구현: Rule 객체 생성
+
+`MaskingPatternLayout`의 **start()** 메서드 내부에서 `logback.xml` 파일의 `<rule>`태그에 정의된 마스킹 규칙을 가져오기 위해서 `RuleSpecParser` 객체가 사용됩니다.
+
+**MaskingPatternLayout.java**
+```java
+@Override
+public void start() {
+    List<DefaultSensitiveStringSanitizer.Rule> rules = new ArrayList<>();
+    for (String spec : ruleSpecs) {
+        rules.add(RuleSpecParser.parse(spec));
+    }
+
+    this.sanitizer = new DefaultSensitiveStringSanitizer(rules, parseTriggers(triggers));
+    super.start();
+}
+```
+
+**ruleSpecs**는 `logback.xml` 파일의 <rule> 태그에 정의된 마스킹 규칙에 해당되는 문자열을 나타냅니다. 이 문자열을 name,regex,replacement로 분류하는 코드는 `RuleSpecParser`의 **parse()** 메서드에 구현했습니다.
+
+**RuleSpecParser.java**
+
+```java
+ public static DefaultSensitiveStringSanitizer.Rule parse(String spec) {
+
+    ...
+
+    String[] parts = spec.split("\\|", 3);
+
+    String name = parts[0];
+    String regex = parts[1];
+    String replacement = parts[2];
+
+    ...
+
+    return new DefaultSensitiveStringSanitizer.Rule(name, Pattern.compile(regex), replacement);
+ }
+```
+
+이렇게 생성된 `Rule` 객체는 Pattern으로 컴파일되어 `DefaultSensitiveStringSanitizer` 객체에 전달됩니다.
+
+## 전체 흐름 정리
+
+지금까지 살펴본 코드의 전체 흐름을 한 번 정리해보겠습니다.
+
+1. `logback.xml` 파일에 정의된 마스킹 규칙(Rule)과 Trigger 키워드를 조회
+2. Logback 초기화 과정에서 **MaskingPatternLayout.start()** 메서드 호출
+3. **RuleSpecParser.parse()** 메서드가 호출되면서 객체 마스킹 규칙 문자열이 `Rule` 객체로 변환
+4. `DefaultSensitiveStringSanitizer` 객체 생성
+5. 로그 출력 시 **MaskingPatternLayout.doLayout()** 메서드 호출
+6. Trigger 1차 필터링
+7. 정규식 기반 마스킹 수행
+8. 최종 문자열 출력
+
+구조는 단순하지만, 설정과 코드가 명확하게 분리되어 있습니다.
+코드를 수정하지 않고도 `logback.xml` 파일의 내용만 변경하면 마스킹 정책을 바꿀 수 있다는 점이 장점입니다.
 
 # 포스팅 시리즈
 
