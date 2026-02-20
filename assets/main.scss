@@ -229,10 +229,11 @@ pre {
   }
 
   /* 코드 블록 위아래 여백 축소 */
+  .highlight,
+  .highlight pre,
   pre,
-  pre.hljs,
-  .highlight {
-    margin: 0.8rem 0 !important;  /* 기존 1.5rem → 0.8rem */
+  pre.hljs {
+    margin: 0.6rem 0 !important;  /* 0.8 → 0.6으로 더 컴팩트 */
   }
 }
 
