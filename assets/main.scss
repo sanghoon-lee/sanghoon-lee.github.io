@@ -130,32 +130,23 @@ li {
   margin-bottom: 0.75rem;
 }
 
-/* =========================
-   Code blocks – Step 1
-   (예제 코드 세련되게 스타일링)
-   ========================= */
-
 /* ================================
-   코드 강조문구 및 코드 블록 처리
-   ================================ */
-
-/* ================================
-   코드 블록 스타일링 (다크 모드 / 화이트 모드 구분)
+   Code blocks – Common for Light/Dark Mode
    ================================ */
 
 code {
-  background-color: #f3f5f7;
+  background-color: #f3f5f7;   /* 연한 회색 배경 (가독성 좋음) */
   padding: 0.15rem 0.35rem;
   border-radius: 4px;
   font-size: 0.9em;
-  color: #c7254e;
+  color: #333;  /* 기본 글씨 색상 */
 }
 
 /* 기본 코드 블록 스타일링 */
 pre {
-  padding: 1.5rem;
+  padding: 1.25rem;
   border-radius: 8px;
-  margin: 1.5rem 0;
+  margin: 1.25rem 0;
   overflow-x: auto;
   font-size: 1rem;
   white-space: pre;
@@ -164,14 +155,34 @@ pre {
   box-sizing: border-box;
   font-family: 'Fira Code', 'Courier New', monospace;
   line-height: 1.45;
-  overflow-x : auto
-
 }
 
-/* 다크 모드일 때 코드 블록 스타일 */
+/* 공통 배경 색상 (화이트/다크 모드 모두 적용) */
+pre,
+pre.hljs,
+.highlight pre {
+  background-color: #f7fafc; /* 배경을 약간 더 진하게 */
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+/* 코드 하이라이팅 영역 */
+pre code,
+pre code.hljs,
+.hljs {
+  background-color: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* ================================
+   다크 모드 - 코드 블록 스타일링
+   ================================ */
 @media (prefers-color-scheme: dark) {
   pre {
-    background-color: #282c34 !important;  /* 어두운 회색 배경 */
+    background-color: #282c34 !important;  /* 어두운 배경 */
     color: #f8f8f2 !important;             /* 밝은 글씨 색상 */
   }
 
@@ -179,60 +190,66 @@ pre {
   pre code {
     background-color: transparent !important;
     color: inherit !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
   }
 
-  pre .language-javascript {
-    background-color: transparent !important;
-    color: #f8f8f2 !important;
-  }
-}
-
-/* 화이트 모드일 때 코드 블록 스타일 */
-@media (prefers-color-scheme: light) {
-  /* wrapper도 같이 컨트롤 (Jekyll highlight 구조 대응) */
-  .highlight {
-    margin: 0.6rem 0 !important;
-    background-color: #e5e7eb !important;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
+  .hljs-keyword {
+    color: #82aaff !important;  /* 차분한 파랑 계열 */
+    font-weight: 600;
   }
 
-  /* pre는 wrapper 안에서 여백/배경 중복 제거 */
-  pre,
-  .highlight pre,
-  pre.hljs {
-    margin: 0 !important;              /* 바깥 여백은 .highlight가 담당 */
-    padding: 0.9rem 1rem !important;   /* ✅ 기존 1.5rem → 줄여야 체감됨 */
-    background-color: transparent !important;
-    color: #111827 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
+  .hljs-string {
+    color: #98c379 !important; /* 초록 계열 */
   }
 
-  /* hljs가 code에 배경을 주는 케이스 제거 */
-  pre code,
-  pre code.hljs,
-  .hljs {
-    background-color: transparent !important;
-    color: inherit !important;
-    padding: 0 !important;
+  .hljs-comment {
+    color: #5c6370 !important; /* 회색 계열 */
+    font-style: italic;
   }
 
-  /* 토큰 색: 눈에 덜 거슬리게 */
-  .hljs-keyword { color: #334e68 !important; font-weight: 600; }
-  .hljs-string  { color: #0f766e !important; }
-  .hljs-comment { color: #6b7280 !important; font-style: italic; }
-
-  /* 함수명/타이틀: 붉은 느낌 제거 */
   .hljs-title,
-  .hljs-function,
-  .hljs-title.function_ {
-    color: #5b21b6 !important;
+  .hljs-function {
+    color: #d19a66 !important; /* 따뜻한 주황/갈색 계열 */
     font-weight: 600;
   }
 }
+
+/* ================================
+   화이트 모드 - 코드 블록 스타일링
+   ================================ */
+@media (prefers-color-scheme: light) {
+  pre {
+    background-color: #f7fafc !important; /* 화이트 모드에서 배경색 */
+    color: #111827 !important;            /* 어두운 글씨 색상 */
+    border: 1px solid #e5e7eb;
+  }
+
+  /* 코드 하이라이팅 영역 */
+  pre code {
+    background-color: transparent !important;
+    color: inherit !important;
+  }
+
+  .hljs-keyword {
+    color: #334e68 !important;  /* 차분한 블루그레이 */
+    font-weight: 600;
+  }
+
+  .hljs-string {
+    color: #0f766e !important; /* 초록 계열 */
+  }
+
+  .hljs-comment {
+    color: #6b7280 !important; /* 회색 계열 */
+    font-style: italic;
+  }
+
+  .hljs-title,
+  .hljs-function {
+    color: #5b21b6 !important; /* 차분한 보라 */
+    font-weight: 600;
+  }
+}
+
 
 /* 복사 버튼 추가 시 스타일 */
 button.copy-btn {
