@@ -217,36 +217,25 @@ pre {
   }
 }
 
-/* 코드 블록 기본 배경 */
-.highlight {
-  background-color: #f8fafc;
+.hljs {
+  background: #ffffff;
+  color: #24292e;
 }
 
-/* 키워드 */
-.highlight .k {
-  color: #1d4ed8;
-  font-weight: 600;
+.hljs-keyword {
+  color: #0000ff;
 }
 
-/* 문자열 */
-.highlight .s {
-  color: #047857;
+.hljs-string {
+  color: #a31515;
 }
 
-/* 주석 */
-.highlight .c {
-  color: #9ca3af;
-  font-style: italic;
+.hljs-comment {
+  color: #008000;
 }
 
-/* 함수명 */
-.highlight .nf {
-  color: #7c3aed;
-}
-
-/* 기본 텍스트 */
-.highlight .n {
-  color: #111827;
+.hljs-function {
+  color: #795e26;
 }
 
 
