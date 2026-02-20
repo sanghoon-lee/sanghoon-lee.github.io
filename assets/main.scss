@@ -191,12 +191,16 @@ pre {
 
 /* 화이트 모드일 때 코드 블록 스타일 */
 @media (prefers-color-scheme: light) {
+  pre,
+  pre.hljs,
   pre {
     background-color: #f3f4f6 !important;  /* 밝은 배경 (화이트 모드) */
     color: #333 !important;                 /* 어두운 글씨 색상 */
   }
 
   /* 코드 하이라이팅 영역 */
+  pre code,
+  pre code.hljs,
   pre code {
     background-color: transparent !important;
     color: inherit !important;
