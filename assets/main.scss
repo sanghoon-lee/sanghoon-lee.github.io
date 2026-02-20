@@ -191,15 +191,17 @@ pre {
 
 /* 화이트 모드일 때 코드 블록 스타일 */
 @media (prefers-color-scheme: light) {
+  /* ✅ 배경은 pre가 담당: 한 톤 더 진하게 */
   pre,
   pre.hljs,
   .highlight pre {
-    background-color: #f3f4f6 !important;
+    background-color: #e5e7eb !important; /* #f3f4f6 보다 확실히 진함 */
     color: #111827 !important;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #d1d5db;
     border-radius: 6px;
   }
 
+  /* ✅ hljs 테마가 code.hljs에 배경을 주는 케이스 제거 */
   pre code,
   pre code.hljs,
   .highlight pre code,
@@ -208,16 +210,22 @@ pre {
     color: inherit !important;
   }
 
-  .hljs-keyword { color: #334e68; font-weight: 600; } /* 파랑 덜 튐 */
-  .hljs-string  { color: #0f766e; }
-  .hljs-comment { color: #6b7280; font-style: italic; }
-  .hljs-function, .hljs-title { color: #795e26; }
-}
+  /* ✅ 키워드: 파랑을 차분하게 (원하면 더 회색톤으로) */
+  .hljs-keyword {
+    color: #334e68 !important;  /* 파랑 느낌 줄인 블루그레이 */
+    font-weight: 600;
+  }
 
-/* 모바일 화면에서 코드 블록 스타일 (모바일은 기존과 동일하게 유지) */
-@media (max-width: 768px) {
-  pre {
-    margin: 1rem 0;  /* 모바일에서 여백 조정 */
+  /* ✅ 문자열/주석 */
+  .hljs-string  { color: #0f766e !important; }
+  .hljs-comment { color: #6b7280 !important; font-style: italic; }
+
+  /* ✅ 함수명/타이틀: 붉은(주황) 느낌 제거 */
+  .hljs-title,
+  .hljs-function,
+  .hljs-title.function_ {
+    color: #5b21b6 !important; /* 차분한 보라 */
+    font-weight: 600;
   }
 }
 
