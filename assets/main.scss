@@ -270,55 +270,6 @@ pre code.hljs,
   }
 }
 
-
-/* ================================
-   화이트 모드 - 코드 블록 스타일링
-   ================================ */
-@media (prefers-color-scheme: light) {
-  pre {
-    background-color: #353b45 !important; /* 밝은 어두운 배경 */
-    color: #f8f8f2 !important;            /* 밝은 글씨 색상 */
-    border: 1px solid #d1d5db;
-  }
-
-  /* 코드 하이라이팅 영역 */
-  pre code {
-    background-color: transparent !important;
-    color: inherit !important;
-  }
-
-  .hljs-keyword {
-    color: #82aaff !important;  /* 차분한 파랑 계열 */
-    font-weight: 600;
-  }
-
-  .hljs-string {
-    color: #98c379 !important; /* 초록 계열 */
-  }
-
-  .hljs-comment {
-    color: #5c6370 !important; /* 회색 계열 */
-    font-style: italic;
-  }
-
-  .hljs-title,
-  .hljs-function {
-    color: #d19a66 !important; /* 따뜻한 주황/갈색 계열 */
-    font-weight: 600;
-  }
-
-  /* ✅ hljs-tag 색상 추가 */
-  .hljs-tag {
-    color: #ff79c6 !important; /* 밝은 분홍색 또는 다른 대비되는 색 */
-  }
-  .hljs-name {
-    color: #ff79c6 !important; /* 밝은 분홍색 또는 다른 대비되는 색 */
-  }
-}
-
-
-
-
 /* 복사 버튼 추가 시 스타일 */
 button.copy-btn {
   background-color: #3490dc;
