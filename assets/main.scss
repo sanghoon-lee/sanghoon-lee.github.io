@@ -227,6 +227,13 @@ pre {
     color: #5b21b6 !important; /* 차분한 보라 */
     font-weight: 600;
   }
+
+  /* 코드 블록 위아래 여백 축소 */
+  pre,
+  pre.hljs,
+  .highlight {
+    margin: 0.8rem 0 !important;  /* 기존 1.5rem → 0.8rem */
+  }
 }
 
 
