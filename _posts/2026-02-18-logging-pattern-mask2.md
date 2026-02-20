@@ -232,10 +232,11 @@ public void start() {
 구조는 단순하지만, 설정과 코드가 명확하게 분리되어 있습니다.
 코드를 수정하지 않고도 `logback.xml` 파일의 내용만 변경하면 마스킹 정책을 바꿀 수 있다는 점이 장점입니다.
 
-# 포스팅 시리즈
+## 포스팅 시리즈
 
 * [[토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (1) 순수 문자열 패턴 기반으로 설계](https://sanghoon-lee.github.io/2026/02/16/logging-pattern-mask/)
 * [토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (2) 구현 상세
+* [[토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (3) 테스트 방법 및 로그 마스킹 구현 방식의 한계](https://sanghoon-lee.github.io/2026/02/20/logging-pattern-mask3/)
 
-## 참고 : 소스 코드 
+## 참고: 소스 코드 
 * [logging-pattern-mask](https://github.com/sanghoon-lee/logging-pattern-mask)

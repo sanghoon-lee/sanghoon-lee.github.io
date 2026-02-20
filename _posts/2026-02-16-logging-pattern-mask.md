@@ -121,7 +121,11 @@ sanghoon.study.logging.mask
 * core : 문자열 마스킹 순수 로직
 * logback : Logback 연동 어댑터(출력 직전 가공)
 
-# 포스팅 시리즈
+## 포스팅 시리즈
 
 * [토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (1) 순수 문자열 패턴 기반으로 설계
 * [[토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (2) 구현 상세](https://sanghoon-lee.github.io/2026/02/18/logging-pattern-mask2/)
+* [[토이 프로젝트] 스프링 애플리케이션의 로그에서 민감 정보 마스킹: (3) 테스트 방법 및 로그 마스킹 구현 방식의 한계](https://sanghoon-lee.github.io/2026/02/20/logging-pattern-mask3/)
+
+## 참고: 소스 코드 
+* [logging-pattern-mask](https://github.com/sanghoon-lee/logging-pattern-mask)

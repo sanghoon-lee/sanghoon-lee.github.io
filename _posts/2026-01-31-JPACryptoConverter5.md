@@ -344,7 +344,7 @@ DB의 데이터 처리 과정에 암·복호화 로직의 실행을 자연스럽
 * [[토이 프로젝트] DB 컬럼 암호화: (4) 코드 살펴보기](https://sanghoon-lee.github.io/2026/01/27/JPACryptoConverter4/)
 * [토이 프로젝트] DB 컬럼 암호화:  (5) 동작의 흐름 및 제약사항
 
-## 참고 : 소스 코드 
+## 참고: 소스 코드 
 * [JPA Crypto Conveter](https://github.com/sanghoon-lee/jpa-crypto-converter)
 
 ## 관련 포스팅
