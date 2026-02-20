@@ -134,6 +134,10 @@ li {
    Code blocks – Common for Light/Dark Mode
    ================================ */
 
+/* ================================
+   Code blocks – Common for Light/Dark Mode
+   ================================ */
+
 code {
   background-color: #f3f5f7;   /* 연한 회색 배경 (가독성 좋음) */
   padding: 0.15rem 0.35rem;
@@ -157,13 +161,13 @@ pre {
   line-height: 1.45;
 }
 
-/* 공통 배경 색상 (화이트/다크 모드 모두 적용) */
+/* 배경을 어두운 톤으로 동일하게 설정 */
 pre,
 pre.hljs,
 .highlight pre {
-  background-color: #f7fafc; /* 배경을 약간 더 진하게 */
-  color: #111827;
-  border: 1px solid #e5e7eb;
+  background-color: #282c34 !important; /* 어두운 배경 */
+  color: #f8f8f2 !important;           /* 밝은 글씨 색상 */
+  border: 1px solid #d1d5db;
   border-radius: 6px;
 }
 
@@ -180,6 +184,7 @@ pre code.hljs,
 /* ================================
    다크 모드 - 코드 블록 스타일링
    ================================ */
+   
 @media (prefers-color-scheme: dark) {
   pre {
     background-color: #282c34 !important;  /* 어두운 배경 */
@@ -218,9 +223,9 @@ pre code.hljs,
    ================================ */
 @media (prefers-color-scheme: light) {
   pre {
-    background-color: #f7fafc !important; /* 화이트 모드에서 배경색 */
-    color: #111827 !important;            /* 어두운 글씨 색상 */
-    border: 1px solid #e5e7eb;
+    background-color: #282c34 !important; /* 어두운 배경 */
+    color: #f8f8f2 !important;            /* 밝은 글씨 색상 */
+    border: 1px solid #d1d5db;
   }
 
   /* 코드 하이라이팅 영역 */
@@ -230,22 +235,22 @@ pre code.hljs,
   }
 
   .hljs-keyword {
-    color: #334e68 !important;  /* 차분한 블루그레이 */
+    color: #82aaff !important;  /* 차분한 파랑 계열 */
     font-weight: 600;
   }
 
   .hljs-string {
-    color: #0f766e !important; /* 초록 계열 */
+    color: #98c379 !important; /* 초록 계열 */
   }
 
   .hljs-comment {
-    color: #6b7280 !important; /* 회색 계열 */
+    color: #5c6370 !important; /* 회색 계열 */
     font-style: italic;
   }
 
   .hljs-title,
   .hljs-function {
-    color: #5b21b6 !important; /* 차분한 보라 */
+    color: #d19a66 !important; /* 따뜻한 주황/갈색 계열 */
     font-weight: 600;
   }
 }
