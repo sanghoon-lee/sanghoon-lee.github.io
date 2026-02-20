@@ -192,7 +192,7 @@ pre {
 /* 화이트 모드일 때 코드 블록 스타일 */
 @media (prefers-color-scheme: light) {
   pre {
-    background-color: #f4f4f4 !important;  /* 밝은 배경 (화이트 모드) */
+    background-color: #f3f4f6 !important;  /* 밝은 배경 (화이트 모드) */
     color: #333 !important;                 /* 어두운 글씨 색상 */
   }
 
@@ -218,22 +218,22 @@ pre {
 }
 
 .hljs {
-  border: 1px solid #e5e7eb;
-  background: #f6f8fa;
-  color: #1f2937;
+  background: #f3f4f6;
+  color: #111827;
 }
 
 .hljs-keyword {
-  color: #1e3a8a;
+  color: #3b5bdb;
   font-weight: 600;
 }
 
 .hljs-string {
-  color: #a31515;
+  color: #0f766e;
 }
 
 .hljs-comment {
-  color: #008000;
+  color: #6b7280;
+  font-style: italic;
 }
 
 .hljs-function {
