@@ -216,6 +216,9 @@ pre code.hljs,
   .hljs-tag {
     color: #ff79c6 !important; /* 밝은 분홍색 또는 다른 대비되는 색 */
   }
+  .hljs-name {
+    color: #ff79c6 !important; /* 밝은 분홍색 또는 다른 대비되는 색 */
+  }
 }
 
 /* ================================
@@ -256,6 +259,9 @@ pre code.hljs,
 
   /* ✅ hljs-tag 색상 추가 */
   .hljs-tag {
+    color: #ff79c6 !important; /* 밝은 분홍색 또는 다른 대비되는 색 */
+  }
+  .hljs-name {
     color: #ff79c6 !important; /* 밝은 분홍색 또는 다른 대비되는 색 */
   }
 }
