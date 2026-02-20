@@ -10,7 +10,7 @@ title: 🏠 Home
 
 .home-intro {
   max-width: 860px;
-  margin: 2.5rem auto 1rem;
+  margin: 2.5rem auto 2.5rem;
   padding: 1.5rem 1rem;
   display: grid;
   grid-template-columns: 180px 1fr;
