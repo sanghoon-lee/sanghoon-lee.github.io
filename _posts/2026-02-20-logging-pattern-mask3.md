@@ -5,18 +5,19 @@ date: 2026-02-20
 categories: 토이프로젝트
 ---
 
-이제부터 로그 마스킹의 테스트 방법과 구현 방식에는 어떤 한계가 있는지 설명해보도록 하겠습니다.
+이제부터 토이 프로젝트를 통해서 구현한 로그 마스킹 기능을 테스트하는 방법과 구현 방식에 어떤 한계가 있는지 설명해보도록 하겠습니다.
 
 ## 테스트 방법
 
-테스트를 위해서 간단하게 문자열을 입력받아서 그대로 응답해주는 Echo API를 다음과 같이 구현했습니다.
+간단하게 문자열을 입력받아서 그대로 응답해주는 Echo API가 토이 프로젝트에 구현되어 있습니다. API가 수행되는 과정에서 로그 출력이 발생하며, 이때 로그에서 민감 정보가 마스킹된 것을 확인할 수 있습니다.
 
+**API 요청 형식**
 * URL: POST /api/payload
 * Content-Type: application/json
 * Parameters
     <br>- message: 애플리케이션에 보낼 문자열 메시지 
 
-API 요청을 받으면 매개변수(Parameter)로 전달된 message의 값을 로그로 출력하도록 했습니다.
+Echo API의 코드는 다음과 같이 작성되어 있습니다.
 
 **PayloadController.java**
 ```java
@@ -29,15 +30,16 @@ public APIResponse<PayloadResponse> publish(@Valid @RequestBody PayloadRequest r
     return APIResponse.ok(payloadResponse);
 }
 ```
+## 테스트 결과 예시 
 
-**예시: 테스트 API 요청**
+**테스트 API 요청**
 ```bash
 curl -X POST "http://localhost:8080/api/payload" \
   -H "Content-Type: application/json" \
   -d '{"message":"phone=010-1234-5678, email=abcdef@gmail.com"}'
 ```
 
-**예시: 테스트 API 응답 및 로그 출력**
+**테스트 API 응답**
 ```bash
 {
   "code": 200,
@@ -48,13 +50,16 @@ curl -X POST "http://localhost:8080/api/payload" \
     "created": "09:12:34.567"
   }
 }
+```
 
+**로그 출력**
+```bash
 received : phone=010-****-5678, email=ab****@gmail.com
 ```
 
 ## 로그 마스킹 구현 방식의 한계
 
-토이 프로젝트에서 로그 마스킹을 구현한 방식은 매우 단순하고 효과적입니다. 하지만, 한계는 분명 존재합니다.
+로그 마스킹 기능은 최대한 단순하게 구현되어 있습니다. 실무에서도 충분히 활용할 수 있지만, 한계는 분명 존재합니다.
 
 ### 1. 성능
 
