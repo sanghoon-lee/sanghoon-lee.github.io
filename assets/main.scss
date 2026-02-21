@@ -100,7 +100,7 @@ body {
   font-size: 2.2rem;
   font-weight: bold;
   margin: 1.5rem 0;
-  //color: #333; /* 포스트 제목 색상 */
+  color: #333; /* 포스트 제목 색상 */
   text-align: left; /* 왼쪽 정렬 */
 }
 
@@ -364,4 +364,8 @@ blockquote li {
 .site-footer p {
   margin: 0;
   font-size: 1rem;
+}
+
+.post-content {
+  background-color: transparent !important; /* 포스트 콘텐츠 영역의 배경을 투명하게 설정 */
 }
