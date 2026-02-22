@@ -14,20 +14,20 @@ categories: 토이프로젝트
 ## 프로젝트 구조
 
 ```
-├─ api
-│  ├─ controller
-│  └─ service
+├─api
+│ ├─ controller
+│ └─ service
 │
-├─ domain
-│  └─ repository
+├─domain
+│ └─ repository
 │
-├─ crypto
-│  ├─ converter
-│  ├─ core
-│  ├─ key
-│  └─ exception
+├─crypto
+│ ├─ converter
+│ ├─ core
+│ ├─ key
+│ └─ exception
 │
-└─ config
+└─config
 ```
 
 각 패키지의 역할은 다음과 같습니다.
