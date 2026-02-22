@@ -270,6 +270,11 @@ pre code.hljs,
   }
 }
 
+pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-variant-ligatures: none;
+}
+
 /* 복사 버튼 추가 시 스타일 */
 button.copy-btn {
   background-color: #3490dc;
