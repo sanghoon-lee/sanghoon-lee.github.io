@@ -95,27 +95,28 @@ Logback에서 PatternLayout을 확장하여 출력 문자열을 가공하는 방
 
 ```
 sanghoon.study.logging.mask
- ├─ LoggingPatternMaskApplication
  │
- ├─ api
- │  ├─ controller
- │  │  └─ PayloadController
- │  ├─ service
- │  │  ├─ request
- │  │  │  └─ PayloadRequest 
- │  │  ├─ response
- │  │  │  └─ PayloadResponse
- │  │  └─ PayloadService
- │  └─ APIResponse
+ ├─LoggingPatternMaskApplication
  │
- ├─ core
- │  ├─ SensitiveStringSanitizer
- │  └─ DefaultSensitiveStringSanitizer
- │     └─ Rule
+ ├─api
+ │ ├─ controller
+ │ │  └─ PayloadController
+ │ ├─ service
+ │ │  ├─ request
+ │ │  │  └─ PayloadRequest 
+ │ │  ├─ response
+ │ │  │  └─ PayloadResponse
+ │ │  └─ PayloadService
+ │ └─ APIResponse
  │
- └─ logback
-    ├─ RuleSpecParser
-    └─ MaskingPatternLayout
+ ├─core
+ │ ├─ SensitiveStringSanitizer
+ │ └─ DefaultSensitiveStringSanitizer
+ │    └─ Rule
+ │
+ └─logback
+   ├─ RuleSpecParser
+   └─ MaskingPatternLayout
 ```
 * api : 테스트용 엔드포인트(API)
 * core : 문자열 마스킹 순수 로직
