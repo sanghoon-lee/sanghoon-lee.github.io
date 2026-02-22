@@ -13,7 +13,7 @@ categories: 토이프로젝트
 
 ## 프로젝트 구조
 
-```text
+```plaintext
 ├─api
 │ ├─ controller
 │ └─ service
