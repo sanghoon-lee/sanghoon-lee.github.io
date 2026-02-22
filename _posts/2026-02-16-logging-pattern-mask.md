@@ -93,7 +93,7 @@ Logback에서 PatternLayout을 확장하여 출력 문자열을 가공하는 방
 
 ## 패키지 구조
 
-```markdown
+```
 sanghoon.study.logging.mask
  ├─ LoggingPatternMaskApplication
  │
