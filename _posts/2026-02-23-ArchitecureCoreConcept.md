@@ -7,7 +7,7 @@ categories: 일반
 
 <style>
 .main-image {
-  width: 100px;
+  width: 200px;
   max-width: 380px;
   height: auto;
   margin-bottom: 1.4rem;
