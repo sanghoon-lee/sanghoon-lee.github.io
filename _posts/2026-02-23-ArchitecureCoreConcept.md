@@ -149,7 +149,7 @@ categories: 일반
 
 퀀텀과 배포단위가 다른 경우 - 논리적 결합
 
-```
+```nohighlight
 예시:
  user-service.jar
  order-service.jar
@@ -159,7 +159,7 @@ categories: 일반
 
 퀀텀과 배포단위가 다른 경우 — 내부 플러그인 
 
-```
+```nohighlight
 예시:
 app.jar
  ├─ core
@@ -193,7 +193,7 @@ Repo, 컴포넌트, 배포단위의 관계도 많이 헷갈리는 부분이었�
 이 셋도 항상 동일하지 않습니다.
 
 **가장 단순한 구조**
-```
+```nohighlight
 Repo
  └─ 컴포넌트
 
@@ -201,7 +201,7 @@ Repo
 ```
 
 **멀티모듈 구조**
-```
+```nohighlight
 Repo
  ├─ 컴포넌트
  ├─ 컴포넌트
