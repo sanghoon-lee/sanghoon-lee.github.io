@@ -157,7 +157,8 @@ categories: 일반
 user-service.jar
 order-service.jar
 
-물리적으로는 2개의 배포단위지만, user-service.jar를 변경 시 order-service.jar의 변경도 필요하다면 퀀텀은 1개가 됩니다.
+물리적으로는 2개의 배포단위지만, user-service.jar를 변경 시 
+order-service.jar의 변경도 필요하다면 퀀텀은 1개가 됩니다.
 ```
 
 **퀀텀과 배포단위가 다른 경우 - 내부 플러그인** 
@@ -170,7 +171,8 @@ app.jar
  ├─ plugin-A
  ├─ plugin-B
 
-배포단위는 1개, plugin-A만 교체가 가능하다면 퀀텀은 plugin 단위로 오히려 작아지게 됩니다.
+배포단위는 1개, plugin-A만 교체가 가능하다면 퀀텀은 plugin 단위로 
+오히려 작아지게 됩니다.
 ```
 
 **퀀텀과 배포단위의 차이점 요약**
