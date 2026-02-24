@@ -9,4 +9,4 @@ header_pages:
   - index.md
   - posts.md
   - career.md
-  - about.md
+#  - about.md
