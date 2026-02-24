@@ -8,4 +8,5 @@ permalink: /:year/:month/:day/:title/
 header_pages:
   - index.md
   - posts.md
+  - career.md
   #- about.md
