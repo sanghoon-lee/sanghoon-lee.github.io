@@ -142,25 +142,29 @@ categories: 일반
 * 배포단위 → “어떻게 배포되는가?” (운영 관점)
 * 퀀텀 → “어떻게 함께 움직이는가?” (변화 관점)
 
-퀀텀과 배포단위가 같은 경우:
+**퀀텀과 배포단위가 같은 경우**
 ```
+예시:
+
 1 서비스 = 1 Docker 이미지 = 1 배포단위
 ```
 
-퀀텀과 배포단위가 다른 경우 - 논리적 결합
+**퀀텀과 배포단위가 다른 경우 - 논리적 결합**
 
 ```nohighlight
 예시:
- user-service.jar
- order-service.jar
+
+user-service.jar
+order-service.jar
 
 물리적으로는 2개의 배포단위지만, user-service.jar를 변경 시 order-service.jar의 변경도 필요하다면 퀀텀은 1개가 됩니다.
 ```
 
-퀀텀과 배포단위가 다른 경우 — 내부 플러그인 
+**퀀텀과 배포단위가 다른 경우 - 내부 플러그인** 
 
 ```nohighlight
 예시:
+
 app.jar
  ├─ core
  ├─ plugin-A
