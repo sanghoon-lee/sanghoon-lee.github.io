@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[학습기록] 소프트웨어 아키텍처: (2) 계약에 의한 설계(Design by Contract)"
-date: 2026-02-23
+date: 2026-02-25
 categories: 학습기록
 ---
 
