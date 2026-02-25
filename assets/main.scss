@@ -186,14 +186,6 @@ pre code.hljs,
     color: #f8f8f2 !important;             /* 밝은 글씨 색상 */
   }
 
-  code.highlighter-rouge:not(pre code),
-  :not(pre) code.highlighter-rouge {
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    border-color: rgba(255, 255, 255, 0.14) !important;
-    color: #e5e7eb !important;
-  }
-}
-
   .hljs-keyword {
     color: #82aaff !important;  /* 차분한 파랑 계열 */
     font-weight: 600;
@@ -222,6 +214,13 @@ pre code.hljs,
   /* hljs-attr (HTML 속성명) */
   .hljs-attr {
     color: #61afef !important; /* 파란색 계열 */
+  }
+
+  code.highlighter-rouge:not(pre code),
+  :not(pre) code.highlighter-rouge {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.14) !important;
+    color: #e5e7eb !important;
   }
 }
 
