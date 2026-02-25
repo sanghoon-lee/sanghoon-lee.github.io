@@ -140,25 +140,6 @@ code {
   border-radius: 4px;
   font-size: 0.9em;
   color: #333;  /* 기본 글씨 색상 */
-
-  /* ✅ 인라인 코드만: pre 안의 code는 제외 */
-  :not(pre) > code {
-    background-color: #eef2f7;   /* 너무 밝지 않은 톤 */
-    color: #111827;              /* 본문과 같은 계열로 선명하게 */
-    border: 1px solid #d1d5db;   /* 경계선으로 ‘버튼’처럼 또렷하게 */
-    padding: 0.18rem 0.4rem;
-    border-radius: 6px;
-
-    font-size: 0.98em;           /* 0.9em → 살짝 키우기 */
-    font-weight: 600;            /* 강조감 */
-    line-height: 1.2;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  }
-
-  /* (선택) 인라인 코드가 링크 안에 있을 때도 가독성 유지 */
-  a :not(pre) > code {
-    color: inherit;
-  }
 }
 
 /* 기본 코드 블록 스타일링 */
@@ -205,11 +186,13 @@ pre code.hljs,
     color: #f8f8f2 !important;             /* 밝은 글씨 색상 */
   }
 
-  /* 코드 하이라이팅 영역 */
-  pre code {
-    background-color: transparent !important;
-    color: inherit !important;
+  code.highlighter-rouge:not(pre code),
+  :not(pre) code.highlighter-rouge {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.14) !important;
+    color: #e5e7eb !important;
   }
+}
 
   .hljs-keyword {
     color: #82aaff !important;  /* 차분한 파랑 계열 */
@@ -388,4 +371,22 @@ blockquote li {
 .site-footer p {
   margin: 0;
   font-size: 1rem;
+}
+
+code.highlighter-rouge:not(pre code),
+:not(pre) code.highlighter-rouge {
+  background-color: #eef2f7 !important;
+  color: #111827 !important;
+  border: 1px solid #d1d5db !important;
+
+  padding: 0.18rem 0.4rem !important;
+  border-radius: 6px !important;
+
+  font-size: 0.98em !important;   /* 작게 보이는 문제 해결 */
+  font-weight: 600 !important;    /* 눈에 들어오게 */
+  line-height: 1.2 !important;
+
+  /* 인라인 코드만 모노스페이스 유지 */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+               "Liberation Mono", "Courier New", monospace !important;
 }
