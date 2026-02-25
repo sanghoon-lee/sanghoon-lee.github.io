@@ -140,6 +140,25 @@ code {
   border-radius: 4px;
   font-size: 0.9em;
   color: #333;  /* 기본 글씨 색상 */
+
+  /* ✅ 인라인 코드만: pre 안의 code는 제외 */
+  :not(pre) > code {
+    background-color: #eef2f7;   /* 너무 밝지 않은 톤 */
+    color: #111827;              /* 본문과 같은 계열로 선명하게 */
+    border: 1px solid #d1d5db;   /* 경계선으로 ‘버튼’처럼 또렷하게 */
+    padding: 0.18rem 0.4rem;
+    border-radius: 6px;
+
+    font-size: 0.98em;           /* 0.9em → 살짝 키우기 */
+    font-weight: 600;            /* 강조감 */
+    line-height: 1.2;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  /* (선택) 인라인 코드가 링크 안에 있을 때도 가독성 유지 */
+  a :not(pre) > code {
+    color: inherit;
+  }
 }
 
 /* 기본 코드 블록 스타일링 */
