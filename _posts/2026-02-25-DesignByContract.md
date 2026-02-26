@@ -157,3 +157,4 @@ if (amount <= 0) {
 
 * [[학습기록] 소프트웨어 아키텍처: (1) 기초 개념-도메인,모듈,컴포넌트,아티팩트 그리고 퀀텀](https://sanghoon-lee.github.io/2026/02/23/ArchitecureCoreConcept/)
 * [학습기록] 소프트웨어 아키텍처: (2) 계약에 의한 설계(Design by Contract)
+* [[학습기록] 소프트웨어 아키텍처: (3) 서비스 기반 아키텍처 스타일](https://sanghoon-lee.github.io/2026/02/26/ServiceArchDesign/)
