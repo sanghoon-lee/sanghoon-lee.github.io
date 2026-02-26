@@ -5,7 +5,7 @@ date: 2026-02-26
 categories: 학습기록
 ---
 
-style>
+<style>
 .main-image {
   width: 200px;
   max-width: 380px;
