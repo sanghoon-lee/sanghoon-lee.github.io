@@ -8,7 +8,7 @@ categories: 학습기록
 <style>
 .main-image {
   width: 100%;
-  max-width: 720px;
+  max-width: 900px;
   height: auto;
   margin-bottom: 1.4rem;
   border-radius: 12px;
