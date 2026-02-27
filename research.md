@@ -4,11 +4,11 @@ title: 👤 Research
 permalink: /research/
 ---
 
-## 1. 특허등록
+## 1. 특허
 
 --- 
 
-### 환경 설비에 구비된 IoT 센서로부터 수신된 센싱 데이터를 기초로 모니터링 정보를 생성하여 이를 검증하고, 생성된 모니터링 정보에 기반하여 대안신용평가 정보인 환경 신용도를 산출하기 위한 시스템의 동작 방법
+### 1.1. 환경 설비에 구비된 IoT 센서로부터 수신된 센싱 데이터를 기초로 모니터링 정보를 생성하여 이를 검증하고, 생성된 모니터링 정보에 기반하여 대안신용평가 정보인 환경 신용도를 산출하기 위한 시스템의 동작 방법
 
 **OPERATIONG METHOD OF SYSTEM GENERATING AND VERIFYING MONITORING INFORMATION BASED ON SENSING DATA RECEIVED FROM IOT SENSOR PROVIDED IN ENVIRONMENTAL FACILITY AND CALCULATING ENVIRONMENTAL CREDIT RATING ALTERNATIVE CREDIT EVALUATION INFORMATION BASED ON GENERATED MONITORING INFORMATION**
 
@@ -19,7 +19,7 @@ permalink: /research/
 
 ---
 
-### IoT 센서의 모니터링을 위해 복수의 센싱 데이터를 키-밸류 구조에 따라 분류하는 전자 장치
+### 1.2. IoT 센서의 모니터링을 위해 복수의 센싱 데이터를 키-밸류 구조에 따라 분류하는 전자 장치
 **ELECTRONIC DEVICE CLASSIFYING MULTIPLE SENSING DATA ACCRODING TO KEY-VALUE STRUCTURE FOR MONITORING IoT SENSOR**
 
 * 출원번호(일자):   1020240099771 (2024.07.26)
@@ -33,7 +33,7 @@ permalink: /research/
 
 ---
 
-### 시계열 인공지능 기법을 활용한 TMS 측정 대기오염물질 예측
+### 2.1. 시계열 인공지능 기법을 활용한 TMS 측정 대기오염물질 예측
 
 **Prediction of air pollutants measured by TMS using time series artificial intelligence technique**
 
