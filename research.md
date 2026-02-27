@@ -4,7 +4,7 @@ title: 👤 Research
 permalink: /research/
 ---
 
-## 특허등록
+## 1. 특허등록
 
 --- 
 
@@ -29,7 +29,7 @@ permalink: /research/
 
 ---
 
-## 논문
+## 2. 논문
 
 ---
 
