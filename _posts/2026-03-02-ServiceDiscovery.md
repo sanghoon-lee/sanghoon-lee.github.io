@@ -148,4 +148,9 @@ Service A → 디스커버리 → Service B
 | API Gateway       | “요청 어디로 보내지?”          | 라우팅   |
 | 관계                | Gateway가 Discovery를 사용 | 의존 관계 |
 
+## 포스팅 시리즈
 
+* [[학습기록] 소프트웨어 아키텍처: (1) 도메인,모듈,컴포넌트,아티팩트 그리고 퀀텀](https://sanghoon-lee.github.io/2026/02/23/ArchitecureCoreConcept/)
+* [[학습기록] 소프트웨어 아키텍처: (2) 계약에 의한 설계(Design by Contract)](https://sanghoon-lee.github.io/2026/02/25/DesignByContract/)
+* [[학습기록] 소프트웨어 아키텍처: (3) 서비스 기반 아키텍처 스타일](https://sanghoon-lee.github.io/2026/02/26/ServiceArchDesign/)
+* [학습기록] 소프트웨어 아키텍처: (4) 서비스 디스커버리 with 마이크로서비스 아키텍처(MSA)

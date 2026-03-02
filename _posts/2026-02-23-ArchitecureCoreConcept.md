@@ -285,6 +285,7 @@ app.jar (배포단위)
 
 ## 포스팅 시리즈
 
-* [학습기록] 소프트웨어 아키텍처: (1) 기초 개념-도메인,모듈,컴포넌트,아티팩트 그리고 퀀텀
+* [학습기록] 소프트웨어 아키텍처: (1) 도메인,모듈,컴포넌트,아티팩트 그리고 퀀텀
 * [[학습기록] 소프트웨어 아키텍처: (2) 계약에 의한 설계(Design by Contract)](https://sanghoon-lee.github.io/2026/02/25/DesignByContract/)
 * [[학습기록] 소프트웨어 아키텍처: (3) 서비스 기반 아키텍처 스타일](https://sanghoon-lee.github.io/2026/02/26/ServiceArchDesign/)
+* [[학습기록] 소프트웨어 아키텍처: (4) 서비스 디스커버리 with 마이크로서비스 아키텍처(MSA)](https://sanghoon-lee.github.io/2026/03/02/ServiceDiscovery/)
