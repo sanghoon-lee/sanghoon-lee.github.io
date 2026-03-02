@@ -220,6 +220,10 @@ pre code.hljs,
     color: #98c379 !important; /* 초록 계열 */
   }
 
+  .hljs-punctuation {
+    color: #98c379 !important; 
+  }
+
   code.highlighter-rouge:not(pre code),
   :not(pre) code.highlighter-rouge {
     background-color: rgba(255, 255, 255, 0.08) !important;
@@ -276,6 +280,10 @@ pre code.hljs,
 
   .hljs-number {
     color: #98c379 !important; /* 초록 계열 */
+  }
+
+  .hljs-punctuation {
+    color: #98c379 !important; 
   }
 }
 
