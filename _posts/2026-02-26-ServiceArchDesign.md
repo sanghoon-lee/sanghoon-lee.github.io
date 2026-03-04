@@ -123,6 +123,7 @@ categories: 학습기록
 * [[학습기록] 소프트웨어 아키텍처: (2) 계약에 의한 설계(Design by Contract)](https://sanghoon-lee.github.io/2026/02/25/DesignByContract/)
 * [학습기록] 소프트웨어 아키텍처: (3) 서비스 기반 아키텍처 스타일
 * [[학습기록] 소프트웨어 아키텍처: (4) 서비스 디스커버리 with 마이크로서비스 아키텍처(MSA)](https://sanghoon-lee.github.io/2026/03/02/ServiceDiscovery/)
+* [[학습기록] 소프트웨어 아키텍처: (5) 아키텍처 결정 레코드(Architecture Decision Record, ADR) 문서 작성법](https://sanghoon-lee.github.io/2026/03/02/ADR/)
 
 
 
