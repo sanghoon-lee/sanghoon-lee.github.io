@@ -148,7 +148,9 @@ http://10.68.65.187:8081
 <img class="main-image" src="/assets/images/nexus1.png" alt="Nexus Repository">
 
 
+<img class="main-image" src="/assets/images/nexus2.png" alt="Nexus Repository">
 
+<img class="main-image" src="/assets/images/nexus3.png" alt="Nexus Repository">
 
 <img class="main-image" src="/assets/images/nexus4.png" alt="Nexus Repository">
 
