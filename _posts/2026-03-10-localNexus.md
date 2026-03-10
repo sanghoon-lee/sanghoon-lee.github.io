@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[학습기록] 사설 라이브러리 저장소 구축을 위해 Nexus 설치"
+title: "[학습기록] Nexus로 사설 라이브러리 저장소 구축해보기"
 date: 2026-03-10
 categories: 학습기록
 ---
@@ -134,17 +134,17 @@ f3d2c2f6a043712721849013a8ff457432f480c590dfb9121e42df2229734030
 http://10.68.65.187:8081
 ```
 
-아래 그림처럼 접속이 된다면 Nexus는 정상적으로 동작하는 것입니다. admin 계정의 최초 비밀번호는
-/nexus-data
+아래 그림처럼 접속이 된다면 Nexus는 정상적으로 동작하는 것입니다. 최초 접속시에는 admin의 초기 비밀번호가 저장된 파일의 경로를 알려줍니다. 
 
 <img class="main-image" src="/assets/images/nexus1.png" alt="Nexus Repository">
 
-처음 접속하면
+로그인에 성공하면, Welcome 메시지와 함께 비밀번호 변경 절차를 수행해야합니다.
 
 <img class="main-image" src="/assets/images/nexus2.png" alt="Nexus Repository">
 
 <img class="main-image" src="/assets/images/nexus3.png" alt="Nexus Repository">
 
+실습에는 maven-releases와 maven-snapshots 두 개의 Repository를 사용할 예정입니다. 다행히 필요한 Repository는 기본적으로 생성되어 있었습니다.
 <img class="main-image" src="/assets/images/nexus4.png" alt="Nexus Repository">
 
 
