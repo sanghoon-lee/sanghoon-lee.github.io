@@ -71,7 +71,7 @@ categories: 학습기록
 
 하지만 현재 제가 속한 조직에서는 공통 라이브러리라는 것이 사실상 존재하지 않습니다.
 
-물론, 이전부터 공통 라이브러리 전략에 대해서 관심을 가지고 있었습니다. 다만, 적극적으로 추진하기는 어려운 상황이었을 뿐입니다.
+물론, 이전부터 공통 라이브러리 전략에 대해서 관심을 가지고 있었습니다. 적극적으로 추진하기 어려운 상황이었을 뿐입니다.
 
 최근 조직 개편과 함께 새로운 시스템을 구축하는 프로젝트를 시작하게 되었습니다. 새로운 시도를 해볼 수 있는 작은 기회가 생긴 것입니다.
 
@@ -91,9 +91,9 @@ Java 생태계에서는 Maven Central 같은 공개 저장소를 통해 수많�
 
 ## 테스트 환경
 
-이번 실습은 윈도우가 설치된 노트북에서 진행했습니다. VMware로 가상 머신을 생성하고, Ubuntu Linux와 Nexus Repository를 설치했습니다. 
+공통 라이브러리 전략을 추진하려면 사설 라이브러리 저장소를 구축하고, 운영해야 합니다. 그래서 개인 노트북에 사설 라이브러리 저장소를 구축해보고, 테스트로 만든 간단한 라이브러리를 배포해봤습니다. 
 
-정리하자면, 실습 환경의 구성은 다음과 같습니다.
+노트북에 VMware로 가상 머신을 생성하고, Ubuntu Linux와 Nexus Repository를 설치했습니다. 테스트 환경의 구성은 다음과 같습니다.
 
 ```
 +-----------------------------+
@@ -117,7 +117,7 @@ Java 생태계에서는 Maven Central 같은 공개 저장소를 통해 수많�
 
 ## Nexus Repository 설치
 
-Nexus는 Docker를 사용해서 설치했습니다. 먼저, Docker에서 사용할 Nexus 이미지 파일을 로컬로 가져오는 것부터 시작했습니다.
+`Nexus`는 `Docker`를 사용해서 설치했습니다. 먼저, `Docker`에서 사용할 `Nexus` 이미지 파일을 로컬로 가져왔습니다.
 
 ```bash
 $sudo docker pull sonatype/nexus3:latest
@@ -135,7 +135,7 @@ Status: Downloaded newer image for sonatype/nexus3:latest
 docker.io/sonatype/nexus3:latest
 ```
 
-그리고, Nexus 이미지를 정상적으로 가져왔는지도 확인했습니다.
+혹시 몰라서 로컬로 `Nexus` 이미지 파일을 잘 가져왔는지 다시 한번 확인했습니다. 
 
 ```bash
 $sudo docker image ls
@@ -144,7 +144,7 @@ IMAGE                    ID             DISK USAGE   CONTENT SIZE   EXTRA
 sonatype/nexus3:latest   cb94c17229a3       1.12GB          399MB
 ```
 
-이후 Nexus Repository 구성을 위해서 Docker 컨테이너를 실행했습니다.
+이미지 파일이 존재하는 것을 확인하고, `Docker` 컨테이너를 실행했습니다.
 
 ```bash
 sudo docker run --name nexus -d -p 5000:5000 -p 8081:8081 -v /nexus-data:/nexus-data -u root sonatype/nexus3
@@ -152,23 +152,23 @@ sudo docker run --name nexus -d -p 5000:5000 -p 8081:8081 -v /nexus-data:/nexus-
 f3d2c2f6a043712721849013a8ff457432f480c590dfb9121e42df2229734030
 ```
 
-컨테이너가 정상적으로 실행되면 브라우저에서 아래 주소로 Nexus에 접속할 수 있습니다.
+컨테이너가 정상적으로 실행되면 브라우저에서 아래 주소로 `Nexus`에 접속할 수 있습니다.
 
 ```
 http://10.68.65.187:8081
 ```
 
-아래 그림처럼 접속이 된다면 Nexus는 정상적으로 동작하는 것입니다. 최초 접속시에는 admin의 초기 비밀번호가 저장된 파일의 경로를 알려줍니다. 
+아래 그림처럼 접속이 되면 정상적으로 동작하는 것입니다. 최초 접속이면, admin의 초기 비밀번호가 저장된 파일의 경로가 나타납니다. 해당 파일을 읽고 초기 비밀번호를 확인하고, 로그인하면 됩니다.
 
 <img class="main-image" src="/assets/images/nexus1.png" alt="Nexus Repository">
 
-로그인에 성공하면, Welcome 메시지와 함께 비밀번호 변경 절차를 수행해야합니다.
+로그인에 성공하면, Welcome 메시지와 함께 비밀번호 변경 절차를 반드시 수행해야 합니다.
 
 <img class="main-image" src="/assets/images/nexus2.png" alt="Nexus Repository">
 
 <img class="main-image" src="/assets/images/nexus3.png" alt="Nexus Repository">
 
-실습에는 maven-releases와 maven-snapshots 두 개의 Repository를 사용할 예정입니다. 다행히 필요한 Repository는 기본적으로 생성되어 있었습니다.
+maven-releases와 maven-snapshots 두 개의 Repository를 사용할 예정이었는데, 다행히 필요한 Repository는 기본적으로 생성되어 있었습니다.
 <img class="main-image" src="/assets/images/nexus4.png" alt="Nexus Repository">
 
 
