@@ -101,7 +101,7 @@ categories: 학습기록
 
 ## Nexus 설치
 
-Docker를 이용해서 `Nexus`를 설치했는데, 특별히 어려운 과정은 없었습니다. 설치 절차는 다음과 같습니다.
+Docker를 이용해서 `Nexus`를 설치했습니다. 설치 절차는 다음과 같습니다.
 
 **이미지 파일 가져오기**
 ```bash
@@ -139,7 +139,7 @@ f3d2c2f6a043712721849013a8ff457432f480c590dfb9121e42df2229734030
 
 ## Nexus 접속
 
-브라우저에서 아래 주소로 `Nexus`에 접속할 수 있으면, 컨테이너가 정상적으로 실행되고 있는 것입니다.
+컨테이너가 정상적으로 실행되고 있으면 브라우저에서 아래 주소로 `Nexus`에 접속할 수 있습니다. 
 
 ```
 http://10.68.65.187:8081
@@ -147,14 +147,21 @@ http://10.68.65.187:8081
 
 최초 접속인 경우, 로그인 창에 admin계정의 초기 비밀번호가 저장된 파일 경로가 나타납니다. 해당 경로에서 비밀번호를 확인하고, 로그인하면 됩니다.
 
+**최초 접속시 로그인 창**
 <img class="main-image" src="/assets/images/nexus1.png" alt="Nexus Repository">
 
-로그인에 성공하면, Welcome 메시지와 함께 비밀번호 변경 절차를 반드시 수행해야 합니다.
+로그인에 성공하면, 아래 그림처럼 Welcome 메시지가 나타납니다. 
 
+**Welcome 메시지**
 <img class="main-image" src="/assets/images/nexus2.png" alt="Nexus Repository">
 
+초기 비밀번호로 로그인을 했기 때문에, 비밀번호 변경 절차가 수행됩니다.
+
+**비밀번호 변경화면**
 <img class="main-image" src="/assets/images/nexus3.png" alt="Nexus Repository">
 
-maven-releases와 maven-snapshots 두 개의 Repository를 사용할 예정입니다. 별도로 설정하지 않아도 기본적으로 필요한 Repository는 이미 생성되어 있었습니다.
+별도로 설정하지 않아도 기본적으로 필요한 Repository는 이미 생성되어 있었습니다.
+
+**Nexus Repository 목록**
 <img class="main-image" src="/assets/images/nexus4.png" alt="Nexus Repository">
 
