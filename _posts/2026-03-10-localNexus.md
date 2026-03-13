@@ -165,3 +165,16 @@ http://10.68.65.187:8081
 **Nexus Repository 목록**
 <img class="main-image" src="/assets/images/nexus4.png" alt="Nexus Repository">
 
+## SimpleLib
+
+테스트를 위해 아래처럼 간단한 코드를 작성했습니다. **라이브러리**로 만들어 다른 프로젝트에서 사용할 수 있도록 jar파일로 빌드하고, `Nexus Repositoty`에 배포해보도록 하겠습니다.
+
+```java
+package sanghoon.study.lib;
+
+public class SimpleLib {
+    public int sum(int x,int y){
+        return x+y;
+    }
+}
+```
