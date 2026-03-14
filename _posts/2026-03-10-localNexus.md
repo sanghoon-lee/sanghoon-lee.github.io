@@ -186,7 +186,54 @@ public class SimpleLib {
 }
 ```
 
-실제 공통 라이브러리는 인증, 로깅, 보안, 외부 시스템 연동과 같은 다양한 기능을 포함할 수 있습니다. 
+> 실제 공통 라이브러리는 인증, 로깅, 보안, 외부 시스템 연동과 같은 다양한 기능을 포함할 수 있습니다. 
 하지만 이번에는 Nexus를 통한 라이브러리 배포 과정을 확인하는 것이 목적이기 때문에, 간단한 예제 코드를 사용했습니다.
 
 ### build.gradle
+
+
+```groovy
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'sanghoon.study'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
+}
+
+publishing {
+    publications {
+        create('mavenJava', MavenPublication) {
+            from components.java
+
+            groupId = project.group
+            artifactId = 'simple-lib'
+            version = project.version
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'localNexus'
+            url = uri('http://10.68.65.187:8081/repository/maven-snapshots/')
+            allowInsecureProtocol = true
+
+            credentials {
+                username = findProperty('nexusUsername') ?: System.getenv('NEXUS_USERNAME')
+                password = findProperty('nexusPassword') ?: System.getenv('NEXUS_PASSWORD')
+            }
+        }
+    }
+}
+```
