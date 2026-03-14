@@ -165,10 +165,17 @@ http://10.68.65.187:8081
 **Nexus Repository 목록**
 <img class="main-image" src="/assets/images/nexus4.png" alt="Nexus Repository">
 
-## SimpleLib
+## 라이브러리 배포
 
-테스트를 위해 아래처럼 간단한 코드를 작성했습니다. **라이브러리**로 만들어 다른 프로젝트에서 사용할 수 있도록 jar파일로 빌드하고, `Nexus Repositoty`에 배포해보도록 하겠습니다.
+### 테스트 코드
 
+`Nexus`로 구축한 `사설 라이브러리 저장소`에 라이브러리를 배포하는 과정을 확인하기 위해
+아주 간단한 Java 프로젝트를 하나 만들었습니다. 
+
+프로젝트 이름은 simple-lib입니다. 이 프로젝트에 SimpleLib 클래스를 선언하고, 두 개의 숫자를 입력받아 
+합을 반환하는 sum 메서드를 작성했습니다.
+
+**SimpleLib 클래스 선언**
 ```java
 package sanghoon.study.lib;
 
@@ -178,3 +185,8 @@ public class SimpleLib {
     }
 }
 ```
+
+실제 공통 라이브러리는 인증, 로깅, 보안, 외부 시스템 연동과 같은 다양한 기능을 포함할 수 있습니다. 
+하지만 이번에는 Nexus를 통한 라이브러리 배포 과정을 확인하는 것이 목적이기 때문에, 간단한 예제 코드를 사용했습니다.
+
+### build.gradle
