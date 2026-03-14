@@ -167,13 +167,14 @@ http://10.68.65.187:8081
 
 ## 라이브러리 배포
 
-### 테스트 코드
-
 `Nexus`로 구축한 `사설 라이브러리 저장소`에 라이브러리를 배포하는 과정을 확인하기 위해
 아주 간단한 Java 프로젝트를 하나 만들었습니다. 
 
-프로젝트 이름은 simple-lib입니다. 이 프로젝트에 SimpleLib 클래스를 선언하고, 두 개의 숫자를 입력받아 
-합을 반환하는 sum 메서드를 작성했습니다.
+프로젝트 이름은 simple-lib입니다.
+
+### simple-lib: 라이브러리 코드 작성
+
+이 프로젝트에 SimpleLib 클래스를 선언하고, 두 개의 숫자를 입력받아 합을 반환하는 sum 메서드를 작성했습니다.
 
 **SimpleLib 클래스 선언**
 ```java
@@ -189,9 +190,9 @@ public class SimpleLib {
 > 실제 공통 라이브러리는 인증, 로깅, 보안, 외부 시스템 연동과 같은 다양한 기능을 포함할 수 있습니다. 
 하지만 이번에는 Nexus를 통한 라이브러리 배포 과정을 확인하는 것이 목적이기 때문에, 간단한 예제 코드를 사용했습니다.
 
-### build.gradle
+### simple-lib: Gradle 설정
 
-
+**build.gradle 작성**
 ```groovy
 plugins {
     id 'java-library'
@@ -236,4 +237,20 @@ publishing {
         }
     }
 }
+```
+
+**gradle.properties 작성**
+```properties
+nexusUsername={배포 계정}
+nexusPassword={비밀번호}
+```
+
+### simple-lib: 배포
+
+Gralde을 reload하고, publish task가 생성되었는지 확인합니다. 
+
+publish task를 실행하면, Gradle이 프로젝트를 빌드한 뒤 지정된 `Nexus` 저장소로 artifact를 업로드합니다.
+
+```bash
+gradle.bat publish
 ```
