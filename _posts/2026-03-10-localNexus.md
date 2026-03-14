@@ -155,9 +155,9 @@ http://10.68.65.187:8081
 **Welcome 메시지**
 <img class="main-image" src="/assets/images/nexus2.png" alt="Nexus Repository">
 
-초기 비밀번호로 로그인을 했기 때문에, 비밀번호 변경 절차가 수행됩니다.
+초기 비밀번호로 로그인하면 비밀번호를 변경해야 합니다.
 
-**비밀번호 변경화면**
+**비밀번호 변경**
 <img class="main-image" src="/assets/images/nexus3.png" alt="Nexus Repository">
 
 별도로 설정하지 않아도 기본적으로 필요한 Repository는 이미 생성되어 있었습니다.
