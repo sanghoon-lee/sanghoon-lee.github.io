@@ -162,7 +162,7 @@ http://10.68.65.187:8081
 
 ## 7. Nexus 저장소의 종류
 
-로그인 후, Browse 메뉴에서 현재 생성되어 있는 저장소(`Repository`) 목록을 확인할 수 있습니다.
+`Nexus`에 로그인 후, Browse 메뉴에서 현재 생성되어 있는 저장소(`Repository`) 목록을 확인할 수 있습니다.
 별도로 설정하지 않았지만, 기본적으로 필요한 저장소들은 이미 생성되어 있었습니다.
 
 **Nexus Repository 목록**
@@ -230,13 +230,13 @@ group 저장소는 이름처럼 여러 저장소를 하나의 저장소처럼 �
 
 ### 8.1. 배포 계정
 
-Settings > Security > Roles 메뉴에서 `nx-admin`과 `nx-anonymous` 두 개의 Role이 정의되어 있는 것을 확인할 수 있었습니다.
+`Nexus`에서 Settings > Security > Roles를 선택하면 현재 정의되어 있는 Role 목록을 확인할 수 있습니다. `nx-admin`과 `nx-anonymous` 두 개의 Role이 정의되어 있었습니다.
 
 <img class="main-image" src="/assets/images/security_roles.jpg" alt="Nexus Roles 목록">
 
-`nx-admin` Role의 상세 정보에서 Privileges가 all로 지정되어 있는 것도 알 수 있었습니다. 즉, `nx-admin` Role이 부여된 계정은 라이브러리 배포를 포함한 모든 권한을 가지고 있다는 의미입니다. 
+`nx-admin` Role의 Privileges는 all로 지정되어 있습니다. 그리고 로그인에 사용한 admin 계정의 Role이 `nx-admin`으로 부여되어 있습니다. 즉, admin 계정은 라이브러리 배포를 포함한 모든 권한을 가지고 있다는 의미입니다. 
 
-보통은 배포 권한을 가진 계정을 별도로 만들어서 사용합니다. 하지만 이번에는 라이브러리 배포 과정을 확인하는 것이 목적이기 때문에, 별도로 계정을 생성하지는 않았습니다. 그냥 `nx-admin` Role을 가진 admin 계정을 사용했습니다.
+보통은 배포 권한을 가진 계정을 별도로 만들어서 사용합니다. 하지만, 이번에는 라이브러리 배포 과정을 확인하는 것이 주 목적입니다. 그래서 admin 계정을 사용했습니다.
 
 ### 8.2. simple-lib: 라이브러리 코드 작성
 
@@ -317,7 +317,7 @@ publishing {
 }
 ```
 
-배포 위치는 다음과 같이 정의됩니다.
+maven-snapshots 저장소에서 배포 위치는 다음과 같습니다.
 
 ```
 groupId    = sanghoon.study
@@ -347,3 +347,12 @@ publish task를 실행하면, Gradle이 프로젝트를 빌드한 뒤 지정된 
 ```bash
 gradle.bat publish
 ```
+
+IDE에서 빌드와 배포가 성공했습니다. `Nexus`에서 Browse > maven-snapshots를 선택해서 simple-lib가 추가된 것을 확인할 수 있었습니다.
+
+**maven-snapshots 저장소 목록**
+<img class="main-image" src="/assets/images/simple_lib.jpg" alt="저장소에 simple-lib 추가">
+
+## 9. 라이브러리 사용
+
+이제 mavan-snapshots 저장소에 추가된 simple-lib 라이브러리를 가져와서 사용해보도록 하겠습니다.
