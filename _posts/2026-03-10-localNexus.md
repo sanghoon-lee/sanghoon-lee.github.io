@@ -238,6 +238,13 @@ group 저장소는 이름처럼 여러 저장소를 하나의 저장소처럼 �
 
 보통은 배포 권한을 가진 계정을 별도로 만들어서 사용합니다. 하지만, 이번에는 라이브러리 배포 과정을 확인하는 것이 주 목적입니다. 그래서 admin 계정을 사용했습니다.
 
+**gradle.properties**
+
+```properties
+nexusUsername={배포 계정}
+nexusPassword={비밀번호}
+```
+
 ### 8.2. simple-lib: 라이브러리 코드 작성
 
 라이브러리 배포를 위해서 아주 간단한 Java 프로젝트를 하나 만들었습니다.
@@ -331,12 +338,6 @@ version    = 0.0.1-SNAPSHOT
 implementation 'sanghoon.study:simple-lib:0.0.1-SNAPSHOT'
 ```
 
-**gradle.properties 작성**
-```properties
-nexusUsername={배포 계정}
-nexusPassword={비밀번호}
-```
-
 ### 8.4. simple-lib: 배포
 
 Gralde을 reload하고, publish task가 생성되었는지 확인합니다. 
@@ -344,6 +345,7 @@ Gralde을 reload하고, publish task가 생성되었는지 확인합니다.
 publish task를 실행하면, Gradle이 프로젝트를 빌드한 뒤 지정된 `Nexus` 저장소로 artifact를 업로드합니다.
 
 **publish task 실행**
+
 ```bash
 gradle.bat publish
 ```
@@ -355,4 +357,71 @@ IDE에서 빌드와 배포가 성공했습니다. `Nexus`에서 Browse > maven-s
 
 ## 9. 라이브러리 사용
 
+### 9.1. simple-calc: 테스트 코드 작성
+
 이제 mavan-snapshots 저장소에 추가된 simple-lib 라이브러리를 가져와서 사용해보도록 하겠습니다.
+
+이번에도 아주 간단한 Java 프로젝트를 하나 만들었습니다.
+
+프로젝트 이름은 simple-calc입니다.
+
+**settings.gradle**
+```
+rootProject.name = 'simple-calc'
+```
+
+이 프로젝트의 Main 클래스에서 simple-lib 라이브러리의 sum() 메서드를 호출하는 코드를 작성했습니다.
+
+**Main.java**
+```java
+import sanghoon.study.lib.SimpleLib;
+
+public class Main {
+    public static void main(String[] args) {
+        SimpleLib simpleLib = new SimpleLib();
+
+        System.out.println(simpleLib.sum(3,5));
+    }
+}
+```
+
+### 9.2. simple-calc: Gradle 설정
+
+simple-lib를 가져오기 위해 라이브러리가 배포된 `사설 라이브러리 저장소`의 주소와 배포 위치를 build.gradle에 추가해야 합니다.
+사용한 build.gradle 파일은 다음과 같습니다. 
+
+**build.gradle**
+
+```groovy
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url = uri('http://10.68.65.187:8081/repository/maven-snapshots/')
+        allowInsecureProtocol = true
+    }
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'sanghoon.study:simple-lib:0.0.1-SNAPSHOT'
+}
+
+test {
+    useJUnitPlatform()
+}
+```
+
+> build.gradle 파일을 작성하고, Gradle을 Reload를 해야만 라이브러리를 가져올 수 있습니다.
+
+### 9.3. simple-calc: 실행 결과
+
+sum() 메서드가 정상적으로 호출되면서 기대했던 값인 8이 터미널로 출력되는 것을 확인할 수 있었습니다.
