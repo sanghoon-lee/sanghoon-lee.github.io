@@ -170,13 +170,18 @@ http://10.68.65.187:8081
 `Nexus`로 구축한 `사설 라이브러리 저장소`에 라이브러리를 배포하는 과정을 확인하기 위해
 아주 간단한 Java 프로젝트를 하나 만들었습니다. 
 
+### 7.1. simple-lib: 라이브러리 코드 작성
+
 프로젝트 이름은 simple-lib입니다.
 
-### 7.1. simple-lib: 라이브러리 코드 작성
+**settings.gradle**
+```
+rootProject.name = 'simple-lib'
+```
 
 이 프로젝트에 SimpleLib 클래스를 선언하고, 두 개의 숫자를 입력받아 합을 반환하는 sum 메서드를 작성했습니다.
 
-**SimpleLib 클래스 선언**
+**SimpleLib.java**
 ```java
 package sanghoon.study.lib;
 
@@ -187,12 +192,17 @@ public class SimpleLib {
 }
 ```
 
-> 실제 공통 라이브러리는 인증, 로깅, 보안, 외부 시스템 연동과 같은 다양한 기능을 포함할 수 있습니다. 
+실제 공통 라이브러리는 인증, 로깅, 보안, 외부 시스템 연동과 같은 다양한 기능을 포함할 수 있습니다. 
 하지만 이번에는 Nexus를 통한 라이브러리 배포 과정을 확인하는 것이 목적이기 때문에, 간단한 예제 코드를 사용했습니다.
 
 ### 7.2. simple-lib: Gradle 설정
 
-**build.gradle 작성**
+
+Gradle 공식 가이드에서는 라이브러리 프로젝트에 java-library 플러그인을, Maven 저장소 배포에는 maven-publish 플러그인을 사용하도록 안내하고 있습니다.
+
+이 설정은 simple-lib-0.0.1-SNAPSHOT.jar를 만들고, maven-snapshots 저장소로 배포하는 형태입니다. Gradle의 Maven Publish 플러그인은 publishing { publications { ... } repositories { ... } } 구조로 publication과 저장소를 정의합니다.
+
+**build.gradle**
 ```groovy
 plugins {
     id 'java-library'
@@ -239,11 +249,30 @@ publishing {
 }
 ```
 
+배포 위치는 다음과 같이 정의됩니다.
+
+```
+groupId    = sanghoon.study
+artifactId = simple-lib
+version    = 0.0.1-SNAPSHOT
+```
+
+그렇기 때문에, simple-lib를 다른 프로젝트에서 사용하려면 아래와 같이 배포 위치를 build.gradle 파일에 추가해주면 됩니다. 
+
+```
+implementation 'sanghoon.study:simple-lib:0.0.1-SNAPSHOT'
+```
+
+
+
 **gradle.properties 작성**
 ```properties
 nexusUsername={배포 계정}
 nexusPassword={비밀번호}
 ```
+
+
+
 
 ### 7.3. simple-lib: 배포
 
