@@ -162,7 +162,7 @@ http://10.68.65.187:8081
 
 ## 7. Nexus 저장소의 종류
 
-로그인을 하고, Browse메뉴를 선택하면 현재 생성되어 있는 저장소(`Repository`) 목록을 확인할 수 있습니다.
+로그인 후, Browse 메뉴에서 현재 생성되어 있는 저장소(`Repository`) 목록을 확인할 수 있습니다.
 별도로 설정하지 않았지만, 기본적으로 필요한 저장소들은 이미 생성되어 있었습니다.
 
 **Nexus Repository 목록**
@@ -181,7 +181,7 @@ hoste 저장소는 직접 라이브러리를 업로드하여 관리합니다. `N
 * maven-releases: 정식 버전의 라이브러리를 배포
 * maven-snapshots: 개발중인 버전의 라이브러리를 배포
 
-즉, 조직 내부에서 만든 라이브러리를 배포할 때 사용할 수 있습니다. 사실 이번 포스팅에서 다루고 있는 `사설 라이브러리 저장소`가 hosted 저장소에 해당됩니다. 
+즉, 조직 내부에서 만든 라이브러리를 배포할 때 사용할 수 있습니다. 사실 이번 포스팅에서 다루고 있는 `사설 라이브러리 저장소`가 **hosted 저장소**에 해당됩니다. 
 
 ## 7.2. proxy
 
@@ -226,16 +226,21 @@ group 저장소는 이름처럼 여러 저장소를 하나의 저장소처럼 �
 
 이렇게 구성하면, 개발자는 여러 저장소를 각각 설정할 필요가 없습니다. group 저장소 하나만 설정하면 됩니다.
 
-## 8. Nexus 설정
+## 8. 라이브러리 배포
+
+### 8.1. 배포 계정
+
+Settings > Security > Roles 메뉴에서 `nx-admin`과 `nx-anonymous` 두 개의 Role이 정의되어 있는 것을 확인할 수 있었습니다.
 
 <img class="main-image" src="/assets/images/security_roles.jpg" alt="Nexus Roles 목록">
 
-## 9. 라이브러리 배포
+`nx-admin` Role의 상세 정보에서 Privileges가 all로 지정되어 있는 것도 알 수 있었습니다. 즉, `nx-admin` Role이 부여된 계정은 라이브러리 배포를 포함한 모든 권한을 가지고 있다는 의미입니다. 
 
-`Nexus`로 구축한 `사설 라이브러리 저장소`에 라이브러리를 배포하는 과정을 확인하기 위해
-아주 간단한 Java 프로젝트를 하나 만들었습니다. 
+보통은 배포 권한을 가진 계정을 별도로 만들어서 사용합니다. 하지만 이번에는 라이브러리 배포 과정을 확인하는 것이 목적이기 때문에, 별도로 계정을 생성하지는 않았습니다. 그냥 `nx-admin` Role을 가진 admin 계정을 사용했습니다.
 
-### 9.1. simple-lib: 라이브러리 코드 작성
+### 8.2. simple-lib: 라이브러리 코드 작성
+
+라이브러리 배포를 위해서 아주 간단한 Java 프로젝트를 하나 만들었습니다.
 
 프로젝트 이름은 simple-lib입니다.
 
@@ -244,7 +249,7 @@ group 저장소는 이름처럼 여러 저장소를 하나의 저장소처럼 �
 rootProject.name = 'simple-lib'
 ```
 
-이 프로젝트에 SimpleLib 클래스를 선언하고, 두 개의 숫자를 입력받아 합을 반환하는 sum 메서드를 작성했습니다.
+이 프로젝트에 SimpleLib 클래스를 선언하고, 두 개의 숫자를 입력받아 합을 반환하는 코드를 작성했습니다.
 
 **SimpleLib.java**
 ```java
@@ -257,10 +262,9 @@ public class SimpleLib {
 }
 ```
 
-실제 공통 라이브러리는 인증, 로깅, 보안, 외부 시스템 연동과 같은 다양한 기능을 포함할 수 있습니다. 
-하지만 이번에는 Nexus를 통한 라이브러리 배포 과정을 확인하는 것이 목적이기 때문에, 간단한 예제 코드를 사용했습니다.
+> 실제 공통 라이브러리는 인증, 로깅, 보안, 외부 시스템 연동과 같은 다양하고 복잡한 기능이 포함될 수 있습니다. 
 
-### 9.2. simple-lib: Gradle 설정
+### 8.3. simple-lib: Gradle 설정
 
 Gradle 공식 가이드에서는 라이브러리 프로젝트에 java-library 플러그인을, Maven 저장소 배포에는 maven-publish 플러그인을 사용하도록 안내하고 있습니다.
 
@@ -327,18 +331,13 @@ version    = 0.0.1-SNAPSHOT
 implementation 'sanghoon.study:simple-lib:0.0.1-SNAPSHOT'
 ```
 
-
-
 **gradle.properties 작성**
 ```properties
 nexusUsername={배포 계정}
 nexusPassword={비밀번호}
 ```
 
-
-
-
-### 9.3. simple-lib: 배포
+### 8.4. simple-lib: 배포
 
 Gralde을 reload하고, publish task가 생성되었는지 확인합니다. 
 
