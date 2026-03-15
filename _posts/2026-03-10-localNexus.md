@@ -62,7 +62,7 @@ categories: 학습기록
 
 사실 오래전부터 **공통 라이브러리**를 적극적으로 이용해서 개발 생산성을 향상시키는 방법을 고민하고 있었습니다. 
 
-**공통 라이브러리**를 활용하려면 `사설 라이브러리 저장소(Private Repository)`가 반드시 필요합니다.내부에서 개발한 코드를 함부로 `Maven Central`과 같은 공개 저장소에 배포할 수 없기 때문입니다. 
+**공통 라이브러리**를 활용하려면 `사설 라이브러리 저장소(Private Repository)`가 반드시 필요합니다. 조직 내부에서 개발한 코드를 함부로 `Maven Central`과 같은 공개 저장소에 배포할 수 없기 때문입니다. 
 
 `Nexus`는 `사설 라이브러리 저장소`를 운영하기 위해 활용할 수 있는 대표적인 도구입니다. 
 
@@ -135,7 +135,7 @@ $ sudo docker run --name nexus -d -p 5000:5000 -p 8081:8081 -v /nexus-data:/nexu
 f3d2c2f6a043712721849013a8ff457432f480c590dfb9121e42df2229734030
 ```
 
-`Nexus Repositoy`의 데이터를 저장할 폴더(**/nexus-data**)를 가상머신에 생성하고, 컨테이너와 연결시켰습니다.  
+`Nexus`의 데이터를 저장할 폴더(**/nexus-data**)를 가상머신에 생성하고, 컨테이너와 연결시켰습니다.  
 
 ## 6. Nexus 접속
 
@@ -160,17 +160,82 @@ http://10.68.65.187:8081
 **비밀번호 변경**
 <img class="main-image" src="/assets/images/nexus3.png" alt="Nexus Repository">
 
-별도로 설정하지 않아도 기본적으로 필요한 Repository는 이미 생성되어 있었습니다.
+## 7. Nexus 저장소의 종류
+
+로그인을 하고, Browse메뉴를 선택하면 현재 생성되어 있는 저장소(`Repository`) 목록을 확인할 수 있습니다.
+별도로 설정하지 않았지만, 기본적으로 필요한 저장소들은 이미 생성되어 있었습니다.
 
 **Nexus Repository 목록**
 <img class="main-image" src="/assets/images/nexus4.png" alt="Nexus Repository">
 
-## 7. 라이브러리 배포
+각 저장소는 역할에 따라 다음과 같이 Type이 구분됩니다. 
+
+* hosted
+* group
+* proxy Type
+
+### 7.1. hosted
+
+hoste 저장소는 직접 라이브러리를 업로드하여 관리합니다. `Nexus`를 설치하면, 다음과 같은 hosted 저장소가 기본으로 생성됩니다.
+
+* maven-releases: 정식 버전의 라이브러리를 배포
+* maven-snapshots: 개발중인 버전의 라이브러리를 배포
+
+즉, 조직 내부에서 만든 라이브러리를 배포할 때 사용할 수 있습니다. 사실 이번 포스팅에서 다루고 있는 `사설 라이브러리 저장소`가 hosted 저장소에 해당됩니다. 
+
+## 7.2. proxy
+
+proxy 저장소는 외부 저장소를 대신 접근해주는 캐시 역할을 합니다. Gradle이나 Maven으로 라이브러리를 다운로드할 때, 보통 다음과 같은 공개 저장소가 사용됩니다.
+
+```
+https://repo.maven.apache.org/maven2
+```
+
+이때 proxy 저장소를 구성해서 사용하면, 다음과 같은 구조로 동작하게 됩니다.
+
+```
+개발자 → Nexus Proxy 저장소(내부) → Maven Central 저장소(외부)
+```
+
+라이브러리를 처음 다운로드할 때는 Maven Central에서 받아오고, 그 이후에는 `Nexus`의 Proxy 저장소에 캐시된 라이브러리를 제공받게 됩니다.
+
+이 방식은 다음과 같은 장점이 있습니다.
+
+* 외부 저장소 의존성 감소
+* 다운로드 속도 향상
+* 외부 네트워크 장애 대응
+
+## 7.3 group
+
+group 저장소는 이름처럼 여러 저장소를 하나의 저장소처럼 묶어주는 역할을 합니다.
+
+예를 들어 다음과 같은 저장소들이 있다고 가정해보겠습니다.
+
+* maven-releases (hosted)
+* maven-snapshots (hosted)
+* maven-central (proxy)
+
+이들을 하나의 group 저장소로 묶으면 다음과 같이 사용할 수 있습니다.
+
+```
+개발자 → maven-public(group)
+           ├ maven-releases
+           ├ maven-snapshots
+           └ maven-central
+```
+
+이렇게 구성하면, 개발자는 여러 저장소를 각각 설정할 필요가 없습니다. group 저장소 하나만 설정하면 됩니다.
+
+## 8. Nexus 설정
+
+<img class="main-image" src="/assets/images/security_roles.jpg" alt="Nexus Roles 목록">
+
+## 9. 라이브러리 배포
 
 `Nexus`로 구축한 `사설 라이브러리 저장소`에 라이브러리를 배포하는 과정을 확인하기 위해
 아주 간단한 Java 프로젝트를 하나 만들었습니다. 
 
-### 7.1. simple-lib: 라이브러리 코드 작성
+### 9.1. simple-lib: 라이브러리 코드 작성
 
 프로젝트 이름은 simple-lib입니다.
 
@@ -195,8 +260,7 @@ public class SimpleLib {
 실제 공통 라이브러리는 인증, 로깅, 보안, 외부 시스템 연동과 같은 다양한 기능을 포함할 수 있습니다. 
 하지만 이번에는 Nexus를 통한 라이브러리 배포 과정을 확인하는 것이 목적이기 때문에, 간단한 예제 코드를 사용했습니다.
 
-### 7.2. simple-lib: Gradle 설정
-
+### 9.2. simple-lib: Gradle 설정
 
 Gradle 공식 가이드에서는 라이브러리 프로젝트에 java-library 플러그인을, Maven 저장소 배포에는 maven-publish 플러그인을 사용하도록 안내하고 있습니다.
 
@@ -274,7 +338,7 @@ nexusPassword={비밀번호}
 
 
 
-### 7.3. simple-lib: 배포
+### 9.3. simple-lib: 배포
 
 Gralde을 reload하고, publish task가 생성되었는지 확인합니다. 
 
