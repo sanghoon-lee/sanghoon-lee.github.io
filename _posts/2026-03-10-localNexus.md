@@ -173,7 +173,7 @@ http://10.68.65.187:8081
 
 * hosted
 * group
-* proxy Type
+* proxy
 
 ### 7.1. hosted
 
