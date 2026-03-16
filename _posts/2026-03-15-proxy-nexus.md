@@ -11,7 +11,7 @@ Gradle이나 Maven과 같은 빌드 도구를 사용하면 Maven Central과 같�
 
 Gradle을 사용하는 프로젝트에서는 다음과 같이 저장소를 설정하는 것이 일반적입니다.
 
-```groovy
+```
 repositories {
     mavenCentral()
 }
