@@ -14,7 +14,7 @@ permalink: /career/
 * 담당업무#2: 2024.11~2026.03
     - 스팸전화 차단 및 보이스피싱 탐지 서비스 개발 및 운영/유지보수 
     - 스팸전화 차단 및 보이스피싱 탐지 서비스 구조개선
-* 기술스택: Java Springboot, Redis, RabbitMQ, Kafka,Hadoop
+* 기술스택: Java Springboot, Redis, RabbitMQ, Kafka, Hadoop
 
 ### (주)에어릭스: 포스코 협력사(2020.08~2024.07)
 * 기업구분: 비상장(중소기업)
