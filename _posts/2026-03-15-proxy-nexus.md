@@ -115,4 +115,4 @@ Dependency Download
 
 ## 관련 포스팅
 
-* [[학습기록] Nexus로 사설 라이브러리 저장소 구축해보기](https://sanghoon-lee.github.io/2026/03/10/localNexus/)
+* [[학습기록] Nexus로 내부 라이브러리 저장소 구축해보기](https://sanghoon-lee.github.io/2026/03/10/localNexus/)
