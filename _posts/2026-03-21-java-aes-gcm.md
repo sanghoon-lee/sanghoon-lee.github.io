@@ -5,6 +5,8 @@ date: 2026-03-21
 categories: 학습기록
 ---
 
+이번 포스팅은 Java를 기준으로 AES-GCM을 안전하게 사용하는 방법을 정리한 글입니다.
+
 ## 1. AES-GCM 기본 구조
 
 AES-GCM은 다음과 같은 요소로 구성됩니다.
@@ -15,13 +17,11 @@ AES-GCM은 다음과 같은 요소로 구성됩니다.
 * Ciphertext: 암호화 결과(암호문)
 * Authentication Tag: 무결성 검증 값
 
-AES-GCM은 데이터를 단순히 암호화하는 것이 아니라, 암호화와 동시에 무결성까지 검증할 수 있는 AEAD 방식입니다.
-
-즉, 복호화 과정에서 데이터가 변경되었는지까지 함께 확인할 수 있습니다.
+AES-GCM은 데이터를 단순히 암호화하는 것이 아니라, 암호화와 동시에 무결성까지 검증할 수 있는 AEAD 방식입니다. 즉, 복호화 과정에서 데이터가 변경되었는지도 함께 확인할 수 있습니다.
 
 ## 2. Java에서 AES-GCM 구현
 
-Java에서는 `Cipher` 클래스를 이용해 AES-GCM을 쉽게 구현할 수 있습니다.
+Java에서는 `Cipher` 클래스를 이용해 AES-GCM을 구현할 수 있습니다. 
 
 ```java
 import javax.crypto.Cipher;
@@ -132,10 +132,12 @@ try {
 **잘못된 사용법**
 
 ```java
-    // 예외를 처리하지 않으면 변조된 데이터를 정상 데이터처럼 처리할 수 있음
-    cipher.init(Cipher.DECRYPT_MODE, key, spec);
-    byte[] decrypted = cipher.doFinal(ciphertext);
+// 예외를 처리하지 않으면 변조 여부를 구분하지 못하고, 상위 로직에서 오류를 부적절하게 처리할 수 있음
+cipher.init(Cipher.DECRYPT_MODE, key, spec);
+byte[] decrypted = cipher.doFinal(ciphertext);
 ```
+
+AES-GCM은 암호문뿐 아니라 인증 태그까지 함께 검증하기 때문에, 암호문이 조금이라도 변경되면 복호화에 실패합니다.
 
 실제로 **2. Java에서 AES-GCM 구현**에서 보여준 AesGcmExample 클래스의 코드를 아래와 같이 수정해서 암호문을 변조해보면, `AEADBadTagException` 예외가 발생하는 것을 확인할 수 있습니다.
 
@@ -169,9 +171,7 @@ try {
 
 ### 3.3. Nonce 길이 (12 bytes 권장)
 
-GCM에서는 96bit(12 bytes) 길이의 Nonce 사용이 권장됩니다.
-
-이는 성능과 보안 측면에서 최적화된 길이이며, 대부분의 구현에서 표준으로 사용됩니다.
+GCM에서는 96bit(12 bytes) 길이의 Nonce 사용이 권장됩니다. 이는 성능과 보안 측면에서 최적화된 길이이며, 대부분의 구현에서 표준으로 사용됩니다.
 
 ### 3.4. 인증 태그 길이(128 bit 권장)
 
@@ -192,11 +192,7 @@ AES-GCM에서는 96, 104, 112, 120, 128 bit 등의 태그 길이를 사용할 �
 * 대부분의 라이브러리와 프로토콜에서 기본값으로 사용
 * 성능 대비 보안 수준이 가장 적절
 
-태그 길이를 줄이면 성능이나 데이터 크기 측면에서 이점이 있을 수 있지만,
-무결성 검증의 강도가 낮아지기 때문에 일반적인 시스템에서는 권장되지 않습니다.
-
-따라서 특별한 이유가 없다면,
-AES-GCM에서는 128bit 인증 태그를 사용하는 것이 가장 안전한 선택입니다.
+태그 길이를 줄이면 성능이나 데이터 크기 측면에서 이점이 있을 수 있지만, 무결성 검증의 강도가 낮아지기 때문에 일반적인 시스템에서는 권장되지 않습니다. 따라서 특별한 이유가 없다면, AES-GCM에서는 128bit 인증 태그를 사용하는 것이 가장 안전한 선택입니다.
 
 ## 4. 인증 태그를 포함한 데이터 구조
 
@@ -208,17 +204,96 @@ Java에서 AES-GCM으로 암호화를 수행하면, `cipher.doFinal()`의 결과
 [ ciphertext | authentication tag ]
 ```
 
-여기에 복호화를 위해 필요한 Nonce까지 포함하면, 실무에서는 일반적으로 다음과 같은 형태로 데이터를 구성합니다.
+다만, 이 결과에는 Nonce가 포함되어 있지 않습니다.
+
+복호화를 수행하기 위해서는 동일한 Nonce가 반드시 필요하기 때문에, 실무에서는 다음과 같이 Nonce를 함께 저장하거나 전송해야 합니다.
 
 ```text
-[ nonce | ciphertext | authentication tag ]
+[nonce | ciphertext | authentication tag]
+```
+
+즉, 이 구조는 Java가 자동으로 만들어주는 것이 아니라, 복호화를 위해 개발자가 직접 구성해야 하는 데이터 포맷입니다.
+
+아래는 조금 더 실무적인 관점에서 AES-GCM을 어떻게 구현하는지 보여주는 코드입니다.
+
+```java
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.GCMParameterSpec;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
+import java.util.Arrays;
+
+public class AesGcmPayloadExample {
+
+    public static void main(String[] args) throws Exception {
+        // 1. AES Key 생성
+        KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+        keyGen.init(256);
+        SecretKey key = keyGen.generateKey();
+
+        // 2. Nonce 생성 (12 bytes 권장)
+        byte[] nonce = new byte[12];
+        new SecureRandom().nextBytes(nonce);
+
+        // 3. 평문
+        byte[] plaintext = "Hello AES-GCM".getBytes(StandardCharsets.UTF_8);
+
+        // 4. 암호화
+        Cipher encryptCipher = Cipher.getInstance("AES/GCM/NoPadding");
+        GCMParameterSpec spec = new GCMParameterSpec(128, nonce);
+        encryptCipher.init(Cipher.ENCRYPT_MODE, key, spec);
+
+        // doFinal() 결과 = [ciphertext | authentication tag]
+        byte[] cipherTextWithTag = encryptCipher.doFinal(plaintext);
+
+        System.out.println("nonce length = " + nonce.length);
+        System.out.println("plaintext length = " + plaintext.length);
+        System.out.println("cipherTextWithTag length = " + cipherTextWithTag.length);
+        System.out.println("cipherTextWithTag = " + Arrays.toString(cipherTextWithTag));
+
+        // 5. 실무용 저장/전송 포맷 구성
+        // [nonce | ciphertext | tag]
+        byte[] payload = ByteBuffer
+                .allocate(nonce.length + cipherTextWithTag.length)
+                .put(nonce)
+                .put(cipherTextWithTag)
+                .array();
+
+        System.out.println("payload length = " + payload.length);
+        System.out.println("payload = [nonce | ciphertext | tag]");
+
+        // -----------------------------------------
+        // 복호화
+        // -----------------------------------------
+
+        // 6. payload에서 nonce와 [ciphertext|tag] 분리
+        ByteBuffer buffer = ByteBuffer.wrap(payload);
+
+        byte[] extractedNonce = new byte[12];
+        buffer.get(extractedNonce);
+
+        byte[] extractedCipherTextWithTag = new byte[buffer.remaining()];
+        buffer.get(extractedCipherTextWithTag);
+
+        // 7. 복호화
+        Cipher decryptCipher = Cipher.getInstance("AES/GCM/NoPadding");
+        GCMParameterSpec decryptSpec = new GCMParameterSpec(128, extractedNonce);
+        decryptCipher.init(Cipher.DECRYPT_MODE, key, decryptSpec);
+
+        byte[] decrypted = decryptCipher.doFinal(extractedCipherTextWithTag);
+
+        System.out.println("decrypted = " + new String(decrypted, StandardCharsets.UTF_8));
+    }
+}
+
 ```
 
 * nonce: 복호화 시 동일하게 사용해야 하는 값
 * ciphertext: 암호화된 데이터
 * authentication tag: 무결성 검증 값
-
-Java에서는 인증 태그가 암호문 뒤에 자동으로 붙기 때문에, 별도로 분리하지 않아도 복호화 시 함께 전달하면 됩니다.
 
 ## 5. 정리
 
