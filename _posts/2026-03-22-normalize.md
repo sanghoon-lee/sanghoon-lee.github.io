@@ -140,7 +140,7 @@ categories: 개념정리
 
 입력 데이터는 반드시 다음과 같은 흐름으로 처리되어야 합니다.
 
-```text id="p3s4cx"
+```text
 입력값
   ↓
 정규화 (normalize)
