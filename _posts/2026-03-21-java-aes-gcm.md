@@ -139,7 +139,7 @@ byte[] decrypted = cipher.doFinal(ciphertext);
 
 AES-GCM은 암호문뿐 아니라 인증 태그까지 함께 검증하기 때문에, 암호문이 조금이라도 변경되면 복호화에 실패합니다.
 
-실제로 **2. Java에서 AES-GCM 구현**에서 보여준 AesGcmExample 클래스의 코드를 아래와 같이 수정해서 암호문을 변조해보면, `AEADBadTagException` 예외가 발생하는 것을 확인할 수 있습니다.
+실제로 위에서 예제로 보여줬던 AesGcmExample 클래스의 코드 일부를 아래와 같이 수정해서 암호문을 변조해보면, `AEADBadTagException` 예외가 발생하는 것을 확인할 수 있습니다.
 
 ```java
 
