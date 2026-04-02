@@ -75,14 +75,14 @@ API Gateway → 주문 서비스 → 결제 서비스 → 외부 PG
 즉시 실패하거나 대체 응답을 반환합니다.
 
 ```text
-[Client]
+[클라이언트]
    |
    v
-[Circuit Breaker]
+[서킷 브레이커]
    |            \
    |             \ (Open 상태)
    v              X
-[Service]   (즉시 실패 / fallback)
+[서비스]   (즉시 실패 / fallback)
 ```
 
 ---
