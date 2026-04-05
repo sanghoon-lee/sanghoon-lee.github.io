@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[토이 프로젝트] Circuit Breaker + Retry를 직접 구현해보며 이해하기"
-date: 2026-01-31
+date: 2026-04-05
 categories: 토이프로젝트
 ---
 
