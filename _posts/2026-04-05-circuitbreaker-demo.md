@@ -554,17 +554,13 @@ Circuit Breaker OPEN
 
 ## 8. 트러블 슈팅: Retry가 동작하지 않았던 이유
 
-Resilience4j의 `@Retry`, `@CircuitBreaker` 어노테이션은 Spring AOP 기반으로 동작합니다.  
-따라서 프로젝트에 다음 의존성이 포함되어 있어야 실제로 재시도와 서킷 브레이커가 적용됩니다.
+Resilience4j의 `@Retry`, `@CircuitBreaker` 어노테이션은 Spring AOP 기반으로 동작합니다. 따라서 프로젝트에 다음 의존성이 포함되어 있어야 실제로 Retry와 Circuit Breaker가 적용됩니다.
 
 ```gradle
 implementation 'org.springframework.boot:spring-boot-starter-aop'
 ```
 
-AOP 의존성이 없으면 @Retry, @CircuitBreaker 어노테이션이 적용되지 않아  
-메서드가 그대로 실행되고 예외가 직접 발생하게 됩니다. 
-
-이 경우 Retry가 동작하지 않고, RestClient 호출에서 발생한 예외가 그대로 외부로 전달됩니다.
+AOP 의존성이 없으면 @Retry, @CircuitBreaker 어노테이션이 메서드에 선언되어 있어도 RestClient 호출에서 발생한 예외가 그대로 메서드 외부로 전달됩니다. 그래서 Retry와 Circuit Breaker가 동작하지 않습니다. 
 
 ---
 
