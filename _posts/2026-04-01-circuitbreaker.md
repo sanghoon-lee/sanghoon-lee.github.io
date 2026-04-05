@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[학습기록] 서킷 브레이커 패턴(Circuit Breaker Pattern)"
+title: "[학습기록] 서킷 브레이커 패턴(Circuit Breaker Pattern): 개념정리"
 date: 2026-04-01
 categories: 학습기록
 ---
