@@ -194,7 +194,7 @@ public class PaymentController {
 
 ## 4. order 패키지
 
-다음으로 `PaymentService`를 호출하는 `order` 패키지를 살펴보겠습니다.
+다음으로 `PaymentService`를 호출하는 order 패키지를 살펴보겠습니다.
 
 이 패키지에서는 `Retry`와 `Circuit Breaker`를 실제로 적용하여  
 호출 실패 시 어떤 방식으로 동작하는지를 확인할 수 있도록 구성했습니다.
@@ -253,6 +253,8 @@ public class OrderService {
 * Retry → 호출 실패 시 재시도 수행
 * Circuit Breaker → 실패가 누적되면 호출 차단
 
+fallback은 Circuit Breaker에서 처리되며, Retry는 예외 발생 시 재시도를 수행합니다.
+
 하나의 요청은 다음과 같은 순서로 처리됩니다.
 
 ```text
@@ -301,9 +303,9 @@ public class OrderController {
 
 ## 5. config 패키지
 
-`OrderService`에서는 `RestClient`를 사용하여 `PaymentService`를 호출하고 있습니다.
-
 `RestClientConfig`는 RestClient Bean을 생성하는 설정 클래스입니다.
+
+이 설정을 통해 `OrderService`에서 `PaymentService`로의 호출 경로가 구성됩니다.
 
 ```java
 @Configuration
@@ -384,6 +386,185 @@ resilience4j:
 
 설정을 통해 Retry와 Circuit Breaker의 동작을 세밀하게 조정할 수 있으며,
 실무에서는 서비스 특성에 맞게 이 값을 튜닝하는 것이 중요합니다.
+
+---
+
+## 7. 실행 및 동작 확인
+
+이제 실제로 애플리케이션을 실행하고,  
+`Retry`와 `Circuit Breaker`가 어떻게 동작하는지 확인해보겠습니다.
+
+### 7.1. 애플리케이션 실행
+
+```bash
+./gradlew bootRun
+```
+
+### 7.2. PaymentService 상태 확인
+
+```bash
+curl http://localhost:8080/payments/status
+```
+
+```json
+{
+  "paymentEnabled": true
+}
+```
+
+### 7.3. 정상 상태에서 호출
+
+```bash
+curl -X POST http://localhost:8080/orders/1001/pay
+```
+
+```json
+{
+  "success": true,
+  "orderId": "1001",
+  "message": "Payment completed",
+  "processedAt":"2026-04-05T19:19:46.857306400"
+}
+```
+정상 상태에서는 `PaymentService`가 정상적으로 호출됩니다.
+
+### 7.4. 장애 상태로 전환
+
+```bash
+curl -X POST http://localhost:8080/payments/toggle?enabled=false
+```
+
+```json
+{
+  "paymentEnabled": false,
+  "changedAt":"2026-04-05T19:24:05.503712700"
+}
+```
+
+이제 PaymentService는 항상 실패하도록 설정됩니다.
+
+### 7.5. Retry 동작 확인
+
+```bash
+curl -X POST http://localhost:8080/orders/2001/pay
+```
+
+```json
+{
+    "success":false,
+    "reason":"InternalServerError",
+    "message":"fallback: payment service temporarily unavailable",
+    "orderId":"2001"
+}
+```
+
+애플리케이션 로그를 통해 동일한 요청이 Retry 설정에 따라 3회 재시도되는 것을 확인할 수 있습니다.
+
+```text
+calling payment service. orderId=2001
+calling payment service. orderId=2001
+calling payment service. orderId=2001
+fallback executed. orderId=2001, reason=org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error: "{"timestamp":"2026-04-05T10:41:06.338+00:00","status":500,"error":"Internal Server Error","path":"/payments/process/2001"}"
+```
+
+### 7.6. Circuit Breaker OPEN 상태 확인
+
+다음과 같이 여러 번 실패 요청을 반복합니다.
+
+```bash
+curl -X POST http://localhost:8080/orders/2002/pay
+curl -X POST http://localhost:8080/orders/2003/pay
+curl -X POST http://localhost:8080/orders/2004/pay
+curl -X POST http://localhost:8080/orders/2005/pay
+```
+
+일정 횟수 이상의 실패가 누적되면 Circuit Breaker가 OPEN 상태로 전환됩니다.
+
+이후 로그는 다음과 같이 변경됩니다.
+
+```text
+fallback executed. orderId=2005, reason=io.github.resilience4j.circuitbreaker.CallNotPermittedException: CircuitBreaker 'paymentService' is OPEN and does not permit further calls
+```
+
+CallNotPermittedException이 발생하는 경우, Circuit Breaker가 OPEN 상태로 전환되어 실제 호출이 차단된 상태입니다.
+
+> CallNotPermittedException 발생 → 호출 차단
+
+이 상태에서는 더 이상 `PaymentService`를 호출하지 않고, 즉시 fallback 로직이 실행됩니다.
+
+### 7.7. HALF_OPEN → CLOSED 복구 확인
+
+다시 `PaymentService`를 정상 상태로 변경합니다.
+
+```bash
+curl -X POST http://localhost:8080/payments/toggle?enabled=true
+```
+
+설정된 시간(waitDurationInOpenState)이 지난 후 요청을 수행합니다.
+
+```bash
+curl -X POST http://localhost:8080/orders/3001/pay
+```
+
+이 시점에는 Circuit Breaker가 HALF_OPEN 상태가 되어 일부 요청만 허용됩니다.
+
+요청이 성공하면 Circuit Breaker는 CLOSED 상태로 복구됩니다.
+
+```json
+{
+  "success": true,
+  "orderId": "3001",
+  "message": "Payment completed",
+  "processedAt":"2026-04-05T19:55:54.306016500"
+}
+```
+
+### 7.8. 전체 동작 흐름 정리
+
+```text
+정상 상태
+  ↓
+장애 발생
+  ↓
+Retry 수행 (재시도)
+  ↓
+실패 누적
+  ↓
+Circuit Breaker OPEN
+  ↓
+호출 차단 (fallback)
+  ↓
+일정 시간 후 HALF_OPEN
+  ↓
+정상 응답 시 CLOSED 복구
+```
+
+### 7.9. 정리
+
+테스트를 통해 다음과 같은 점을 확인할 수 있습니다.
+
+* Retry는 일시적인 오류를 보완하기 위해 재시도를 수행한다
+* Circuit Breaker는 반복되는 실패 상황에서 호출을 차단한다
+* OPEN 상태에서는 실제 서비스 호출이 발생하지 않는다
+* 일정 시간이 지나면 HALF_OPEN 상태를 거쳐 정상 상태로 복구된다
+
+이처럼 Retry와 Circuit Breaker를 함께 적용하면 일시적인 오류는 유연하게 처리하면서도, 지속적인 장애로부터 시스템을 보호할 수 있습니다.
+
+---
+
+## 8. 트러블 슈팅: Retry가 동작하지 않았던 이유
+
+Resilience4j의 `@Retry`, `@CircuitBreaker` 어노테이션은 Spring AOP 기반으로 동작합니다.  
+따라서 프로젝트에 다음 의존성이 포함되어 있어야 실제로 재시도와 서킷 브레이커가 적용됩니다.
+
+```gradle
+implementation 'org.springframework.boot:spring-boot-starter-aop'
+```
+
+AOP 의존성이 없으면 @Retry, @CircuitBreaker 어노테이션이 적용되지 않아  
+메서드가 그대로 실행되고 예외가 직접 발생하게 됩니다. 
+
+이 경우 Retry가 동작하지 않고, RestClient 호출에서 발생한 예외가 그대로 외부로 전달됩니다.
 
 ---
 
