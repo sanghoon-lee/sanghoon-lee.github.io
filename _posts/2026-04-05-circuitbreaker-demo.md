@@ -33,5 +33,10 @@ src/main/java/sanghoon/study/circuitbreaker/demo
 
 또한 toggle API를 통해 내부 서비스의 상태를 의도적으로 장애 또는 정상 상태로 전환할 수 있도록 구성했습니다.
 
+## 관련 포스팅
+
+* [[학습기록] 서킷 브레이커 패턴(Circuit Breaker Pattern): 개념정리](https://sanghoon-lee.github.io/2026/04/01/circuitbreaker/)
 
 #CircuitBreaker #Retry #Resilience4j #SpringBoot #MSA #장애대응 #토이프로젝트
+
+
