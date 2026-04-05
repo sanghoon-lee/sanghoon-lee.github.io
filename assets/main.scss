@@ -290,12 +290,16 @@ pre code.hljs,
     color: #98c379 !important; /* 초록 계열 */
   }
 
-   .hljs-type {
+  .hljs-type {
     color: #ffb6c1 !important; /* 분홍 계열 */
   }
 
+  .hljs-selector-class {
+    color: #f8f8f2 !important; /* 밝은 계열 */
+  }
+
   .hljs-punctuation {
-    color: #98c379 !important; 
+    color: #61afef !important; /* 파란색 계열 */
   }
 }
 
