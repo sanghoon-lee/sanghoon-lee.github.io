@@ -377,6 +377,7 @@ resilience4j:
 curl http://localhost:8080/payments/status
 ```
 
+**응답**
 ```json
 {
   "paymentEnabled": true
@@ -389,6 +390,7 @@ curl http://localhost:8080/payments/status
 curl -X POST http://localhost:8080/orders/1001/pay
 ```
 
+**응답**
 ```json
 {
   "success": true,
@@ -405,6 +407,7 @@ curl -X POST http://localhost:8080/orders/1001/pay
 curl -X POST http://localhost:8080/payments/toggle?enabled=false
 ```
 
+**응답**
 ```json
 {
   "paymentEnabled": false,
@@ -420,6 +423,7 @@ curl -X POST http://localhost:8080/payments/toggle?enabled=false
 curl -X POST http://localhost:8080/orders/2001/pay
 ```
 
+**응답**
 ```json
 {
     "success":false,
@@ -431,6 +435,7 @@ curl -X POST http://localhost:8080/orders/2001/pay
 
 애플리케이션 로그를 통해 동일한 요청이 Retry 설정에 따라 3회 재시도되는 것을 확인할 수 있습니다.
 
+**로그**
 ```text
 calling payment service. orderId=2001
 calling payment service. orderId=2001
@@ -453,6 +458,7 @@ curl -X POST http://localhost:8080/orders/2005/pay
 
 이후 로그는 다음과 같이 변경됩니다.
 
+**로그**
 ```text
 fallback executed. orderId=2005, reason=io.github.resilience4j.circuitbreaker.CallNotPermittedException: CircuitBreaker 'paymentService' is OPEN and does not permit further calls
 ```
@@ -481,6 +487,7 @@ curl -X POST http://localhost:8080/orders/3001/pay
 
 요청이 성공하면 Circuit Breaker는 CLOSED 상태로 복구됩니다.
 
+**응답**
 ```json
 {
   "success": true,
