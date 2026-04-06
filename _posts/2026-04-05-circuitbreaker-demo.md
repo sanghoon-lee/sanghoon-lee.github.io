@@ -367,12 +367,14 @@ resilience4j:
 
 ### 7.1. 애플리케이션 실행
 
+**요청**
 ```bash
 ./gradlew bootRun
 ```
 
 ### 7.2. PaymentService 상태 확인
 
+**요청**
 ```bash
 curl http://localhost:8080/payments/status
 ```
@@ -386,6 +388,7 @@ curl http://localhost:8080/payments/status
 
 ### 7.3. 정상 상태에서 호출
 
+**요청**
 ```bash
 curl -X POST http://localhost:8080/orders/1001/pay
 ```
@@ -403,6 +406,7 @@ curl -X POST http://localhost:8080/orders/1001/pay
 
 ### 7.4. 장애 상태로 전환
 
+**요청**
 ```bash
 curl -X POST http://localhost:8080/payments/toggle?enabled=false
 ```
@@ -419,6 +423,7 @@ curl -X POST http://localhost:8080/payments/toggle?enabled=false
 
 ### 7.5. Retry 동작 확인
 
+**요청**
 ```bash
 curl -X POST http://localhost:8080/orders/2001/pay
 ```
@@ -447,6 +452,7 @@ fallback executed. orderId=2001, reason=org.springframework.web.client.HttpServe
 
 다음과 같이 여러 번 실패 요청을 반복합니다.
 
+**요청**
 ```bash
 curl -X POST http://localhost:8080/orders/2002/pay
 curl -X POST http://localhost:8080/orders/2003/pay
@@ -473,12 +479,14 @@ CallNotPermittedException이 발생하는 경우, Circuit Breaker가 OPEN 상태
 
 다시 `PaymentService`를 정상 상태로 변경합니다.
 
+**요청**
 ```bash
 curl -X POST http://localhost:8080/payments/toggle?enabled=true
 ```
 
 설정된 시간(waitDurationInOpenState)이 지난 후 요청을 수행합니다.
 
+**요청**
 ```bash
 curl -X POST http://localhost:8080/orders/3001/pay
 ```
