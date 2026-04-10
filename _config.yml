@@ -1,5 +1,6 @@
 plugins:
   - jekyll-sitemap
+  - jekyll-feed
 
 title: "준민아빠의 블로그"    # 블로그 제목
 description: "개발자로 살아가는 준민아빠의 기록"  # 간단 소개
@@ -7,7 +8,6 @@ description: "개발자로 살아가는 준민아빠의 기록"  # 간단 소개
 timezone: Asia/Seoul
 
 url: "https://sanghoon-lee.github.io"
-
 
 # 글 링크 형태 (선택)
 permalink: /:year/:month/:day/:title/
