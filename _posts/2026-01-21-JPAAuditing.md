@@ -81,7 +81,7 @@ JPA Auditing 기능을 사용하기 위해 부모 엔티티에는 `@EntityListen
 * 데이터 INSERT → 자동으로 생성일 기록
 * 데이터 UPDATE → 지동으로 수정일 기록
 
-하지만, 막상 데이터를 INSERT하고, H2 콘솔로 접속해서 저장된 데이터를 조회해보면 기대와 다르게 아래 그림처럼 **생성일과 수정일이 모두 `null`**로 저장되고 있었습니다. 
+하지만, 막상 데이터를 INSERT하고, H2 콘솔로 접속해서 저장된 데이터를 조회해보면 기대와 다르게 아래 그림처럼 **생성일과 수정일이 모두 null**로 저장되고 있었습니다. 
 
 <img class="main-image" src="/assets/images/h2console.png" alt="H2 콘솔 화면(생성일과 수정일이 null로 기록)">
 
