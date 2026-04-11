@@ -119,7 +119,7 @@ public class Application {
 
 이후, JPA Auditing 기능이 정상적으로 동작하는 것을 확인했습니다. 데이터를 INSERT하고, H2 콘솔로 접속해서 저장된 데이터를 조회해보면 아래 그림처럼 생성일과 수정일에 모두 정상적인 값이 저장되어 있었습니다.
 
-<img class="page-image" src="/assets/images/h2console2.png" alt="H2 콘솔 화면(생성일과 수정일이 정상적으로 기록)">
+<img class="sub-image" src="/assets/images/h2console2.png" alt="H2 콘솔 화면(생성일과 수정일이 정상적으로 기록)">
 
 ---
 
