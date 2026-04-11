@@ -2,7 +2,7 @@
 layout: post
 title: "[학습기록] 스프링 @MappedSuperClass 어노테이션"
 date: 2026-01-07
-description: MappedSuperClass 어노테이션에 대해서 공부한 내용을 정리해서 작성한 글입니다.
+description: MappedSuperClass 어노테이션에 대해서 공부한 내용을 정리한 글입니다.
 image: /assets/images/springboot.png
 categories: 학습기록
 ---
