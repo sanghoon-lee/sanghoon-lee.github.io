@@ -2,7 +2,7 @@
 layout: post
 title: "[학습기록] 스프링 @MappedSuperClass 어노테이션"
 date: 2026-01-07
-description: @MappedSuperClass 어노테이션에 대해서 공부한 내용을 정리해서 작성한 글입니다.
+description: MappedSuperClass 어노테이션에 대해서 공부한 내용을 정리해서 작성한 글입니다.
 image: /assets/images/springboot.png
 categories: 학습기록
 ---
@@ -23,8 +23,7 @@ categories: 학습기록
 > DB테이블과 연결되고, 식별자를 통해서 영속적으로 조회·관리되는 데이터의 단위입니다.
 
 **속성** 
-> 엔티티의 상태(state)를 표현하는 구성 요소로,
-DB 관점에서는 테이블의 컬럼(Column)에 해당합니다. 
+> 엔티티의 상태(state)를 표현하는 구성 요소로, DB 관점에서는 테이블의 컬럼(Column)에 해당합니다. 
 
 아래 예제처럼 회원정보라는 엔티티에는 식별자뿐만 아니라, 이름, 전화번호, 이메일주소와 같은 여러 속성이 존재할 수 있습니다.
 ```
