@@ -83,9 +83,9 @@ accountRepository.save(account);
 | 순서 | 처리 단계              | 설명                             |
 | -- | ------------------ | ------------------------------ |
 | 1  | 서비스 계층             | 엔티티 생성 및 값 설정                  |
-| 2  | 리포지토리              | `save()` 호출                    |
+| 2  | 리포지토리              | save() 호출                    |
 | 3  | JPA                | 엔티티를 DB 컬럼 값으로 변환              |
-| 4  | AttributeConverter | `convertToDatabaseColumn()` 호출 |
+| 4  | AttributeConverter | convertToDatabaseColumn() 호출 |
 | 5  | CryptoEngine       | 평문 → 암호문 변환                    |
 | 6  | DB                 | 암호문이 컬럼에 저장                    |
 
@@ -127,11 +127,11 @@ String phoneNumber = account.getPhoneNumber();
 
 | 순서 | 처리 단계                | 설명                              |
 | -- | -------------------- | ------------------------------- |
-| 1  | 리포지토리                | `findById()` 호출                 |
+| 1  | 리포지토리                | findById() 호출                 |
 | 2  | JPA                  | DB로부터 컬럼 값 조회                   |
 | 3  | JPA                  | 컬럼 값을 엔티티 필드로 매핑                |
-| 4  | `AttributeConverter` | `convertToEntityAttribute()` 호출 |
-| 5  | `CryptoEngine`       | 암호문 → 평문 변환                     |
+| 4  | AttributeConverter | convertToEntityAttribute() 호출 |
+| 5  | CryptoEngine       | 암호문 → 평문 변환                     |
 | 6  | 엔티티                  | 복호화된 평문 값 설정                    |
 
 
