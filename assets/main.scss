@@ -246,71 +246,97 @@ pre code.hljs,
    화이트 모드 - 코드 블록 스타일링
    ================================ */
 @media (prefers-color-scheme: light) {
+  /* 코드 블록 공통 */
   pre {
-    background-color: #353b45 !important; /* 밝은 어두운 배경 */
-    color: #f8f8f2 !important;            /* 밝은 글씨 색상 */
-    border: 1px solid #d1d5db;
+    background: #1f2430 !important;
+    color: #d8dee9 !important;
+    border: 1px solid #2f3645;
+    border-radius: 12px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    line-height: 1.65;
+    font-size: 0.95rem;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
   }
 
-  /* 코드 하이라이팅 영역 */
+  /* 코드 내부 */
   pre code {
-    background-color: transparent !important;
+    background: transparent !important;
     color: inherit !important;
+    font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
   }
 
-  .hljs-built_in{
-    color: #61afef !important; /* 파란색 계열 */
+  /* 기본 텍스트 */
+  .hljs {
+    color: #d8dee9;
+    background: transparent !important;
   }
 
-  .hljs-meta,
-  .hljs-keyword {
-    color: #82aaff !important;  /* 차분한 파랑 계열 */
+  /* 키워드, 제어문 */
+  .hljs-keyword,
+  .hljs-meta {
+    color: #84a0ff !important;
     font-weight: 600;
   }
 
+  /* 타입, 클래스 계열 */
+  .hljs-built_in,
+  .hljs-type,
+  .hljs-title.class_,
+  .hljs-title.class {
+    color: #73daca !important;
+  }
+
+  /* 함수명 */
+  .hljs-title,
+  .hljs-function {
+    color: #ffd580 !important;
+    font-weight: 600;
+  }
+
+  /* 문자열 */
   .hljs-string {
-    color: #98c379 !important; /* 초록 계열 */
+    color: #a3d977 !important;
   }
 
-  .hljs-section {
-    color: #98c379 !important; /* 초록 계열 */
+  /* 숫자, 리터럴 */
+  .hljs-number,
+  .hljs-literal {
+    color: #f5a97f !important;
   }
 
-  .hljs-comment {
-    color: #a0a1a7 !important; /* 회색 계열 */
+  /* 주석 */
+  .hljs-comment,
+  .hljs-quote {
+    color: #7f8c98 !important;
     font-style: italic;
   }
 
-  .hljs-title,
-  .hljs-function {
-    color: #d19a66 !important; /* 따뜻한 주황/갈색 계열 */
-    font-weight: 600;
+  /* 속성명, 태그명 */
+  .hljs-attr,
+  .hljs-name,
+  .hljs-selector-tag {
+    color: #7dcfff !important;
   }
 
-  /* hljs-name (함수명, 클래스명 등) */
-  .hljs-name {
-    color: #4fd6b5 !important; /* 청록색 계열 */
+  /* 섹션, 선택자 */
+  .hljs-section,
+  .hljs-selector-class,
+  .hljs-selector-id {
+    color: #bb9af7 !important;
   }
 
-  /* hljs-attr (HTML 속성명) */
-  .hljs-attr {
-    color: #61afef !important; /* 파란색 계열 */
+  /* 변수, 파라미터 */
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-params {
+    color: #e6b3ff !important;
   }
 
-  .hljs-number {
-    color: #98c379 !important; /* 초록 계열 */
-  }
-
-  .hljs-type {
-    color: #ffb6c1 !important; /* 분홍 계열 */
-  }
-
-  .hljs-selector-class {
-    color: #61afef !important; /* 파란색 계열 */
-  }
-
-  .hljs-punctuation {
-    color: #98c379 !important; 
+  /* 구두점은 너무 튀지 않게 */
+  .hljs-punctuation,
+  .hljs-operator {
+    color: #aab4c3 !important;
   }
 }
 
