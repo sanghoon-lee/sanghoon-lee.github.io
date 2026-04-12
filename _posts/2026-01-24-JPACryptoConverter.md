@@ -88,7 +88,7 @@ JPA를 사용하는 환경에서 통제 가능한 범위 내에서 안전하고 
 
 <img class="main-image" src="/assets/images/jpa.jpg" alt="Spring Data JPA">
 
-이어지는 포스팅에서 어떻게 구현했는지 자세히 살펴보도록 하겠습니다.
+다음 포스팅에서는 어떤 구현 방식을 선택했는지 살펴보도록 하겠습니다.
 
 ---
 
