@@ -3,7 +3,7 @@ layout: post
 title: "[토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민"
 date: 2026-01-24
 description: 애플리케이션 레벨에서 DB 컬럼 데이터를 암호화하는 토이프로젝트를 수행하는 과정을 정리한 글입니다. 1/5
-image: /assets/images/springboot.png
+image: /assets/images/jpa.jpg
 categories: 토이프로젝트
 ---
 
@@ -86,11 +86,13 @@ DB 레벨 암호화와 애플리케이션 레벨 암호화의 차이는 다음�
 
 JPA를 사용하는 환경에서 통제 가능한 범위 내에서 안전하고 일관된 애플리케이션 레벨 암호화를 직접 구현해보고 싶었습니다. DB에 저장되는 특정 컬럼에 대해 애플리케이션이 책임지고 데이터의 암·복호화를 수행하는 핵심 기능뿐만 아니라, 실무에서 마주칠 수 있는 여러 제약까지 고려해서 설계에 반영해보는 것이 목표였습니다.
 
+<img class="main-image" src="/assets/images/jpa.jpg" alt="Spring Data JPA">
+
 이어지는 포스팅에서 어떻게 구현했는지 자세히 살펴보도록 하겠습니다.
 
 ---
 
-## 포스팅 시리즈
+## 5. 포스팅 시리즈
 
 * [토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민
 * [[토이 프로젝트] DB 컬럼 암호화: (2) AttributeConverter를 선택한 이유](https://sanghoon-lee.github.io/2026/01/25/JPACryptoConverter2/)
@@ -100,7 +102,7 @@ JPA를 사용하는 환경에서 통제 가능한 범위 내에서 안전하고 
 
 ---
 
-## 참고: 소스 코드 
+## 6. 소스 코드 
 * [JPA Crypto Conveter](https://github.com/sanghoon-lee/jpa-crypto-converter)
 
 ---
