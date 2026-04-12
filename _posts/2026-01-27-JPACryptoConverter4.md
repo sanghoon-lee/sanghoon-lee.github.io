@@ -124,7 +124,7 @@ public class StringEncryptConverter extends BaseEncryptConverter<String>{
 
 `BaseEncryptConverter`와 `StringEncryptConverter`이 포함된 crypto.converter 패키지의 구조는 다음과 같습니다.
 
-```text
+```nohighlight
 ├─ crypto
 │  ├─ converter
 │  │  ├─ BaseEncryptConverter.java   
@@ -203,7 +203,7 @@ public class AesGcmCryptoEngine implements CryptoEngine{
 
 `CryptoEngine`와 `AesGcmCryptoEngine`이 포함된 crypto.core 패키지의 구조는 다음과 같습니다.
 
-```
+```nohighlight
 ├─ crypto
 │  ├─ converter
 │  ├─ core
@@ -256,7 +256,7 @@ public class PropertyKeyProvider implements KeyProvider{
 
 `KeyProvider`와 `PropertyKeyProvider`가 포함된 crypto.key 패키지의 구조는 다음과 같습니다.
 
-```
+```nohighlight
 ├─ crypto
 │  ├─ converter
 │  ├─ core
