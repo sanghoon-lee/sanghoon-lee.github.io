@@ -48,7 +48,7 @@ categories: 토이프로젝트
 
 ---
 
-## 3. JPA AttributeConverter를 활용한 구현 방식의 선택
+## 3. AttributeConverter를 활용한 구현 방식의 선택
 
 지금까지 검토한 결과를 바탕으로 암·복호화 로직은 서비스 계층도 엔티티 내부도 아닌 위치에 두는 것이 가장 적절하다는 결론에 도달할 수 있었습니다. 
 
@@ -60,7 +60,23 @@ categories: 토이프로젝트
 
 이렇게 관점을 바꿔보면, 암·복호화 로직은 엔티티가 DB에 저장되거나 조회되는 바로 그 시점에 실행되는 것이 가장 자연스럽다고 판단할 수 있었습니다.
 
-JPA의 `AttributeConverter` 인터페이스는 DB에 저장되거나 조회되는 시점에 개입할 수 있도록 확장 포인트를 제공하고 있습니다. 그래서 가장 적합한 선택지라고 생각했습니다.
+JPA의 `AttributeConverter` 인터페이스는 DB에 저장되거나 조회되는 시점에 개입할 수 있도록 확장 포인트를 제공하고 있습니다. 
+
+암호화는 개발자가 “신경 써서 적용하는 기능”이 아니라, 구조적으로 빠질 수 없게 만들어야 하는 기능입니다.
+
+그 관점에서 `AttributeConverter`는 암호화를 가장 자연스럽게 강제할 수 있는 방법입니다. 그래서 가장 적합한 선택지라고 생각했습니다.
+
+---
+
+## 4. AttributeConverter의 한계
+
+다만 AttributeConverter 방식은 다음과 같은 한계도 존재합니다.
+
+- WHERE 조건에서 직접 사용하기 어렵다
+- LIKE 검색이 불가능하다
+- 인덱스를 활용하기 어렵다
+
+따라서 조회 패턴에 따라서는 별도의 설계가 필요합니다.
 
 <img class="main-image" src="/assets/images/jpa.jpg" alt="Spring Data JPA">
 
@@ -68,7 +84,7 @@ JPA의 `AttributeConverter` 인터페이스는 DB에 저장되거나 조회되�
 
 ---
 
-## 4. 포스팅 시리즈
+## 5. 포스팅 시리즈
 
 * [[토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민](https://sanghoon-lee.github.io/2026/01/24/JPACryptoConverter/)
 * [토이 프로젝트] DB 컬럼 암호화: (2) AttributeConverter를 선택한 이유
@@ -78,7 +94,7 @@ JPA의 `AttributeConverter` 인터페이스는 DB에 저장되거나 조회되�
 
 ---
 
-## 5. 소스 코드 
+## 6. 소스 코드 
 * [JPA Crypto Conveter](https://github.com/sanghoon-lee/jpa-crypto-converter)
 
 ---

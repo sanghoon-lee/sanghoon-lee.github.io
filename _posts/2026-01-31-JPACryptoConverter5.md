@@ -163,9 +163,10 @@ public String convertToEntityAttribute(String dbData) {
 
 * `WHERE phone_number = '010-1234-5678'`
 * `LIKE`, `PREFIX` 검색
+* `JOIN`으로 검색 조건 연결
 * 인덱스를 활용한 동등 비교 검색
 
-이는 애플리케이션 레벨 암호화 방식의 구조적인 특성으로, JPA의 `AttributeConverter`로는 해결할 수 없는 영역입니다.
+이는 애플리케이션 레벨 암호화 방식의 구조적인 특성으로 JPA의 `AttributeConverter`로는 해결할 수 없는 영역입니다.
 
 즉, **암호화된 컬럼은 조회 조건으로 사용하기 어렵다**는 점은 명확한 한계였습니다. 
 
@@ -173,9 +174,14 @@ public String convertToEntityAttribute(String dbData) {
 
 ### 2.2. 토이 프로젝트에서의 해결방식
 
-이러한 한계를 극복하기 위해서, 이번 토이 프로젝트에서는 암호문과 함께 **조회용 식별자 역할을 하는 해시 값**을 별도로 저장하는 방식을 선택했습니다.
+이를 해결하기 위해 다음과 같은 전략을 사용했습니다.
 
-그래서 암호화된 전화번호(`phoneNumber`)의 조회용 식별자로 사용될 해시값(`phoneNumberHash`)이 엔티티에 추가되었습니다. 
+- 입력값 정규화
+- 해시 컬럼 별도 저장
+- 조회는 해시 기준으로 수행
+- 암호화 컬럼은 실제 데이터 보호 용도로 사용
+
+다음과 같이 엔티티에 암호화된 전화번호(`phoneNumber`)의 조회용 식별자로 사용될 해시값(`phoneNumberHash`)을 추가했습니다. 
 
 | 필드명 | 데이터 타입 | 내용 | 암호화 대상 |
 | --- | --- | --- | ---- |
@@ -186,11 +192,13 @@ public String convertToEntityAttribute(String dbData) {
 | sex | int | 성별 - 1:남성,0:여성 | X |
 | age | int | 나이 | X |
 
+암호화는 데이터 보호를 위한 기능이지만, 조회 방식까지 함께 설계하지 않으면 실제 서비스에서는 사용하기 어렵습니다.
+
 ---
 
 ### 2.3. Account 클래스 코드 변경
 
-Account 엔티티의 최종 정의는 다음과 같습니다.
+`Account` 엔티티의 변경된 코드는 다음과 같습니다.
 
 ```java
 @Getter
