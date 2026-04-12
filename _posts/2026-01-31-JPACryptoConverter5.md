@@ -2,11 +2,13 @@
 layout: post
 title: "[토이 프로젝트] DB 컬럼 암호화: (5) 동작의 흐름 및 제약사항"
 date: 2026-01-31
+description: 애플리케이션 레벨에서 DB 컬럼 데이터를 암호화하는 토이프로젝트를 수행하는 과정을 정리한 글입니다. 5/5
+image: /assets/images/jpa.jpg
 categories: 토이프로젝트
 ---
 
 <style>
-.main-image {
+.sub-image {
   width: 100%;
   max-width: 800px;
   height: auto;
@@ -16,13 +18,15 @@ categories: 토이프로젝트
 }
 </style>
 
-지난 포스팅까지 다룬 내용을 바탕으로,
-이번 포스팅에서는 실제 코드가 어떤 흐름으로 동작하는지를
-차례대로 따라가 보려고 합니다.
+지난 포스팅에서 핵심 구현체 위주로 애플리케이션 레벨 암호화가 어떻게 동작하는지 살펴봤습니다. 이번에는 엔티티에서 암호화 대상이 되는 필드는 어떻게 정의하는지 알아보도록 하겠습니다.
 
-먼저 엔티티가 어떻게 정의되어 있으며, 그 중에서 어떤 필드가 암호화 대상인지를 살펴보도록 하겠습니다.
+그리고 이렇게 구현한 애플리케이션 레벨 암호화의 제약사항은 무엇인지 설명하는 것으로 이번 포스팅 시리즈를 마무리하려고 합니다.
 
-## 엔티티의 정의
+---
+
+## 1. 엔티티의 동작
+
+### 1.1. 엔티티의 정의
 
 | 필드명 | 데이터 타입 | 내용 | 암호화 대상 |
 | --- | --- | --- | ---- |
@@ -56,7 +60,9 @@ public class Account extends BaseEntity {
 }
 ```
 
-## 엔티티 저장 시 암호화 흐름
+---
+
+### 1.2. 엔티티 저장 시 암호화 흐름
 
 JPA를 사용하면 서비스 계층에서는 엔티티를 DB에 저장하면서 암호화를 의식할 필요가 없습니다. 아래 코드처럼 엔티티를 생성해서 값을 설정하고, save() 메서드를 호출하는 것으로 끝입니다.
 
@@ -97,12 +103,13 @@ public String convertToDatabaseColumn(String attribute) {
 }
 ```
 
-이 메서드는 엔티티에 설정된 평문을 입력값으로 받아,
-CryptoEngine을 통해 암호화를 수행한 뒤 암호문 값을 반환합니다.
+이 메서드는 엔티티에 설정된 평문을 입력값으로 받아, CryptoEngine을 통해 암호화를 수행한 뒤 암호문 값을 반환합니다.
 
 그 결과로 서비스 계층에서는 평문을 다루지만, DB에는 암호문이 저장될 수 있습니다.
 
-## 엔티티 조회 시 복호화 흐름
+---
+
+### 1.3. 엔티티 조회 시 복호화 흐름
 
 서비스 계층에서는 조회 시에도 복호화를 전혀 의식할 필요가 없습니다. 아래 코드처럼 리포지토리를 통해 엔티티를 조회하면,
 엔티티의 필드에는 평문 값이 설정된 상태로 반환됩니다.
@@ -130,9 +137,7 @@ String phoneNumber = account.getPhoneNumber();
 
 저장과 마찬가지로, 조회 시 흐름에서도 핵심은 4번 단계입니다.
 
-phoneNumber 필드는 @Convert로 선언되어 있기 때문에,
-DB에서 값을 읽은 직후 StringEncryptConverter의
-convertToEntityAttribute() 메서드가 호출됩니다.
+phoneNumber 필드는 @Convert로 선언되어 있기 때문에, DB에서 값을 읽은 직후 StringEncryptConverter의 convertToEntityAttribute() 메서드가 호출됩니다.
 
 **StringEncryptConverter의 convertToEntityAttribute() 메서드**
 ```java
@@ -142,32 +147,29 @@ public String convertToEntityAttribute(String dbData) {
 }
 ```
 
-이 메서드는 DB로부터 조회된 암호문을 입력값으로 받아,
-CryptoEngine을 통해 복호화를 수행한 뒤 평문 값을 반환합니다.
+이 메서드는 DB로부터 조회된 암호문을 입력값으로 받아, CryptoEngine을 통해 복호화를 수행한 뒤 평문 값을 반환합니다.
 
-그 결과로 서비스 계층이나 도메인 모델에서는
-암호화 여부를 전혀 의식하지 않고도, DB로부터
-항상 평문 데이터를 조회할 수 있습니다.
+그 결과로 서비스 계층이나 도메인 모델에서는 암호화 여부를 전혀 의식하지 않고도, DB로부터 항상 평문 데이터를 조회할 수 있습니다.
 
-## 암호화된 컬럼에서 조회의 한계
+---
 
-애플리케이션 레벨에서 암·복호화를 자동화하는 흐름은
-비교적 깔끔하게 구현할 수 있었습니다. 하지만, 이 방식에도 명확한 한계가 존재합니다.
+## 2. 제약사항
 
-전화번호(`phoneNumber`)는 DB에 암호문 형태로 저장되기 때문에,
-다음과 같은 조회 조건을 직접 사용할 수 없습니다.
+### 2.1. 암호화된 컬럼에서 조회의 한계
+
+애플리케이션 레벨에서 암·복호화를 자동화하는 흐름은 비교적 깔끔하게 구현할 수 있었습니다. 하지만 이 방식에도 명확한 한계가 존재합니다.
+
+전화번호(`phoneNumber`)는 DB에 암호문 형태로 저장되기 때문에, 다음과 같은 조회 조건을 직접 사용할 수 없습니다.
 
 * `WHERE phone_number = '010-1234-5678'`
 * `LIKE`, `PREFIX` 검색
 * 인덱스를 활용한 동등 비교 검색
 
-이는 애플리케이션 레벨 암호화 방식의 구조적인 특성으로,
-JPA의 `AttributeConverter`로는 해결할 수 없는 영역입니다.
+이는 애플리케이션 레벨 암호화 방식의 구조적인 특성으로, JPA의 `AttributeConverter`로는 해결할 수 없는 영역입니다.
 
-즉, **암호화된 컬럼은 조회 조건으로 사용하기 어렵다**는 점은
-명확한 한계였습니다. 
+즉, **암호화된 컬럼은 조회 조건으로 사용하기 어렵다**는 점은 명확한 한계였습니다. 
 
-### 토이 프로젝트에서의 해결방식
+### 2.2. 토이 프로젝트에서의 해결방식
 
 이러한 한계를 극복하기 위해서, 이번 토이 프로젝트에서는 암호문과 함께 **조회용 식별자 역할을 하는 해시 값**을 별도로 저장하는 방식을 선택했습니다.
 
@@ -276,7 +278,9 @@ public class Account extends BaseEntity{
 * 해시 값 유출 시의 영향 범위
 * 해시 컬럼에도 개인정보로 분류될 가능성
 
-## 테스트 결과
+---
+
+### 2.3. 테스트 결과
 
 **API를 통해 설정된 엔티티의 값을 DB에 저장**
 
@@ -330,24 +334,42 @@ Response Body:
 
 **H2 콘솔에서 직접 DB에 저장된 값을 조회**
 
-<img class="main-image" src="/assets/images/h2console_log.png" alt="H2 콘솔 화면">
+<img class="sub-image" src="/assets/images/h2console_log.png" alt="H2 콘솔 화면">
 
-## 마무리
+---
 
-DB의 데이터 처리 과정에 암·복호화 로직의 실행을 자연스럽게 통합시킬 수 있도록 확장 포인트를 제공하는 `AttributeConverter`를 활용해서 애플리케이션 레벨 암호화를 간단하게 구현할 수 있었습니다. 하지만, 높은 수준의 보안성이 보장되는 것은 아닙니다. 그래서 실무에 적용하기 위해서는 암호화 알고리즘/키 길이/IV 처리/안전한 키 저장 등에 대한 충분한 검토가 필요합니다.
+## 3. 마무리
 
-## 포스팅 시리즈
+확장 포인트를 제공하는 `AttributeConverter`를 활용히면 애플리케이션 레벨 암호화를 간단하게 구현할 수 있었습니다. 
+
+이러한 구현 방식으로 DB의 데이터 처리 과정에 암·복호화 로직의 실행은 자연스럽게 통합시킬 수 있습니다. 하지만, 높은 수준의 보안성이 보장되는 것은 아닙니다. 
+
+<img class="main-image" src="/assets/images/jpa.jpg" alt="Spring Data JPA">
+
+그래서 실무에 적용하기 위해서는 암호화 알고리즘/키 길이/IV 처리/안전한 키 저장 등에 대한 충분한 검토가 필요할 것 같습니다.
+
+---
+
+## 4. 포스팅 시리즈
 
 * [[토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민](https://sanghoon-lee.github.io/2026/01/24/JPACryptoConverter/)
 * [[토이 프로젝트] DB 컬럼 암호화: (2) AttributeConverter를 선택한 이유](https://sanghoon-lee.github.io/2026/01/25/JPACryptoConverter2/)
-* [[토이 프로젝트] DB 컬럼 암호화: (3) 프로젝트 구조 살펴보기](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
-* [[토이 프로젝트] DB 컬럼 암호화: (4) 코드 살펴보기](https://sanghoon-lee.github.io/2026/01/27/JPACryptoConverter4/)
+* [[토이 프로젝트] DB 컬럼 암호화: (3) 프로젝트 구조](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
+* [[토이 프로젝트] DB 컬럼 암호화: (4) 핵심 구현체](https://sanghoon-lee.github.io/2026/01/27/JPACryptoConverter4/)
 * [토이 프로젝트] DB 컬럼 암호화:  (5) 동작의 흐름 및 제약사항
 
-## 참고: 소스 코드 
+---
+
+## 5. 소스 코드 
 * [JPA Crypto Conveter](https://github.com/sanghoon-lee/jpa-crypto-converter)
 
-## 관련 포스팅
+---
+
+## 6. 관련 포스팅
 
 * [[트러블슈팅] 스프링에서 JPA Auditing이 동작하지 않는 문제 - @EnableJpaAuditing 빠진 경우](https://sanghoon-lee.github.io/2026/01/21/JPAAuditing/)
 * [[학습기록] 스프링 @MappedSuperClass 어노테이션](https://sanghoon-lee.github.io/2026/01/07/MappedSuperClass/)
+
+---
+
+#JPA #DB #암호화 #보안 #토이프로젝트 #AttributeConverter #구현체

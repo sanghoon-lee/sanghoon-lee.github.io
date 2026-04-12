@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[토이 프로젝트] DB 컬럼 암호화: (4) 코드 살펴보기"
+title: "[토이 프로젝트] DB 컬럼 암호화: (4) 핵심 구현체"
 date: 2026-01-27
 description: 애플리케이션 레벨에서 DB 컬럼 데이터를 암호화하는 토이프로젝트를 수행하는 과정을 정리한 글입니다. 4/5
 image: /assets/images/jpa.jpg
@@ -33,7 +33,7 @@ public interface AttributeConverter<X, Y> {
 
 | 구분 | 데이터 저장 시 | 데이터 조회 시 |
 | --- | --- | --- |
-| 호출 메서드 | `convertToDatabaseColumn()` | `convertToEntityAttribute()` |
+| 호출 메서드 | convertToDatabaseColumn() | convertToEntityAttribute() |
 | 변환 방향 | 평문 → 암호문 | 암호문 → 평문 |
 | 호출 시점 | DB에 저장하기 직전 | DB에서 읽은 직후 |
 | 결과 | DB에는 암호문 저장 | 엔티티에는 평문 설정 |
@@ -293,7 +293,7 @@ crypto.base64-key=[BASE64로 인코딩된 키 값]
 * [[토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민](https://sanghoon-lee.github.io/2026/01/24/JPACryptoConverter/)
 * [[토이 프로젝트] DB 컬럼 암호화: (2) AttributeConverter를 선택한 이유](https://sanghoon-lee.github.io/2026/01/25/JPACryptoConverter2/)
 * [[토이 프로젝트] DB 컬럼 암호화: (3) 프로젝트 구조](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
-* [토이 프로젝트] DB 컬럼 암호화: (4) 코드 살펴보기
+* [토이 프로젝트] DB 컬럼 암호화: (4) 핵심 구현체
 * [[토이 프로젝트] DB 컬럼 암호화:  (5) 동작의 흐름 및 제약사항](https://sanghoon-lee.github.io/2026/01/31/JPACryptoConverter5/)
 
 ---
