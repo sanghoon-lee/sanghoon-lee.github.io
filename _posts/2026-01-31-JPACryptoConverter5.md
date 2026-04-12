@@ -161,9 +161,9 @@ public String convertToEntityAttribute(String dbData) {
 
 전화번호(`phoneNumber`)는 DB에 암호문 형태로 저장되기 때문에, 다음과 같은 조회 조건을 직접 사용할 수 없습니다.
 
-* `WHERE phone_number = '010-1234-5678'`
+* 평문값을 이용한 검색(예: `WHERE phone_number = '010-1234-5678'`)
 * `LIKE`, `PREFIX` 검색
-* `JOIN`으로 검색 조건 연결
+* `JOIN`으로 연결된 검색
 * 인덱스를 활용한 동등 비교 검색
 
 이는 애플리케이션 레벨 암호화 방식의 구조적인 특성으로 JPA의 `AttributeConverter`로는 해결할 수 없는 영역입니다.
