@@ -17,6 +17,8 @@ permalink: /career/
     - 금융/보안 앱 개발 및 유지보수
 * 기술스택: Java Springboot, Redis, RabbitMQ, Kafka, Hadoop
 
+---
+
 ### (주)에어릭스: 포스코 협력사(2020.08~2024.07)
 * 기업구분: 비상장
 * 기업규모(직원수/매출액): 약350명/1,200억
@@ -27,6 +29,8 @@ permalink: /career/
     - 정부R&D과제수행
 * 기술스택: Python, NodeJS, Mosquitto, Redis, Kafka, React
 
+---
+
 ### 모비코어(주): 스타트업(2019.02~2020.07)
 * 기업구분: 비상장
 * 기업규모(직원수/매출액): 3명/6억
@@ -35,6 +39,8 @@ permalink: /career/
     - 프로젝트 관리(PM)
     - 소프트웨어 개발용역 사업관리
 * 기술스택: Java Springboot, JavaCard
+
+---
 
 ### 한솔시큐어(주): 한솔그룹 IT계열사(2002.01~2019.02)
 * 기업구분: 코스닥 상장
