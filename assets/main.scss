@@ -191,6 +191,11 @@ pre code.hljs,
     font-weight: 600;
   }
 
+  .hljs-built_in{
+    color: #61afef !important; /* 파란색 계열 */
+  }
+
+
   .hljs-string {
     color: #98c379 !important; /* 초록 계열 */
   }
@@ -250,6 +255,10 @@ pre code.hljs,
   pre code {
     background-color: transparent !important;
     color: inherit !important;
+  }
+
+  .hljs-built_in{
+    color: #61afef !important; /* 파란색 계열 */
   }
 
   .hljs-keyword {
