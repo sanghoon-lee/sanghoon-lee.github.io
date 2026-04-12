@@ -72,7 +72,7 @@ JPA의 `AttributeConverter` 인터페이스는 DB에 저장되거나 조회되�
 
 * [[토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민](https://sanghoon-lee.github.io/2026/01/24/JPACryptoConverter/)
 * [토이 프로젝트] DB 컬럼 암호화: (2) AttributeConverter를 선택한 이유
-* [[토이 프로젝트] DB 컬럼 암호화: (3) 프로젝트 구조 살펴보기](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
+* [[토이 프로젝트] DB 컬럼 암호화: (3) 프로젝트 구조](https://sanghoon-lee.github.io/2026/01/26/JPACryptoConverter3/)
 * [[토이 프로젝트] DB 컬럼 암호화: (4) 코드 살펴보기](https://sanghoon-lee.github.io/2026/01/27/JPACryptoConverter4/)
 * [[토이 프로젝트] DB 컬럼 암호화:  (5) 동작의 흐름 및 제약사항](https://sanghoon-lee.github.io/2026/01/31/JPACryptoConverter5/)
 
