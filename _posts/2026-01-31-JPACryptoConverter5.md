@@ -169,6 +169,8 @@ public String convertToEntityAttribute(String dbData) {
 
 즉, **암호화된 컬럼은 조회 조건으로 사용하기 어렵다**는 점은 명확한 한계였습니다. 
 
+---
+
 ### 2.2. 토이 프로젝트에서의 해결방식
 
 이러한 한계를 극복하기 위해서, 이번 토이 프로젝트에서는 암호문과 함께 **조회용 식별자 역할을 하는 해시 값**을 별도로 저장하는 방식을 선택했습니다.
@@ -183,6 +185,10 @@ public String convertToEntityAttribute(String dbData) {
 | userName | String | 이름(예 : 홍길동) | X |
 | sex | int | 성별 - 1:남성,0:여성 | X |
 | age | int | 나이 | X |
+
+---
+
+### 2.3. Account 클래스 코드 변경
 
 Account 엔티티의 최종 정의는 다음과 같습니다.
 
@@ -235,6 +241,10 @@ public class Account extends BaseEntity{
 * `WHERE phone_number_hash = ?` 조건으로 정확한 조회 가능
 * 유니크 인덱스를 통한 중복 전화번호 방지 가능
 
+---
+
+### 2.4. 서비스 계층의 코드 변경
+
 서비스 계층에서도 입력받은 전화번호의 해시값을 계산해서 조회할 수 있도록 아래처럼 코드를 작성했습니다.
 
 ```java
@@ -280,7 +290,7 @@ public class Account extends BaseEntity{
 
 ---
 
-### 2.3. 테스트 결과
+### 2.5. 테스트 결과
 
 **API를 통해 설정된 엔티티의 값을 DB에 저장**
 
