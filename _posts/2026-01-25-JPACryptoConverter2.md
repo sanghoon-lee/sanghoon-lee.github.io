@@ -76,3 +76,5 @@ JPA의 `AttributeConverter` 인터페이스는 DB에 저장되거나 조회되�
 
 ## 5. 소스 코드 
 * [JPA Crypto Conveter](https://github.com/sanghoon-lee/jpa-crypto-converter)
+
+#JPA #DB #암호화 #보안 #토이프로젝트 #AttributeConverter
