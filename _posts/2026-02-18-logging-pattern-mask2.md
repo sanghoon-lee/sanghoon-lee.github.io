@@ -301,6 +301,8 @@ public final class RuleSpecParser {
 
 ## 8. 전체 흐름 정리
 
+<img class="main-image" src="/assets/images/security.png" alt="민감 정보">
+
 지금까지 살펴본 코드의 전체 흐름을 한 번 정리해보겠습니다.
 
 1. `logback.xml` 파일에 정의된 마스킹 규칙(Rule)과 Trigger 키워드를 조회
