@@ -295,7 +295,7 @@ public final class RuleSpecParser {
 }
 ```
 
-이렇게 생성된 Rule은 Pattern으로 컴파일되어 DefaultSensitiveStringSanitizer 객체에 전달됩니다.
+이렇게 생성된 Rule 객체는 Pattern으로 컴파일되어 DefaultSensitiveStringSanitizer 객체에 전달됩니다.
 
 ---
 
@@ -307,7 +307,7 @@ public final class RuleSpecParser {
 
 1. `logback.xml` 파일에 정의된 마스킹 규칙(Rule)과 Trigger 키워드를 조회
 2. Logback 초기화 과정에서 **MaskingPatternLayout.start()** 메서드 호출
-3. **RuleSpecParser.parse()** 메서드가 호출되면서 객체 마스킹 규칙 문자열이 `Rule` 객체로 변환
+3. **RuleSpecParser.parse()** 메서드가 호출되면서 객체 마스킹 규칙 문자열이 Rule 객체로 변환
 4. DefaultSensitiveStringSanitizer 객체 생성
 5. 로그 출력 시 **MaskingPatternLayout.doLayout()** 메서드 호출
 6. Trigger 1차 필터링
