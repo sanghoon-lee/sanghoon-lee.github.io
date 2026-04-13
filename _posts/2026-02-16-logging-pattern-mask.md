@@ -159,4 +159,4 @@ sanghoon.study.logging.mask
 
 ---
 
-#민감정보 #로그 #마스킹 #문자열 #토이프로젝트
+#민감정보 #로그 #마스킹 #문자열 #Logback #PatternLayout #토이프로젝트
