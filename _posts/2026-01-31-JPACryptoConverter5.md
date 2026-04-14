@@ -2,21 +2,10 @@
 layout: post
 title: "[토이 프로젝트] DB 컬럼 암호화: (5) 동작의 흐름 및 제약사항"
 date: 2026-01-31
-description: 애플리케이션 레벨에서 DB 컬럼 데이터를 암호화하는 토이프로젝트를 수행하는 과정을 정리한 글입니다. 5/5
+description: 애플리케이션 레벨에서 DB 컬럼 데이터를 암호화하는 토이 프로젝트를 수행하는 과정을 정리한 글입니다. 5/5
 image: /assets/images/jpa.jpg
 categories: 토이프로젝트
 ---
-
-<style>
-.sub-image {
-  width: 100%;
-  max-width: 800px;
-  height: auto;
-  margin-bottom: 1.4rem;
-  border-radius: 12px;
-  display: block;
-}
-</style>
 
 지난 포스팅에서 핵심 구현체 위주로 애플리케이션 레벨 암호화가 어떻게 동작하는지 살펴봤습니다. 이번에는 엔티티에서 암호화 대상이 되는 필드는 어떻게 정의하는지 알아보도록 하겠습니다.
 
