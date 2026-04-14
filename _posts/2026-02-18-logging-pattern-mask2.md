@@ -9,7 +9,7 @@ categories: 토이프로젝트
 
 지난 포스팅에서 출력 문자열을 가공하는 방식으로 로그 마스킹을 구현하기로 결정한 이유에 대해서 기술했습니다. 
 
-이 방식의 구현을 위해서는 Logback의 PatternLayout을 확장해야만 합니다.
+이제부터는 이 방식의 구현을 위해 어떻게 Logback의 PatternLayout을 확장했는지 코드를 중심으로 살펴보도록 하겠습니다.
 
 <img class="main-image" src="/assets/images/logback.png" alt="LOGBACK">
 
