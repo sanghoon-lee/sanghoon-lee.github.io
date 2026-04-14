@@ -11,11 +11,11 @@ ChatGPT의 도움을 받아서 GitHub Pages + Minima 테마로 심플한 블로�
 
 <img class="main-image" src="/assets/images/githubpages.jpg" alt="GitHub Pages">
 
-2-3년 전쯤 회사에서 기술 블로그를 GitHub에 만들면서 고생했던 기억이 아직도 생생합니다.
+2-3년 전쯤 회사에서 GitHub에 기술 블로그를 만들면서 고생했던 기억이 아직도 생생합니다.
 
-Jekyll 설정부터 Gem 설치까지 이슈가 너무 많았습니다. 구글링에 의존해서 겨우 해결하기는 했지만 쉽지는 않았습니다.
+Jekyll 설정부터 Gem 설치까지 해결해야 할 이슈가 너무 많았습니다.
 
-그런데 ChatGPT의 도움을 받으니 너무나 간단했습니다.
+그런데 이번에는 ChatGPT의 도움을 받으니 너무 쉬웠습니다.
 
 ---
 
