@@ -110,6 +110,8 @@ received : phone=010-****-5678, email=ab****@gmail.com
 
 토이 프로젝트를 수행하는 과정에서 배운 지식과 경험은 애플리케이션의 로그 관리에 어려움을 겪고 있는 현실의 문제를 개선하는데 활용해 볼 수 있을 것 같습니다.
 
+<img class="main-image" src="/assets/images/solution.png" alt="문제해결">
+
 ---
 
 ## 5. 포스팅 시리즈
