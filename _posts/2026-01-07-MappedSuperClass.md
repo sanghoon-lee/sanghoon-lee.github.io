@@ -41,7 +41,7 @@ categories: 학습기록
    ... 
 ```
 
-쉡게 엔티티는 DB테이블이고, 속성은 테이블에 속한 컬럼이라고 이해해도 될 것 같습니다.
+엔티티는 DB테이블이고, 속성은 테이블에 속한 컬럼이라고 이해해도 될 것 같습니다.
 
 ---
 
@@ -62,7 +62,7 @@ categories: 학습기록
 * 유지보수 비용 증가 
 * 컬럼 정책 변경 시 누락 위험
 
-이러한 문제를 회피하기 위해서 아래 예제 코드처럼 @MappedSuperclass로 클래스를 선언합니다. 이렇게 선언된 BaseEntity는 여러 엔티티에서 공통으로 사용할 수 있는 속성들만 묶인 기본 객체가 됩니다. ChildEntity는 BaseEntity로부터 createAt과 updateAt 속성을 상속받아 사용하게 됩니다.  
+이러한 문제를 회피하기 위해서 아래 예제 코드처럼 @MappedSuperclass로 클래스를 선언할 수 있습니다.
 
 ```java
 @MappedSuperclass
@@ -79,11 +79,17 @@ public class ChildEntity extends BaseEntity{
 
 ```
 
+@MappedSuperClass로 선언된 BaseEntity는 여러 엔티티에서 공통으로 사용할 수 있는 속성들만 묶인 기본 객체가 됩니다. 
+
+그리고 ChildEntity는 BaseEntity로부터 createAt과 updateAt 속성을 상속받아 사용하게 됩니다.  
+
 ---
 
 ## 3. @Entity와 @MappedSuperClass의 차이점
 
-스프링의 JPA는 @Entity로 선언된 객체를 엔티티로 인식해서 연결된 테이블을 DB에 생성하게 됩니다. 하지만, @MappedSuperClass로 선언된 객체는 엔티티로 인식되지 않습니다. 따라서, 객체와 연결된 테이블도 생성되지 않습니다.
+스프링의 JPA는 @Entity로 선언된 객체를 엔티티로 인식해서 연결된 테이블을 DB에 생성하게 됩니다. 
+
+반면, @MappedSuperClass로 선언된 객체는 엔티티로 인식되지 않습니다. 그래서 객체와 연결된 테이블도 생성되지 않습니다.
 
 | 구분	| @Entity |	@MappedSuperclass|
 | ---- | --- | --- |
@@ -102,11 +108,11 @@ public class ChildEntity extends BaseEntity{
 
 다형성 조회(Polymorphic Query)는 부모 엔티티를 기준으로 조회했을 때, 부모와 모든 자식 엔티티까지 함께 조회되는 것을 의미합니다. 
 
-결제 전체 내역을 한 번에 보고 싶을 때, 다형성 조회 기능을 활용하면 결제수단이 무엇이든 '결제'라는 개념으로 묶어서 한번에 조회하는 것이 가능합니다. 
+예를 들어 결제 전체 내역을 한 번에 보고 싶을 때, 다형성 조회 기능을 활용하면 결제수단이 무엇이든 '결제'라는 개념으로 묶어서 한번에 조회하는 것이 가능합니다. 
 
 아래는 그것과 관련된 예제 코드입니다.
 
-```java
+```sql
 /**
  * 결제(개념) : 부모 엔티티(Payment)
  * 결제수단(구현체) : 자식 엔티티(카드, 포인트, 현금 등)
@@ -123,9 +129,9 @@ select p from Payment p where p.amount > 10000
 
 1️⃣ 불필요한 테이블 생성
 
-아래의 예제 코드처럼 @Entity로 객체를 선언하면 JPA는 독립적인 엔티티로 인식하고 연결된 테이블을 DB에 생성하게 됩니다. 
+아래 코드에서 BaseEntity는 @Entity로 선언되어 독립적인 엔티티로 인식됩니다.  
 
-하지만, BaseEntity는 부모 엔티티로 자식 엔티티에서 공통으로 사용할 수 있는 속성들을 정의하는 목적만 가지고 있었습니다. 따라서 테이블이 생성됨으로써 불필요하게 자원을 낭비하고, 관리 요소만 증가시켰습니다.
+하지만 부모 엔티티로 자식 엔티티에서 공통으로 사용할 수 있는 속성들을 정의하는 목적만 가지고 있습니다. 그렇지만 엔티티로 인식되기 때문에 연결된 테이블이 DB에 생성됩니다. 결국 불필요한 자원이 낭비되고, 관리 요소만 증가하게 됩니다.
 
 ```java
 @Entity
@@ -137,18 +143,16 @@ public abstract class BaseEntity {
 
 2️⃣ 설계 혼란
 
-BaseEntity와 연결된 테이블이 생성되면, Repository 생성의 대상이 되기도 합니다. 아래 예제 코드처럼 Reposiroty를 생성해도 됩니다. 하지만, 설계 의도가 흐려지면서
-
-* “이 Repository를 실제로 어디서 써야 하지?”
-* “이 엔티티는 무슨 책임을 가지는 거지?”
-
-와 같은 혼란을 유발할 수 있습니다.
+또한 테이블이 생성되면, Repository 생성의 대상이 되기도 합니다. 아래 예제 코드처럼 Repository를 생성해도 됩니다. 
 
 ```java
 public interface BaseEntityRepository 
                     extends JpaRepository<BaseEntity, Long> {
 }
 ```
+
+하지만 설계 의도가 흐려지면서 **“이 Repository를 실제로 어디서 써야 하지?”**, **“이 엔티티는 무슨 책임을 가지는 거지?”**와 같은 혼란을 유발할 수 있습니다.
+
 
 3️⃣ 의도하지 않은 다형성 조회 가능성
 
