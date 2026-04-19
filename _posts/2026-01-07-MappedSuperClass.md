@@ -123,9 +123,9 @@ select p from Payment p where p.amount > 10000
 
 ---
 
-### 5. 잘못된 @Entity 사용으로 발생하는 문제
+## 5. @Entity의 부적절한 사용으로 발생하는 문제
 
-다형성 조회가 필요하지 않아서 @MappedSuperClass를 사용하는 것이 적합한 상황임에도 불구하고, @Entity를 사용하게 되면 다음과 같은 문제가 발생하게 됩니다.
+@MappedSuperClass를 사용하는 것이 적합한 상황임에도 불구하고, @Entity를 사용하게 되면 다음과 같은 문제가 발생하게 됩니다.
 
 1️⃣ 불필요한 테이블 생성
 
