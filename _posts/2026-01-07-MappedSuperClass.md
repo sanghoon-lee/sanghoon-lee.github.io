@@ -81,13 +81,13 @@ public class ChildEntity extends BaseEntity{
 
 @MappedSuperClass로 선언된 BaseEntity는 여러 엔티티에서 공통으로 사용할 수 있는 속성들만 묶인 기본 객체가 됩니다. 
 
-그리고 ChildEntity는 BaseEntity로부터 createAt과 updateAt 속성을 상속받아 사용하게 됩니다.  
+그리고 ChildEntity는 BaseEntity로부터 createAt과 updateAt 속성을 상속받아 사용할 수 있습니다.
 
 ---
 
 ## 3. @Entity와 @MappedSuperClass의 차이점
 
-스프링의 JPA는 @Entity로 선언된 객체를 엔티티로 인식해서 연결된 테이블을 DB에 생성하게 됩니다. 
+스프링의 JPA는 @Entity로 선언된 객체를 엔티티로 인식하기 때문에, 연결된 테이블을 DB에 생성하게 됩니다. 
 
 반면, @MappedSuperClass로 선언된 객체는 엔티티로 인식되지 않습니다. 그래서 객체와 연결된 테이블도 생성되지 않습니다.
 
@@ -98,9 +98,9 @@ public class ChildEntity extends BaseEntity{
 | 조회 가능 |	O |	X |
 | Repository 생성	| O	| X |
 
-단순히 공통적으로 사용할 수 있는 속성만 제공하고, 다형성 조회(Polymorphic Query)는 필요하지 않은 상황에서는 @Entity가 아닌 @MappedSuperclass를 사용하는 것이 적합합니다. 
+단순히 공통적으로 사용할 수 있는 속성만 제공하고, 다형성 조회(Polymorphic Query)는 필요하지 않은 상황이라면 @Entity가 아닌 @MappedSuperclass를 사용하는 것이 적합합니다. 
 
-만약, 다형성 조회가 필요한 상황이라면 **@Entity+@Inheritance 조합**을 사용하는 것이 적합할 것입니다. 나중에 기회가 된다면 이 조합에 대해서도 공부해서 별도로 포스팅을 해보도록 하겠습니다.
+> 혹시 다형성 조회가 필요하다면 **@Entity+@Inheritance 조합**을 사용하는 것이 적합할 것입니다. 나중에 기회가 된다면 이 조합에 대해서도 공부해서 별도로 포스팅을 해보도록 하겠습니다.
 
 ---
 
@@ -129,9 +129,7 @@ select p from Payment p where p.amount > 10000
 
 1️⃣ 불필요한 테이블 생성
 
-BaseEntity는 부모 엔티티로 자식 엔티티에서 공통으로 사용할 수 있는 속성들을 정의하는 목적만 가지고 있습니다. 
-
-하지만 아래 코드처럼 @Entity로 선언되면 독립적인 엔티티로 인식됩니다. 그리고 연결된 테이블도 DB에 생성됩니다. 
+아래 코드에서 BaseEntity는 @Entity로 선언된 독립적인 엔티티입니다. 그래서 연결된 테이블도 DB에 생성됩니다. 
 
 ```java
 @Entity
@@ -141,11 +139,13 @@ public abstract class BaseEntity {
 }
 ```
 
-필요하지 않은 테이블의 생성으로 불필요한 자원이 낭비되고, 관리 요소만 증가하게 됩니다.
+하지만 부모 엔티티로 자식 엔티티에서 공통으로 사용할 수 있는 속성들을 정의하는 목적만 가지고 있습니다.  
+
+그렇기 때문에 테이블의 생성으로 불필요한 자원을 낭비하게 되면서 관리 요소만 증가하게 됩니다.
 
 2️⃣ 설계 혼란
 
-또한 테이블이 생성되면, Repository 생성의 대상이 되기도 합니다. 아래 예제 코드처럼 Repository를 생성해도 됩니다. 
+불필요한 BaseEntity의 테이블이 생성되면, 아래 코드처럼 BaseEntityRepository도 생성될 수 있습니다.  
 
 ```java
 public interface BaseEntityRepository 
