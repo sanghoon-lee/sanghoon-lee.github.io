@@ -12,7 +12,7 @@ categories: 학습기록
 **소프트웨어 아키텍처 101, 한빛미디어**
 
 ---
-*
+
 **API 게이트웨이(Gateway)**와 **서비스 디스커버리(Service Discovery)**는 어떤 관계일까요?
 
 실무에서 많이 사용하고 있는 개념이지만, 막상 구조적으로 연결해서 설명하려고 하면 헷갈릴 수 있습니다.
@@ -142,3 +142,7 @@ Service A → 디스커버리 → Service B
 * [학습기록] 소프트웨어 아키텍처: (4) 서비스 디스커버리 with 마이크로서비스 아키텍처(MSA)
 * [[학습기록] 소프트웨어 아키텍처: (5) 아키텍처 결정 레코드(Architecture Decision Record, ADR) 문서 작성법](https://sanghoon-lee.github.io/2026/03/04/ADR/)
 * [[학습기록] 소프트웨어 아키텍처: (6) 토폴로지(Topology)](https://sanghoon-lee.github.io/2026/03/09/Topology/)
+
+---
+
+#소프트웨어아키텍처101 #한빛미디어 #소프트웨어 #아키텍처 #마이크로서비스 #MSA #API #게이트웨이 #서비스디스커버리
