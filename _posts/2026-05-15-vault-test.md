@@ -37,7 +37,7 @@ Apache JMeter는 다양한 시스템의 부하 및 성능 테스트에 널리 �
 <img class="sub-image" src="/assets/images/jmeter_app.png" alt="Apache JMeter 실행화면">
 
 
-그리고 JMeter에서 Test Plan을 다음과 같이 구성했습니다.
+그리고 Test Plan을 다음과 같이 구성했습니다.
 
 ```nohighlight
 Test Plan
@@ -158,7 +158,7 @@ Vault Transit Engine은 애플리케이션 외부에서 암호화 연산을 수�
 
 ---
 
-## 4. 테스트 결과 해석
+## 4. 테스트 결과 보고서
 
 CLI에서 테스트가 완료되면, report 폴더에 웹 페이지 형식의 결과 보고서가 생성됩니다.
 
