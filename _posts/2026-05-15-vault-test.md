@@ -25,7 +25,7 @@ categories: 학습기록
 
 Apache JMeter는 다양한 시스템의 부하 및 성능 테스트에 널리 사용되는 대표적인 오픈소스 기반의 성능 테스트 도구이며, 공인시험 환경에서도 활용되고 있습니다.
 
-> KOLAS: 힌국인정기구(Korea Laboratory Accreditation Scheme)의 약자로, 국제 표준에 따라 시험 교정 검사 시관의 기술 능력과 품질 시스템을 평가하여 공인하는 산업통상자원부 산하 국가기구입니다.
+> KOLAS: 힌국인정기구(Korea Laboratory Accreditation Scheme)의 약자로, 국제 표준에 따라 시험 교정 검사 기관의 기술 능력과 품질 시스템을 평가하여 공인하는 산업통상자원부 산하 국가기구입니다.
 
 ---
 
@@ -34,6 +34,9 @@ Apache JMeter는 다양한 시스템의 부하 및 성능 테스트에 널리 �
 테스트를 위해서 최신 버전인 Apache JMeter 5.6.3 바이너리 파일을 다운로드 받아서 설치했습니다.
 
 <img class="sub-image" src="/assets/images/jmeter_app.png" alt="Apache JMeter 실행화면">
+
+
+
 
 ---
 
