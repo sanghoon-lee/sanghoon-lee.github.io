@@ -122,7 +122,7 @@ GUI에서 테스트가 실행되면 실시간으로 화면에 결과를 출력�
 CLI에서 테스트를 수행하려면 터미널에서 다음과 같이 명령을 입력하면 됩니다.
 
 ```bash
-$ jmeter -n -t [테스트 파일명(예:test.jmx)] -l result.jtl -e -o report
+$ jmeter -n -t {테스트 파일명(예:test.jmx)} -l result.jtl -e -o report
 ```
 
 다음은 제 개인 노트북에서 테스트를 실행한 결과입니다.
