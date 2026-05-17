@@ -186,4 +186,12 @@ Percentile 기반의 응답 특성은 결과 리포트의 Statistics 항목에�
 
 ---
 
+## 6. 관련 포스팅
+
+* [[학습기록] Vault를 이용한 KMS 대체 검토: (1) 개념정리와 설치과정](https://sanghoon-lee.github.io/2026/04/09/vault//)
+* [[학습기록] Vault를 이용한 KMS 대체 검토: (2) Transit Engine을 이용한 암·복호화 실습](https://sanghoon-lee.github.io/2026/04/11/vault2/)
+* [[학습기록] Vault를 이용한 KMS 대체 검토: (3) Java 애플리케이션에서 Vault 연동하기](https://sanghoon-lee.github.io/2026/04/18/vault3/)
+
+---
+
 #JMeter #부하테스트 #성능테스트 #HashiCorpVault #Vault #TPS #TransitEngine 
