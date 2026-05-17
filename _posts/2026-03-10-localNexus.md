@@ -2,19 +2,10 @@
 layout: post
 title: "[학습기록] Nexus로 내부 라이브러리 저장소 구축해보기"
 date: 2026-03-10
+description: Nexus로 라이브러리 저장소를 구축해본 과정을 정리해서 작성한 포스팅입니다.
+image: /assets/images/nexus.png
 categories: 학습기록
 ---
-
-<style>
-.main-image {
-  width: 100%;
-  max-width: 900px;
-  height: auto;
-  margin-bottom: 1.4rem;
-  border-radius: 12px;
-  display: block;
-}
-</style>
 
 일반적으로 소프트웨어 개발은 다음과 같은 과정을 거쳐 진행됩니다.
 
@@ -24,6 +15,8 @@ categories: 학습기록
 * 구현과 검증
 
 그래서 소프트웨어 개발은 **코드를 작성하는 작업**을 넘어 **논리적 사고**를 바탕으로 비즈니스 문제를 해결하는 행위로 설명할 수 있습니다.
+
+---
 
 ## 1. 소프트웨어 개발 조직의 기술력
 
@@ -37,11 +30,9 @@ categories: 학습기록
 
 팀에서 활용할 수 있도록 축적된 **지식**과 **경험**의 크기와 깊이가 결국 소프트웨어 개발 조직의 `기술력`이라고 생각합니다. 
 
+---
+
 ## 2. 기술력을 활용하는 방식: 공통 라이브러리
-
-그렇다면 소프트웨어 개발 조직의 `기술력`은 어떤 방식으로 활용할 수 있을까요?
-
-대표적인 방식 중 하나가 바로 **공통 라이브러리**입니다. 
 
 소프트웨어를 개발하다 보면 프로젝트마다 반복적으로 등장하는 문제들이 있습니다. 주로 다음과 같은 것들입니다.
 
@@ -52,34 +43,39 @@ categories: 학습기록
 * 예외 처리 규칙
 * API 응답 구조
 
-이러한 문제들의 해결 방식을 코드 형태로 정리해서 재사용할 수 있도록 만들어 낸 결과물이 바로 **공통 라이브러리**입니다. 
+이러한 문제들의 해결 방식이 코드 형태로 정리되고, 재사용할 수 있도록 만들어진 결과물이 바로 **공통 라이브러리**입니다. 
 
-과거에 해결했던 문제는 **공통 라이브러리**를 활용하면, 새로운 개발 프로젝트에서 코드를 다시 작성할 필요가 없습니다. 이미 검증되고, 일관된 방식으로 쉽고 빠르게 문제를 해결할 수 있습니다. 
+과거에 해결했던 문제는 **공통 라이브러리**를 활용하면 이미 검증되고, 일관된 방식으로 쉽고 빠르게 문제를 해결할 수 있습니다. 반복되는 코드가 **공통 라이브러리** 내부에 감춰지기 때문에, 전체적인 코드는 간결해지고 복잡도를 낮출 수도 있습니다. 
 
-반복되는 코드는 **공통 라이브러리** 내부에 감춰지기 때문에, 전체적인 코드는 간결해지고 복잡도를 낮출 수 있습니다. 또한, 개발자는 핵심 비즈니스 로직의 구현에 더 많은 시간을 집중할 수 있습니다. 결과적으로 소프트웨어 개발 품질과 생산성은 높아지고, 유지보수의 난이도는 낮아지게 될 것입니다.
+개발자는 핵심 비즈니스 로직의 구현에 더 많은 시간을 집중할 수 있습니다. 결과적으로 소프트웨어 개발 품질과 생산성은 높아지고, 유지보수 난이도는 낮아지게 될 것입니다.
+
+---
 
 ## 3. 내부 라이브러리 저장소(Private Repository)의 필요성
 
-사실 오래전부터 **공통 라이브러리**를 적극적으로 이용해서 개발 생산성을 향상시키는 방법을 고민하고 있었습니다. 
+**공통 라이브러리**를 적극적으로 활용하려면 **내부 라이브러리 저장소(Artifact Repository)**가 필요합니다. 조직 내부에서 개발한 코드를 함부로 Maven Central과 같은 공개 저장소에 배포할 수 없기 때문입니다. 
 
-**공통 라이브러리**를 활용하려면 `내부 라이브러리 저장소(Artifact Repository)`가 반드시 필요합니다. 조직 내부에서 개발한 코드를 함부로 `Maven Central`과 같은 공개 저장소에 배포할 수 없기 때문입니다. 
+<img class="main-image" src="/assets/images/nexus.png" alt="nexus repository">
 
-`Nexus`는 `내부 라이브러리 저장소`를 운영하기 위해 활용할 수 있는 대표적인 도구입니다. 
+**Nexus**는 **내부 라이브러리 저장소**를 구축하는데 활용할 수 있는 대표적인 도구입니다. 
 
-```
+```nohighlight
 서비스 A ─┐
 서비스 B ─┼── 공통 라이브러리 ── Nexus
 서비스 C ─┘
 ```
 
+---
+
 ## 4. 테스트 환경
 
-개인 노트북에 `라이브러리 저장소`를 구축하고, 간단한 라이브러리를 만들어서 배포해보려고 테스트 환경을 만들었습니다. 
+개인 노트북에 **라이브러리 저장소**를 구축하고, 간단한 라이브러리를 만들어서 배포해보는 테스트를 수행하기 위한 환경을 만들었습니다. 
 
-`라이브러리 저장소`는 노트북에 VMware로 생성한 가상머신에 `Nexus`를 설치해서 구축했습니다.
+**라이브러리 저장소**는 노트북에 VMware로 생성한 가상머신에 **Nexus**를 설치해서 구축했습니다.
 
 테스트 환경은 다음과 같습니다.
-```
+
+```nohighlight
 +-----------------------------+
 | Windows PC                  |
 | IP : 10.68.65.226           |
@@ -99,11 +95,16 @@ categories: 학습기록
 +-----------------------------+
 ```
 
+---
+
 ## 5. Nexus 설치
 
-Docker를 이용해서 `Nexus`를 설치했습니다. 설치 절차는 다음과 같습니다.
+도커(Docker)를 이용해서 **Nexus**를 설치했습니다. 설치 절차는 다음과 같습니다.
 
-**이미지 파일 가져오기**
+---
+
+### 5.1. 이미지 파일 다운로드
+
 ```bash
 $ sudo docker pull sonatype/nexus3:latest
 
@@ -119,8 +120,10 @@ Digest: sha256:cb94c17229a34d20365345dfa28552ee462cf79c77dd2fadbd98422e5a439bc9
 Status: Downloaded newer image for sonatype/nexus3:latest
 docker.io/sonatype/nexus3:latest
 ```
+---
 
-**이미지 파일 확인**
+### 5.2. 다운로드 확인
+
 ```bash
 $ sudo docker image ls
 
@@ -128,7 +131,9 @@ IMAGE                    ID             DISK USAGE   CONTENT SIZE   EXTRA
 sonatype/nexus3:latest   cb94c17229a3       1.12GB          399MB
 ```
 
-**컨테이너 실행**
+---
+
+### 5.3. 컨테이너 실행
 
 ```bash
 $ sudo docker run --name nexus -d -p 5000:5000 -p 8081:8081 -v /nexus-data:/nexus-data -u root sonatype/nexus3
@@ -136,38 +141,44 @@ $ sudo docker run --name nexus -d -p 5000:5000 -p 8081:8081 -v /nexus-data:/nexu
 f3d2c2f6a043712721849013a8ff457432f480c590dfb9121e42df2229734030
 ```
 
-`Nexus`의 웹 접속을 위해 8081 포트를 사용했고, **/nexus-data** 디렉터리를 볼륨으로 연결해서 저장소 데이터를 유지했습니다.
+**Nexus**의 웹 접속을 위해 8081 포트를 사용했고, **/nexus-data** 디렉터리를 볼륨으로 연결해서 저장소 데이터를 유지했습니다.
+
+---
 
 ## 6. Nexus 접속
 
-컨테이너가 정상적으로 실행되고 있으면 브라우저에서 아래 주소로 `Nexus`에 접속할 수 있습니다. 
+컨테이너가 정상적으로 실행되고 있으면 브라우저에서 아래 주소로 **Nexus**에 접속할 수 있습니다. 
 
-```
+```nohighlight
 http://10.68.65.187:8081
 ```
 
 최초 접속인 경우, 로그인 창에 admin계정의 초기 비밀번호가 저장된 파일 경로가 나타납니다. 해당 경로에서 비밀번호를 확인하고, 로그인하면 됩니다.
 
 **최초 접속시 로그인 창**
-<img class="main-image" src="/assets/images/nexus1.png" alt="Nexus Repository">
+<img class="sub-image" src="/assets/images/nexus1.png" alt="Nexus Repository">
 
 로그인에 성공하면, 아래 그림처럼 Welcome 메시지가 나타납니다. 
 
 **Welcome 메시지**
-<img class="main-image" src="/assets/images/nexus2.png" alt="Nexus Repository">
+<img class="sub-image" src="/assets/images/nexus2.png" alt="Nexus Repository">
 
 초기 비밀번호로 로그인하면 비밀번호를 변경해야 합니다.
 
 **비밀번호 변경**
-<img class="main-image" src="/assets/images/nexus3.png" alt="Nexus Repository">
+<img class="sub-image" src="/assets/images/nexus3.png" alt="Nexus Repository">
+
+---
+
+---
 
 ## 7. Nexus 저장소의 종류
 
-`Nexus`에 로그인 후, Browse 메뉴에서 현재 생성되어 있는 저장소(`Repository`) 목록을 확인할 수 있습니다.
+**Nexus**에 로그인 후, Browse 메뉴에서 현재 생성되어 있는 저장소(Repository) 목록을 확인할 수 있습니다.
 별도로 설정하지 않았지만, 기본적으로 필요한 저장소들은 이미 생성되어 있었습니다.
 
 **Nexus Repository 목록**
-<img class="main-image" src="/assets/images/nexus4.png" alt="Nexus Repository">
+<img class="sub-image" src="/assets/images/nexus4.png" alt="Nexus Repository">
 
 각 저장소는 역할에 따라 다음과 같이 Type이 구분됩니다. 
 
@@ -175,14 +186,18 @@ http://10.68.65.187:8081
 * group
 * proxy
 
+---
+
 ### 7.1. hosted
 
-hoste 저장소는 직접 라이브러리를 업로드하여 관리합니다. `Nexus`를 설치하면, 다음과 같은 hosted 저장소가 기본으로 생성됩니다.
+hosted 저장소는 직접 라이브러리를 업로드하여 관리합니다. **Nexus**를 설치하면, 다음과 같은 hosted 저장소가 기본으로 생성됩니다.
 
 * maven-releases: 정식 버전의 라이브러리를 배포
 * maven-snapshots: 개발중인 버전의 라이브러리를 배포
 
-즉, 조직 내부에서 만든 라이브러리를 배포할 때 사용할 수 있습니다. 사실 이번 포스팅에서 다루고 있는 `내부 라이브러리 저장소`가 **hosted 저장소**에 해당됩니다. 
+즉, 조직 내부에서 만든 라이브러리를 배포할 때 사용할 수 있습니다. 사실 이번 포스팅에서 다루고 있는 **내부 라이브러리 저장소**가 hosted 저장소에 해당됩니다. 
+
+---
 
 ### 7.2. proxy
 
@@ -198,13 +213,15 @@ https://repo.maven.apache.org/maven2
 개발자 → Nexus Proxy 저장소(내부) → Maven Central 저장소(외부)
 ```
 
-라이브러리를 처음 다운로드할 때는 Maven Central에서 받아오고, 그 이후에는 `Nexus`의 Proxy 저장소에 캐시된 라이브러리를 제공받게 됩니다.
+라이브러리를 요청하면 최초에는 Maven Central에서 가져오지만, 그 이후에는 **Nexus**의 Proxy 저장소에 캐시된 라이브러리를 제공받게 됩니다.
 
 이 방식은 다음과 같은 장점이 있습니다.
 
 * 외부 저장소 의존성 감소
 * 다운로드 속도 향상
 * 외부 네트워크 장애 대응
+
+---
 
 ### 7.3 group
 
@@ -227,26 +244,21 @@ group 저장소는 이름처럼 여러 저장소를 하나의 저장소처럼 �
 
 이렇게 구성하면, 개발자는 여러 저장소를 각각 설정할 필요가 없습니다. group 저장소 하나만 설정하면 됩니다.
 
+---
+
 ## 8. 라이브러리 배포
 
-### 8.1. 배포 계정
-
-`Nexus`에서 Settings > Security > Roles를 선택하면 현재 정의되어 있는 Role 목록을 확인할 수 있습니다. `nx-admin`과 `nx-anonymous` 두 개의 Role이 정의되어 있었습니다.
+**Nexus**에서 `Settings > Security > Roles`를 선택하면 현재 정의되어 있는 Role 목록을 확인할 수 있습니다. 기본적으로 **nx-admin**과 **nx-anonymous** 두 개의 Role이 정의되어 있습니다.
 
 <img class="main-image" src="/assets/images/security_roles.jpg" alt="Nexus Roles 목록">
 
-`nx-admin` Role의 Privileges는 all로 지정되어 있습니다. 그리고 로그인에 사용한 admin 계정의 Role이 `nx-admin`으로 부여되어 있습니다. 즉, admin 계정은 라이브러리 배포를 포함한 모든 권한을 가지고 있다는 의미입니다. 
+**nx-admin** Role의 Privileges는 all로 지정되어 있습니다. 로그인에 사용한 admin 계정의 Role이 **nx-admin**으로 부여되어 있습니다. 즉, admin 계정은 라이브러리 배포를 포함한 모든 권한을 가지고 있다는 의미입니다. 
 
 보통은 배포 권한을 가진 계정을 별도로 만들어서 사용합니다. 하지만, 이번에는 라이브러리 배포 과정을 확인하는 것이 주 목적입니다. 그래서 admin 계정을 사용했습니다.
 
-**gradle.properties**
+---
 
-```properties
-nexusUsername={배포 계정}
-nexusPassword={비밀번호}
-```
-
-### 8.2. simple-lib: 라이브러리 코드 작성
+### 8.1. simple-lib: 라이브러리 코드 작성
 
 라이브러리 배포를 위해서 아주 간단한 Java 프로젝트를 하나 만들었습니다.
 
@@ -272,13 +284,16 @@ public class SimpleLib {
 
 > 실제 공통 라이브러리는 인증, 로깅, 보안, 외부 시스템 연동과 같은 다양하고 복잡한 기능이 포함될 수 있습니다. 
 
-### 8.3. simple-lib: Gradle 설정
+---
 
-Gradle 공식 가이드에서는 라이브러리 프로젝트에 java-library 플러그인을, Maven 저장소 배포에는 maven-publish 플러그인을 사용하도록 안내하고 있습니다.
+### 8.2. simple-lib: Gradle 설정
 
-이 설정은 simple-lib-0.0.1-SNAPSHOT.jar를 만들고, maven-snapshots 저장소로 배포하는 형태입니다. Gradle의 Maven Publish 플러그인은 publishing { publications { ... } repositories { ... } } 구조로 publication과 저장소를 정의합니다.
+Gradle 공식 가이드에서는 Maven 저장소 배포에는 maven-publish 플러그인을 사용하도록 안내하고 있습니다.
 
-**build.gradle**
+maven-publish 플러그인은 publishing { publications { ... } repositories { ... } } 구조로 publication과 저장소를 정의합니다.
+
+배포할 라이브러리 파일의 이름을 simple-lib-0.0.1-SNAPSHOT.jar로 만들어 maven-snapshots 저장소로 배포하도록 다음과 같이 build.gradle 파일을 작성했습니다. 
+
 ```groovy
 plugins {
     id 'java-library'
@@ -325,7 +340,11 @@ publishing {
 }
 ```
 
-maven-snapshots 저장소에서 배포 위치는 다음과 같습니다.
+---
+
+### 8.3. simple-lib: 배포 경로
+
+위의 build.gradle 파일에는 배포할 라이브러리의 경로가 다음과 같이 작성되어 있습니다. 
 
 ```
 groupId    = sanghoon.study
@@ -333,17 +352,19 @@ artifactId = simple-lib
 version    = 0.0.1-SNAPSHOT
 ```
 
-그렇기 때문에, simple-lib를 다른 프로젝트에서 사용하려면 아래와 같이 배포 위치를 build.gradle 파일에 추가해주면 됩니다. 
+simple-lib를 다른 프로젝트에서 사용하려면 아래와 같은 경로를 build.gradle 파일에 추가해주면 됩니다. 
 
 ```
 implementation 'sanghoon.study:simple-lib:0.0.1-SNAPSHOT'
 ```
 
-### 8.4. simple-lib: 배포
+---
+
+### 8.4. simple-lib: 배포하기
 
 Gralde을 reload하고, publish task가 생성되었는지 확인합니다. 
 
-publish task를 실행하면, Gradle이 프로젝트를 빌드한 뒤 지정된 `Nexus` 저장소로 artifact를 업로드합니다.
+publish task를 실행하면, Gradle이 프로젝트를 빌드한 뒤 지정된 저장소로 artifact를 업로드합니다.
 
 **publish task 실행**
 
@@ -351,14 +372,14 @@ publish task를 실행하면, Gradle이 프로젝트를 빌드한 뒤 지정된 
 gradle.bat publish
 ```
 
-IDE에서 빌드와 배포가 성공했습니다. `Nexus`에서 Browse > maven-snapshots를 선택해서 simple-lib가 추가된 것을 확인할 수 있었습니다.
+IDE에서 빌드와 배포가 성공했습니다. 배포가 성공하면 **Nexus**에 접속해서 simple-lib가 추가된 것을 확인할 수 있습니다.
 
 **maven-snapshots 저장소 목록**
 <img class="main-image" src="/assets/images/simple_lib.jpg" alt="저장소에 simple-lib 추가">
 
-## 9. 라이브러리 사용
+---
 
-### 9.1. simple-calc: 테스트 코드 작성
+## 9. 라이브러리 사용
 
 이제 mavan-snapshots 저장소에 추가된 simple-lib 라이브러리를 가져와서 사용해보도록 하겠습니다.
 
@@ -371,9 +392,10 @@ IDE에서 빌드와 배포가 성공했습니다. `Nexus`에서 Browse > maven-s
 rootProject.name = 'simple-calc'
 ```
 
+### 9.1. simple-calc: 테스트 코드 작성
+
 이 프로젝트의 Main 클래스에서 simple-lib 라이브러리의 sum() 메서드를 호출하는 코드를 작성했습니다.
 
-**Main.java**
 ```java
 import sanghoon.study.lib.SimpleLib;
 
@@ -386,12 +408,11 @@ public class Main {
 }
 ```
 
+---
+
 ### 9.2. simple-calc: Gradle 설정
 
-simple-lib를 가져오기 위해 라이브러리가 배포된 `내부 라이브러리 저장소`의 주소와 배포 위치를 build.gradle에 추가해야 합니다.
-사용한 build.gradle 파일은 다음과 같습니다. 
-
-**build.gradle**
+simple-lib를 가져오기 위해 build.gradle을 다음과 같이 작성했습니다.
 
 ```groovy
 plugins {
@@ -423,14 +444,8 @@ test {
 
 > build.gradle 파일을 작성하고, Gradle을 Reload를 해야만 라이브러리를 가져올 수 있습니다.
 
-### 9.3. simple-calc: 실행 결과
+코드를 실행시키면 sum() 메서드가 정상적으로 호출되면서 기대했던 값인 8이 터미널로 출력되는 것을 확인할 수 있습니다.
 
-sum() 메서드가 정상적으로 호출되면서 기대했던 값인 8이 터미널로 출력되는 것을 확인할 수 있었습니다.
+---
 
-## 10. 마무리
-
-지금까지 `Nexus`를 설치해 `내부 라이브러리 저장소`를 구축하고, 라이브러리를 배포하는 과정을 살펴보았습니다.
-
-소프트웨어 개발 조직의 `기술력`은 팀이 함께 활용할 수 있도록 조직에 축적된 **지식**과 **경험**의 크기와 깊이라고 생각합니다.
-
-따라서 `내부 라이브러리 저장소`에 이러한 **지식**과 **경험**을 `코드` 형태의 라이브러리로 정리하는 것은 조직의 기술력을 실제로 활용할 수 있는 기반과 체계를 만들어가는 중요한 과정이라고 생각합니다.
+#Nexus #라이브러리 #배포
