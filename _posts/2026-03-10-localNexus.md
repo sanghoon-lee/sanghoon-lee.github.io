@@ -170,8 +170,6 @@ http://10.68.65.187:8081
 
 ---
 
----
-
 ## 7. Nexus 저장소의 종류
 
 **Nexus**에 로그인 후, Browse 메뉴에서 현재 생성되어 있는 저장소(Repository) 목록을 확인할 수 있습니다.
@@ -294,6 +292,7 @@ maven-publish 플러그인은 publishing { publications { ... } repositories { .
 
 배포할 라이브러리 파일의 이름을 simple-lib-0.0.1-SNAPSHOT.jar로 만들어 maven-snapshots 저장소로 배포하도록 다음과 같이 build.gradle 파일을 작성했습니다. 
 
+**build.gradle**
 ```groovy
 plugins {
     id 'java-library'
@@ -383,6 +382,10 @@ IDE에서 빌드와 배포가 성공했습니다. 배포가 성공하면 **Nexus
 
 이제 mavan-snapshots 저장소에 추가된 simple-lib 라이브러리를 가져와서 사용해보도록 하겠습니다.
 
+---
+
+### 9.1. simple-calc: 테스트 코드 작성
+
 이번에도 아주 간단한 Java 프로젝트를 하나 만들었습니다.
 
 프로젝트 이름은 simple-calc입니다.
@@ -392,10 +395,10 @@ IDE에서 빌드와 배포가 성공했습니다. 배포가 성공하면 **Nexus
 rootProject.name = 'simple-calc'
 ```
 
-### 9.1. simple-calc: 테스트 코드 작성
-
 이 프로젝트의 Main 클래스에서 simple-lib 라이브러리의 sum() 메서드를 호출하는 코드를 작성했습니다.
 
+
+**Main.java**
 ```java
 import sanghoon.study.lib.SimpleLib;
 
@@ -414,6 +417,7 @@ public class Main {
 
 simple-lib를 가져오기 위해 build.gradle을 다음과 같이 작성했습니다.
 
+**build.gradle**
 ```groovy
 plugins {
     id 'java'
