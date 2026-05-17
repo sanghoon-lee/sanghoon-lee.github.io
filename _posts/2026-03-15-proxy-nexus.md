@@ -3,7 +3,7 @@ layout: post
 title: "폐쇄망 개발환경의 내부 라이브러리 저장소 아키텍처 구성"
 date: 2026-03-15
 description: 내부 라이브러리를 구성하는 방법을 아키텍처 중심으로 설명한 글입니다. 
-image: /assets/images/nexus.jpg
+image: /assets/images/nexus2.jpg
 categories: 개념정리
 ---
 
@@ -90,7 +90,7 @@ Dependency Download
 
 **내부 저장소**를 구축하는데 사용되는 대표적인 도구로 **Nexus**가 있습니다.
 
-<img class="main-image" src="/assets/images/nexus.png" alt="nexus repository">
+<img class="main-image" src="/assets/images/nexus2.jpg" alt="nexus repository">
 
 **내부 저장소**는 외부 라이브러리가 폐쇄망 내부로 유입되는 유일한 경로가 됩니다. 즉, 라이브러리를 조직 내부에서 일관된 방식으로 통제할 수 있게 됩니다. 
 
