@@ -13,6 +13,8 @@ categories: 일반
 
 그 과정에서 리라이팅이 단순한 문장 수정 이상의 의미를 가지고 있다는 사실을 알게 되었습니다.
 
+<img class="main-image" src="/assets/images/rewriting.jpg" alt="리라이팅">
+
 ---
 
 ## 1. 과거 글이 어색하게 보이기 시작한 이유
@@ -26,8 +28,6 @@ categories: 일반
 * 잘못 이해하고 작성한 내용
 
 그 결과 최근에는 과거에 작성했던 글들을 다시 읽어보고 수정하는데 많은 시간을 소비하게 되었습니다.
-
-<img class="main-image" src="/assets/images/rewriting.jpg" alt="리라이팅">
 
 곰곰이 생각해보니 이유는 비교적 명확했습니다. 그때의 나와 현재의 나 사이에는 지식과 경험의 차이가 분명히 존재하기 때문입니다.
 
