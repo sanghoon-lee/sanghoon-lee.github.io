@@ -285,6 +285,17 @@ td {
   color: #333; /* 글씨 색상 */
 }
 
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        #d1d5db,
+        transparent
+    );
+    margin: 3rem 0;
+}
 
 blockquote {
   margin: 0.8rem 0;
