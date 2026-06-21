@@ -204,10 +204,39 @@ pre code {
 }
 
 /* 속성명, 태그명 */
-.hljs-attr,
+/**.hljs-attr,
 .hljs-name,
 .hljs-selector-tag {
   color: #7dcfff !important;
+}*/
+/* HTML/XML 태그 전체 */
+.hljs-tag {
+  color: #ff9e64 !important;
+  font-weight: 600;
+}
+
+/* 태그명 */
+.hljs-tag .hljs-name,
+.hljs-name {
+  color: #7dcfff !important;
+  font-weight: 600;
+}
+
+/* 태그 속성명 */
+.hljs-tag .hljs-attr,
+.hljs-attr {
+  color: #bb9af7 !important;
+}
+
+/* 속성값 */
+.hljs-tag .hljs-string,
+.hljs-string {
+  color: #a3d977 !important;
+}
+
+/* 꺾쇠괄호 < > / 등 */
+.hljs-tag .hljs-punctuation {
+  color: #c0caf5 !important;
 }
 
 /* 섹션, 선택자 */
