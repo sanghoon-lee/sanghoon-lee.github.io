@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[학습기록] Vault를 이용한 KMS 대체 검토: (2) KV Engine을 이용한 암호화 키 저장과 조회 실습"
-date: 2026-04-11
+date: 2026-04-10
 description: HashiCorp Vault의 KV Engine에 대한 개념을 공부하고, 이를 이용해서 암호화 키 저장과 조회 실습하는 과정을 정리한 글입니다. 원래 포스팅했던 내용을 나중에 리라이팅하면서 추가되었습니다.
 image: /assets/images/hashicorp.jpg
 categories: 학습기록
