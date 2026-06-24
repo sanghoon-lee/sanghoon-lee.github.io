@@ -180,7 +180,7 @@ Percentile 기반의 응답 특성은 결과 리포트의 Statistics 항목에�
 
 ---
 
-## 5. 관련 포스팅
+## 5. 참고
 
 * [[학습기록] Vault를 이용한 KMS 대체 검토: (1) 개념정리와 설치과정](https://sanghoon-lee.github.io/2026/04/09/vault//)
 * [[학습기록] Vault를 이용한 KMS 대체 검토: (2) KV Engine을 이용한 암호화 키 저장과 조회 실습](https://sanghoon-lee.github.io/2026/04/10/vault1-1-rewriting/)
