@@ -1,10 +1,14 @@
 ---
 layout: post
-title: "GitHub에 블로그 개설 with ChatGPT"
+title: "[잡담] GitHub에 블로그 개설 with ChatGPT"
 date: 2025-11-28
 description: ChatGPT의 도움을 받아서 깃허브에 블로그를 개설한 소식을 알리기 위해 작성한 글입니다.
 image: /assets/images/githubpages.jpg
-categories: 일반
+categories: 잡담
+tags:
+  - AI
+  - ChatGPT
+  - Github
 ---
 
 ChatGPT의 도움을 받아서 GitHub Pages + Minima 테마로 심플한 블로그를 만들었습니다! 😄
@@ -56,7 +60,5 @@ ChatGPT가 요구사항에 맞는 코드와 설정 파일등을 생성해주면 
 
 이런 기록들이 모이면 저만의 소중한 지식 자산이 되지 않을까요? 부족함이 많았던 어느 개발팀장의 성장기록으로 가치는 있을 것 같습니다.
 
----
 
-#블로그 #개발블로그 #Github #GPT #AI
 
