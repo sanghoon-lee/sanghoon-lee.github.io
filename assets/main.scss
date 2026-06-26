@@ -143,6 +143,11 @@ pre {
   border-radius: 12px;
   padding: 16px 20px;
   overflow-x: auto;
+
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
+
   line-height: 1.65;
   font-size: 0.95rem;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
@@ -152,8 +157,14 @@ pre {
 pre code {
   background: transparent !important;
   color: inherit !important;
-  font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
-  //font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace; */
+  font-family: "Consolas", "Courier New", monospace;
+  /* font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;*/
+  
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
+  
   font-variant-ligatures: none;
 }
 
