@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "[학습기록] Vault를 이용한 KMS 대체 검토: (2) KV Engine을 이용한 암호화 키 저장과 조회 실습"
+title: "[토이프로젝트] Vault를 이용한 KMS 대체 검토: (2) KV Engine을 이용한 암호화 키 저장과 조회 실습"
 date: 2026-04-10
 description: HashiCorp Vault의 KV Engine에 대한 개념을 공부하고, 이를 이용해서 암호화 키 저장과 조회 실습하는 과정을 정리한 글입니다. 원래 포스팅했던 내용을 나중에 리라이팅하면서 추가되었습니다.
 image: /assets/images/hashicorp.jpg
-categories: 학습기록
+categories: 토이프로젝트
 tags:
   - Vault
   - HashiCorp
@@ -202,8 +202,8 @@ KV Engine은 암호화 키뿐만 아니라, 다양한 시크릿을 중앙에서 
 
 ## 4. 포스팅 목록
 
-* [[학습기록] Vault를 이용한 KMS 대체 검토: (1) 개념정리와 설치과정](https://sanghoon-lee.github.io/2026/04/09/vault/)
-* [학습기록] Vault를 이용한 KMS 대체 검토: (2) KV Engine을 이용한 암호화 키 저장과 조회 실습
-* [[학습기록] Vault를 이용한 KMS 대체 검토: (3) Transit Engine을 이용한 암·복호화 실습](https://sanghoon-lee.github.io/2026/04/11/vault2/)
-* [[학습기록] Vault를 이용한 KMS 대체 검토: (4) Java 애플리케이션에서 Vault Transit Engine 연동하기](https://sanghoon-lee.github.io/2026/04/18/vault3/)
+* [[토이프로젝트] Vault를 이용한 KMS 대체 검토: (1) 개념정리와 설치과정](https://sanghoon-lee.github.io/2026/04/09/vault/)
+* [토이프로젝트] Vault를 이용한 KMS 대체 검토: (2) KV Engine을 이용한 암호화 키 저장과 조회 실습
+* [[토이프로젝트] Vault를 이용한 KMS 대체 검토: (3) Transit Engine을 이용한 암·복호화 실습](https://sanghoon-lee.github.io/2026/04/11/vault2/)
+* [[토이프로젝트] Vault를 이용한 KMS 대체 검토: (4) Java 애플리케이션에서 Vault Transit Engine 연동하기](https://sanghoon-lee.github.io/2026/04/18/vault3/)
 
