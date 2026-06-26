@@ -5,6 +5,10 @@ date: 2026-03-21
 description: Java를 기준으로 AES-GCM을 안전하게 사용하는 방법을 정리한 포스팅입니다.
 image: /assets/images/lock.png
 categories: 학습기록
+tags:
+  - Cryptography
+  - Security
+  - Java
 ---
 
 AES-GCM 모드는 강력한 암호화 방식입니다. 하지만 잘못된 사용은 심각한 보안 취약점으로 이어질 수 있습니다.
@@ -298,10 +302,7 @@ public class AesGcmPayloadExample {
 
 ---
 
-## 5. 관련 포스팅
+## 5. 참고
 
 * [[학습기록] 대칭키 암호화 모드 비교: 실무에서 GCM을 선택해야 하는 이유](https://sanghoon-lee.github.io/2026/03/21/aes-gcm/)
 
----
-
-#암호화 #AES #ECB #CBC #GCM #java
