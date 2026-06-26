@@ -142,14 +142,17 @@ pre {
   border: 1px solid #2f3645;
   border-radius: 12px;
   padding: 16px 20px;
+  
   overflow-x: auto;
-
-  white-space: pre;
-  word-break: normal;
-  overflow-wrap: normal;
-
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  
   line-height: 1.65;
   font-size: 0.95rem;
+  letter-spacing: 0 !important;
+  tab-size: 4;
+
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
 }
 
@@ -158,14 +161,14 @@ pre code {
   background: transparent !important;
   color: inherit !important;
   /* font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace; */
-  font-family: "Consolas", "Courier New", monospace;
+  font-family: Consolas, "Courier New", monospace !important;
+  font-variant-ligatures: none !important;
   /* font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;*/
   
-  white-space: pre;
-  word-break: normal;
-  overflow-wrap: normal;
-  
-  font-variant-ligatures: none;
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  letter-spacing: 0 !important;
 }
 
 /* 기본 텍스트 */
