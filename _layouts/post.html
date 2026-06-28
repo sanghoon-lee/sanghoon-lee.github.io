@@ -13,8 +13,24 @@ layout: default
 
   <header class="post-header">
     <h1 class="post-title">{{ page.title | escape }}</h1>
+
+    <div class="post-meta">
+      {% if page.date %}
+        <span class="post-date">
+          {{ page.date | date: "%Y.%m.%d" }}
+        </span>
+      {% endif %}
+
+      {% if page.tags %}
+        <span class="post-tags">
+          {% for tag in page.tags %}
+            <span class="post-tag">#{{ tag }}</span>
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
   </header>
-  
+
   <br>
 
   <div class="post-content">
