@@ -2,6 +2,23 @@
 layout: default
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('pre code.language-mermaid').forEach(function (codeBlock) {
+      const pre = codeBlock.parentElement;
+      const mermaidDiv = document.createElement('div');
+      mermaidDiv.className = 'mermaid';
+      mermaidDiv.textContent = codeBlock.textContent;
+      pre.replaceWith(mermaidDiv);
+    });
+
+    mermaid.initialize({
+      startOnLoad: true
+    });
+  });
+</script>
+
 <!-- Highlight.js CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css">
 
