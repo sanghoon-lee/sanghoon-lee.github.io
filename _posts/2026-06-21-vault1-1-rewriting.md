@@ -6,11 +6,8 @@ description: HashiCorp Vault의 KV Engine에 대한 개념을 공부하고, 이�
 image: /assets/images/hashicorp.jpg
 categories: 토이프로젝트
 tags:
-  - Vault
-  - HashiCorp
-  - KMS
-  - Security
-  - Docker
+  - 보안
+  - 인프라
 ---
 
 보안 관점에서는 암호화 키를 애플리케이션으로 전달하지 않고, 애플리케이션과 분리된 외부 시스템에서 암·복호화를 수행하는 방식이 더 권장됩니다.

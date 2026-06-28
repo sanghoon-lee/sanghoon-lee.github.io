@@ -7,8 +7,7 @@ image: /assets/images/githubpages.jpg
 categories: 잡담
 tags:
   - AI
-  - Blog
-  - Github
+  - 블로그
 ---
 
 ChatGPT의 도움을 받아서 GitHub Pages + Minima 테마로 심플한 블로그를 만들었습니다! 😄
