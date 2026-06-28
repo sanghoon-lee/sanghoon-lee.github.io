@@ -34,9 +34,11 @@ layout: default
     <div class="post-meta">
       {% if page.date %}
         <span class="post-date">
-          <strong>날짜 :</strong> {{ page.date | date: "%Y.%m.%d" }}
+          <strong>작성일자 :</strong> {{ page.date | date: "%Y.%m.%d" }}
         </span>
       {% endif %}
+
+      <br>
 
       {% if page.tags %}
         <span class="post-tags">
