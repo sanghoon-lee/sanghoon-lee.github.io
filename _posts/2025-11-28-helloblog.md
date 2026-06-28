@@ -7,7 +7,7 @@ image: /assets/images/githubpages.jpg
 categories: 잡담
 tags:
   - AI
-  - ChatGPT
+  - Blog
   - Github
 ---
 
