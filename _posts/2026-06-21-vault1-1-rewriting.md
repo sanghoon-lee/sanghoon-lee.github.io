@@ -75,7 +75,7 @@ KV Engine에는 Version 1과 Version 2가 존재합니다. Version 1은 시크�
 $ sudo docker exec -it vault sh
 ```
 
-> 이후 실습도 모두 컨테이너 내부의 CLI를 사용해서 진행되었습니다.
+> 이후 실습도 모두 컨테이너 내부의 Vault CLI를 사용해서 진행되었습니다.
 
 컨테이너 내부에 접속한 상태에서 아래 명령으로 KV Version 2 Engine을 활성화하려고 했습니다.
 
