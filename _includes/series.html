@@ -12,7 +12,11 @@
     <ul>
         {% for post in series.posts %}
         <li>
-            <a href="{{ post.url }}">{{ post.title }}</a>
+            {% if page.url == post.url %}
+                <strong>✔ {{ post.title }} (현재 글)</strong>
+            {% else %}
+                <a href="{{ post.url }}">{{ post.title }}</a>
+            {% endif %}
         </li>
         {% endfor %}
     </ul>
