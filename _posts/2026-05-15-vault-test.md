@@ -1,10 +1,12 @@
 ---
 layout: post
-title: "JMeter를 이용한 Vault Transit Engine 성능 테스트"
+title: "[학습기록] JMeter를 이용한 Vault Transit Engine 성능 테스트"
 date: 2026-05-15
 description: JMeter를 이용해서 Vault Transit Engine의 성능을 테스트해 본 과정을 정리해서 작성한 글입니다.
 image: /assets/images/hashicorp.jpg
 categories: 학습기록
+tags:
+  - 테스트
 ---
 
 시크릿 관리 통제 강화와 애플리케이션 내부에서 수행하던 암호화 연산의 외부화를 핵심 방향으로 Vault 기반 보안체계 구축을 검토하게 되었습니다.
@@ -186,7 +188,3 @@ Percentile 기반의 응답 특성은 결과 리포트의 Statistics 항목에�
 * [[토이프로젝트] Vault를 이용한 KMS 대체 검토: (2) KV Engine을 이용한 암호화 키 저장과 조회 실습](https://sanghoon-lee.github.io/2026/04/10/vault1-1-rewriting/)
 * [[토이프로젝트] Vault를 이용한 KMS 대체 검토: (3) Transit Engine을 이용한 암·복호화 실습](https://sanghoon-lee.github.io/2026/04/11/vault2/)
 * [[토이프로젝트] Vault를 이용한 KMS 대체 검토: (4) Java 애플리케이션에서 Vault Transit Engine 연동하기](https://sanghoon-lee.github.io/2026/04/18/vault3/)
-
----
-
-#JMeter #부하테스트 #성능테스트 #HashiCorpVault #Vault #TPS #TransitEngine 
