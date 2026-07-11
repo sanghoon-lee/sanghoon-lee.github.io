@@ -1,0 +1,19 @@
+{% assign series = site.data[page.series] %}
+
+<div class="series-box">
+    <div class="series-title">
+        📚 {{ series.title }}
+    </div>
+
+    <div class="series-description">
+        {{ series.description }}
+    </div>
+
+    <ul>
+        {% for post in series.posts %}
+        <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

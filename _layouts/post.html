@@ -34,19 +34,14 @@ layout: default
     <div class="post-meta">
       {% if page.date %}
         <span class="post-date">
-          <strong>발행일 :</strong> {{ page.date | date: "%Y.%m.%d" }}
+          <strong>준민아빠 </strong> {{ page.date | date: "%Y.%m.%d" }}
         </span>
       {% endif %}
 
       <br>
 
-      {% if page.tags %}
-        <span class="post-tags">
-          <strong>태그 :</strong>
-          {% for tag in page.tags %}
-            <span class="post-tag">#{{ tag }}</span>
-          {% endfor %}
-        </span>
+      {% if page.series %}
+        {% include series.html %}
       {% endif %}
     </div>
   </header>

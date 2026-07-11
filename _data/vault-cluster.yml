@@ -1,0 +1,15 @@
+title: Vault 클러스터 구축
+description: Vault 클러스터를 직접 구축하면서 개념부터 Leader Election, Failover, Load Balancer 구성까지 단계별로 정리한 시리즈입니다.
+
+posts:
+  - title: "(1) 개념과 동작 원리"
+    url: "/2026/06/26/vault-ha/"
+
+  - title: "(2) 실습환경 구성"
+    url: "/toy-project-vault-cluster-2"
+
+  - title: "(3) Leader Election과 Failover 검증"
+    url: "/toy-project-vault-cluster-3"
+
+  - title: "(4) Load Balancer로 단일 진입점 구성"
+    url: "/toy-project-vault-cluster-4"
