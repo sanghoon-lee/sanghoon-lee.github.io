@@ -2,16 +2,6 @@
 {% assign next_post = nil %}
 {% assign current_found = false %}
 
-<div style="background:#fff3cd; padding:15px; margin:20px 0;">
-  <div>page.series: {{ page.series }}</div>
-  <div>page.url: {{ page.url }}</div>
-  <div>series title: {{ series.title }}</div>
-
-  {% for post in series.posts %}
-    <div>등록된 URL: {{ post.url }}</div>
-  {% endfor %}
-</div>
-
 {% for post in series.posts %}
   {% if current_found %}
     {% assign next_post = post %}
@@ -25,19 +15,21 @@
 
 {% if next_post %}
   <div class="series-next-box">
-    <div class="series-next-label">다음 포스팅</div>
+    <div class="series-next-label">
+      다음 포스팅
+    </div>
 
-    <a class="series-next-link"
-       href="{{ next_post.url | relative_url }}">
+    <a
+      class="series-next-link"
+      href="{{ next_post.url | relative_url }}"
+    >
       <span class="series-next-title">
         {{ next_post.title }}
       </span>
 
-      <span class="series-next-arrow">→</span>
+      <span class="series-next-arrow">
+        →
+      </span>
     </a>
-  </div>
-{% else %}
-  <div style="background:#f8d7da; padding:15px; margin:20px 0;">
-    다음 포스팅을 찾지 못했습니다.
   </div>
 {% endif %}
