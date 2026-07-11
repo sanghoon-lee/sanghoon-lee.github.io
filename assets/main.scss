@@ -454,3 +454,15 @@ code.highlighter-rouge:not(pre code),
 .series-box li {
     margin: 6px 0;
 }
+
+.post-tag {
+    display: inline-block;
+    margin-right: 6px;
+    margin-bottom: 4px;
+    padding: 4px 10px;
+    background: #eef6ff;
+    color: #3568c9;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
