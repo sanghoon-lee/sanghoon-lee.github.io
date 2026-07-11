@@ -5,6 +5,9 @@ date: 2026-01-07
 description: MappedSuperClass 어노테이션에 대해서 공부한 내용을 정리한 글입니다.
 image: /assets/images/springboot.png
 categories: 학습기록
+tags:
+  - 자바
+  - DB
 ---
 
 스프링은 다양한 어노테이션을 제공함으로써 개발 편의성을 보장하고 있습니다. 

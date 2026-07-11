@@ -1,0 +1,35 @@
+{% assign series = site.data[page.series] %}
+{% assign next_post = nil %}
+{% assign current_found = false %}
+
+{% for post in series.posts %}
+  {% if current_found %}
+    {% assign next_post = post %}
+    {% break %}
+  {% endif %}
+
+  {% if page.url == post.url %}
+    {% assign current_found = true %}
+  {% endif %}
+{% endfor %}
+
+{% if next_post %}
+  <div class="series-next-box">
+    <div class="series-next-label">
+      다음 포스팅
+    </div>
+
+    <a
+      class="series-next-link"
+      href="{{ next_post.url | relative_url }}"
+    >
+      <span class="series-next-title">
+        {{ next_post.title }}
+      </span>
+
+      <span class="series-next-arrow">
+        →
+      </span>
+    </a>
+  </div>
+{% endif %}
