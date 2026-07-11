@@ -52,6 +52,10 @@ layout: default
     {{ content }}
   </div>
 
+  {% if page.series %}
+    {% include series-next.html %}
+  {% endif %}
+
   <script src="https://giscus.app/client.js"
           data-repo="sanghoon-lee/sanghoon-lee.github.io"
           data-repo-id="R_kgDOQerB-w"
