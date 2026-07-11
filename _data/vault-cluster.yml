@@ -6,10 +6,10 @@ posts:
     url: "/2026/06/26/vault-ha/"
 
   - title: "(2) 실습환경 구성"
-    url: "/toy-project-vault-cluster-2"
+    url: "/2026/06/26/vault-ha2/"
 
   - title: "(3) Leader Election과 Failover 검증"
-    url: "/toy-project-vault-cluster-3"
+    url: "/2026/06/28/vault-ha3/"
 
   - title: "(4) Load Balancer로 단일 진입점 구성"
-    url: "/toy-project-vault-cluster-4"
+    url: "/2026/07/04/vault-ha4/"
