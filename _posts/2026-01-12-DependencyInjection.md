@@ -14,11 +14,9 @@ Spring에서는 객체 간 의존 관계를 관리하기 위해 **의존성 주�
 
 <img class="main-image" src="/assets/images/springboot.png" alt="스프링부트">
 
-기존 코드를 유지보수하거나 새로운 기능을 개발하는 과정에서 의존성 주입 방식에 대한 충분한 이해 없이 간편하다는 이유로 `@Autowired` 기반 필드 주입 방식을 사용하는 경우도 있습니다.
-
 최근에는 필드 주입보다는 생성자 주입 방식이 권장되고 있습니다. 하지만 단순히 "권장된다"는 이유만으로 사용하기보다 그 이유와 차이점을 이해하는 것이 중요합니다.
 
-저 역시 의존성 주입 방식의 차이를 명확히 이해하지 못했던 부분이 있었고, 이번 기회에 생성자 주입이 권장되는 이유와 필드 주입 방식의 한계를 정리해보았습니다.
+저 역시 의존성 주입 방식의 차이를 명확히 이해하지 못한 상태에서 간편하다는 이유로 `@Autowired` 기반 필드 주입 방식을 주로 사용했던 경험이 있습니다.
 
 ---
 
@@ -115,7 +113,7 @@ public class SomeService {
 
 반면 필드 주입 방식에서는 객체 생성 이후 Spring 컨테이너가 Reflection을 이용해 의존성을 주입합니다. 따라서 객체 생성 시점과 의존성 주입 시점이 분리되고, 객체가 완전히 초기화되기 전까지는 필요한 의존성이 존재하는지 명확하게 알기 어렵습니다.
 
-참고로 필드 주입 방식에서 사용하는 Reflection은 Java에서 실행 중에 클래스 정보를 조회하고 객체의 필드에 접근할 수 있도록 제공하는 기능입니다. Spring은 Reflection을 활용해 런타임에 Bean의 메타데이터를 확인하고, 개발자가 직접 접근하기 어려운 private 필드에도 의존 객체를 주입할 수 있습니다.
+참고로 필드 주입 방식에서 사용하는 Reflection은 Java에서 실행 중에 클래스 정보를 조회하고 객체의 필드에 접근할 수 있도록 제공하는 기능입니다. Spring은 Reflection을 활용해 개발자가 직접 값을 할당하지 않아도 private 필드에 의존 객체를 주입할 수 있습니다.
 
 ---
 
@@ -205,7 +203,7 @@ public class SomeService {
 
 ```java
 @Test
-void processTest() {
+void runTest() {
     SomeDependency dependency = mock(SomeDependency.class);
     SomeRepository repository = mock(SomeRepository.class);
 
