@@ -6,9 +6,9 @@ description: Java를 기준으로 AES-GCM을 안전하게 사용하는 방법을
 image: /assets/images/lock.png
 categories: 학습기록
 tags:
-  - Cryptography
-  - Security
-  - Java
+  - 보안
+  - 암호화
+  - 자바
 ---
 
 AES-GCM 모드는 강력한 암호화 방식입니다. 하지만 잘못된 사용은 심각한 보안 취약점으로 이어질 수 있습니다.
