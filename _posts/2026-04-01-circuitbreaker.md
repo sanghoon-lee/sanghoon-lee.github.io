@@ -2,7 +2,7 @@
 layout: post
 title: "[학습기록] 서킷 브레이커(Circuit Breaker)란? 장애 확산을 막는 동작 원리와 재시도(Retry)와의 차이"
 date: 2026-04-01
-description: 서비스 간 호출이 빈번한 환경에서 연쇄 장애(Cascading Failure)를 방지하기 위한 서킷 브레이커(Circuit Breaker)의 개념과 Closed/Open/Half-Open 상태, 재시도(Retry) 전략의 차이를 정리합니다.
+description: 서비스 간 호출이 빈번한 환경에서 연쇄 장애를 방지하기 위한 서킷 브레이커의 개념과 Closed/Open/Half-Open 상태, 재시도(Retry) 전략의 차이를 정리합니다.
 image: /assets/images/repair.jpg
 categories: 학습기록
 tags:
