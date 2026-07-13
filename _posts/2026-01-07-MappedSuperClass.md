@@ -8,7 +8,6 @@ categories: 학습기록
 tags:
   - 자바
   - 스프링
-  - JPA
   - DB
 ---
 

@@ -6,7 +6,7 @@ description: 데이터 품질 저하가 발생하는 원인과 이를 방지하�
 image: /assets/images/quality.jpg
 categories: 학습기록
 tags:
-  - 데이터품질
+  - 데이터
   - DB
 ---
 
