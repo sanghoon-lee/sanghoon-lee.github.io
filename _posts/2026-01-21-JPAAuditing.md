@@ -19,19 +19,9 @@ Spring Data JPA에서 생성일과 수정일을 자동으로 관리할 수 있�
 
 ## 1. 문제의 시작
 
-최근에 수행했던 토이 프로젝트에서는 사소한 설정 하나를 놓쳐 생각보다 많은 시간을 문제 해결에 소비해야 했습니다. JPA에 대한 기초가 부족한 탓이었습니다.
+제가 원했던 것은 엔티티 이벤트를 감지하는 JPA Auditing 기능을 활용해서 데이터의 생성일과 수정일 정보가 애플리케이션에서 자동으로 관리되도록 구현하는 것이었습니다. 그래서 생성일과 수정일과 같이 공통으로 사용할 수 있는 속성들만 묶인 기본 객체를 정의하고 엔티티에서 이를 상속받아 사용하면 된다고 쉽게 생각했습니다.
 
-제가 원했던 것은 엔티티 이벤트를 감지하는 JPA Auditing 기능을 활용해서 데이터의 생성일과 수정일 정보가 애플리케이션에서 자동으로 관리되도록 구현하는 것이었습니다.
-
-그래서 생성일과 수정일과 같이 공통으로 사용할 수 있는 속성들만 묶인 기본 객체를 정의하고 엔티티에서 이를 상속받아 사용하면 된다고 쉽게 생각했습니다.
-
----
-
-## 2. 코드 구현
-
-`@EntityListeners(AuditingEntityListener.class)`는 엔티티 이벤트를 감지하기 위한 리스너 등록 설정입니다.
-
-**createdAt**과 **updatedAt** 필드에 각각 `@CreatedDate`, `@LastModifiedDate` 어노테이션을 붙여서 생성일과 수정일로 인식되도록 선언했습니다. 
+그래서 **createdAt**과 **updatedAt** 필드에 각각 `@CreatedDate`, `@LastModifiedDate` 어노테이션을 붙여서 생성일과 수정일로 인식되도록 선언했습니다. 
 
 ```java
 @MappedSuperclass
@@ -47,6 +37,10 @@ public abstract class BaseEntity {
     ...
 }
 ```
+
+**참고**
+
+> `@EntityListeners(AuditingEntityListener.class)`는 엔티티 이벤트를 감지하기 위한 리스너 등록 설정입니다.
 
 이어서 엔티티로 사용할 `Account`가 `BaseEntity`를 상속받도록 구현했습니다.
 
@@ -73,7 +67,7 @@ public class Account extends BaseEntity{
 
 ---
 
-## 3. 기대와 다른 동작
+## 2. 기대와 다른 동작
 
 기대했던 결과는 다음과 같았습니다.
 
@@ -88,7 +82,7 @@ public class Account extends BaseEntity{
 
 ---
 
-## 4. 문제의 해결
+## 3. 문제의 해결
 
 사실 문제가 발생한 원인은 아주 단순했습니다. `@EnableJpaAuditing` 어노테이션을 선언하지 않아서 JPA Auditing 기능이 활성화되지 못했던 것입니다. 
 
@@ -120,7 +114,7 @@ public class Application {
 
 ---
 
-## 5. 마무리
+## 4. 마무리
 
 이번 문제는 단순히 어노테이션 하나를 빠뜨린 실수였습니다. 하지만 각 설정이 어떤 역할을 하는지 이해하는 것이 중요하다는 점을 다시 한번 느낄 수 있었습니다.
 
