@@ -7,7 +7,6 @@ image: /assets/images/troubleshooting.png
 categories: 트러블슈팅
 tags:
   - 자바
-  - 스프링
   - DB
 ---
 

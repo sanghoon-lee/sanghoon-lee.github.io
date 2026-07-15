@@ -7,7 +7,6 @@ image: /assets/images/springboot.png
 categories: 학습기록
 tags:
   - 자바
-  - 스프링
 ---
 
 Spring에서는 객체 간 의존 관계를 관리하기 위해 **의존성 주입(Dependency Injection, DI)**을 사용합니다. 이때 생성자 주입과 `@Autowired`를 이용한 필드 주입 중 어떤 방식을 선택해야 하는지 고민하는 경우가 많습니다.

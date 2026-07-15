@@ -7,7 +7,6 @@ image: /assets/images/springboot.png
 categories: 학습기록
 tags:
   - 자바
-  - 스프링
   - DB
 ---
 

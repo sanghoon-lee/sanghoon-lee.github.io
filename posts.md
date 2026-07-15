@@ -76,7 +76,7 @@ permalink: /posts/
       let html = '';
 
       // 현재 페이지 앞뒤로 보여줄 페이지 수
-      const visibleRange = 2;
+      const visibleRange = 1;
 
       // Prev
       html += `
