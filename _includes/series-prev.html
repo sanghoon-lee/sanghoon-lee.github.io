@@ -1,0 +1,19 @@
+{% assign posts = site.posts | where:"series", page.series | sort:"date" %}
+
+{% assign prev_post = nil %}
+
+{% for post in posts %}
+  {% if post.url == page.url %}
+    {% break %}
+  {% endif %}
+  {% assign prev_post = post %}
+{% endfor %}
+
+{% if prev_post %}
+<div class="series-prev">
+    <div class="series-label">◀ 이전 포스팅</div>
+    <a href="{{ prev_post.url | relative_url }}">
+        {{ prev_post.title }}
+    </a>
+</div>
+{% endif %}

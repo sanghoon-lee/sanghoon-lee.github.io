@@ -1,0 +1,61 @@
+{% if page.series %}
+
+  {% assign series_posts = site.posts
+    | where: "series", page.series
+    | sort: "date"
+  %}
+
+  {% assign prev_post = nil %}
+  {% assign next_post = nil %}
+  {% assign found_current = false %}
+
+  {% for post in series_posts %}
+
+    {% if found_current %}
+      {% assign next_post = post %}
+      {% break %}
+    {% endif %}
+
+    {% if post.url == page.url %}
+      {% assign found_current = true %}
+    {% else %}
+      {% assign prev_post = post %}
+    {% endif %}
+
+  {% endfor %}
+
+  {% if prev_post or next_post %}
+    <nav class="series-navigation" aria-label="시리즈 이전 및 다음 포스팅">
+
+      <div class="series-navigation-item series-navigation-prev">
+        {% if prev_post %}
+          <a href="{{ prev_post.url | relative_url }}">
+            <span class="series-navigation-label">
+              ← 이전 포스팅
+            </span>
+
+            <span class="series-navigation-title">
+              {{ prev_post.title }}
+            </span>
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="series-navigation-item series-navigation-next">
+        {% if next_post %}
+          <a href="{{ next_post.url | relative_url }}">
+            <span class="series-navigation-label">
+              다음 포스팅 →
+            </span>
+
+            <span class="series-navigation-title">
+              {{ next_post.title }}
+            </span>
+          </a>
+        {% endif %}
+      </div>
+
+    </nav>
+  {% endif %}
+
+{% endif %}
