@@ -2,12 +2,14 @@
 layout: post
 title: "[토이프로젝트] Vault를 이용한 KMS 대체 검토: (2) KV Engine을 이용한 암호화 키 저장과 조회 실습"
 date: 2026-04-10
+series: vault-kms
 description: HashiCorp Vault의 KV Engine에 대한 개념을 공부하고, 이를 이용해서 암호화 키 저장과 조회 실습하는 과정을 정리한 글입니다. 원래 포스팅했던 내용을 나중에 리라이팅하면서 추가되었습니다.
 image: /assets/images/hashicorp.jpg
 categories: 토이프로젝트
 tags:
   - 보안
   - 인프라
+  - 자바
 ---
 
 보안 관점에서는 암호화 키를 애플리케이션으로 전달하지 않고, 애플리케이션과 분리된 외부 시스템에서 암·복호화를 수행하는 방식이 더 권장됩니다.

@@ -1,0 +1,15 @@
+title: Vault를 이용한 KMS 대체 검토
+description: HashiCorp Vault의 개념과 주요 기능을 학습하고, KMS 대체 가능성을 검토한 과정을 정리한 시리즈입니다.
+
+posts:
+  - title: "(1) 개념정리와 설치과정"
+    url: "/2026/04/09/vault/"
+
+  - title: "(2) KV Engine을 이용한 암호화 키 저장과 조회 실습"
+    url: "/2026/04/10/vault1-1-rewriting/"
+
+  - title: "(3) Transit Engine을 이용한 암·복호화 실습"
+    url: "/2026/04/11/vault2/"
+
+  - title: "(4) Java 애플리케이션에서 Vault Transit Engine 연동하기"
+    url: "/2026/04/18/vault3/"
