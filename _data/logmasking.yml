@@ -4,3 +4,5 @@ description: "Spring Boot와 Logback PatternLayout을 이용해 민감정보 로
 posts:
   - title: "(1) PatternLayout 방식을 선택한 이유"
     url: "/2026/02/16/logging-pattern-mask/"
+  - title: "(2) PatternLayout 확장으로 로그 마스킹 구현하기"
+    url: "/2026/02/18/logging-pattern-mask2/"
