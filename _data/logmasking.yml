@@ -1,0 +1,6 @@
+title: "[토이프로젝트] Spring Boot Logback 로그 마스킹 구현"
+description: "Spring Boot와 Logback PatternLayout을 이용해 민감정보 로그 마스킹 기능을 설계하고 구현하는 과정을 정리한 시리즈입니다."
+
+posts:
+  - title: "(1) PatternLayout 방식을 선택한 이유"
+    url: "/2026/02/16/logging-pattern-mask/"
