@@ -392,6 +392,9 @@ E -. 초기화 완료 .-> F
 ---
 
 ## 8. 소스코드 
+
+전체 소스 코드는 아래 저장소에서 확인할 수 있습니다.
+
 * [logging-pattern-mask](https://github.com/sanghoon-lee/logging-pattern-mask)
 
 

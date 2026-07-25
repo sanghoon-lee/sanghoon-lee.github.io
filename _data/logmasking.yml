@@ -6,3 +6,5 @@ posts:
     url: "/2026/02/16/logging-pattern-mask/"
   - title: "(2) PatternLayout 확장으로 로그 마스킹 구현하기"
     url: "/2026/02/18/logging-pattern-mask2/"
+  - title: "(3) 동작 검증과 한계"
+    url: "/2026/02/20/logging-pattern-mask3/"
