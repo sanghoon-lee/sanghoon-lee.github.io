@@ -2,6 +2,7 @@
 layout: post
 title: "[토이프로젝트] Spring Boot Logback 로그 마스킹 구현: (1) PatternLayout 방식을 선택한 이유"
 date: 2026-02-16
+series: logmasking
 description: Spring Boot Logback PatternLayout을 이용한 로그 마스킹 프로젝트의 첫 번째 글입니다. 코드 직접 처리, JSON 직렬화, PatternLayout 방식을 비교하고 문자열 기반 방식을 선택한 이유를 설명합니다.
 image: /assets/images/security.png
 categories: 토이프로젝트

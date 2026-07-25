@@ -2,6 +2,7 @@
 layout: post
 title: "[토이프로젝트] Spring Boot Logback 로그 마스킹 구현: (3) 동작 검증과 한계"
 date: 2026-02-20
+series: logmasking
 description: Spring Boot Logback 로그 마스킹 기능을 API 요청으로 테스트하고, 정규식과 Trigger 기반 문자열 마스킹 방식의 한계와 운영 시 고려사항을 정리합니다.
 image: /assets/images/security.png
 categories: 토이프로젝트

@@ -2,6 +2,7 @@
 layout: post
 title: "[토이프로젝트] Spring Boot Logback 로그 마스킹 구현: (2) PatternLayout 확장으로 로그 마스킹 구현하기"
 date: 2026-02-18
+series: logmasking
 description: Spring Boot Logback PatternLayout을 확장하여 로그 출력 시 전화번호와 이메일 주소 등 민감정보를 자동으로 마스킹하는 기능을 구현합니다.
 image: /assets/images/security.png
 categories: 토이프로젝트
