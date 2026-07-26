@@ -33,11 +33,11 @@ CPU 사용률, Heap 메모리, Active Service, XLog와 같은 운영 정보를 �
 
 공식 GitHub 저장소의 `release` 브랜치에서 `2.17.1` 태그를 선택했습니다.
 
-<img class="main-image" src="/assets/images/scouter-release-tags.jpg" alt="Scouter 프로젝트 Release 브랜치의 Tag 목록">
+<img class="sub-image" src="/assets/images/scouter-release-tags.jpg" alt="Scouter 프로젝트 Release 브랜치의 Tag 목록">
 
 그리고 페이지 하단에 위치한 **Assets**에서 `scouter-all-2.17.1.tar.gz` 파일을 다운로드했습니다. 
 
-<img class="main-image" src="/assets/images/scouter-assets.jpg" alt="Scouter 2.17.1 배포 버전의 Assets 목록">
+<img class="sub-image" src="/assets/images/scouter-assets.jpg" alt="Scouter 2.17.1 배포 버전의 Assets 목록">
 
 압축을 해제하면 `scouter/agent.java` 디렉터리에서 `Scouter Agent` 연동에 필요한 `scouter.agent.jar` 파일을 확인할 수 있습니다.
 
