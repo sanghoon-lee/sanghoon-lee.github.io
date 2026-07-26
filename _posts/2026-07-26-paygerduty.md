@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "[학습기록] Scouter와 PagerDuty로 장애 감지부터 On-call까지: (1) Scouter Server 설치와 모니터링 환경 준비"
+title: "[토이프로젝트] Scouter와 PagerDuty로 장애 감지부터 On-call까지: (1) Scouter Server 설치와 모니터링 환경 준비"
 date: 2026-07-26
 description: Scouter Server를 설치하고 모니터링 환경을 준비합니다. 이후 Spring Boot Agent 연동과 Alert, PagerDuty를 이용한 On-call 자동화 시리즈를 시작합니다.
 image: /assets/images/monitoring.jpg
-categories: 학습기록
+categories: 토이프로젝트
 tags:
   - 인프라
   - 자바
@@ -191,7 +191,8 @@ flowchart LR
 > [(4) 애플리케이션 서버 보호 기능 검증](https://sanghoon-lee.github.io/2026/06/08/nginx-rp4/)<br>
 > [(5) 로드밸런싱 기능 검증](https://sanghoon-lee.github.io/2026/06/14/nginx-rp5/)<br>
 > [(6) SSL 종료 기능 검증](https://sanghoon-lee.github.io/2026/06/14/nginx-rp6/)<br>
-> [(7) 정적 콘텐츠 처리 기능 검증](https://sanghoon-lee.github.io/2026/06/17/nginx-rp7/)
+> [(7) 정적 콘텐츠 처리 기능 검증](https://sanghoon-lee.github.io/2026/06/17/nginx-rp7/)<br><br>
+> 실습환경 구성과 관련해서는 [(5) 로드밸런싱 기능 검증](https://sanghoon-lee.github.io/2026/06/14/nginx-rp5/)을 참고하면 됩니다.
 
 ---
 
