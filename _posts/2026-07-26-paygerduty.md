@@ -2,6 +2,7 @@
 layout: post
 title: "[토이프로젝트] Scouter와 PagerDuty로 장애 감지부터 On-call까지: (1) Scouter Server 설치와 모니터링 환경 준비"
 date: 2026-07-26
+series: paygerduty
 description: Scouter Server를 설치하고 모니터링 환경을 준비합니다. 이후 Spring Boot Agent 연동과 Alert, PagerDuty를 이용한 On-call 자동화 시리즈를 시작합니다.
 image: /assets/images/monitoring.jpg
 categories: 토이프로젝트
