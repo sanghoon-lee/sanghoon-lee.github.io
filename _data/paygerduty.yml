@@ -4,4 +4,6 @@ description: ""
 posts:
   - title: "(1) Scouter Server 설치와 모니터링 환경 준비"
     url: "/2026/07/26/paygerduty/"
+  - title: "(2) Spring Boot 애플리케이션에 Scouter Agent 연동과 모니터링 시작"
+    url: "/2026/07/26/paygerduty2/"
 

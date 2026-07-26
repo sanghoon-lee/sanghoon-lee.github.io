@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[토이프로젝트] Scouter와 PagerDuty로 장애 감지부터 On-call까지: Spring Boot 애플리케이션에 Scouter Agent 연동과 모니터링 시작"
+title: "[토이프로젝트] Scouter와 PagerDuty로 장애 감지부터 On-call까지: (2) Spring Boot 애플리케이션에 Scouter Agent 연동과 모니터링 시작"
 date: 2026-07-26
 series: paygerduty
 description: 
