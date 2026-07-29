@@ -21,7 +21,7 @@ tags:
 
 ## 1. Scouter Agent 준비
 
-먼저 애플리케이션에 `Scouter Agent`를 연동하기 위해 Agent 파일을 다운로드하고 필요한 설정 파일을 준비했습니다.
+먼저 애플리케이션에 `Scouter Agent`를 연동하기 위해 필요한 파일을 다운로드하고, 설정 파일을 준비했습니다.
 
 ---
 
@@ -31,7 +31,7 @@ tags:
 
 * [https://github.com/scouter-project/scouter](https://github.com/scouter-project/scouter)
 
-공식 GitHub 저장소의 `release` 브랜치에서 `2.17.1` 태그를 선택했습니다.
+저장소의 `release` 브랜치로 이동해서 `2.17.1` 태그를 선택했습니다.
 
 <img class="sub-image" src="/assets/images/scouter-release-tags.jpg" alt="Scouter 프로젝트 Release 브랜치의 Tag 목록">
 
@@ -43,7 +43,7 @@ tags:
 
 **참고**
 
-> `scouter-all-2.17.1.tar.gz`에는 `Scouter Server`와 `Java Agent`, `Host Agent` 등 모니터링 환경을 구성하는 데 필요한 파일이 포함되어 있습니다. 이번 실습에서는 Java Agent 연동에 필요한 `scouter.agent.jar`만 사용합니다.
+> `scouter-all-2.17.1.tar.gz`에는 `Scouter Server`와 `Java Agent`, `Host Agent` 등 모니터링 환경을 구성하는 데 필요한 파일이 포함되어 있습니다. 이번에는 애플리케이션 연동에 필요한 `scouter.agent.jar`만 사용합니다.
 
 ---
 
@@ -92,7 +92,7 @@ obj_type=tomcat
 | `net_collector_ip`       | Scouter Server 주소             |
 | `net_collector_udp_port` | Collector UDP 포트              |
 | `net_collector_tcp_port` | Collector TCP 포트              |
-| `obj_host`               | `Scouter Client`에서 표시할 호스트 이름 |
+| `obj_host`               | `Scouter`에서 애플리케이션이 속한 호스트를 구분하기 위한 이름 |
 | `obj_type`               | 애플리케이션 종류                     |
 
 
@@ -122,7 +122,7 @@ simple-api
 
 ### 2.1. Dockerfile 수정
 
-GitHub 저장소에 있는 `simple-api`의 Dockerfile은 아래와 같이 작성되어 있습니다.
+GitHub 저장소에 있는 `simple-api`의 `Dockerfile`은 아래와 같이 작성되어 있습니다.
 
 **변경 전 Dockerfile**
 
@@ -160,11 +160,15 @@ ENTRYPOINT ["java", "-jar", "simple-api.jar"]
 
 ### 2.2. Docker 이미지 빌드
 
-Dockerfile 수정을 마치고, `simple-api-scouter`라는 이름으로 새로운 도커 이미지를 빌드했습니다.
+`Dockerfile`의 수정을 마치고 `simple-api-scouter`라는 이름으로 새로운 Docker 이미지를 빌드했습니다.
 
 ```bash
 docker build -t simple-api-scouter .
 ```
+
+**참고**
+
+> Docker는 이전 빌드 결과를 캐시로 재사용할 수 있습니다. 변경한 파일이 이미지에 반영되지 않은 것으로 보이는 경우 `docker build --no-cache -t simple-api-scouter .` 명령으로 캐시를 사용하지 않고 다시 빌드할 수 있습니다.
 
 ---
 
@@ -272,6 +276,19 @@ Picked up JAVA_TOOL_OPTIONS: -javaagent:/app/agent/scouter.agent.jar -Dscouter.c
 20260728 14:49:32 [A100] agent boot seed=x1jqkj7jgk
 20260728 14:49:33 [A119] Agent UDP local.port=0
 ```
+
+로그에서 `JAVA_TOOL_OPTIONS`가 JVM에 전달된 것과 `scouter.agent.jar`가 시스템 클래스 로더를 통해 로드된 것을 확인할 수 있습니다. 또한 `objType`이 `tomcat`으로 설정되고, `objName` 끝에 `simple-api-1`이 표시되는 것으로 보아 Scouter Agent 설정도 정상적으로 적용되었습니다.
+
+**참고**
+
+> 로그의 `Agent UDP local.port=0`은 Collector의 UDP 포트가 아니라 Agent가 사용하는 로컬 UDP 포트를 의미합니다. `scouter.conf` 파일의 `net_collector_udp_port=6100`은 Scouter Agent가 데이터를 전송할 대상인 Scouter Server의 UDP 포트이므로 서로 다른 값입니다.
+
+**참고**
+
+> Docker 환경에서는 Scouter Agent 로그의 `objName`에 컨테이너의 `hostname`과 `-Dobj_name`으로 설정한 값이 함께 표시될 수 있습니다.
+>
+> 위 로그에서도 `objName`이 `/535c1cd092b1/simple-api-1`로 출력되었습니다. `535c1cd092b1`은 Docker 컨테이너에 부여된 `hostname`이며, `simple-api-1`은 JVM 시스템 프로퍼티인 `-Dobj_name`으로 지정한 값입니다.
+
 
 ---
 
