@@ -600,3 +600,24 @@ code.highlighter-rouge:not(pre code),
     display: none;
   }
 }
+
+.image-row {
+    display: flex;
+    gap: 16px;
+}
+
+.image-row img {
+    width: 100%;
+}
+
+.image-row figure {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .image-row {
+        flex-direction: column;
+    }
+}
