@@ -69,7 +69,7 @@ tags:
 
 공식 GitHub 저장소에서 다운로드한 파일임을 확인한 뒤 실행 버튼을 클릭했습니다. 그러자 `Scouter Client`의 로그인 화면이 나타났습니다.
 
-<img class="sub-image" src="/assets/images/scouter.login.png" alt="scouter 서버 정보 입력창">
+<img class="main-image" src="/assets/images/scouter.login.png" alt="scouter 서버 정보 입력창">
 
 `Server Address`에는 `Scouter Server`가 실행되고 있는 주소인 192.168.56.13:6100을 입력했습니다. 또한 ID와 Password에는 기본 계정인 `admin` / `admin`을 입력한 뒤 로그인했습니다.
 
