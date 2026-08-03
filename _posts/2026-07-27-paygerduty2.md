@@ -296,4 +296,4 @@ Picked up JAVA_TOOL_OPTIONS: -javaagent:/app/agent/scouter.agent.jar -Dscouter.c
 
 `Scouter Client`를 사용하려면 운영체제에 맞는 Client를 별도로 다운로드해야 합니다. 
 
-다음 포스팅에서는 Windows 운영체제용 Client를 설치하고, `Scouter Client`를 통해 수집된 애플리케이션의 운영 정보를 실시간으로 확인해보도록 하겠습니다.
+다음 포스팅에서는 Windows 운영체제용 `Scouter Client`를 설치하고, 수집된 애플리케이션의 운영 정보를 실시간으로 확인해보도록 하겠습니다.
