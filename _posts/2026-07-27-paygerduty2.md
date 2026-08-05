@@ -252,7 +252,7 @@ $ docker compose ps
 또한 애플리케이션 시작 로그를 통해 `Scouter Agent`가 정상적으로 로드된 것도 확인했습니다.
 
 ```bash
-$ sudo docker logs api-01
+$ docker logs api-01
 ```
 
 ```text
@@ -265,16 +265,17 @@ Picked up JAVA_TOOL_OPTIONS: -javaagent:/app/agent/scouter.agent.jar -Dscouter.c
  Open Source S/W Performance Monitoring
  Scouter version 2.17.1
 
-20260728 14:49:31 [SCOUTER] loaded by system classloader
-20260728 14:49:31 [SCOUTER] jar:file:/app/agent/scouter.agent.jar
-20260728 14:49:31 [SCOUTER] Version 2.17.1 2022-03-27 04:35 GMT_ENV_java8plus
-20260728 14:49:32 [SCOUTER] objType:tomcat
-20260728 14:49:32 [SCOUTER] objName:/535c1cd092b1/simple-api-1
-20260728 14:49:32 [A113] Counter Collector Started (#19)
-20260728 14:49:32 [A113] InteractionCounter Collector Started (#19)
-20260728 14:49:32 [SCOUTER] Configure -Dscouter.config=/app/agent/scouter.conf
-20260728 14:49:32 [A100] agent boot seed=x1jqkj7jgk
-20260728 14:49:33 [A119] Agent UDP local.port=0
+20260729 05:35:10 [SCOUTER] Version 2.17.1 2022-03-27 04:35 GMT_ENV_java8plus
+20260729 05:35:10 [SCOUTER] loaded by system classloader
+20260729 05:35:10 [SCOUTER] jar:file:/app/agent/scouter.agent.jar
+20260729 05:35:11 [SCOUTER] objType:tomcat
+20260729 05:35:11 [SCOUTER] objName:/f7ddc5a582f1/simple-api-1
+20260729 05:35:11 [A113] Counter Collector Started (#19)
+20260729 05:35:11 [A113] InteractionCounter Collector Started (#19)
+20260729 05:35:11 [SCOUTER] Configure -Dscouter.config=/app/agent/scouter.conf
+20260729 05:35:11 [A100] agent boot seed=x1jqm5t98g
+20260729 05:35:12 [A119] Agent UDP local.port=0
+
 ```
 
 로그에서 `JAVA_TOOL_OPTIONS`가 JVM에 전달된 것과 `scouter.agent.jar`가 시스템 클래스 로더를 통해 로드된 것을 확인할 수 있습니다. 또한 `objType`이 `tomcat`으로 설정되고, `objName` 끝에 `simple-api-1`이 표시되는 것으로 보아 Scouter Agent 설정도 정상적으로 적용되었습니다.
@@ -287,7 +288,7 @@ Picked up JAVA_TOOL_OPTIONS: -javaagent:/app/agent/scouter.agent.jar -Dscouter.c
 
 > Docker 환경에서는 Scouter Agent 로그의 `objName`에 컨테이너의 `hostname`과 `-Dobj_name`으로 설정한 값이 함께 표시될 수 있습니다.
 >
-> 위 로그에서도 `objName`이 `/535c1cd092b1/simple-api-1`로 출력되었습니다. `535c1cd092b1`은 Docker 컨테이너에 부여된 `hostname`이며, `simple-api-1`은 JVM 시스템 프로퍼티인 `-Dobj_name`으로 지정한 값입니다.
+> 위 로그에서도 `objName`이 `/f7ddc5a582f1/simple-api-1`로 출력되었습니다. `f7ddc5a582f1`은 Docker 컨테이너에 부여된 `hostname`이며, `simple-api-1`은 JVM 시스템 프로퍼티인 `-Dobj_name`으로 지정한 값입니다.
 
 
 ---
