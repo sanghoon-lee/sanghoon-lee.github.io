@@ -13,7 +13,7 @@ tags:
 
 모니터링 대상 애플리케이션에 `Scouter Agent` 연동이 완료되었습니다. 이제 `Scouter Server`에는 애플리케이션의 운영 정보가 실시간으로 수집되고 있습니다.
 
-이번에는 `Scouter Client`를 통해 CPU 및 Heap 메모리 사용률, Active Service, XLog 등 다양한 운영 정보를 실시간으로 확인해보겠습니다.
+이번에는 `Scouter Client`를 통해 CPU 및 Heap 메모리, Active Service, XLog 등 다양한 운영 정보를 실시간으로 확인해보겠습니다.
 
 ---
 
@@ -107,5 +107,35 @@ tags:
 앞부분의 `f7ddc5a582f1`, `f134b16023c7`은 Docker가 컨테이너에 부여한 **hostname**입니다. 뒤에 표시되는 `simple-api-1`, `simple-api-2`는 Docker Compose의 `JAVA_TOOL_OPTIONS`를 통해 `-Dobj_name`으로 지정한 이름입니다. 동일한 호스트에서 여러 애플리케이션 인스턴스를 실행하더라도 `obj_name`을 통해 각각의 애플리케이션을 쉽게 구분할 수 있습니다.
 
 ---
+
+### 2.2. CPU - Linux(서버의 CPU 사용률)
+
+기본 화면 하단의 CPU - Linux 창에서는 `Scouter Agent`가 실행 중인 Linux 서버의 CPU 사용률을 실시간으로 확인할 수 있습니다.
+
+<img class="main-image" src="/assets/images/cpu.jpg" alt="CPU - Linux">
+
+이 그래프는 특정 애플리케이션이 아니라 서버 전체의 CPU 사용률을 나타냅니다. 따라서 Object Tree에서 `simple-api-1`이나 `simple-api-2`를 선택하지 않아도 항상 표시됩니다.
+
+CPU 사용률이 지속적으로 높게 유지된다면 서버 전체에 부하가 발생하고 있는 상황일 수 있습니다. 반대로 CPU 사용률은 낮은데 특정 애플리케이션의 응답 시간이 느리다면 애플리케이션 내부의 병목이나 외부 시스템 호출을 의심해볼 수 있습니다.
+
+이번에는 하나의 Linux 서버에서 두 개의 애플리케이션을 실행했기 때문에 CPU - Linux 창도 하나만 표시됩니다.
+
+---
+
+### 2.3. Heap Memory(JVM의 Heap Memory 사용량)
+
+기본 화면의 Heap Memory 창에서는 Object Tree에서 선택된 애플리케이션의 JVM Heap 사용량을 실시간으로 확인할 수 있습니다.
+
+로그인 직후에는 `Scouter Client`가 기본적으로 하나의 애플리케이션을 선택하기 때문에 별도로 선택하지 않아도 Heap 사용량이 표시됩니다. 다른 애플리케이션을 선택하면 해당 애플리케이션의 Heap 사용량으로 화면이 변경됩니다.
+
+<img class="main-image" src="/assets/images/heap-memory.jpg" alt="Heap Memory">
+
+그래프는 시간이 지남에 따라 Heap 사용량이 어떻게 변화하는지를 보여줍니다. 일반적으로 요청을 처리하면서 점차 증가하다가, Garbage Collection(GC) 이 수행되면 사용하지 않는 객체가 정리되면서 다시 감소하는 모습을 확인할 수 있습니다.
+
+Heap 사용량이 지속적으로 증가하고 GC 이후에도 거의 줄어들지 않는다면 메모리 누수(Memory Leak)를 의심해볼 수 있습니다. 또한 Heap 사용량이 최대치에 자주 도달한다면 JVM Heap 크기를 조정하거나 애플리케이션의 메모리 사용 패턴을 분석할 필요가 있습니다.
+
+---
+
+### 2.4. Active Service
 
 작성중

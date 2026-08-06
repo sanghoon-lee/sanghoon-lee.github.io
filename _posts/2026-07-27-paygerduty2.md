@@ -15,13 +15,11 @@ tags:
 
 이러한 운영 정보를 수집하려면 모니터링 대상 애플리케이션에 `Scouter Agent`를 연동해야 합니다.
 
-`Scouter Agent`가 수집한 정보는 `Scouter Server`로 전송되며, `Scouter Client`를 통해 실시간으로 확인할 수 있습니다.
-
 ---
 
 ## 1. Scouter Agent 준비
 
-먼저 애플리케이션에 `Scouter Agent`를 연동하기 위해 필요한 파일을 다운로드하고, 설정 파일을 준비했습니다.
+애플리케이션에 `Scouter Agent`를 연동하려면 먼저 필요한 파일을 다운로드하고, 설정 파일을 준비해야 합니다.
 
 ---
 
@@ -31,7 +29,7 @@ tags:
 
 * [https://github.com/scouter-project/scouter](https://github.com/scouter-project/scouter)
 
-저장소의 `release` 브랜치로 이동해서 `2.17.1` 태그를 선택했습니다.
+`Scouter Server`와 동일한 버전을 사용하기 위해 저장소의 `release` 브랜치로 이동해서 `2.17.1` 태그를 선택했습니다.
 
 <img class="sub-image" src="/assets/images/scouter-release-tags.jpg" alt="Scouter 프로젝트 Release 브랜치의 Tag 목록">
 
@@ -295,6 +293,6 @@ Picked up JAVA_TOOL_OPTIONS: -javaagent:/app/agent/scouter.agent.jar -Dscouter.c
 
 ## 4. 다음 포스팅
 
-`Scouter Client`를 사용하려면 운영체제에 맞는 Client를 별도로 다운로드해야 합니다. 
+`Scouter Agent`가 수집한 정보는 `Scouter Server`로 전송되며, `Scouter Client`를 통해 실시간으로 확인할 수 있습니다.
 
 다음 포스팅에서는 Windows 운영체제용 `Scouter Client`를 설치하고, 수집된 애플리케이션의 운영 정보를 실시간으로 확인해보도록 하겠습니다.
