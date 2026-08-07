@@ -2,7 +2,7 @@
 layout: post
 title: "[토이 프로젝트] DB 컬럼 암호화: (1) 애플리케이션 레벨 암호화에 대한 고민"
 date: 2026-01-24
-description: 애플리케이션 레벨에서 DB 컬럼 데이터를 암호화하는 토이프로젝트를 수행하는 과정을 정리한 글입니다. 1/5
+description: 애플리케이션 레벨에서 DB 컬럼 데이터를 암호화하는 토이 프로젝트를 수행하는 과정을 정리한 글입니다. 1/5
 image: /assets/images/jpa.jpg
 categories: 토이프로젝트
 ---
