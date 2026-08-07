@@ -3,7 +3,7 @@ layout: post
 title: "[토이프로젝트] Scouter와 PagerDuty로 장애 감지부터 On-call까지: (3) Scouter Client 설치와 운영 정보 모니터링"
 date: 2026-08-03
 series: paygerduty
-description: 
+description: Windows용 Scouter Client를 설치하고 Object Tree, CPU, Heap Memory, Active Service, XLog 등 주요 운영 정보를 확인하는 방법을 정리합니다.
 image: /assets/images/monitoring.jpg
 categories: 토이프로젝트
 tags:
@@ -13,13 +13,13 @@ tags:
 
 모니터링 대상 애플리케이션에 `Scouter Agent` 연동이 완료되었습니다. 이제 `Scouter Server`에는 애플리케이션의 운영 정보가 실시간으로 수집되고 있습니다.
 
-이번에는 `Scouter Client`를 통해 CPU 및 Heap 메모리, Active Service, XLog 등 다양한 운영 정보를 실시간으로 확인해보겠습니다.
+이번에는 `Scouter Client`를 설치하고, `Scouter Server`에 수집된 운영 정보를 어떻게 확인하는지 살펴보겠습니다.
 
 ---
 
 ## 1. Scouter Client 준비
 
-`Scouter Client`를 사용하기 위해 필요한 파일을 다운로드해야 합니다.
+`Scouter Client`를 사용하려면 필요한 파일을 다운로드해야 합니다.
 
 ---
 
@@ -31,7 +31,7 @@ tags:
 
 <img class="sub-image" src="/assets/images/scouter-release-tags.jpg" alt="Scouter 프로젝트 Release 브랜치의 Tag 목록">
 
-이번에는 페이지 하단의 **Assets**에서 `scouter.client.product-win32.win32.x86_64.zip` 파일을 다운로드했습니다.
+그리고 페이지 하단의 **Assets**에서 `scouter.client.product-win32.win32.x86_64.zip` 파일을 다운로드했습니다.
 
 <img class="sub-image" src="/assets/images/scouter-assets2.jpg" alt="Scouter 2.17.1 배포 버전의 Assets 목록">
 
@@ -81,13 +81,13 @@ tags:
 
 ## 2. 운영 정보 확인
 
-로그인이 완료되면 `Scouter Client`에는 서버 전체의 상태를 보여주는 정보와 특정 애플리케이션의 상태를 보여주는 정보가 함께 표시됩니다.
+로그인이 완료되면 Scouter Client에서 서버 전체의 상태와 선택된 애플리케이션의 상태를 함께 확인할 수 있습니다.
 
 <img class="sub-image" src="/assets/images/scouter1.jpg" alt="Scouter Client 기본 모니터링 화면">
 
-기본적으로 화면 하단에는 Linux 서버의 CPU, 메모리, 디스크, 네트워크 등 서버 전체의 자원 사용 현황이 표시됩니다. 이러한 정보는 특정 애플리케이션을 선택하지 않아도 항상 확인할 수 있습니다.
+기본 화면에는 Linux 서버의 CPU, 메모리, 디스크, 네트워크 등 서버 전체의 자원 사용 현황이 표시됩니다.
 
-반면 Heap 메모리, Active Service, XLog와 같은 애플리케이션 수준의 운영 정보는 Object Tree에서 모니터링 대상을 선택해야 확인할 수 있습니다.
+또한 Heap Memory, Active Service, XLog와 같은 애플리케이션 수준의 정보도 함께 표시되며, 이러한 정보는 Object Tree에서 선택된 애플리케이션을 기준으로 제공됩니다.
 
 ---
 
@@ -104,13 +104,13 @@ tags:
 
 나머지 항목은 토이프로젝트를 진행하면서 생성했던 애플리케이션 컨테이너들입니다. 현재는 실행이 종료되었지만, Scouter는 이전에 수집했던 Object 정보를 유지하기 때문에 Object Tree에 계속 표시됩니다.
 
-앞부분의 `f7ddc5a582f1`, `f134b16023c7`은 Docker가 컨테이너에 부여한 **hostname**입니다. 뒤에 표시되는 `simple-api-1`, `simple-api-2`는 Docker Compose의 `JAVA_TOOL_OPTIONS`를 통해 `-Dobj_name`으로 지정한 이름입니다. 동일한 호스트에서 여러 애플리케이션 인스턴스를 실행하더라도 `obj_name`을 통해 각각의 애플리케이션을 쉽게 구분할 수 있습니다.
+앞부분의 `f7ddc5a582f1`, `f134b16023c7`은 Docker가 컨테이너에 부여한 **hostname**입니다. 뒤에 표시되는 `simple-api-1`, `simple-api-2`는 Docker Compose의 `JAVA_TOOL_OPTIONS`를 통해 `-Dobj_name`으로 지정한 이름입니다. 동일한 호스트에서 여러 애플리케이션 인스턴스를 실행하더라도 `obj_name`을 통해 각 인스턴스를 쉽게 구분할 수 있습니다.
 
 ---
 
 ### 2.2. CPU - Linux(서버의 CPU 사용률)
 
-기본 화면 하단의 CPU - Linux 창에서는 `Scouter Agent`가 실행 중인 Linux 서버의 CPU 사용률을 실시간으로 확인할 수 있습니다.
+CPU - Linux 창에서는 `Scouter Agent`가 실행 중인 Linux 서버의 CPU 사용률을 실시간으로 확인할 수 있습니다.
 
 <img class="main-image" src="/assets/images/cpu.jpg" alt="CPU - Linux">
 
@@ -118,13 +118,13 @@ tags:
 
 CPU 사용률이 지속적으로 높게 유지된다면 서버 전체에 부하가 발생하고 있는 상황일 수 있습니다. 반대로 CPU 사용률은 낮은데 특정 애플리케이션의 응답 시간이 느리다면 애플리케이션 내부의 병목이나 외부 시스템 호출을 의심해볼 수 있습니다.
 
-이번에는 하나의 Linux 서버에서 두 개의 애플리케이션을 실행했기 때문에 CPU - Linux 창도 하나만 표시됩니다.
+현재는 두 개의 애플리케이션이 동일한 Linux 서버에서 실행되고 있기 때문에 CPU - Linux 창은 하나만 표시됩니다.
 
 ---
 
-### 2.3. Heap Memory(JVM의 Heap Memory 사용량)
+### 2.3. Heap Memory(JVM Heap 사용량)
 
-기본 화면의 Heap Memory 창에서는 Object Tree에서 선택된 애플리케이션의 JVM Heap 사용량을 실시간으로 확인할 수 있습니다.
+Heap Memory 창에서는 Object Tree에서 선택된 애플리케이션의 JVM Heap 사용량을 실시간으로 확인할 수 있습니다.
 
 로그인 직후에는 `Scouter Client`가 기본적으로 하나의 애플리케이션을 선택하기 때문에 별도로 선택하지 않아도 Heap 사용량이 표시됩니다. 다른 애플리케이션을 선택하면 해당 애플리케이션의 Heap 사용량으로 화면이 변경됩니다.
 
@@ -136,7 +136,37 @@ Heap 사용량이 지속적으로 증가하고 GC 이후에도 거의 줄어들�
 
 ---
 
-### 2.4. Active Service
+### 2.4. Active Service(현재 처리 중인 요청)
 
-## 작성중
+Active Service 창에서는 현재 처리 중인 요청(Active Service)의 개수를 실시간으로 확인할 수 있습니다.
+
+<img class="main-image" src="/assets/images/active-service.jpg" alt="Active Service">
+
+그래프에는 시간에 따른 Active Service의 변화가 표시됩니다. 위 화면은 애플리케이션으로 유입되는 요청이 없는 상태에서 캡처한 화면이므로 Active Service도 0으로 표시됩니다.
+
+반대로 많은 요청이 동시에 유입되거나 일부 요청의 처리 시간이 길어지면 Active Service가 빠르게 증가하는 모습을 확인할 수 있습니다.
+
+만약 Active Service가 지속적으로 높은 상태를 유지한다면 애플리케이션이 요청을 제때 처리하지 못하고 있을 가능성이 있습니다. 이 경우에는 데이터베이스 조회 지연, 외부 API 호출 지연, 스레드 부족, 락 경합 등 요청 처리를 지연시키는 원인이 없는지 함께 확인해 보는 것이 좋습니다.
+
+---
+
+### 2.5. XLog(요청 처리 이력)
+
+XLog는 애플리케이션에서 처리된 요청의 실행 이력을 확인할 수 있는 기능입니다.
+
+<img class="main-image" src="/assets/images/xlog.jpg" alt="XLog">
+
+앞에서 살펴본 Active Service가 **현재 처리 중인 요청**을 보여준다면, XLog는 **처리가 완료된 요청의 실행 결과**를 보여줍니다.
+
+각 요청은 하나의 점(Point)으로 표시되며, 점의 위치를 통해 요청이 발생한 시각과 처리 시간을 직관적으로 확인할 수 있습니다. 점이 위쪽에 위치할수록 요청 처리 시간이 길다는 의미이므로, 응답이 느린 요청을 한눈에 찾을 수 있습니다. 특정 요청을 더블 클릭하면 해당 요청의 상세 실행 정보도 확인할 수 있습니다.
+
+응답 시간이 비정상적으로 오래 걸린 요청이나 오류가 발생한 요청을 빠르게 찾아 분석할 수 있기 때문에, 장애 원인을 추적할 때 가장 많이 활용되는 화면 중 하나입니다.
+
+---
+
+## 3. 마무리
+
+`Scouter Client`를 설치하고 기본 모니터링 화면을 통해 운영 정보를 확인하는 방법을 살펴봤습니다.
+
+지금까지는 모니터링 화면의 구성과 각 지표의 의미를 이해하는 과정이었다면, 다음 포스팅에서는 실제 부하를 발생시키면서 운영 정보를 활용해 장애를 분석하는 과정을 살펴보겠습니다.
 
