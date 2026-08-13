@@ -124,7 +124,7 @@ CPU 사용률이 지속적으로 높게 유지된다면 서버 전체에 부하�
 
 ---
 
-### 2.3. Heap Memory(JVM Heap 사용량)
+### 2.3. Heap Used(JVM Heap 사용량)
 
 Heap Memory 창에서는 Object Tree에서 선택된 애플리케이션의 JVM Heap 사용량을 실시간으로 확인할 수 있습니다.
 

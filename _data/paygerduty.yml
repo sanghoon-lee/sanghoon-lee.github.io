@@ -8,5 +8,7 @@ posts:
     url: "/2026/07/27/paygerduty2/"
   - title: "(3) Scouter Client 설치와 운영 정보 모니터링"
     url: "/2026/08/03/paygerduty3/"
+  - title: "(4) JMeter로 부하를 발생시키며 운영 정보 분석하기"
+    url: "/2026/08/10/paygerduty4/"
 
 
