@@ -118,7 +118,7 @@ Docker Hub에서는 Scouter Server 2.20.0 버전의 공식 이미지를 제공�
 가상머신에 `scouter-docker` 디렉터리를 생성하고, 그 하위에 `Scouter Server` 실행에 필요한 `server` 디렉터리를 복사했습니다. 
 
 
-```md
+```nohighlight
 scouter-docker/
 ├── Dockerfile
 └── server/
