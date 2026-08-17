@@ -132,7 +132,7 @@ scouter-docker/
 
 Dockerfile은 `server` 디렉터리를 이미지 내부의 `/scouter/server`로 복사하고, `Scouter Server`가 사용하는 6100 포트를 TCP와 UDP 모두 열도록 구성했습니다. 
 
-모니터링 대상 Spring Boot 애플리케이션은 Java 21을 사용하지만, `Scouter Server`는 별도의 JVM에서 실행되므로 동일한 Java 버전을 사용할 필요는 없습니다. 처음에는 Java 17 기반 JRE를 사용했지만 Scouter Server 실행 과정에서 JAXB 관련 호환성 문제가 발생해 Java 11 기반 JRE로 변경했습니다.
+모니터링 대상 Spring Boot 애플리케이션은 Java 21을 사용하지만, `Scouter Server`는 별도의 JVM에서 실행되므로 동일한 Java 버전을 사용할 필요는 없습니다. Java 17 기반 JRE를 사용하면 Scouter Server 실행 과정에서 JAXB 관련 호환성 문제가 발생해서 Java 11 기반 JRE로 변경했습니다. 
 
 ```Dockerfile
 FROM eclipse-temurin:11-jre
@@ -176,7 +176,7 @@ Docker Compose를 이용해 컨테이너를 구성하고, 위에서 빌드했던
 
 ### 3.1. Docker Compose 구성
 
-이를 위해 `docker-compose.yml` 파일을 아래와 같이 작성했습니다.
+`docker-compose.yml` 파일은 아래와 같이 작성했습니다.
 
 ```yaml
 services:
@@ -185,8 +185,8 @@ services:
     container_name: scouter-server
     restart: unless-stopped
     volumes:
-      - /home/sanghoon/scouter-server/database:/home/server/database
-      - /home/sanghoon/scouter-server/logs:/home/server/logs
+      - /home/sanghoon/scouter-server/database:/scouter/server/database
+      - /home/sanghoon/scouter-server/logs:/scouter/server/logs
     ports:
       - "6100:6100/tcp"
       - "6100:6100/udp"
@@ -205,15 +205,15 @@ services:
 
 ---
 
-### 3.2. Scouter Server 실행
+### 3.2. 컨테이너 실행
 
-이어서 `docker-compose.yml`을 이용해서 컨테이너를 구성하고 실행했습니다.
+이어서 `docker-compose.yml` 파일로 컨테이너를 구성하고 실행했습니다.
 
 ```bash
 $ docker compose up -d
 ```
 
-`docker compose ps` 명령을 통해 컨테이너가 정상적으로 실행되고 있는 것을 확인했습니다.
+`docker compose ps` 명령으로 컨테이너가 정상적으로 실행되고 있는 것을 확인할 수 있었습니다.
 
 ```bash
 $ docker compose ps
@@ -224,7 +224,7 @@ NAME             IMAGE                   COMMAND                  SERVICE       
 scouter-server   scouter-server:2.20.0   "/__cacert_entrypoin…"   scouter-server   18 seconds ago   Up 17 seconds   0.0.0.0:6100->6100/tcp, 0.0.0.0:6100->6100/udp, [::]:6100->6100/tcp, [::]:6100->6100/udp
 ```
 
-추가로 실행 로그를 확인하여 실제 `Scouter Server`의 버전이 2.20.0인지 확인했습니다.
+추가로 컨테이너 로그를 통해 실행 중인 `Scouter Server`의 버전도 확인했습니다.
 
 ```bash
 $ docker compose logs scouter-server
@@ -244,7 +244,7 @@ scouter-server  |  Scouter version 2.20.0
 
 ---
 
-### 3.3. 모니터링 대상 애플리케이션 구성
+### 3.3. 모니터링 환경 구성
 
 `Scouter Agent`를 연동하려면 먼저 모니터링 대상 애플리케이션이 필요합니다.
 
