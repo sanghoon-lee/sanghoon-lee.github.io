@@ -15,11 +15,11 @@ tags:
 
 초반에는 장애 대응으로 고생을 많이 했습니다. 임원에게 주간업무 보고를 하다가 장애 대응부터 하고 오라며 회의실에서 쫓겨난 적도 있었습니다.
 
-저는 현재 회사에 입사하기 전까지는 임베디드 소프트웨어와 소규모 기업용 시스템만 개발했습니다. 그래서 APM(Application Performance Monitoring)을 실무에서 사용할 기회는 거의 없었습니다.
+그때 담당했던 서비스에서는 오픈소스 APM(Application Performance Monitoring)인 `Scouter`를 사용하고 있었습니다. 처음에는 사용법도 잘 몰랐습니다. 
 
-담당하던 서비스는 APM으로 오픈소스인 `Scouter`라는 프로그램을 사용하고 있었습니다. 처음에는 사용법도 잘 몰랐습니다. 하지만 장애에 대응하면서 하나씩 익혀갔고, 서비스 상태를 실시간으로 확인하고 원인을 분석하는 데 큰 도움을 받았습니다.
+하지만 장애에 대응하면서 하나씩 익혀갔고, 그러다 보니 서비스 상태를 실시간으로 확인하고 원인을 분석하는 데 큰 도움을 받을 수 있었습니다.
 
-최근 인프라팀장님께서 장애 발생 시 문자 메시지나 슬랙 알림을 통해 담당 개발자에게 연락하는 방식을 고민하고 있는 것을 알게 되었습니다. 하지만 새벽 시간대의 긴급 장애까지 대응하기에는 한계가 있다고 생각했습니다. 새벽 시간대에 잠든 개발자를 깨우기에는 문자 메시지도 슬랙 알림도 그리 믿음직스럽지 않아 보였기 때문입니다. 
+최근 인프라팀에서 장애 발생 시 문자 메시지나 슬랙 알림을 통해 담당 개발자에게 알리는 방안을 고민하고 있다는 것을 알게 되었습니다. 하지만 새벽 시간대의 긴급 장애까지 대응하기에는 한계가 있다고 생각했습니다. 새벽 시간대에 잠든 개발자를 깨우기에는 문자 메시지도 슬랙 알림도 그리 믿음직스럽지 않아 보였기 때문입니다. 
 
 24시간 3교대로 운영하는 IDC의 운영 비용을 줄이기 위한 고민이라는 점은 충분히 이해했습니다. 다만 새벽 시간대의 긴급 장애라면 담당 개발자에게 전화로 알리는 방식이 가장 현실적이라고 생각했습니다.
 
@@ -40,7 +40,7 @@ tags:
 
 이런 문제를 해결하기 위해 사용하는 도구가 **APM(Application Performance Monitoring)** 입니다.
 
-APM은 애플리케이션의 CPU, 메모리, 응답시간, Thread, SQL 수행 시간, 요청 수 등을 지속적으로 수집하고, 이를 대시보드로 시각화하여 제공합니다.
+APM은 CPU와 메모리 사용량, 응답 시간, Thread, SQL 수행 시간, 요청 처리 현황 등 애플리케이션 운영에 필요한 다양한 정보를 지속적으로 수집하고 이를 시각화하여 제공합니다.
 
 이번 포스팅 시리즈에서 사용할 `Scouter`는 Java 애플리케이션을 위한 오픈소스 APM입니다. CPU, Heap 메모리, Active Service, XLog 등 다양한 운영 정보를 실시간으로 확인할 수 있으며, Alert 기능도 제공합니다.
 
@@ -48,51 +48,148 @@ APM은 애플리케이션의 CPU, 메모리, 응답시간, Thread, SQL 수행 �
 
 ---
 
-## 2. Scouter Server 준비하기
+## 2. Scouter Server 이미지 준비
 
-우선 Docker를 이용해 `Scouter Server`를 구성하고, `Scouter Agent`를 연동할 모니터링 대상 애플리케이션을 준비했습니다. 
+우선 `Scouter Server`를 구성하기 위해 가상머신(VM)을 다음과 같이 생성했습니다.
+
+* IP : 192.168.56.13
+* OS : Ubuntu Linux
+
+그리고 `Scouter Server`의 실행 환경은 Docker로 구성했습니다.
 
 ---
 
-### 2.1. 이미지 다운로드
+### 2.1. Docker Hub 이미지 확인
 
-최신 버전을 사용하기 위해 일반적으로 사용하는 `latest` 태그로 이미지를 가져오려고 했습니다.
+최신 버전의 `Scouter Server`를 사용하기 위해 일반적으로 사용하는 `latest` 태그를 사용했지만, 이미지를 가져올 수 없었습니다.  
 
 ```bash
 $ docker pull scouterapm/scouter-server:latest
 ```
 
-하지만 `latest` 태그가 제공되지 않아 이미지를 내려받을 수 없었습니다. 
-
 ```text
 Error response from daemon: failed to resolve reference "docker.io/scouterapm/scouter-server:latest": docker.io/scouterapm/scouter-server:latest: not found
 ```
 
-확인해보니 Docker Hub에 공개된 공식 이미지는 최신 릴리스와 버전 차이가 있었고, `latest` 태그도 제공되지 않았습니다. 따라서 포스팅 작성 시점 기준으로 Docker Hub에서 사용할 수 있는 최신 태그인 `2.17.1`을 사용했습니다.
+Docker Hub에 공개된 `Scouter Server`의 공식 이미지는 최신 릴리스와 버전 차이가 크게 있었고, `latest` 태그도 제공되지 않았기 때문입니다. 따라서 처음에는 포스팅 작성 시점에 Docker Hub에서 제공하는 가장 최신 태그인 2.17.1을 사용했습니다.
 
 ```bash
 $ docker pull scouterapm/scouter-server:2.17.1
 ```
 
+하지만 이후 Spring Boot 3 애플리케이션을 연동하는 과정에서 문제가 발생했습니다. `Scouter Agent` 2.17.1에서는 Jakarta Servlet 기반의 HTTP 요청을 정상적으로 추적하지 못해 `Active Service`와 `XLog`가 표시되지 않았습니다.
+
+이후 이 문제를 해결하기 위해 `Scouter Agent`를 포함한 전체 환경을 2.20.0 버전으로 변경했습니다. 
+
+**참고**
+
+> [[트러블슈팅] Spring Boot 3 + Scouter 2.17.1에서 XLog가 표시되지 않는 문제 해결](https://sanghoon-lee.github.io/2026/08/13/scouter-trouble/)
+
 ---
 
-### 2.2. Docker Compose 구성
+### 2.2. Scouter 2.20.0 배포 파일 다운로드
 
-`docker-compose.yml` 파일은 아래와 같이 작성했습니다.
+Docker Hub에서는 Scouter Server 2.20.0 버전의 공식 이미지를 제공하지 않았기 때문에, 2.20.0 배포 파일을 이용해 Docker 이미지를 직접 생성하기로 했습니다. 
+
+`Scouter` 공식 GitHub의 Releases 페이지에서 [v2.20.0](https://github.com/scouter-project/scouter/releases/tag/v2.20.0)를 선택하면 해당 버전의 Releases 페이지로 이동합니다. 
+
+페이지 하단에 위치한 Assets에서 Docker 이미지 생성에 필요한 `scouter-all-2.20.0.tar.gz` 파일을 다운로드 받았습니다.
+
+<div class="image-row">
+  <figure>
+    <img src="/assets/images/scouter-v2.20.0-releases1.jpg" alt="Scouter 2.20.0 Releases 페이지(상단)">
+    <figcaption>Scouter 2.20.0 Releases 페이지 상단</figcaption>
+  </figure>
+
+  <figure>
+    <img src="/assets/images/scouter-v2.20.0-releases2.jpg" alt="Scouter 2.20.0 Releases 페이지(하단)">
+    <figcaption>Scouter 2.20.0 Releases 페이지 하단</figcaption>
+  </figure>
+</div>
+
+---
+
+### 2.3. Scouter 2.20.0 Docker 이미지 생성
+
+다운로드한 `scouter-all-2.20.0.tar.gz` 파일의 압축을 해제하면 `scouter` 디렉터리 아래에 `agent.batch`, `agent.host`, `agent.java`, `server`, `webapp` 디렉터리가 생성됩니다.
+
+<img class="main-image" src="/assets/images/scouter-all-2.20.0.jpg" alt="scouter-all-2.20.0.tar.gz 압축 해제">
+
+가상머신에 `scouter-docker` 디렉터리를 생성하고, 그 하위에 `Scouter Server` 실행에 필요한 `server` 디렉터리를 복사했습니다. 
+
+
+```md
+scouter-docker/
+├── Dockerfile
+└── server/
+    ├── scouter-server-boot.jar
+    ├── lib/
+    ├── conf/
+    └── ...
+```
+
+이어서 `scouter-server-boot.jar`를 이용해 `Scouter Server`가 실행되도록 Dockerfile을 작성했습니다. 
+
+Dockerfile은 `server` 디렉터리를 이미지 내부의 `/scouter/server`로 복사하고, `Scouter Server`가 사용하는 6100 포트를 TCP와 UDP 모두 열도록 구성했습니다. 
+
+모니터링 대상 Spring Boot 애플리케이션은 Java 21을 사용하지만, `Scouter Server`는 별도의 JVM에서 실행되므로 동일한 Java 버전을 사용할 필요는 없습니다. 처음에는 Java 17 기반 JRE를 사용했지만 Scouter Server 실행 과정에서 JAXB 관련 호환성 문제가 발생해 Java 11 기반 JRE로 변경했습니다.
+
+```Dockerfile
+FROM eclipse-temurin:11-jre
+
+WORKDIR /scouter
+
+COPY server/ /scouter/server/
+
+WORKDIR /scouter/server
+
+EXPOSE 6100/tcp
+EXPOSE 6100/udp
+
+CMD ["java", "-Xmx1024m", "-classpath", "./scouter-server-boot.jar", "scouter.boot.Boot", "./lib"]
+```
+
+Dockerfile 작성을 완료한 뒤 이미지를 빌드했습니다.
+
+```bash
+$ docker build -t scouter-server:2.20.0 .
+```
+
+정상적으로 이미지가 빌드되었고, 로컬에 존재하는 이미지 목록에 포함되어 있는 것도 확인했습니다.
+
+```bash
+$ docker image ls
+```
+
+```text
+IMAGE                   ID             DISK USAGE   CONTENT SIZE   EXTRA
+scouter-server:2.20.0   89a4f7784fc3        525MB          150MB
+```
+
+---
+
+## 3. Scouter Server 실행
+
+Docker Compose를 이용해 컨테이너를 구성하고, 위에서 빌드했던 `scouter-server:2.20.0` 이미지를 실행했습니다.
+
+---
+
+### 3.1. Docker Compose 구성
+
+이를 위해 `docker-compose.yml` 파일을 아래와 같이 작성했습니다.
 
 ```yaml
 services:
   scouter-server:
-    image: scouterapm/scouter-server:2.17.1
+    image: scouter-server:2.20.0
     container_name: scouter-server
     restart: unless-stopped
     volumes:
-      - /home/sanghoon/scouter-server/database:/home/scouter-server/database
-      - /home/sanghoon/scouter-server/logs:/home/scouter-server/logs
+      - /home/sanghoon/scouter-server/database:/home/server/database
+      - /home/sanghoon/scouter-server/logs:/home/server/logs
     ports:
       - "6100:6100/tcp"
       - "6100:6100/udp"
-      - "6180:6180"
 ```
 
 구성을 살펴보면 다음과 같습니다.
@@ -100,60 +197,58 @@ services:
 - `/home/sanghoon/scouter-server/database`: XLog, 프로파일, 카운터 등 Scouter가 수집한 모니터링 데이터를 보관하는 로컬 디렉터리입니다.
 - `/home/sanghoon/scouter-server/logs`: `Scouter Server`의 실행 로그를 보관하는 로컬 디렉터리입니다.
 - `6100/tcp`, `6100/udp`: `Scouter Agent`, `Scouter Client`가 `Scouter Server`와 통신하는 포트입니다.
-- `6180`: `Scouter Server`의 HTTP API를 제공하는 포트입니다.
 - `restart: unless-stopped`: 서버 재부팅 시 자동으로 컨테이너가 실행되도록 설정했습니다.
 
-`Scouter Server`가 수집한 데이터는 기본적으로 컨테이너 내부에 저장됩니다. 별도의 볼륨을 연결하지 않으면 컨테이너를 삭제하고 다시 생성할 때 기존 모니터링 데이터도 함께 사라질 수 있습니다.
+`Scouter Server`가 수집한 데이터는 기본적으로 컨테이너 내부에 저장됩니다. 별도의 볼륨을 연결하지 않으면 컨테이너를 삭제하고 다시 생성할 때 기존 모니터링 데이터도 함께 사라질 수 있습니다. 
+
+모니터링 데이터를 보존하기 위해 호스트의 `/home/sanghoon/scouter-server/database`, `/home/sanghoon/scouter-server/logs` 디렉터리를 컨테이너 내부의 데이터 및 로그 저장 경로와 연결했습니다.
 
 ---
 
-### 2.3. Scouter Server 실행
+### 3.2. Scouter Server 실행
 
-이어서 `Scouter Server` 컨테이너를 실행했습니다.
+이어서 `docker-compose.yml`을 이용해서 컨테이너를 구성하고 실행했습니다.
 
 ```bash
 $ docker compose up -d
 ```
 
-컨테이너 실행 상태는 `docker compose ps` 또는 `docker compose logs -f scouter-server` 명령으로도 확인할 수 있습니다.
-
-이번에는 컨테이너의 실행 여부뿐만 아니라 `Scouter Server`의 HTTP API가 정상적으로 동작하는지 확인하기 위해 서버 상태 조회 API를 호출해봤습니다. 참고로 현재 `Scouter Server`가 실행되는 가상머신의 IP는 `192.168.56.13`입니다.
+`docker compose ps` 명령을 통해 컨테이너가 정상적으로 실행되고 있는 것을 확인했습니다.
 
 ```bash
-$ curl http://192.168.56.13:6180/scouter/v1/info/server
+$ docker compose ps
 ```
 
-```json
-{
-    "status":"200",
-    "requestId":"#cg70",
-    "resultCode":"0",
-    "message":"success",
-    "result":[
-        {
-            "id":"-1082951330",
-            "name":"SCCOUTER-COLLECTOR",
-            "connected":true,
-            "serverTime":"1785048887135",
-            "version":"2.17.1 2022-03-27 04:35 GMT"
-        }
-    ]
-}
+```text
+NAME             IMAGE                   COMMAND                  SERVICE          CREATED          STATUS          PORTS
+scouter-server   scouter-server:2.20.0   "/__cacert_entrypoin…"   scouter-server   18 seconds ago   Up 17 seconds   0.0.0.0:6100->6100/tcp, 0.0.0.0:6100->6100/udp, [::]:6100->6100/tcp, [::]:6100->6100/udp
 ```
 
-응답의 `status`가 200, `resultCode`가 0, `connected`가 true로 표시되는 것을 통해 `Scouter Server`가 정상적으로 실행되고 있음을 확인할 수 있었습니다.
+추가로 실행 로그를 확인하여 실제 `Scouter Server`의 버전이 2.20.0인지 확인했습니다.
 
-6180 포트는 `Scouter`의 모니터링 화면이 아니라 HTTP API를 제공하는 포트입니다. 실제 모니터링 화면은 별도의 `Scouter Client`를 사용해 확인해야 합니다.
+```bash
+$ docker compose logs scouter-server
+```
+
+```text
+scouter-server  |   ____                  _
+scouter-server  |  / ___|  ___ ___  _   _| |_ ___ _ __
+scouter-server  |  \___ \ / __/   \| | | | __/ _ \ '__|
+scouter-server  |   ___) | (_| (+) | |_| | ||  __/ |
+scouter-server  |  |____/ \___\___/ \__,_|\__\___|_|
+scouter-server  |  Open Source S/W Performance Monitoring
+scouter-server  |  Scouter version 2.20.0
+```
+
+이를 통해 직접 생성한 Docker 이미지에서 `Scouter Server` 2.20.0이 정상적으로 실행되고 있음을 확인할 수 있었습니다.
 
 ---
 
-### 2.4. 모니터링 대상 애플리케이션 준비
+### 3.3. 모니터링 대상 애플리케이션 구성
 
 `Scouter Agent`를 연동하려면 먼저 모니터링 대상 애플리케이션이 필요합니다.
 
-새로운 애플리케이션을 별도로 만들지 않고, **Nginx로 Reverse Proxy 구성하기** 시리즈에서 사용했던 애플리케이션과 Nginx로 구성한 로드밸런싱 환경을 그대로 활용했습니다. 
-
-클라이언트의 요청은 `192.168.56.11:80`에서 실행되는 Nginx를 통해 두 개의 Spring Boot 애플리케이션으로 전달됩니다. 이후 각 애플리케이션에 `Scouter Agent`를 연결하여 모니터링 데이터를 `192.168.56.13`에서 구동되고 있는 `Scouter Server`로 전송하도록 구성할 예정입니다.
+새로운 애플리케이션을 별도로 만들지 않고, **Nginx로 Reverse Proxy 구성하기** 시리즈에서 사용했던 애플리케이션과 Nginx로 구성한 로드밸런싱 환경을 그대로 활용할 계획입니다.
 
 최종적으로 구성할 실습 환경은 다음과 같습니다.
 
@@ -174,7 +269,7 @@ flowchart LR
     end
 
     subgraph VM2["가상머신 #2: 192.168.56.13"]
-        Scouter["Scouter Server<br/>6100 TCP/UDP<br/>6180 HTTP API"]
+        Scouter["Scouter Server<br/>6100 TCP/UDP"]
     end
 
     Client -->|"http://192.168.56.11:80"| Nginx
@@ -197,9 +292,9 @@ flowchart LR
 
 ---
 
-## 3. 다음 포스팅
+## 4. 다음 포스팅
 
-`Scouter Server`를 설치하고, 모니터링 대상 Spring Boot 애플리케이션이 준비되었습니다.
+이번 포스팅에서 `Scouter Server` 2.20.0 버전의 Docker 이미지를 직접 생성하고, 컨테이너로 실행했습니다. 또한 모니터링 대상으로 사용할 Spring Boot 애플리케이션 환경을 준비했습니다.
 
-다음 포스팅에서는 Spring Boot 애플리케이션에 `Scouter Agent`를 연동하고, `Scouter Client`를 이용해 CPU, Heap 메모리, Active Service 등 다양한 운영 정보를 실시간으로 확인해보겠습니다.
+다음 포스팅에서는 Spring Boot 애플리케이션에 `Scouter Agent`를 연동하고, 애플리케이션의 운영 정보가 `Scouter Server`로 정상적으로 전송되는지 확인해보겠습니다.
 
