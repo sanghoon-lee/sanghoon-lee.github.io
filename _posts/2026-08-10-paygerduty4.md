@@ -26,6 +26,9 @@ tags:
   - Ramp-up Period : 10s
   - Loop Count : Infinite
 - HTTP Request
+  - Protocol : http
+  - Server IP : 192.168.56.11
+  - Port : 8081
   - GET /api/server
 
 이 테스트의 목적은 애플리케이션에 요청을 집중시켜 응답 지연 현상을 재현하는 것입니다. 따라서 단일 API를 반복 호출하는 단순한 시나리오로 테스트를 진행했습니다.
@@ -33,6 +36,8 @@ tags:
 ---
 
 ## 2. CPU 사용률 변화
+
+
 
 ---
 

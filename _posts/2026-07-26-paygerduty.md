@@ -90,9 +90,9 @@ $ docker pull scouterapm/scouter-server:2.17.1
 ### 2.2. Scouter 2.20.0 배포 파일 다운로드
 {: #scouter-download }
 
-Docker Hub에서는 Scouter Server 2.20.0 버전의 공식 이미지를 제공하지 않았기 때문에, 2.20.0 배포 파일을 이용해 Docker 이미지를 직접 생성하기로 했습니다. 
+Docker Hub에서는 `Scouter Server` 2.20.0 버전의 공식 이미지를 제공하지 않았기 때문에, 2.20.0 배포 파일을 이용해 Docker 이미지를 직접 생성하기로 했습니다. 
 
-`Scouter` 공식 GitHub의 Releases 페이지에서 [v2.20.0](https://github.com/scouter-project/scouter/releases/tag/v2.20.0)를 선택하면 해당 버전의 Releases 페이지로 이동합니다. 
+Scouter 공식 GitHub의 Releases 페이지에서 [v2.20.0](https://github.com/scouter-project/scouter/releases/tag/v2.20.0)를 선택하면 해당 버전의 Releases 페이지로 이동합니다. 
 
 페이지 하단에 위치한 Assets에서 Docker 이미지 생성에 필요한 `scouter-all-2.20.0.tar.gz` 파일을 다운로드 받았습니다.
 
