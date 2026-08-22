@@ -88,6 +88,7 @@ $ docker pull scouterapm/scouter-server:2.17.1
 ---
 
 ### 2.2. Scouter 2.20.0 배포 파일 다운로드
+{: #scouter-download }
 
 Docker Hub에서는 Scouter Server 2.20.0 버전의 공식 이미지를 제공하지 않았기 때문에, 2.20.0 배포 파일을 이용해 Docker 이미지를 직접 생성하기로 했습니다. 
 
@@ -245,10 +246,11 @@ scouter-server  |  Scouter version 2.20.0
 ---
 
 ### 3.3. 모니터링 환경 구성
+{: #environment }
 
 `Scouter Agent`를 연동하려면 먼저 모니터링 대상 애플리케이션이 필요합니다.
 
-새로운 애플리케이션을 별도로 만들지 않고, **Nginx로 Reverse Proxy 구성하기** 시리즈에서 사용했던 애플리케이션과 Nginx로 구성한 로드밸런싱 환경을 그대로 활용할 계획입니다.
+새로운 애플리케이션을 별도로 만들지 않고, **Nginx로 Reverse Proxy 구성하기** 시리즈에서 사용했던 애플리케이션(`simple-api`)을 그대로 활용할 계획입니다.
 
 최종적으로 구성할 실습 환경은 다음과 같습니다.
 
@@ -256,23 +258,17 @@ scouter-server  |  Scouter version 2.20.0
 flowchart LR
     Client["Client"]
 
-    subgraph VM1["가상머신 #1: 192.168.56.11"]
-        subgraph DockerNetwork["Docker Network"]
-            Nginx["Nginx<br/>Reverse Proxy"]
-
-            App1["Spring Boot #1<br/>api-01:8000<br/>(Scouter Agent)"]
-            App2["Spring Boot #2<br/>api-02:8000<br/>(Scouter Agent)"]
-
-            Nginx -->|"http://api-01:8000"| App1
-            Nginx -->|"http://api-02:8000"| App2
-        end
+    subgraph VM1["IP: 192.168.56.11"]
+        App1["애플리케이션 컨테이너 #1<br/>api-01:8081<br/>(Scouter Agent)"]
+        App2["애플리케이션 컨테이너 #1<br/>api-02:8082<br/>(Scouter Agent)"]
     end
 
-    subgraph VM2["가상머신 #2: 192.168.56.13"]
+    subgraph VM2["IP: 192.168.56.13"]
         Scouter["Scouter Server<br/>6100 TCP/UDP"]
     end
 
-    Client -->|"http://192.168.56.11:80"| Nginx
+    Client -->|"http://192.168.56.11:8081"| App1
+    Client -->|"http://192.168.56.11:8082"| App2
 
     App1 -.->|"모니터링 데이터<br/>6100 TCP/UDP"| Scouter
     App2 -.->|"모니터링 데이터<br/>6100 TCP/UDP"| Scouter
@@ -280,7 +276,8 @@ flowchart LR
 
 여기서 `api-01:8000`과 `api-02:8000`은 외부에 공개된 주소가 아니라, Nginx가 Docker 네트워크 내부에서 각 Spring Boot 컨테이너를 호출할 때 사용하는 컨테이너 이름과 포트입니다.
 
-**참고: Nginx로 Reverse Proxy 구성하기 시리즈**
+**Nginx로 Reverse Proxy 구성하기 시리즈**
+
 > [(1) 개념과 동작 원리](https://sanghoon-lee.github.io/2026/06/03/nginx-rp/)<br>
 > [(2) 애플리케이션 서버 구현](https://sanghoon-lee.github.io/2026/06/04/nginx-rp2/)<br>
 > [(3) Reverse Proxy 서버 구축 ](https://sanghoon-lee.github.io/2026/06/07/nginx-rp3/)<br>
@@ -289,6 +286,11 @@ flowchart LR
 > [(6) SSL 종료 기능 검증](https://sanghoon-lee.github.io/2026/06/14/nginx-rp6/)<br>
 > [(7) 정적 콘텐츠 처리 기능 검증](https://sanghoon-lee.github.io/2026/06/17/nginx-rp7/)<br><br>
 > 실습환경 구성과 관련해서는 [(5) 로드밸런싱 기능 검증](https://sanghoon-lee.github.io/2026/06/14/nginx-rp5/)을 참고하면 됩니다.
+
+**simple-api 애플리케이션 GitHub 저장소**
+
+* [https://github.com/sanghoon-lee/simple-api](https://github.com/sanghoon-lee/simple-api)
+
 
 ---
 
