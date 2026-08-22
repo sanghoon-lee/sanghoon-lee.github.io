@@ -121,7 +121,7 @@ Heap Used 창에서는 Object Tree에서 선택된 애플리케이션의 JVM Hea
 
 XLog 창에서는 애플리케이션에서 처리된 요청의 실행 이력을 확인할 수 있습니다.
 
-<img class="main-image" src="/assets/images/xlog.jpg" alt="XLog">
+<img class="sub-image" src="/assets/images/xlog.jpg" alt="XLog">
 
 Active Service EQ 창에서는 **현재 처리 중인 요청**을 보여주지만, XLog 창에서는 **처리가 완료된 요청의 실행 결과**를 보여줍니다.
 
