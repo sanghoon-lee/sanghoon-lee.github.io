@@ -23,7 +23,7 @@ tags:
 
 **참고**
 
-> [Scouter 2.20.0 배포 파일(`scouter.agent.jar`) 다운로드 방법](https://sanghoon-lee.github.io/2026/07/26/scouter/#scouter-download)
+> [Scouter 2.20.0 배포 파일(`scouter.agent.jar`) 다운로드 방법](https://sanghoon-lee.github.io/2026/07/26/paygerduty/#scouter-download)
 
 ---
 
