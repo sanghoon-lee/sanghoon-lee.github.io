@@ -33,7 +33,7 @@ tags:
 
 **참고**
 
-> [모니터링 환경 구성](https://sanghoon-lee.github.io/2026/07/26/scouter/#environment)
+> [모니터링 환경 구성](https://sanghoon-lee.github.io/2026/07/26/paygerduty/#environment)
 
 그리고 `agent` 디렉터리에 `scouter.agent.jar` 파일을 복사했습니다. 
 
