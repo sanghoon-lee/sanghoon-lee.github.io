@@ -112,13 +112,12 @@ Spring Boot 3부터는 기존 Java EE의 `javax.*` API 대신 Jakarta EE의 `jak
 
 <div class="image-row">
   <figure>
-    <img class="main-image" src="/assets/images/xxxx" alt="정상적으로 표시되는 Active Service">
-    <figcaption>Active Service</figcaption>
-  </figure>
-
-  <figure>
-    <img class="main-image" src="/assets/images/xxxx" alt="정상적으로 표시되는 XLog">
+    <img class="main-image" src="/assets/images/after-req-03.png" alt="정상적으로 표시되는 XLog">
     <figcaption>XLog</figcaption>
+  </figure>
+  <figure>
+    <img class="main-image" src="/assets/images/after-req-04.png" alt="정상적으로 표시되는 Active Service">
+    <figcaption>Active Service</figcaption>
   </figure>
 </div>
 
