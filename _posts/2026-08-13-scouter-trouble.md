@@ -12,7 +12,7 @@ tags:
 
 Spring Boot로 개발된 애플리케이션에 `JMeter`로 부하를 발생시키고, `Scouter Server`에 수집되는 운영 정보의 변화를 확인하는 토이프로젝트를 진행하던 중 이상한 현상을 발견했습니다.
 
-분명 애플리케이션은 정상적으로 실행되고 있었고, `Scouter Agent`도 애플리케이션에 정상적으로 적용된 것으로 보였습니다. 하지만 애플리케이션에 요청을 계속 전송해도 `Active Service`와 `XLog`에는 아무런 정보도 표시되지 않았습니다.
+분명 애플리케이션은 정상적으로 실행되고 있었고, `Scouter Agent`도 애플리케이션에 정상적으로 적용된 것으로 보였습니다. 하지만 애플리케이션에 요청을 계속 전송해도 `XLog`에는 아무 변화가 없었습니다.
 
 ---
 
@@ -41,19 +41,9 @@ Spring Boot로 개발된 애플리케이션에 `JMeter`로 부하를 발생시�
 
 <img class="main-image" src="/assets/images/loadtest.png" alt="부하 발생시 Heap Used 변화">
 
-하지만 `XLog`와 `Active Service` 창에는 아무런 정보도 표시되지 않았습니다.
+하지만 `XLog` 창에는 아무 변화가 없었습니다.
 
-<div class="image-row">
-  <figure>
-    <img class="main-image" src="/assets/images/active-service.jpg" alt="변화 없는 Active Service">
-    <figcaption>변화 없는 Active Service 창</figcaption>
-  </figure>
-
-  <figure>
-    <img class="main-image" src="/assets/images/xlog.jpg" alt="변화 없는 XLog">
-    <figcaption>변화 없는 XLog 창</figcaption>
-  </figure>
-</div>
+<img class="sub-image" src="/assets/images/xlog.jpg" alt="변화 없는 XLog">
 
 ---
 
@@ -80,9 +70,9 @@ $ curl http://192.168.56.11:8081/api/server
 
 ## 3. 원인 
 
-그렇다면 왜 `XLog`와 `Active Service` 창에는 아무런 정보도 표시되지 않았을까요? 
+그렇다면 왜 `XLog` 창에는 아무 변화가 없었을까요? 
 
-`Active Service`, `XLog`와 같은 요청 추적 정보는 애플리케이션으로 유입되는 HTTP 요청을 추적해야 생성됩니다.
+`XLog`와 같은 요청 추적 정보는 애플리케이션으로 유입되는 HTTP 요청을 추적해야 생성됩니다.
 
 Spring Boot 3부터는 기존 Java EE의 `javax.*` API 대신 Jakarta EE의 `jakarta.*` API를 사용합니다. Servlet API 역시 `javax.servlet.*`에서 `jakarta.servlet.*`로 변경되었습니다.
 
@@ -94,7 +84,7 @@ Spring Boot 3부터는 기존 Java EE의 `javax.*` API 대신 Jakarta EE의 `jak
 | Scouter Agent 2.17.1     | Jakarta Servlet 미지원 |
 | Scouter Agent 2.20.0     | Jakarta Servlet 지원 |
 
-결국 Spring Boot 3.5.14와 `Scouter Agent` 2.17.1의 호환성 문제가 원인이었습니다. Scouter Agent 자체는 동작하고 있었기 때문에 JVM 관련 정보는 수집할 수 있었지만, Jakarta Servlet 기반의 HTTP 요청을 정상적으로 추적하지 못해 `Active Service`와 `XLog` 창에는 아무 정보도 표시되지 않았던 것입니다.
+결국 Spring Boot 3.5.14와 `Scouter Agent` 2.17.1의 호환성 문제가 원인이었습니다. Scouter Agent 자체는 동작하고 있었기 때문에 JVM 관련 정보는 수집할 수 있었지만, Jakarta Servlet 기반의 HTTP 요청을 정상적으로 추적하지 못해 `XLog` 창에는 아무 정보도 표시되지 않았던 것입니다.
 
 **참고**
 
@@ -108,18 +98,9 @@ Spring Boot 3부터는 기존 Java EE의 `javax.*` API 대신 Jakarta EE의 `jak
 
 `Scouter Agent`를 2.20.0 버전으로 변경하고, 동일한 방법으로 애플리케이션에 요청을 전송했습니다.
 
-이번에는 이전과 달리 `Active Service`에 처리 중인 요청이 표시되었고, `XLog`에도 처리된 요청이 정상적으로 나타나는 것을 확인할 수 있었습니다.
+이번에는 이전과 달리 `XLog`에도 처리된 요청이 정상적으로 나타나는 것을 확인할 수 있었습니다.
 
-<div class="image-row">
-  <figure>
-    <img class="main-image" src="/assets/images/after-req-03.png" alt="정상적으로 표시되는 XLog">
-    <figcaption>XLog</figcaption>
-  </figure>
-  <figure>
-    <img class="main-image" src="/assets/images/after-req-04.png" alt="정상적으로 표시되는 Active Service">
-    <figcaption>Active Service</figcaption>
-  </figure>
-</div>
+<img class="main-image" src="/assets/images/after-req-03.png" alt="정상적으로 표시되는 XLog">
 
 ---
 
@@ -129,4 +110,4 @@ Spring Boot 3부터는 기존 Java EE의 `javax.*` API 대신 Jakarta EE의 `jak
 
 JVM 상태를 수집하는 것과 HTTP 요청을 추적하는 것은 서로 다른 영역이기 때문에, 일부 정보만 정상적으로 보인다면 Agent의 연결 상태뿐만 아니라 애플리케이션 환경과 `Scouter` 버전의 호환성도 함께 확인할 필요가 있습니다.
 
-특히 Spring Boot 3 환경에서 JVM 관련 정보는 정상적으로 수집되지만 `Active Service`나 `XLog`가 표시되지 않는다면, 사용 중인 `Scouter Agent`가 Jakarta Servlet을 지원하는 버전인지 확인해보는 것이 좋습니다.
+특히 Spring Boot 3 환경에서 JVM 관련 정보는 정상적으로 수집되지만 `XLog`가 표시되지 않는다면, 사용 중인 `Scouter Agent`가 Jakarta Servlet을 지원하는 버전인지 확인해보는 것이 좋습니다.

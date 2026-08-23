@@ -31,7 +31,7 @@ tags:
   </figure>
 
   <figure>
-    <img src="/assets/images/api-02.req.jpg" alt="api-02 애플리케이션을 대상으로 API 호출">
+    <img src="/assets/images/api-02-req.jpg" alt="api-02 애플리케이션을 대상으로 API 호출">
     <figcaption>api-02 애플리케이션을 대상으로 API 호출</figcaption>
   </figure>
 </div>
