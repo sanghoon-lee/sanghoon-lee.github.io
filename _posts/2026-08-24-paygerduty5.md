@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[토이프로젝트] Scouter와 PagerDuty로 장애 감지부터 On-call까지: (5) Scouter Alert 설정과 장애 감지 테스트"
-date: 2026-08-10
+date: 2026-08-24
 series: paygerduty
 description: Scouter Alert 기능을 설정하고 애플리케이션에 이상 상황을 발생시켜, 설정한 조건에 따라 Alert가 정상적으로 발생하는지 확인합니다.
 image: /assets/images/monitoring.jpg
