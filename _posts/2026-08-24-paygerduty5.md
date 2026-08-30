@@ -247,7 +247,7 @@ check_time=10
 
 TPS가 0보다 크고 10보다 작은 범위로 내려가자 `TPS.alert`에 정의한 조건에 따라 Warning Alert가 발생했습니다.`Scouter Client`의 Alert 창에서 이를 확인할 수 있었습니다.
 
-<img class="main-image" src="/assets/images/alert.jpg" alt="TPS 감소에 따른 Warning Alert 발생">
+<img class="sub-image" src="/assets/images/alert.jpg" alt="TPS 감소에 따른 Warning Alert 발생">
 
 **참고**
 
