@@ -1,4 +1,4 @@
-`---
+---
 layout: post
 title: "[토이프로젝트] Scouter와 PagerDuty로 장애 감지부터 On-call까지: (5) Scouter Alert 설정과 장애 감지 테스트"
 date: 2026-08-24
@@ -47,7 +47,7 @@ Alert 조건은 Script 형태로 작성하며, 기본적으로 `Scouter Server`�
 $ mkdir -p /home/sanghoon/scouter-server/plugin
 ```
 
-그리고 `docker-compose.yml`에 plugin 디렉터리에 대한 Volume 설정을 추가했습니다.
+그리고 `docker-compose.yml`에 `plugin` 디렉터리에 대한 Volume 설정을 추가했습니다.
 
 ```yaml
 services:
@@ -78,3 +78,24 @@ $ docker compose up -d
 ---
 
 ### 2.2. Alert Script 작성
+
+```java
+@GetMapping("/error")
+public Map<String, String> error() {
+    throw new RuntimeException("Test error: "+serverName);
+}
+```
+
+```
+GET /api/error
+      ↓
+RuntimeException 발생
+      ↓
+Spring Boot → HTTP 500 응답
+      ↓
+Scouter Agent가 Exception 감지
+      ↓
+해당 요청의 XLog에 Error 표시
+      ↓
+오류 관련 집계값 증가
+```
