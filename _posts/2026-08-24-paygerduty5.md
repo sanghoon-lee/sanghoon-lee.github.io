@@ -29,7 +29,7 @@ tags:
 
 ## 2. 응답 지연 API 구현
 
-이제부터 애플리케이션의 처리 속도를 의도적으로 늦추고, 이로 인해 요청 처리량이 감소하고 TPS가 낮아지는 상황을 만들어 Alert가 발생하는지 확인해보겠습니다.
+이제부터 애플리케이션의 처리 속도를 의도적으로 늦추고, 이로 인해 요청 처리량이 감소하고 TPS가 낮아지는 상황을 만들어 Alert를 발생시킬 수 있는지 확인해보도록 하겠습니다.
 
 이를 위해 모니터링 대상 애플리케이션인 `simple-api` 프로젝트에 응답을 일정 시간 지연시키는 `/slow` API를 추가했습니다. 
 
@@ -58,17 +58,17 @@ public class ApiController {
 * `api-01` : `GET http://192.168.56.11:8081/api/slow` 
 * `api-02` : `GET http://192.168.56.11:8082/api/slow`
 
-`api-01`과 `api-02`에 `/api/slow` API를 호출해 의도적으로 응답을 지연시키고, 해당 요청이 `Scouter Client`의 XLog에 나타나는 것을 확인했습니다.
+`api-01`과 `api-02`에 `/api/slow` API를 호출해 의도적으로 응답을 지연시키고, `Scouter Client`의 XLog에 요청이 기록되는 것을 확인했습니다.
 
 <div class="image-row">
   <figure>
-    <img src="/assets/images/xlog-slow.jpg" alt="XLog에 표시된 API 응답 지연">
-    <figcaption>XLog에 표시된 API 응답 지연</figcaption>
+    <img src="/assets/images/xlog-slow.jpg" alt="XLog에서 확인한 API 응답 지연">
+    <figcaption>XLog에서 확인한 API 응답 지연</figcaption>
   </figure>
 
   <figure>
-    <img src="/assets/images/xlog-slow-list.jpg" alt="XLog List에 표시된 API 응답 지연">
-    <figcaption>XLog List에 표시된 API 응답 지연</figcaption>
+    <img src="/assets/images/xlog-slow-list.jpg" alt="XLog List에서 확인한 API 응답 지연">
+    <figcaption>XLog List에서 확인한 API 응답 지연</figcaption>
   </figure>
 </div>
 

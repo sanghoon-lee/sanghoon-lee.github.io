@@ -12,4 +12,6 @@ posts:
     url: "/2026/08/10/paygerduty4/"
   - title: "(5) Scouter Alert 설정과 장애 감지 테스트"
     url: "/2026/08/24/paygerduty5/"
+  - title: "(6) XLog 오류를 이용한 Alert 발생 테스트"
+    url: "/2026/08/31/paygerduty6/"
 
