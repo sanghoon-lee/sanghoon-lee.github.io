@@ -80,7 +80,7 @@ public class ApiController {
 
 ## 3. 테스트 시나리오
 
-이번 테스트에서는 `JMeter`를 이용해 `/api/slow`를 반복 호출하여 애플리케이션의 응답을 의도적으로 지연시키고, 요청 처리량이 감소하는 상황을 만들어보겠습니다. 이때 TPS가 설정한 임계값보다 낮아지면 `Alert Script`가 이를 감지하여 Alert를 발생시키는지 확인합니다.
+TPS가 설정한 임계값보다 낮아지면 `Alert Script`가 이를 감지하여 Alert를 발생시키는지 확인하기 위해서 `JMeter`를 통해 `/api/slow`를 반복 호출하여 애플리케이션의 응답을 의도적으로 지연시키고, 요청 처리량이 감소하는 상황을 만들어보겠습니다. 
 
 ```mermaid
 flowchart TD
