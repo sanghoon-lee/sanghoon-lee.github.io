@@ -14,4 +14,5 @@ posts:
     url: "/2026/08/24/paygerduty5/"
   - title: "(6) XLog 오류를 이용한 Alert 발생 테스트"
     url: "/2026/08/31/paygerduty6/"
-
+  - title: "(7) Scouter Alert 외부 연동 방법과 PagerDuty On-call 검토"
+    url: "/2026/09/27/paygerduty7/"
