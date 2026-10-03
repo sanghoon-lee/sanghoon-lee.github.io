@@ -1,6 +1,7 @@
 plugins:
   - jekyll-sitemap
   - jekyll-feed
+  - jekyll-redirect-from
 
 title: "준민아빠의 블로그"    # 블로그 제목
 description: "개발자로 살아가는 준민아빠의 기록"  # 간단 소개
