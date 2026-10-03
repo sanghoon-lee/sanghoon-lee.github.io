@@ -18,6 +18,7 @@ tags:
 ---
 
 ## 1. 이상 상태 감지(Alert)와 알림(Notification)
+{: #alert-notification }
 
 이상 상황을 자동으로 감지하고 담당자에게 전달하는 과정을 이해하려면 먼저 `Alert`와 `Notification`의 차이를 구분할 필요가 있습니다.
 
