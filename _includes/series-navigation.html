@@ -1,31 +1,32 @@
 {% if page.series %}
-  {% assign series_posts = site.posts | where: "series", page.series | sort: "date" %}
+  {% assign series = site.data[page.series] %}
   {% assign prev_post = nil %}
   {% assign next_post = nil %}
-  {% assign found_current = false %}
+  {% assign current_index = nil %}
 
-  {% for post in series_posts %}
-    {% if found_current == true %}
-      {% assign next_post = post %}
-      {% break %}
-    {% endif %}
-
+  {% for post in series.posts %}
     {% if post.url == page.url %}
-      {% assign found_current = true %}
-    {% else %}
-      {% assign prev_post = post %}
+      {% assign current_index = forloop.index0 %}
+      {% break %}
     {% endif %}
   {% endfor %}
 
-  {% if prev_post %}
-    {% assign has_series_navigation = true %}
+  {% if current_index != nil %}
+
+    {% assign prev_index = current_index | minus: 1 %}
+    {% assign next_index = current_index | plus: 1 %}
+
+    {% if prev_index >= 0 %}
+      {% assign prev_post = series.posts[prev_index] %}
+    {% endif %}
+
+    {% if next_index < series.posts.size %}
+      {% assign next_post = series.posts[next_index] %}
+    {% endif %}
+
   {% endif %}
 
-  {% if next_post %}
-    {% assign has_series_navigation = true %}
-  {% endif %}
-
-  {% if has_series_navigation %}
+  {% if prev_post or next_post %}
     <nav class="series-navigation" aria-label="시리즈 이전 및 다음 포스팅">
 
       <div class="series-navigation-item series-navigation-prev">
