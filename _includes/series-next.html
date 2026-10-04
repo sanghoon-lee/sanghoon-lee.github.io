@@ -1,15 +1,15 @@
 {% assign series = site.data[page.series] %}
 {% assign next_post = nil %}
-{% assign current_found = false %}
 
 {% for post in series.posts %}
-  {% if current_found %}
-    {% assign next_post = post %}
-    {% break %}
-  {% endif %}
-
   {% if page.url == post.url %}
-    {% assign current_found = true %}
+    {% assign next_index = forloop.index0 | plus: 1 %}
+
+    {% if next_index < series.posts.size %}
+      {% assign next_post = series.posts[next_index] %}
+    {% endif %}
+
+    {% break %}
   {% endif %}
 {% endfor %}
 
