@@ -1,0 +1,9 @@
+title: "Spring 애플리케이션 설정 관리"
+description: "Spring 애플리케이션의 설정값을 객체로 관리하고, 설정에 따라 기능을 제어하는 방법을 다룬 시리즈입니다."
+
+posts:
+  - title: "(1) @ConfigurationProperties를 사용하는 이유"
+    url: "/2026/02/05/Config/"
+
+  - title: "(2) @ConditionalOnProperty 사용법과 활용 예제"
+    url: "/2026/02/13/Config2/"

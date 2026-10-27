@@ -1,0 +1,22 @@
+title: "[토이프로젝트] Nginx로 Reverse Proxy 구성하기"
+description: "Reverse Proxy의 개념과 동작 원리를 알아보고, Nginx와 애플리케이션 서버를 직접 구성하여 서버 보호, 로드밸런싱, SSL 종료, 정적 콘텐츠 처리 기능을 하나씩 구현하고 검증합니다."
+
+posts:
+  - title: "(1) 개념과 동작 원리"
+    url: "/2026/06/03/nginx-rp/"
+  - title: "(2) 애플리케이션 서버 구현"
+    url: "/2026/06/04/nginx-rp2/"
+  - title: "(3) Reverse Proxy 서버 구축"
+    url: "/2026/06/07/nginx-rp3/"
+  - title: "(4) 애플리케이션 서버 보호 기능 검증"
+    url: "/2026/06/08/nginx-rp4/"
+  - title: "(5) 로드밸런싱 기능 검증"
+    url: "/2026/06/14/nginx-rp5/"
+  - title: "(6) SSL 종료 기능 검증"
+    url: "/2026/06/14/nginx-rp6/"
+  - title: "(7) 정적 콘텐츠 처리 기능 검증"
+    url: "/2026/06/17/nginx-rp7/"
+    
+    
+
+    
