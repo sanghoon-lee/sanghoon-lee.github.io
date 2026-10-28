@@ -57,8 +57,6 @@ classDiagram
 
 ---
 
----
-
 ## 2. Exception과 Error의 차이
 
 앞서 살펴본 것처럼 `Exception`과 `Error`는 모두 `Throwable`을 상속하지만, 서로 다른 목적을 가지고 있습니다.
