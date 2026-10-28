@@ -16,3 +16,5 @@ posts:
     url: "/2026/10/25/signed/"
   - title: "(5) 안전한 예외 처리와 서비스 안정성"
     url: "/2026/10/27/dos5/"
+  - title: "(별첨) Exception과 Error는 무엇이 다를까?"
+    url: "/2026/10/28/exception-error/"
