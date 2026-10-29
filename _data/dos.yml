@@ -18,3 +18,5 @@ posts:
     url: "/2026/10/27/dos5/"
   - title: "(별첨) Exception과 Error는 무엇이 다를까?"
     url: "/2026/10/28/exception-error/"
+  - title: "(6) 해시 충돌과 서비스 거부 취약점"
+    url: "/2026/10/29/dos6/"
