@@ -20,3 +20,5 @@ posts:
     url: "/2026/10/28/exception-error/"
   - title: "(6) 해시 충돌과 서비스 거부 취약점"
     url: "/2026/10/29/dos6/"
+  - title: "(별첨) Hash란 무엇일까?"
+    url: "/2026/10/31/hash/"
