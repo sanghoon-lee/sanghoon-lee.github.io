@@ -4,3 +4,5 @@ description: ""
 posts:
   - title: "(1) 안전한 파일 업로드란 무엇인가?"
     url: "/2026/10/31/upload1/"
+  - title: "(2) OWASP File Upload Cheat Sheet 살펴보기"
+    url: "/2026/11/01/upload2/"
