@@ -2,6 +2,6 @@ title: "[토이프로젝트] JPA DB 컬럼 암호화"
 description: ""
 
 posts:
-  - title: "(1) 애플리케이션 레벨 암호화를 선택한 이유"
+  - title: "(1) 애플리케이션 레벨 암호화를 고려한 이유"
     url: "/2026/01/24/jpa-crypto-converter1/"
   
