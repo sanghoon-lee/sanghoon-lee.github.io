@@ -4,4 +4,6 @@ description: ""
 posts:
   - title: "(1) 애플리케이션 레벨 암호화를 고려한 이유"
     url: "/2026/01/24/jpa-crypto-converter1/"
+  - title: "(2) AttributeConverter를 선택한 이유"
+    url: "/2026/01/25/jpa-crypto-converter2/"
   
