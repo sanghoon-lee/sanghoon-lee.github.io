@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[토이프로젝트] JPA DB 컬럼 암호화: (2) AttributeConverter를 선택한 이유"
+title: "[토이프로젝트] JPA DB 컬럼 암호화: (2) AttributeConverter를 활용한 구현 방식 검토"
 date: 2026-01-25
 description: JPA AttributeConverter를 이용한 DB 컬럼 암호화 구현 방법을 검토합니다. 서비스 계층, Entity 내부 방식과 비교하고 AttributeConverter의 장점과 제약사항을 살펴봅니다.
 image: /assets/images/jpa.jpg
