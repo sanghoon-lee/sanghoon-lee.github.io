@@ -6,4 +6,5 @@ posts:
     url: "/2026/01/24/jpa-crypto-converter1/"
   - title: "(2) AttributeConverter를 활용한 구현 방식 검토"
     url: "/2026/01/25/jpa-crypto-converter2/"
-  
+  - title: "(3) 암·복호화 기능의 공통화를 위한 구조 설계"
+    url: "/2026/01/26/jpa-crypto-converter3/"
