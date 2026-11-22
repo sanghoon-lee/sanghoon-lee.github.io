@@ -10,3 +10,4 @@ posts:
     url: "/2026/01/26/jpa-crypto-converter3/"
   - title: "(4) AttributeConverter와 AES-GCM 암호화 구현"
     url: "/2026/01/27/jpa-crypto-converter4/"
+  - title: "(5) 동작 검증과 암호화 컬럼의 검색 제약 해결"
