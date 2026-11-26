@@ -1,5 +1,5 @@
 title: "[토이프로젝트] JPA DB 컬럼 암호화"
-description: ""
+description: "JPA AttributeConverter를 활용해 애플리케이션 레벨에서 DB 컬럼 암호화를 구현하는 과정을 정리합니다. 암호화 방식의 선택부터 구조 설계, AES-GCM 기반 암·복호화 구현, 동작 검증 및 암호화 컬럼의 검색 제약과 해결 방법까지 살펴봅니다."
 
 posts:
   - title: "(1) 애플리케이션 레벨 암호화를 고려한 이유"
