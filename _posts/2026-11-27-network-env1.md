@@ -2,7 +2,7 @@
 layout: post
 title: "[토이프로젝트] VirtualBox를 활용한 DMZ와 Trust Zone 실습 환경 구축: (1) 시작하며"
 date: 2026-11-27
-series: virtualbox-network-security
+series: network-test-env
 description: 실제 서비스 운영 환경과 유사한 네트워크 실습 환경을 구축하기 위해 VirtualBox와 pfSense를 활용하고자 합니다. 이번 토이 프로젝트의 배경과 목표를 정리하고, 구현하고자 하는 단일 방화벽과 이중 방화벽 기반의 네트워크 아키텍처를 살펴봅니다.
 image: /assets/images/network.png
 categories: 토이프로젝트
