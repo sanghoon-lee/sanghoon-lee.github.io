@@ -4,3 +4,5 @@ description: "VirtualBox와 pfSense를 활용하여 외부망, DMZ, Trust Zone�
 posts:
   - title: "(1) 시작하며"
     url: "/2026/11/27/network-env1/"
+  - title: "(2) 네트워크 보안 영역과 방화벽의 이해"
+    url: "/2026/11/28/network-env2/"
